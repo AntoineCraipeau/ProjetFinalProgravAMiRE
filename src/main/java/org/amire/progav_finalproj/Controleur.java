@@ -78,20 +78,16 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
             } else{
                 request.setAttribute("messageErreur", "");
-                unUtilisateur.setLogin(request.getParameter("champLogin"));
-                unUtilisateur.setPassword(request.getParameter("champMotDePasse"));
-                unUtilisateur.setIdUserinfo(userSessionBean.getUserByLogin(unUtilisateur.getLogin()).getIdUserinfo());
+                String login = request.getParameter("champLogin");
+                unUtilisateur.setIdUserinfo(userSessionBean.getUserByLogin(login).getIdUserinfo());
                 request.getSession().setAttribute("utilisateur", unUtilisateur);
             }
 
         } else if (action != ActionTypes.Entry) {
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
-                unUtilisateur.setLogin(utilisateurInfoSession.getLogin());
-                unUtilisateur.setPassword(utilisateurInfoSession.getPassword());
                 unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
             }
-
         }
 
         //Si l'utilisateur vient d'arriver, l'IdUserinfo sera à 0

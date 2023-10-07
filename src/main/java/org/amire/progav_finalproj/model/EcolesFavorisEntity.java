@@ -3,7 +3,7 @@ package org.amire.progav_finalproj.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ecoles_favoris", schema = "db_prograv_final", catalog = "")
+@Table(name = "ecoles_favoris", schema = "db_prograv_final")
 public class EcolesFavorisEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
