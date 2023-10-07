@@ -1,21 +1,17 @@
 package org.amire.progav_finalproj;
 
-
 import java.io.*;
-import java.util.List;
-
 
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import org.amire.progav_finalproj.model.*;
-import org.amire.progav_finalproj.dto.*;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
 
-//@WebServlet(name = "Controleur", value = "/")
+
 public class Controleur extends HttpServlet {
 
     @EJB
@@ -54,15 +50,21 @@ public class Controleur extends HttpServlet {
     }
 
     public boolean verifierInfosConnexion(HttpServletRequest request){
-        String login = request.getParameter("champLogin");
-        String password = request.getParameter("champMotDePasse");
+        try {
 
-        if(login == null || password == null){
+            String login = request.getParameter("champLogin");
+            String password = request.getParameter("champMotDePasse");
+
+            if (login == null || password == null) {
+                return false;
+            }
+
+            UserinfoEntity user = userSessionBean.getUserByLogin(login);
+            return password.equals(user.getPassword());
+
+        } catch (Exception e) { // Une exception est levée par getUserByLogin si le login n'existe pas
             return false;
         }
-
-        UserinfoEntity user = userSessionBean.getUserByLogin(login);
-        return password.equals(user.getPassword());
     }
 
 
