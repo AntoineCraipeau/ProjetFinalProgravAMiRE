@@ -5,11 +5,17 @@
              version="3.0">
     <persistence-unit name="default">
 
-        <class>org.amire.progav_finalproj.model.EmployesEntity</class>
+        <class>org.amire.progav_finalproj.model.AdminEntity</class>
+        <class>org.amire.progav_finalproj.model.CandidatsFavorisEntity</class>
+        <class>org.amire.progav_finalproj.model.EcoleEntity</class>
+        <class>org.amire.progav_finalproj.model.EcolesFavorisEntity</class>
+        <class>org.amire.progav_finalproj.model.EnseignantEntity</class>
+        <class>org.amire.progav_finalproj.model.PostuleEntity</class>
+        <class>org.amire.progav_finalproj.model.UserinfoEntity</class>
         <properties>
-            <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/advprogtp2"/>
-            <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="eclipselink.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_prograv_final"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
         </properties>
     </persistence-unit>
 </persistence>

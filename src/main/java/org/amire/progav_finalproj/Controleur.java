@@ -9,17 +9,18 @@ import jakarta.ejb.EJB;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import org.amire.progav_finalproj.model.EmployeeSessionBean;
-import org.amire.progav_finalproj.model.EmployesEntity;
-import org.amire.progav_finalproj.model.EmployeeFactory;
+import org.amire.progav_finalproj.model.*;
+import org.amire.progav_finalproj.dto.*;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
+import org.amire.progav_finalproj.utils.UserTypes;
 
 //@WebServlet(name = "Controleur", value = "/")
 public class Controleur extends HttpServlet {
 
     @EJB
-    private EmployeeSessionBean employesSessionBean;
+    private UserSessionBean userSessionBean;
+
     UserBean unUtilisateur;
     public static String LOGIN_VALIDE;
     public static String MOT_DE_PASSE_VALIDE;
@@ -28,53 +29,40 @@ public class Controleur extends HttpServlet {
 
     public void processRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        // Trouver la value de l'input submit ayant mené à cette servlet
-
-        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
-
-        System.out.println("action = " + action);
-
-        // Les données saisies par l'utilisateur sont placées dans le contexte
         placerUtilisateurDansContexte(request);
 
-        // Traitement de l'action
-        switch (action){
-            case Details:
-                int id_employee_detail = Integer.parseInt(request.getParameter("idEmploye"));
-                EmployesEntity employeDetail = employesSessionBean.getEmployeeById(id_employee_detail);
-                request.setAttribute("anemploye", employeDetail);
-                break;
+        UserBean utilisateur = (UserBean) request.getAttribute("utilisateur");
+        if(utilisateur.getIdUserinfo() != 0) { // Si l'utilsiateur ne vient pas d'arriver sur le site
 
-            case Edit:
-                EmployesEntity employeAEditer = EmployeeFactory.getEmployeeInfoFromRequest(request);
-                employesSessionBean.editEmployee(employeAEditer);
-                break;
+            long idUtilisateur = utilisateur.getIdUserinfo();
+            UserTypes typeUtilisateur = userSessionBean.getUserTypeFromUserId(idUtilisateur);
 
-            case Supprimer:
-                int id_supprimer = Integer.parseInt(request.getParameter("idEmploye"));
-                EmployesEntity employeASupprimer = employesSessionBean.getEmployeeById(id_supprimer);
-                employesSessionBean.deleteEmployee(employeASupprimer);
-                break;
-        }
-
-
-        // Seuls les actions "Entry" et "Details" ne nécessitent pas de récupérer la liste des employés
-        if(action != ActionTypes.Entry && action != ActionTypes.Details){
-
-            // Récupération de la liste de tous les employés via notre service getTousLesEmployes()
-            List<EmployesEntity> tousLesEmployees = employesSessionBean.getAllEmployees();
-
-            // Je mets la liste dans l'objet request afin qu'il soit accessible dans les autres couches, notamment la Vue
-            request.setAttribute("employees", tousLesEmployees);
-
+            switch (typeUtilisateur) {
+                case ADMIN:
+                    request.setAttribute("admin", userSessionBean.getUserById(idUtilisateur).getAdminByIdAdmin());
+                    break;
+                case ECOLE:
+                    request.setAttribute("ecole", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole());
+                    break;
+                case ENSEIGNANT:
+                    request.setAttribute("enseignant", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
+                    break;
+            }
         }
 
         aiguillerVersLaProchainePage(request, response);
     }
 
-    // Une tâche <-> une méthode
-    public boolean verifierInfosConnexion(UserBean unUtilisateur){
-        return (unUtilisateur.getLogin().equals(LOGIN_VALIDE) && unUtilisateur.getPassword().equals(MOT_DE_PASSE_VALIDE));
+    public boolean verifierInfosConnexion(HttpServletRequest request){
+        String login = request.getParameter("champLogin");
+        String password = request.getParameter("champMotDePasse");
+
+        if(login == null || password == null){
+            return false;
+        }
+
+        UserinfoEntity user = userSessionBean.getUserByLogin(login);
+        return password.equals(user.getPassword());
     }
 
 
@@ -84,45 +72,52 @@ public class Controleur extends HttpServlet {
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
         if(action == ActionTypes.Login){
-            unUtilisateur.setLogin(request.getParameter("champLogin"));
-            unUtilisateur.setPassword(request.getParameter("champMotDePasse"));
-            request.getSession().setAttribute("utilisateur", unUtilisateur);
-        } else {
+            if(!verifierInfosConnexion(request)){
+                request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
+            } else{
+                request.setAttribute("messageErreur", "");
+                unUtilisateur.setLogin(request.getParameter("champLogin"));
+                unUtilisateur.setPassword(request.getParameter("champMotDePasse"));
+                unUtilisateur.setIdUserinfo(userSessionBean.getUserByLogin(unUtilisateur.getLogin()).getIdUserinfo());
+                request.getSession().setAttribute("utilisateur", unUtilisateur);
+            }
+
+        } else if (action != ActionTypes.Entry) {
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
                 unUtilisateur.setLogin(utilisateurInfoSession.getLogin());
                 unUtilisateur.setPassword(utilisateurInfoSession.getPassword());
+                unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
             }
 
         }
 
+        //Si l'utilisateur vient d'arriver, l'IdUserinfo sera à 0
 
         request.setAttribute("utilisateur", unUtilisateur);
     }
 
     public void aiguillerVersLaProchainePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+        UserBean userBean = (UserBean) request.getAttribute("utilisateur");
 
-        //Si l'utilisateur arrive sur le site, ou si les infos de connexions sont nulles.
-        if(action == ActionTypes.Entry || unUtilisateur == null || unUtilisateur.getLogin() == null || unUtilisateur.getPassword() == null)
+        if(userBean.getIdUserinfo() == 0){
+            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
 
-            request.getRequestDispatcher("WEB-INF/index_d.jsp").forward(request, response);
+        UserTypes userType = userSessionBean.getUserTypeFromUserId(userBean.getIdUserinfo());
 
-
-        //Sinon on vérifie les infos de connexion
-        if (verifierInfosConnexion(unUtilisateur)){
-
-            if(action == ActionTypes.Details)
-                request.getRequestDispatcher("WEB-INF/detail.jsp").forward(request, response);
-            else
-                request.getRequestDispatcher("WEB-INF/bienvenue.jsp").forward(request, response);
-
-        }else{
-
-            request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
-            request.getRequestDispatcher("WEB-INF/index_d.jsp").forward(request, response);
-
+        switch (userType){
+            case ADMIN:
+                request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                break;
+            case ECOLE:
+                request.getRequestDispatcher("WEB-INF/ecole.jsp").forward(request, response);
+                break;
+            case ENSEIGNANT:
+                request.getRequestDispatcher("WEB-INF/enseignant.jsp").forward(request, response);
+                break;
         }
     }
 

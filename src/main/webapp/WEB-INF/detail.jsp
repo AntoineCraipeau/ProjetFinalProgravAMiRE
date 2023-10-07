@@ -1,4 +1,3 @@
-<jsp:useBean id="anemploye" scope="request" type="org.amire.progav_finalproj.model.EmployesEntity"/>
 <%--
   Created by IntelliJ IDEA.
   User: antoi

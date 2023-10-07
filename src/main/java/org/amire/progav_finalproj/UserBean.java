@@ -6,6 +6,8 @@ public class UserBean {
 
     private String password;
 
+    private long idUserinfo;
+
     public UserBean() {
     }
 
@@ -23,6 +25,14 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public long getIdUserinfo() {
+        return idUserinfo;
+    }
+
+    public void setIdUserinfo(long idUserinfo) {
+        this.idUserinfo = idUserinfo;
     }
 
 }
