@@ -6,5 +6,6 @@ public enum ActionTypes {
     Edit,
     Supprimer,
     Login,
+    Logout,
     Retour,
 }

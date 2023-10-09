@@ -11,6 +11,9 @@
     <title>Enseignant</title>
 </head>
 <body>
-    <h1>Vous êtes une ecole ! ${ecole.raisonSociale} </h1>
+    <h1>Bonjour ${ecole.raisonSociale} ! Vous êtes une ecole !</h1>
+    <form action="hello-servlet" method="post">
+        <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
+    </form>
 </body>
 </html>

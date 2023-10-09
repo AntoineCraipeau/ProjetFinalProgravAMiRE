@@ -11,6 +11,9 @@
     <title>Admin</title>
 </head>
 <body>
-    <h1>Vous êtes un admin ! ${admin.idAdmin}</h1>
+    <h1>Bonjour admin n°${admin.idAdmin} ! Vous êtes un admin ! </h1>
+    <form action="hello-servlet" method="post">
+        <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
+    </form>
 </body>
 </html>

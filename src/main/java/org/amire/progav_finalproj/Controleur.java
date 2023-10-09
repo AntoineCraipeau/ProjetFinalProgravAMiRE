@@ -18,8 +18,8 @@ public class Controleur extends HttpServlet {
     private UserSessionBean userSessionBean;
 
     UserBean unUtilisateur;
-    public static String LOGIN_VALIDE;
-    public static String MOT_DE_PASSE_VALIDE;
+    // public static String LOGIN_VALIDE;
+    // public static String MOT_DE_PASSE_VALIDE;
 
     public static final String MESSAGE_ERREUR_CREDENTIALS_KO = "Infos de connexion non valides. Merci de les saisir à nouveau";
 
@@ -73,6 +73,11 @@ public class Controleur extends HttpServlet {
         unUtilisateur = new UserBean();
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
+        if(action == ActionTypes.Logout){
+            request.getSession().setAttribute("utilisateur", null);
+            request.getSession().invalidate();
+        }
+
         if(action == ActionTypes.Login){
             if(!verifierInfosConnexion(request)){
                 request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
@@ -83,7 +88,7 @@ public class Controleur extends HttpServlet {
                 request.getSession().setAttribute("utilisateur", unUtilisateur);
             }
 
-        } else if (action != ActionTypes.Entry) {
+        } else if (action != ActionTypes.Entry && action != ActionTypes.Logout){
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
                 unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
@@ -99,7 +104,7 @@ public class Controleur extends HttpServlet {
 
         UserBean userBean = (UserBean) request.getAttribute("utilisateur");
 
-        if(userBean.getIdUserinfo() == 0){
+        if(userBean.getIdUserinfo() == 0){ // Si l'utilisateur vient d'arriver sur le site ou de se déconnecter
             request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
             return;
         }
@@ -120,9 +125,9 @@ public class Controleur extends HttpServlet {
     }
 
     public void init() {
-        ServletContext context = getServletContext();
-        LOGIN_VALIDE = context.getInitParameter("login");
-        MOT_DE_PASSE_VALIDE = context.getInitParameter("password");
+        // ServletContext context = getServletContext();
+        // LOGIN_VALIDE = context.getInitParameter("login");
+        // MOT_DE_PASSE_VALIDE = context.getInitParameter("password");
     }
 
     public void destroy() {
