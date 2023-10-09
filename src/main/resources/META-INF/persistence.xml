@@ -13,9 +13,10 @@
         <class>org.amire.progav_finalproj.model.PostuleEntity</class>
         <class>org.amire.progav_finalproj.model.UserinfoEntity</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_prograv_final"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://amireprojet.c0pj4jozbnof.eu-west-2.rds.amazonaws.com:3306/db_prograv_final"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.user" value="admin"/>
+            <property name="jakarta.persistence.jdbc.password" value="vC2dw2JTHakP3TwurmBW"/>
         </properties>
     </persistence-unit>
 </persistence>
