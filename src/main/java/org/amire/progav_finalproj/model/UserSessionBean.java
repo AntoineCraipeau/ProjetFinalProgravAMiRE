@@ -20,11 +20,6 @@ public class UserSessionBean {
         return q.getResultList();
     }
 
-    public List<UserinfoEntity> getAllEnseignants() {
-        Query q = em.createQuery("select e from UserinfoEntity e where e.idEnseignant != null "); // Requête JPQL
-        return q.getResultList();
-    }
-
     public UserinfoEntity getUserById(long id) {
         Query q = em.createQuery("select e from UserinfoEntity e where e.idUserinfo = :id"); // Requête JPQL
         q.setParameter("id", id);

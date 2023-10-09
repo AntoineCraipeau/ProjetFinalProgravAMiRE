@@ -3,7 +3,6 @@ package org.amire.progav_finalproj;
 import java.io.*;
 
 import jakarta.ejb.EJB;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import org.amire.progav_finalproj.model.*;
@@ -16,6 +15,10 @@ public class Controleur extends HttpServlet {
 
     @EJB
     private UserSessionBean userSessionBean;
+    @EJB
+    private EnseignantSessionBean enseignantSessionBean;
+    @EJB
+    private EcoleSessionBean ecoleSessionBean;
 
     UserBean unUtilisateur;
     // public static String LOGIN_VALIDE;
@@ -36,12 +39,20 @@ public class Controleur extends HttpServlet {
             switch (typeUtilisateur) {
                 case ADMIN:
                     request.setAttribute("admin", userSessionBean.getUserById(idUtilisateur).getAdminByIdAdmin());
+                    request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
+                    request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
                     break;
                 case ECOLE:
                     request.setAttribute("ecole", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole());
+                    request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
+                    request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
+                    request.setAttribute("candidats", enseignantSessionBean.getAllEnseignants());
                     break;
                 case ENSEIGNANT:
                     request.setAttribute("enseignant", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
+                    request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
+                    request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
+                    request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
                     break;
             }
         }
