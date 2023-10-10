@@ -46,7 +46,7 @@
                 <td>${enseignant.prenom}</td>
             </tr>
         </c:forEach>
-        <button type="submit" value="AjoutFavorisEcole">Ajouter en favoris</button>
+        <button type="submit" name="action" value="AjoutFavorisEcole">Ajouter en favoris</button>
     </form>
 </body>
 </html>
