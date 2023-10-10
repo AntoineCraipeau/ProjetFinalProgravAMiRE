@@ -15,5 +15,38 @@
     <form action="hello-servlet" method="post">
         <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
     </form>
+
+    <h2>Vos favoris</h2>
+
+    <c:forEach items="${favoris}" var="favori">
+        <tr>
+            <td><input type="radio" name="idEnseignant" value=${favori.idEnseignant} required></td>
+            <td>${favori.nom}</td>
+            <td>${favori.prenom}</td>
+        </tr>
+    </c:forEach>
+
+    <h2> Vos postulations</h2>
+    <c:forEach items="${postulations}" var="postulation">
+        <tr>
+            <td><input type="radio" name="idPostulation" value=${postulation.idPostule} required></td>
+            <td>${postulation.idEnseignant}</td>
+            <td>${postulation.idEcole}</td>
+            <td>${postulation.idOffre}</td>
+        </tr>
+    </c:forEach>
+
+    <h2> Les Enseignants</h2>
+    <form method="post" action="hello-servlet">
+
+        <c:forEach items="${enseignants}" var="enseignant">
+            <tr>
+                <td><input type="radio" name="idEmploye" value=${enseignant.idEnseignant} required></td>
+                <td>${enseignant.nom}</td>
+                <td>${enseignant.prenom}</td>
+            </tr>
+        </c:forEach>
+        <button type="submit" value="AjoutFavorisEcole">Ajouter en favoris</button>
+    </form>
 </body>
 </html>

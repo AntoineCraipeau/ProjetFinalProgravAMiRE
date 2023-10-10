@@ -8,4 +8,12 @@ public enum ActionTypes {
     Login,
     Logout,
     Retour,
+    AjoutFavorisEcole,
+    RetraitFavorisEcole,
+    AjoutPosulationEcole,
+    RetraitPosulationEcole,
+    AjoutFavorisEnseignant,
+    RetraitFavorisEnseignant,
+    AjoutPosulationEnseignant,
+    RetraitPosulationEnseignant,
 }

@@ -38,17 +38,20 @@ public class Controleur extends HttpServlet {
 
             switch (typeUtilisateur) {
                 case ADMIN:
+                    handleAdminRequest(request);
                     request.setAttribute("admin", userSessionBean.getUserById(idUtilisateur).getAdminByIdAdmin());
                     request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
                     request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
                     break;
                 case ECOLE:
+                    handleEcoleRequest(request);
                     request.setAttribute("ecole", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole());
                     request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
                     request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
-                    request.setAttribute("candidats", enseignantSessionBean.getAllEnseignants());
+                    request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
                     break;
                 case ENSEIGNANT:
+                    handleEnseignantRequest(request);
                     request.setAttribute("enseignant", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
                     request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
                     request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
@@ -58,6 +61,18 @@ public class Controleur extends HttpServlet {
         }
 
         aiguillerVersLaProchainePage(request, response);
+    }
+
+    public void handleAdminRequest(HttpServletRequest request){
+        // TODO : Suppression d'écoles et d'enseignants ?
+    }
+
+    public void handleEcoleRequest(HttpServletRequest request){
+        // TODO : Ajout / retrait de favoris et de postulations
+    }
+
+    public void handleEnseignantRequest(HttpServletRequest request){
+        // TODO : Ajout / retrait de favoris et de postulations
     }
 
     public boolean verifierInfosConnexion(HttpServletRequest request){
