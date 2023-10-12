@@ -145,7 +145,7 @@ public class Controleur extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 break;
             case ECOLE:
-                request.getRequestDispatcher("WEB-INF/ecole.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
                 break;
             case ENSEIGNANT:
                 request.getRequestDispatcher("WEB-INF/enseignant.jsp").forward(request, response);
