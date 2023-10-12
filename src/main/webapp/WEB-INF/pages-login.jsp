@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +12,24 @@
   <title> Login </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+
+  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${contextPath}/assets/img/favicon.png" rel="icon">
+  <link href="${contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -37,37 +42,38 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"> 
-              <img src="assets/img/logo.png" alt="" width=50% height=50%>   
+              <img src="./assets/img/logo.png" alt="" width=50% height=50%>
               
               <div class="card mb-3">
 
                 <div class="card-body">
+                  <p class="small text-danger">${messageErreur}</p>
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour se connecter</p>
                   </div>
-                  <form class="row g-3 needs-validation" novalidate method="post" action="LoginServlet">
+                  <form class="row g-3 needs-validation" novalidate method="post" action="hello-servlet">
                     <div class="col-12">
-                        <label for="username" class="form-label">Nom d'utilisateur</label>
-                        <input type="text" name="username" class="form-control" id="username" required>
+                        <label for="champLogin" class="form-label">Nom d'utilisateur</label>
+                      <input class="form-control" placeholder="Login" name="champLogin" autofocus="" id ="champLogin">
                         <div class="invalid-feedback">Entrer votre nom d'utilisateur</div>
                     </div>
                     <div class="col-12">
-                        <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" name="password" class="form-control" id="password" required>
+                        <label for="champMotDePasse" class="form-label">Mot de passe</label>
+                      <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password" id="champMotDePasse">
                         <div class="invalid-feedback">Entrer votre mot de passe</div>
                     </div>
                     <div class="col-12">
-                        <button class="btn btn-primary w-100" type="submit">Connexion</button>
+                      <input type="submit" name="action" value="Login" class="btn btn-primary w-100"/>
                     </div>
                     <div class="col-12">
                         <p class="small mb-0">Pas de compte ? <a href="register.jsp">Crée un compte</a></p>
                     </div>
                 </form>
-                <c:if test="${not empty param.error}">
+                <!--<c:if test="${not empty param.error}">
                     <p class="small text-danger">Nom d'utilisateur ou mot de passe incorrect.</p>
-                </c:if>
+                </c:if>-->
 
                 </div>
               </div>

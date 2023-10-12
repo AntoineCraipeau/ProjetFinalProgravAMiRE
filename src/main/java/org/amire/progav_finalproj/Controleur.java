@@ -131,7 +131,7 @@ public class Controleur extends HttpServlet {
         UserBean userBean = (UserBean) request.getAttribute("utilisateur");
 
         if(userBean.getIdUserinfo() == 0){ // Si l'utilisateur vient d'arriver sur le site ou de se déconnecter
-            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages-login.jsp").forward(request, response);
             return;
         }
 
