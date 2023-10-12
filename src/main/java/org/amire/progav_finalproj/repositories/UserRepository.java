@@ -1,16 +1,17 @@
-package org.amire.progav_finalproj.model;
+package org.amire.progav_finalproj.repositories;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import org.amire.progav_finalproj.model.UserinfoEntity;
 import org.amire.progav_finalproj.utils.UserTypes;
 
 import java.util.List;
 
 @Stateless
-public class UserSessionBean {
+public class UserRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
