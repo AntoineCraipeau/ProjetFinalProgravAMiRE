@@ -43,6 +43,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"> 
               <img src="./assets/img/logo.png" alt="" width=50% height=50%>
+            </br>
               
               <div class="card mb-3">
 

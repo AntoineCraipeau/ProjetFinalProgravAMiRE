@@ -76,11 +76,11 @@
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">${username}</span>
+          <span class="d-none d-md-block dropdown-toggle ps-2">${userInfo.login}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>${userInfo.login}</h6>
+            <h6>${ecole.raisonSociale}</h6>
             <span>Ecole</span>
           </li>
           <li>
@@ -159,8 +159,8 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/img_profil_ecole.png" alt="Profile" class="rounded-circle">
-              <h2>${username }</h2>
-              <h3>${userRole}></h3>
+              <h2>${ecole.raisonSociale }</h2>
+              <h3>Ecole</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -196,13 +196,13 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">Besoin</h5>
-                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+                  <p class="small fst-italic">${ecole.Besoin}</p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Raison Sociale</div>
-                    <div class="col-lg-9 col-md-8">${ Raison_sociale }</div>
+                    <div class="col-lg-9 col-md-8">${ecole.raisonSociale}</div>
                   </div>
 
                   <div class="row">
@@ -217,7 +217,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${ disponibilites}</div>
+                    <div class="col-lg-9 col-md-8">${ ecole.Periode}</div>
                   </div>
 
                   <div class="row">
@@ -227,7 +227,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Compétences rechercher</div>
-                    <div class="col-lg-9 col-md-8">${ competences }</div>
+                    <div class="col-lg-9 col-md-8">${ ecole.competences_requises }</div>
                   </div>
 
                   <div class="row">
@@ -281,7 +281,7 @@
 
                       <div class="card">
                         <div class="card-body">
-                        </br> 
+                        </br>
 
                          
               <!-- General Form Elements -->
