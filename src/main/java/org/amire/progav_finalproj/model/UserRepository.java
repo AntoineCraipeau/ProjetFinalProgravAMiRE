@@ -10,7 +10,7 @@ import org.amire.progav_finalproj.utils.UserTypes;
 import java.util.List;
 
 @Stateless
-public class UserSessionBean {
+public class UserRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();

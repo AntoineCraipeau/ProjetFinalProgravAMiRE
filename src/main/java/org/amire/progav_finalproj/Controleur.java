@@ -10,17 +10,15 @@ import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
 
-import javax.swing.*;
-
 
 public class Controleur extends HttpServlet {
 
     @EJB
-    private UserSessionBean userSessionBean;
+    private UserRepository userRepository;
     @EJB
-    private EnseignantSessionBean enseignantSessionBean;
+    private EnseignantRepository enseignantRepository;
     @EJB
-    private EcoleSessionBean ecoleSessionBean;
+    private EcoleRepository ecoleRepository;
 
     UserBean unUtilisateur;
     // public static String LOGIN_VALIDE;
@@ -32,35 +30,34 @@ public class Controleur extends HttpServlet {
 
         placerUtilisateurDansContexte(request);
 
-        UserBean utilisateur = (UserBean) request.getAttribute("utilisateur");
-        if(utilisateur.getIdUserinfo() != 0) { // Si l'utilsiateur ne vient pas d'arriver sur le site
+        if(unUtilisateur != null && unUtilisateur.getIdUserinfo() != 0) { // Si l'utilsiateur ne vient pas d'arriver sur le site
 
-            long idUtilisateur = utilisateur.getIdUserinfo();
-            UserTypes typeUtilisateur = userSessionBean.getUserTypeFromUserId(idUtilisateur);
+            long idUtilisateur = unUtilisateur.getIdUserinfo();
+            UserTypes typeUtilisateur = userRepository.getUserTypeFromUserId(idUtilisateur);
 
             switch (typeUtilisateur) {
                 case ADMIN:
                     handleAdminRequest(request);
-                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
-                    request.setAttribute("admin", userSessionBean.getUserById(idUtilisateur).getAdminByIdAdmin());
-                    request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
-                    request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
+                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                    request.setAttribute("admin", userRepository.getUserById(idUtilisateur).getAdminByIdAdmin());
+                    request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
+                    request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
                     break;
                 case ECOLE:
                     handleEcoleRequest(request);
-                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
-                    request.setAttribute("ecole", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole());
-                    request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
-                    request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
-                    request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
+                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                    request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole());
+                    request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
+                    request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
+                    request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
                     break;
                 case ENSEIGNANT:
                     handleEnseignantRequest(request);
-                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
-                    request.setAttribute("enseignant", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
-                    request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
-                    request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
-                    request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
+                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                    request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
+                    request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
+                    request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
+                    request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
                     break;
             }
         }
@@ -75,11 +72,11 @@ public class Controleur extends HttpServlet {
         switch (action) {
             case SupprimerEcole:
                 long idEcole = Long.parseLong(request.getParameter("idEcole"));
-                ecoleSessionBean.deleteEcoleById(idEcole);
+                ecoleRepository.deleteEcoleById(idEcole);
                 break;
             case SupprimerEnseignant:
                 long idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
-                enseignantSessionBean.deleteEnseignantById(idEnseignant);
+                enseignantRepository.deleteEnseignantById(idEnseignant);
                 break;
         }
 
@@ -89,28 +86,21 @@ public class Controleur extends HttpServlet {
         // TODO : Ajout / retrait de favoris et de postulations
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
-        long idEcole;
-        long idEnseignant;
+        EcoleEntity ecole = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEcoleByIdEcole();
+        long idEcole = ecole.getIdEcole();
+        long idEnseignant = request.getParameter("idEnseignant") != null ? Long.parseLong(request.getParameter("idEnseignant")) : 0;
 
         switch (action) {
             case AjoutFavorisEcole:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.ajouterEcoleFavoris(idEcole, idEnseignant);
                 break;
             case RetraitFavorisEcole:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.retirerEcoleFavoris(idEcole, idEnseignant);
                 break;
             case AjoutPosulationEcole:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.ajouterEcolePostulation(idEcole, idEnseignant);
                 break;
             case RetraitPosulationEcole:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.retirerEcolePostulation(idEcole, idEnseignant);
                 break;
         }
@@ -120,28 +110,21 @@ public class Controleur extends HttpServlet {
         // TODO : Ajout / retrait de favoris et de postulations
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
-        long idEcole;
-        long idEnseignant;
+        EnseignantEntity enseignant = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEnseignantByIdEnseignant();
+        long idEnseignant = enseignant.getIdEnseignant();
+        long idEcole = request.getParameter("idEcole") != null ? Long.parseLong(request.getParameter("idEcole")) : 0;
 
         switch (action){
             case AjoutFavorisEnseignant:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.ajouterEnseignantFavoris(idEcole, idEnseignant);
                 break;
             case RetraitFavorisEnseignant:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.retirerEnseignantFavoris(idEcole, idEnseignant);
                 break;
             case AjoutPosulationEnseignant:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.ajouterEnseignantPostulation(idEcole, idEnseignant);
                 break;
             case RetraitPosulationEnseignant:
-                idEcole = Long.parseLong(request.getParameter("idEcole"));
-                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
                 //userSessionBean.retirerEnseignantPostulation(idEcole, idEnseignant);
                 break;
         }
@@ -157,7 +140,7 @@ public class Controleur extends HttpServlet {
                 return false;
             }
 
-            UserinfoEntity user = userSessionBean.getUserByLogin(login);
+            UserinfoEntity user = userRepository.getUserByLogin(login);
             return password.equals(user.getPassword());
 
         } catch (Exception e) { // Une exception est levée par getUserByLogin si le login n'existe pas
@@ -182,7 +165,7 @@ public class Controleur extends HttpServlet {
             } else{
                 request.setAttribute("messageErreur", "");
                 String login = request.getParameter("champLogin");
-                unUtilisateur.setIdUserinfo(userSessionBean.getUserByLogin(login).getIdUserinfo());
+                unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(login).getIdUserinfo());
                 request.getSession().setAttribute("utilisateur", unUtilisateur);
             }
 
@@ -207,7 +190,7 @@ public class Controleur extends HttpServlet {
             return;
         }
 
-        UserTypes userType = userSessionBean.getUserTypeFromUserId(userBean.getIdUserinfo());
+        UserTypes userType = userRepository.getUserTypeFromUserId(userBean.getIdUserinfo());
 
         switch (userType){
             case ADMIN:
