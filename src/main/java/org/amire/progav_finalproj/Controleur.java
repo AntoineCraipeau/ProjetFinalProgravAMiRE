@@ -97,10 +97,10 @@ public class Controleur extends HttpServlet {
 
         switch (action) {
             case AjoutFavorisEcole:
-                ecoleFavorisRepository.addEcoleFavoris(idEcole, idEnseignant);
+                ecoleFavorisRepository.addFavorisEcole(idEcole, idEnseignant);
                 break;
             case RetraitFavorisEcole:
-                ecoleFavorisRepository.removeEcoleFavoris(idEcole, idEnseignant);
+                ecoleFavorisRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
                 break;
             case AjoutPosulationEcole:
                 //userSessionBean.ajouterEcolePostulation(idEcole, idEnseignant);
@@ -124,7 +124,7 @@ public class Controleur extends HttpServlet {
                 candidatsFavorisRepository.addCandidatsFavoris(idEnseignant, idEcole);
                 break;
             case RetraitFavorisEnseignant:
-                candidatsFavorisRepository.removeCandidatsFavoris(idEnseignant, idEcole);
+                candidatsFavorisRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
                 break;
             case AjoutPosulationEnseignant:
                 //userSessionBean.ajouterEnseignantPostulation(idEcole, idEnseignant);

@@ -14,6 +14,8 @@ public class PostuleRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
+    // Read
+
     public List<PostuleEntity> getAllPostules() {
         Query q = em.createQuery("select e from PostuleEntity e"); // Requête JPQL
         return q.getResultList();
@@ -24,6 +26,15 @@ public class PostuleRepository {
         q.setParameter("id", id);
         return (PostuleEntity) q.getSingleResult();
     }
+
+    public PostuleEntity getPostuleByOwnersIds(long idEcole, long idEnseignant){
+        Query q = em.createQuery("select e from PostuleEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
+        q.setParameter("idEcole", idEcole);
+        q.setParameter("idEnseignant", idEnseignant);
+        return (PostuleEntity) q.getSingleResult();
+    }
+
+    // Create & Update
 
     public void addPostule(PostuleEntity postule) {
         em.getTransaction().begin();
@@ -37,8 +48,14 @@ public class PostuleRepository {
         em.getTransaction().commit();
     }
 
+    // Delete
+
     public void removePostuleById(long id) {
         removePostule(getPostuleById(id));
+    }
+
+    public void removePostuleByOwnersIds(long idEcole, long idEnseignant){
+        removePostule(getPostuleByOwnersIds(idEcole, idEnseignant));
     }
 
     public void removePostule(PostuleEntity postule) {

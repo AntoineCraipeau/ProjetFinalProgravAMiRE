@@ -17,6 +17,31 @@ public class CandidatsFavorisRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
+    // Read
+
+    public List<EcoleEntity> getAllFavorisOfCandidatById(long idEnseignant){
+        Query q = em.createQuery("select e from CandidatsFavorisEntity e where e.idEnseignant = :idEnseignant"); // Requête JPQL
+        q.setParameter("idEnseignant", idEnseignant);
+        List<CandidatsFavorisEntity> favoris = q.getResultList();
+        //On extrait les écoles de la liste
+        return favoris.stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toList();
+    }
+
+    public CandidatsFavorisEntity getFavorisCandidatById(long id){
+        Query q = em.createQuery("select e from CandidatsFavorisEntity e where e.idCandidatsFavoris = :id"); // Requête JPQL
+        q.setParameter("id", id);
+        return (CandidatsFavorisEntity) q.getSingleResult();
+    }
+
+    public CandidatsFavorisEntity getFavorisCandidatByOwnersId(long idEnseignant, long idEcole){
+        Query q = em.createQuery("select e from CandidatsFavorisEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
+        q.setParameter("idEcole", idEcole);
+        q.setParameter("idEnseignant", idEnseignant);
+        return (CandidatsFavorisEntity) q.getSingleResult();
+    }
+
+    // Create
+
     public void addCandidatsFavoris(long idEnseignant, long idEcole){
         CandidatsFavorisEntity favoris = new CandidatsFavorisEntity();
         favoris.setIdEcole(idEcole);
@@ -26,19 +51,20 @@ public class CandidatsFavorisRepository {
         em.getTransaction().commit();
     }
 
-    public void removeCandidatsFavoris(long idEnseignant, long idEcole){
-        Query q = em.createQuery("delete from CandidatsFavorisEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
-        q.setParameter("idEcole", idEcole);
-        q.setParameter("idEnseignant", idEnseignant);
-        q.executeUpdate();
+    // Delete
+
+    public void removeCandidatsFavorisById(long id){
+        removeCandidatsFavoris(getFavorisCandidatById(id));
     }
 
-    public List<EcoleEntity> getAllFavorisOfCandidatById(long idEnseignant){
-        Query q = em.createQuery("select e from CandidatsFavorisEntity e where e.idEnseignant = :idEnseignant"); // Requête JPQL
-        q.setParameter("idEnseignant", idEnseignant);
-        List<CandidatsFavorisEntity> favoris = q.getResultList();
-        //On extrait les écoles de la liste
-        return favoris.stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toList();
+    public void removeCandidatsFavorisByOwnersId(long idEnseignant, long idEcole){
+        removeCandidatsFavoris(getFavorisCandidatByOwnersId(idEnseignant, idEcole));
+    }
+
+    public void removeCandidatsFavoris(CandidatsFavorisEntity favoris){
+        em.getTransaction().begin();
+        em.remove(favoris);
+        em.getTransaction().commit();
     }
 
 }
