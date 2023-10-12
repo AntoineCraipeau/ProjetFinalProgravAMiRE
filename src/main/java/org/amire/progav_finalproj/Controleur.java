@@ -39,12 +39,14 @@ public class Controleur extends HttpServlet {
             switch (typeUtilisateur) {
                 case ADMIN:
                     handleAdminRequest(request);
+                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
                     request.setAttribute("admin", userSessionBean.getUserById(idUtilisateur).getAdminByIdAdmin());
                     request.setAttribute("ecoles", ecoleSessionBean.getAllEcoles());
                     request.setAttribute("enseignants", enseignantSessionBean.getAllEnseignants());
                     break;
                 case ECOLE:
                     handleEcoleRequest(request);
+                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
                     request.setAttribute("ecole", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole());
                     request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
                     request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
@@ -52,6 +54,7 @@ public class Controleur extends HttpServlet {
                     break;
                 case ENSEIGNANT:
                     handleEnseignantRequest(request);
+                    request.setAttribute("userInfo", userSessionBean.getUserById(idUtilisateur));
                     request.setAttribute("enseignant", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
                     request.setAttribute("favoris", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
                     request.setAttribute("postulations", userSessionBean.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
