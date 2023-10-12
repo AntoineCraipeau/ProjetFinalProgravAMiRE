@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
-<%@ page import=".package.Enseignant" %> <!-- Assurez-vous d'importer la classe Enseignant de votre package -->
+ <!-- Assurez-vous d'importer la classe Enseignant de votre package -->
 
 
 
@@ -35,10 +35,6 @@
 </head>
 
 <body>
-  
-<body>
-
-  <body>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -106,11 +102,6 @@
                         </li>
                     </ul>
                 </li>
-                <% } else { %>
-                  <!-- L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion -->
-                  <script>
-                      window.location.href = "pages-login.jsp";
-                  </script>
               <% } %>
     
         </ul><!-- End Profile Dropdown Items -->
@@ -157,7 +148,8 @@
         </li><!-- End Login Page Nav -->
   
       </ul>
-  
+
+        </aside><!-- End Sidebar -->
   
     </header><!-- End Header -->
     <main id="main" class="main">

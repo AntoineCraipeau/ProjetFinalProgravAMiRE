@@ -214,12 +214,31 @@ public class Controleur extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 break;
             case ECOLE:
-                request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
+                handleEcoleRedirection(request, response);
                 break;
             case ENSEIGNANT:
-                request.getRequestDispatcher("WEB-INF/enseignant.jsp").forward(request, response);
+                handleEnseignantRedirection(request, response);
                 break;
         }
+    }
+
+    public void handleEcoleRedirection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+
+        if(action == ActionTypes.EcoleVersDashboard)
+            request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
+        else
+            request.getRequestDispatcher("WEB-INF/profil_ecole.jsp").forward(request, response);
+
+    }
+
+    public void handleEnseignantRedirection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+
+        if(action != ActionTypes.EnseignantVersDashboard)
+            request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
+        else
+            request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
     }
 
     public void init() {
