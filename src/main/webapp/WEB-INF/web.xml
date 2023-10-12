@@ -17,13 +17,13 @@
 
 
     <servlet>
-            <servlet-name>Controleur</servlet-name>
+        <servlet-name>Controleur</servlet-name>
         <servlet-class>org.amire.progav_finalproj.Controleur</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>Controleur</servlet-name>
-        <url-pattern>/a</url-pattern>
+        <url-pattern>/Controlleur</url-pattern>
     </servlet-mapping>
 
     <jsp-config>

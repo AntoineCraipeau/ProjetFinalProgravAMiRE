@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Bonjour ${ecole.raisonSociale} ! Vous êtes une ecole !</h1>
-    <form action="hello-servlet" method="post">
+    <form action="Controlleur" method="post">
         <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
     </form>
 
@@ -37,7 +37,7 @@
     </c:forEach>
 
     <h2> Les Enseignants</h2>
-    <form method="post" action="hello-servlet">
+    <form method="post" action="Controlleur">
 
         <c:forEach items="${enseignants}" var="enseignant">
             <tr>
