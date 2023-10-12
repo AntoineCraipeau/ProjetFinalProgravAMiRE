@@ -53,7 +53,7 @@
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour se connecter</p>
                   </div>
-                  <form class="row g-3 needs-validation" novalidate method="post" action="hello-servlet">
+                  <form class="row g-3 needs-validation" novalidate method="post" action="Controlleur">
                     <div class="col-12">
                         <label for="champLogin" class="form-label">Nom d'utilisateur</label>
                       <input class="form-control" placeholder="Login" name="champLogin" autofocus="" id ="champLogin">
