@@ -20,4 +20,14 @@ public class EnseignantSessionBean {
         return q.getResultList();
     }
 
+    public void deleteEnseignantById(long id){
+        Query q = em.createQuery("delete from EnseignantEntity e where e.idEnseignant = :id"); // Requête JPQL
+        q.setParameter("id", id);
+        q.executeUpdate();
+
+        Query q2 = em.createQuery("delete from UserinfoEntity u where u.idEnseignant = :id"); // Requête JPQL
+        q2.setParameter("id", id);
+        q2.executeUpdate();
+    }
+
 }

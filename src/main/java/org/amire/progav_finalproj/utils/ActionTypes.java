@@ -16,4 +16,6 @@ public enum ActionTypes {
     RetraitFavorisEnseignant,
     AjoutPosulationEnseignant,
     RetraitPosulationEnseignant,
+    SupprimerEcole,
+    SupprimerEnseignant,
 }
