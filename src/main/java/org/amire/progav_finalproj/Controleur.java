@@ -6,6 +6,7 @@ import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import org.amire.progav_finalproj.model.*;
+import org.amire.progav_finalproj.repositories.*;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
@@ -18,7 +19,11 @@ public class Controleur extends HttpServlet {
     @EJB
     private EnseignantRepository enseignantRepository;
     @EJB
+    private CandidatsFavorisRepository candidatsFavorisRepository;
+    @EJB
     private EcoleRepository ecoleRepository;
+    @EJB
+    private EcoleFavorisRepository ecoleFavorisRepository;
 
     UserBean unUtilisateur;
     // public static String LOGIN_VALIDE;
@@ -92,10 +97,10 @@ public class Controleur extends HttpServlet {
 
         switch (action) {
             case AjoutFavorisEcole:
-                //userSessionBean.ajouterEcoleFavoris(idEcole, idEnseignant);
+                ecoleFavorisRepository.addEcoleFavoris(idEcole, idEnseignant);
                 break;
             case RetraitFavorisEcole:
-                //userSessionBean.retirerEcoleFavoris(idEcole, idEnseignant);
+                ecoleFavorisRepository.removeEcoleFavoris(idEcole, idEnseignant);
                 break;
             case AjoutPosulationEcole:
                 //userSessionBean.ajouterEcolePostulation(idEcole, idEnseignant);
@@ -116,10 +121,10 @@ public class Controleur extends HttpServlet {
 
         switch (action){
             case AjoutFavorisEnseignant:
-                //userSessionBean.ajouterEnseignantFavoris(idEcole, idEnseignant);
+                candidatsFavorisRepository.addCandidatsFavoris(idEnseignant, idEcole);
                 break;
             case RetraitFavorisEnseignant:
-                //userSessionBean.retirerEnseignantFavoris(idEcole, idEnseignant);
+                candidatsFavorisRepository.removeCandidatsFavoris(idEnseignant, idEcole);
                 break;
             case AjoutPosulationEnseignant:
                 //userSessionBean.ajouterEnseignantPostulation(idEcole, idEnseignant);

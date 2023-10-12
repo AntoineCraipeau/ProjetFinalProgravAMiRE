@@ -4,7 +4,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import org.amire.progav_finalproj.model.UserRepository;
+import org.amire.progav_finalproj.repositories.UserRepository;
 
 @Path("/users")
 public class ApiEmployee {
