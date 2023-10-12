@@ -10,6 +10,8 @@ import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
 
+import javax.swing.*;
+
 
 public class Controleur extends HttpServlet {
 
@@ -65,14 +67,81 @@ public class Controleur extends HttpServlet {
 
     public void handleAdminRequest(HttpServletRequest request){
         // TODO : Suppression d'écoles et d'enseignants ?
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+
+        switch (action) {
+            case SupprimerEcole:
+                long idEcole = Long.parseLong(request.getParameter("idEcole"));
+                ecoleSessionBean.deleteEcoleById(idEcole);
+                break;
+            case SupprimerEnseignant:
+                long idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                enseignantSessionBean.deleteEnseignantById(idEnseignant);
+                break;
+        }
+
     }
 
     public void handleEcoleRequest(HttpServletRequest request){
         // TODO : Ajout / retrait de favoris et de postulations
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+
+        long idEcole;
+        long idEnseignant;
+
+        switch (action) {
+            case AjoutFavorisEcole:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.ajouterEcoleFavoris(idEcole, idEnseignant);
+                break;
+            case RetraitFavorisEcole:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.retirerEcoleFavoris(idEcole, idEnseignant);
+                break;
+            case AjoutPosulationEcole:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.ajouterEcolePostulation(idEcole, idEnseignant);
+                break;
+            case RetraitPosulationEcole:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.retirerEcolePostulation(idEcole, idEnseignant);
+                break;
+        }
     }
 
     public void handleEnseignantRequest(HttpServletRequest request){
         // TODO : Ajout / retrait de favoris et de postulations
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+
+        long idEcole;
+        long idEnseignant;
+
+        switch (action){
+            case AjoutFavorisEnseignant:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.ajouterEnseignantFavoris(idEcole, idEnseignant);
+                break;
+            case RetraitFavorisEnseignant:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.retirerEnseignantFavoris(idEcole, idEnseignant);
+                break;
+            case AjoutPosulationEnseignant:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.ajouterEnseignantPostulation(idEcole, idEnseignant);
+                break;
+            case RetraitPosulationEnseignant:
+                idEcole = Long.parseLong(request.getParameter("idEcole"));
+                idEnseignant = Long.parseLong(request.getParameter("idEnseignant"));
+                //userSessionBean.retirerEnseignantPostulation(idEcole, idEnseignant);
+                break;
+        }
     }
 
     public boolean verifierInfosConnexion(HttpServletRequest request){
