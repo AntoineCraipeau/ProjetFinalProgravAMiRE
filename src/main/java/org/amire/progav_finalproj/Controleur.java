@@ -2,6 +2,7 @@ package org.amire.progav_finalproj;
 
 import java.io.*;
 
+import com.google.protobuf.Message;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -38,36 +39,42 @@ public class Controleur extends HttpServlet {
 
         placerUtilisateurDansContexte(request);
 
-        if(unUtilisateur != null && unUtilisateur.getIdUserinfo() != 0) { // Si l'utilsiateur ne vient pas d'arriver sur le site
+        try {
 
-            long idUtilisateur = unUtilisateur.getIdUserinfo();
-            UserTypes typeUtilisateur = userRepository.getUserTypeFromUserId(idUtilisateur);
+            if (unUtilisateur != null && unUtilisateur.getIdUserinfo() != 0) { // Si l'utilsiateur ne vient pas d'arriver sur le site
 
-            switch (typeUtilisateur) {
-                case ADMIN:
-                    handleAdminRequest(request);
-                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                    request.setAttribute("admin", userRepository.getUserById(idUtilisateur).getAdminByIdAdmin());
-                    request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
-                    request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
-                    break;
-                case ECOLE:
-                    handleEcoleRequest(request);
-                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                    request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole());
-                    request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
-                    request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
-                    request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
-                    break;
-                case ENSEIGNANT:
-                    handleEnseignantRequest(request);
-                    request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                    request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
-                    request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
-                    request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
-                    request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
-                    break;
+                long idUtilisateur = unUtilisateur.getIdUserinfo();
+                UserTypes typeUtilisateur = userRepository.getUserTypeFromUserId(idUtilisateur);
+
+                switch (typeUtilisateur) {
+                    case ADMIN:
+                        handleAdminRequest(request);
+                        request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                        request.setAttribute("admin", userRepository.getUserById(idUtilisateur).getAdminByIdAdmin());
+                        request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
+                        request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
+                        break;
+                    case ECOLE:
+                        handleEcoleRequest(request);
+                        request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                        request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole());
+                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
+                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
+                        request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
+                        break;
+                    case ENSEIGNANT:
+                        handleEnseignantRequest(request);
+                        request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
+                        request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
+                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
+                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
+                        request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
+                        break;
+                }
             }
+
+        } catch (Exception e) { // Des exceptions peuvent être levées par les repositories
+            request.setAttribute("messageErreur", e.getMessage());
         }
 
         aiguillerVersLaProchainePage(request, response);
