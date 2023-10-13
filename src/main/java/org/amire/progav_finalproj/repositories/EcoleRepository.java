@@ -16,6 +16,14 @@ public class EcoleRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
+    // Read
+
+    public EcoleEntity getEcoleById(long id) {
+        Query q = em.createQuery("select e from EcoleEntity e where e.idEcole = :id"); // Requête JPQL
+        q.setParameter("id", id);
+        return (EcoleEntity) q.getSingleResult();
+    }
+
     public List<EcoleEntity> getAllEcoles() {
         Query q = em.createQuery("select e from EcoleEntity e"); // Requête JPQL
         return q.getResultList();

@@ -5,6 +5,7 @@ import java.io.*;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
 import org.amire.progav_finalproj.utils.ActionTypes;
@@ -24,6 +25,8 @@ public class Controleur extends HttpServlet {
     private EcoleRepository ecoleRepository;
     @EJB
     private EcoleFavorisRepository ecoleFavorisRepository;
+    @EJB
+    private PostuleRepository postuleRepository;
 
     UserBean unUtilisateur;
     // public static String LOGIN_VALIDE;
@@ -88,12 +91,14 @@ public class Controleur extends HttpServlet {
     }
 
     public void handleEcoleRequest(HttpServletRequest request){
-        // TODO : Ajout / retrait de favoris et de postulations
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
+        //Ecole ayant envoyé la requête
         EcoleEntity ecole = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEcoleByIdEcole();
         long idEcole = ecole.getIdEcole();
+        //Enseignant ciblé par la requête (si applicable)
         long idEnseignant = request.getParameter("idEnseignant") != null ? Long.parseLong(request.getParameter("idEnseignant")) : 0;
+        EnseignantEntity enseignant = idEnseignant != 0 ? enseignantRepository.getEnseignantById(idEnseignant) : null;
 
         switch (action) {
             case AjoutFavorisEcole:
@@ -103,21 +108,29 @@ public class Controleur extends HttpServlet {
                 ecoleFavorisRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
                 break;
             case AjoutPosulationEcole:
-                //userSessionBean.ajouterEcolePostulation(idEcole, idEnseignant);
+                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole));
+                break;
+            case ModifPosulationEcole:
+                PostuleEntity postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision(request.getParameter("decision"));
+                postuleRepository.editPostule(postule);
+                // Y'a besoin de changer autre chose que la décision ?
                 break;
             case RetraitPosulationEcole:
-                //userSessionBean.retirerEcolePostulation(idEcole, idEnseignant);
+                postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
         }
     }
 
     public void handleEnseignantRequest(HttpServletRequest request){
-        // TODO : Ajout / retrait de favoris et de postulations
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
+        //Enseignant ayant envoyé la requête
         EnseignantEntity enseignant = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEnseignantByIdEnseignant();
         long idEnseignant = enseignant.getIdEnseignant();
+        //Ecole ciblée par la requête (si applicable)
         long idEcole = request.getParameter("idEcole") != null ? Long.parseLong(request.getParameter("idEcole")) : 0;
+        EcoleEntity ecole = idEcole != 0 ? ecoleRepository.getEcoleById(idEcole) : null;
 
         switch (action){
             case AjoutFavorisEnseignant:
@@ -127,10 +140,16 @@ public class Controleur extends HttpServlet {
                 candidatsFavorisRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
                 break;
             case AjoutPosulationEnseignant:
-                //userSessionBean.ajouterEnseignantPostulation(idEcole, idEnseignant);
+                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole));
+                break;
+            case ModifPosulationEnseignant:
+                PostuleEntity postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision(request.getParameter("decision"));
+                postuleRepository.editPostule(postule);
                 break;
             case RetraitPosulationEnseignant:
                 //userSessionBean.retirerEnseignantPostulation(idEcole, idEnseignant);
+                postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
         }
     }
