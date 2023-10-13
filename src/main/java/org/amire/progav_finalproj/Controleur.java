@@ -146,9 +146,9 @@ public class Controleur extends HttpServlet {
                 PostuleEntity postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 postule.setDecision(request.getParameter("decision"));
                 postuleRepository.editPostule(postule);
+                // Y'a besoin de changer autre chose que la décision ?
                 break;
             case RetraitPosulationEnseignant:
-                //userSessionBean.retirerEnseignantPostulation(idEcole, idEnseignant);
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
         }
