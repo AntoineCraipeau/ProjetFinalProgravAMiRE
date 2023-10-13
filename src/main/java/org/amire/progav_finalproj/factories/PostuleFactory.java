@@ -1,6 +1,5 @@
 package org.amire.progav_finalproj.factories;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.model.PostuleEntity;
