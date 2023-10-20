@@ -69,7 +69,7 @@
                         <input type="password" id="password" name="password" required>
                     </div>
                     <div class="form-group">
-                      <label for="userType">Type d'utilisateur</label>
+                      <label>Type d'utilisateur</label>
                       <input type="checkbox" id="enseignant" name="userType" value="enseignant"> Enseignant
                       <input type="checkbox" id="ecole" name="userType" value="ecole"> École
                       <input type="checkbox" id="admin" name="userType" value="admin"> Admin

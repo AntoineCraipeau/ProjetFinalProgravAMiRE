@@ -1,36 +1,51 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
+<%@ page import="org.amire.progav_finalproj.model.CandidatsFavorisEntity" %>
+
+
  <!-- Assurez-vous d'importer la classe Enseignant de votre package -->
 
 
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tableau de bord</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>Users / Profile / Ecole </title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="${contextPath}/assets/img/favicon.png" rel="icon">
+    <link href="${contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style >
+        @font-face {
+            font-display: block;
+            font-family: "bootstrap-icons";
+            src: url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?2820a3852bdb9a5832199cc61cec4e65") format("woff2"),
+            url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff?2820a3852bdb9a5832199cc61cec4e65") format("woff");
+        }
+    </style>
+
 
 </head>
 
@@ -157,6 +172,8 @@
   
     </header><!-- End Header -->
     <main id="main" class="main">
+
+
       <div class="pagetitle">
         <h1>Les offres d'écoles</h1>
       </div>
@@ -174,22 +191,23 @@
                             <thead>
                                 <h1>Liste des postulations</h1>
                                 <tr class="text-center">
-                                    <th>Sél</th>
-                                    <th>Ecole</th>
-                                    <th>Enseignant</th>
+                                    <th>IDPostule</th>
                                     <th>Date</th>
                                     <th>Decision</th>
+                                    <th>Ecole</th>
+                                    <th>Enseignant</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody> <!-- Notez l'ajout de la balise <tbody> -->
                                 <c:forEach items="${postulations}" var="postulation">
                                     <tr>
-                                        <td><input type="radio" name="idPostulation" value="${postulation.id_postule}" required></td>
-                                        <td>${postulation.Ecole}</td>
-                                        <td>${postulation.Enseignant}</td>
-                                        <td>${postulation.Date}</td>
-                                        <td><span class="badge bg-success">${postulation.Decision}</span></td>
+
+                                        <td>${postulation.idPostule}</td>
+                                        <td>${postulation.date}</td>
+                                        <td>${postulation.decision}</td>
+                                        <td>${postulation.idEcole}</td>
+                                        <td>${postulation.idEnseignant}</td>
                                         <td>
                                             <form action="EnSavoirPlusServlet" method="post">
                                                 <button class="btn btn-primary" type="submit">En savoir plus</button>
@@ -209,7 +227,83 @@
                 </div>
             </div>
         </div>
-    </section>
+      </section>
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-20">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Liste des écoles</h5>
+
+                            <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <h1>Liste des écoles</h1>
+                            <tr class="text-center">
+                                <th>Ecole</th>
+                                <th>Raison_sociale</th>
+                                <th>Besoin</th>
+                                <th>Competences_requises</th>
+                                <th>Exigences</th>
+                                <th>Periode</th>
+                                <th>Remarques</th>
+                            </tr>
+                            </thead>
+                            <tbody> <!-- Notez l'ajout de la balise <tbody> -->
+                            <c:forEach items="${ecoles}" var="ecoles">
+                                <tr>
+                                    <td>${ecoles.raisonSociale}</td>
+                                    <td>${ecoles.besoin}</td>
+                                    <td>${ecoles.competencesRequises}</td>
+                                    <td>${ecoles.exigences}</td>
+                                    <td>${ecoles.periode}</td>
+                                    <td>${ecoles.remarques}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${candidatsFavorisEntity.isEcoleDansFavoris(unUtilisateur.getIdUserinfo(), ecoles.idEcole)}">
+                                                <form action="Controlleur" method="post">
+                                                    <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
+                                                    <input type="hidden" name="action" value="RetraitFavorisEnseignant">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <i class="bi bi-heart-fill"></i> <!-- Cœur rempli (icone solide) -->
+                                                    </button>
+                                                </form>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form action="Controlleur" method="post">
+                                                    <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
+                                                    <input type="hidden" name="action" value="AjoutFavorisEnseignant">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <i class="bi bi-heart"></i> <!-- Cœur vide (icone régulière) -->
+                                                    </button>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
+
+
+
+                                        </br>
+
+                                        <form action="Controlleur" method="post">
+                                            <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
+                                            <button class="btn btn-primary" name="action" value="AjoutPosulationEnseignant" type="submit">AjoutPosulationEnseignant</button>
+                                        </form>
+
+
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
     
 

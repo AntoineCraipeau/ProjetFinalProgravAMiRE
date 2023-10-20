@@ -131,10 +131,10 @@ public class Controleur extends HttpServlet {
     public void handleEnseignantRequest(HttpServletRequest request){
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
-        //Enseignant ayant envoyé la requête
+        // Enseignant ayant envoyé la requête
         EnseignantEntity enseignant = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEnseignantByIdEnseignant();
         long idEnseignant = enseignant.getIdEnseignant();
-        //Ecole ciblée par la requête (si applicable)
+        // Ecole ciblée par la requête (si applicable)
         long idEcole = request.getParameter("idEcole") != null ? Long.parseLong(request.getParameter("idEcole")) : 0;
         EcoleEntity ecole = idEcole != 0 ? ecoleRepository.getEcoleById(idEcole) : null;
 

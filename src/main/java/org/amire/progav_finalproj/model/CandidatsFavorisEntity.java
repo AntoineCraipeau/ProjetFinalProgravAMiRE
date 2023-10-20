@@ -18,6 +18,7 @@ public class CandidatsFavorisEntity {
     @ManyToOne
     @JoinColumn(name = "id_ecole", referencedColumnName = "id_ecole", nullable = false)
     private EcoleEntity ecoleByIdEcole;
+
     @ManyToOne
     @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant", nullable = false)
     private EnseignantEntity enseignantByIdEnseignant;
@@ -68,6 +69,12 @@ public class CandidatsFavorisEntity {
         return result;
     }
 
+    // Ajouter la méthode isEcoleDansFavorite
+    public boolean isEcoleDansFavoris(long id_enseignant, long id_ecole) {
+        return this.idEnseignant == id_enseignant && this.idEcole == id_ecole;
+    }
+
+
     public EcoleEntity getEcoleByIdEcole() {
         return ecoleByIdEcole;
     }
@@ -83,4 +90,7 @@ public class CandidatsFavorisEntity {
     public void setEnseignantByIdEnseignant(EnseignantEntity enseignantByIdEnseignant) {
         this.enseignantByIdEnseignant = enseignantByIdEnseignant;
     }
+
+
+
 }
