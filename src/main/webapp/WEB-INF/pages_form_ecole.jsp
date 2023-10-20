@@ -38,6 +38,56 @@
   </style>
 
 
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle" href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">${userInfo.login}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>${ecole.raisonSociale}</h6>
+            <span>Ecole</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <form action="Controlleur" method="post">
+              <input type="hidden" name="action" value="Logout">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </form>
+          </li>
+        </ul>
+      </li>
+
+
+    </ul><!-- End Profile Dropdown Items -->
+  </nav><!-- End Icons Navigation -->
+
+
+
 </head>
 
 <body>
@@ -60,61 +110,7 @@
       </form>
     </div><!-- End Search Bar -->
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-  
-          <li class="nav-item d-block d-lg-none">
-              <a class="nav-link nav-icon search-bar-toggle" href="#">
-                  <i class="bi bi-search"></i>
-              </a>
-          </li><!-- End Search Icon-->
-  
-          <!-- Vérifiez si l'utilisateur est connecté et est eseignant en vérifiant la présence de la session -->
-          <% if (session.getAttribute("user") != null && "Ecole".equals(session.getAttribute("userRole"))) { %>
 
-              <!-- Accédez aux attributs de la session -->
-              <% String username = (String) session.getAttribute("username"); %>
-              <% String userRole = (String) session.getAttribute("userRole"); %>
-  
-              <li class="nav-item dropdown pe-3">
-                  <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                      <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                      <span class="d-none d-md-block dropdown-toggle ps-2"><%= username %></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                      <li class="dropdown-header">
-                          <h6><%= username %></h6>
-                          <span>Ecole</span>
-                      </li>
-                      <li>
-                          <hr class="dropdown-divider">
-                      </li>
-  
-                      <li>
-                          <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
-                              <i class="bi bi-person"></i>
-                              <span>My Profile</span>
-                          </a>
-                      </li>
-  
-                      <li>
-                          <hr class="dropdown-divider">
-                      </li>
-  
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" onclick = "Logout">
-                          <i class="bi bi-box-arrow-right"></i>
-                          <span>Sign Out</span>
-                      </a>
-                      </li>
-                  </ul>
-              </li>
-              <% } else { %>
-                <!-- L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion -->
-                <script>
-                    window.location.href = "pages-login.jsp";
-                </script>
-            <% } %>
   
       </ul><!-- End Profile Dropdown Items -->
   </nav><!-- End Icons Navigation -->
@@ -181,37 +177,37 @@
                 <div class="row mb-3">
                   <label for="inputNom" class="col-sm-2 col-form-label">Raison Sociale</label>
                   <div class="col-sm-10">
-                    <input type="nom" class="form-control">
+                    <input type="nom" class="form-control" id="inputNom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Besoin</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control">
+                    <input type="prenom" class="form-control" id="inputPrenom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Exigences</label>
                   <div class="col-sm-10">
-                    <input type="Experience" class="form-control">
+                    <input type="Experience" class="form-control" id="inputExperience">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="Mail" class="form-control">
+                    <input type="Mail" class="form-control" id="inputMail">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="Telephone" class="form-control">
+                    <input type="Telephone" class="form-control" id="inputTelephone">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaiter</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" id="inputDate">
                   </div>
                 </div>
                 
@@ -241,14 +237,14 @@
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck3" >
                       <label class="form-check-label" for="gridCheck2">
                         Sciences
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck4" >
                       <label class="form-check-label" for="gridCheck2">
                         Programmation
                       </label>
@@ -277,9 +273,9 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
+                  <label for="otherthing" class="col-sm-2 col-form-label">Autres remarques</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" style="height: 100px"></textarea>
+                    <textarea class="form-control" style="height: 100px" id="otherthing"></textarea>
                   </div>
                 </div>
 

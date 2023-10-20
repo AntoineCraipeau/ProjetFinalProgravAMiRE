@@ -77,10 +77,13 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
+                            <form action="Controlleur" method="post">
+                                <input type="hidden" name="action" value="EnseignantVersProfil">
+                                <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                    <i class="bi bi-person"></i>
+                                    <span>My Profile</span>
+                                </a>
+                            </form>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

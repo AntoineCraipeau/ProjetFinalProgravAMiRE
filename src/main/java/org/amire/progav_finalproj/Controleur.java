@@ -240,18 +240,20 @@ public class Controleur extends HttpServlet {
 
         if(action == ActionTypes.EcoleVersDashboard)
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
-        else
+        else if (action == ActionTypes.EcoleVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_ecole.jsp").forward(request, response);
-
-    }
+        else {
+            request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
+    }}
 
     public void handleEnseignantRedirection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
-        if(action != ActionTypes.EnseignantVersDashboard)
+        if(action == ActionTypes.EnseignantVersDashboard)
+            request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
+        else if (action == ActionTypes.EnseignantVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
-        else
-            request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
+        else {request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);}
     }
 
     public void init() {
