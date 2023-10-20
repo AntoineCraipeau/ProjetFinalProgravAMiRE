@@ -54,7 +54,7 @@
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour se connecter</p>
                   </div>
-                  <form class="row g-3 needs-validation" novalidate method="post" action="Controlleur">
+                  <form class="row g-3 " method="post" action="Controlleur">
                     <div class="col-12">
                         <label for="champLogin" class="form-label">Nom d'utilisateur</label>
                       <input class="form-control" placeholder="Login" name="champLogin" autofocus="" id ="champLogin">
@@ -68,18 +68,18 @@
                     <div class="col-12">
                       <input type="submit" name="action" value="Login" class="btn btn-primary w-100"/>
                     </div>
+                </form>
                     <div class="col-12">
                       <form action="Controlleur" method="post">
-                        <p class="small mb-0">Pas de compte ?
+                        <p class="small mb-0">Pas de compte ? </p>
                           <input type="hidden" name="action" value="ToRegister">
                           <a  href="#" onclick="this.parentNode.submit();">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span> Crée un compte</span>
+                            <p class="small mb-0"> Crée un compte</p>
                           </a>
-                    </p>
-                        </form>
+                      </form>
                     </div>
-                </form>
+
                 <!--<c:if test="${not empty param.error}">
                     <p class="small text-danger">Nom d'utilisateur ou mot de passe incorrect.</p>
                 </c:if>-->

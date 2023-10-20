@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Profile / Ecole </title>
+  <title> Register </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
 
   <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -23,19 +29,8 @@
   <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
-
   <!-- Template Main CSS File -->
   <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
-
-  <style >
-    @font-face {
-      font-display: block;
-      font-family: "bootstrap-icons";
-      src: url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?2820a3852bdb9a5832199cc61cec4e65") format("woff2"),
-      url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff?2820a3852bdb9a5832199cc61cec4e65") format("woff");
-    }
-  </style>
-
 
 </head>
 

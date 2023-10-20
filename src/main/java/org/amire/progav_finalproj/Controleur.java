@@ -74,7 +74,9 @@ public class Controleur extends HttpServlet {
                         request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
                         request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
                         break;
+
                 }
+
             }
 
         } catch (Exception e) { // Des exceptions peuvent être levées par les repositories
