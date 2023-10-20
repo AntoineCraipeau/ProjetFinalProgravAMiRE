@@ -68,17 +68,17 @@
                     <div class="col-12">
                       <input type="submit" name="action" value="Login" class="btn btn-primary w-100"/>
                     </div>
-                </form>
-                    <div class="col-12">
-                      <form action="Controlleur" method="post">
-                        <p class="small mb-0">Pas de compte ? </p>
-                          <input type="hidden" name="action" value="ToRegister">
-                          <a  href="#" onclick="this.parentNode.submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <p class="small mb-0"> Crée un compte</p>
-                          </a>
-                      </form>
-                    </div>
+                  </form>
+                  <div class="col-12">
+                    <form action="Controlleur" method="post">
+                      <p class="small mb-0">Pas de compte ? </p>
+                        <input type="hidden" name="action" value="ToRegister">
+                        <a  href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <p class="small mb-0"> Crée un compte</p>
+                        </a>
+                    </form>
+                  </div>
 
                 <!--<c:if test="${not empty param.error}">
                     <p class="small text-danger">Nom d'utilisateur ou mot de passe incorrect.</p>

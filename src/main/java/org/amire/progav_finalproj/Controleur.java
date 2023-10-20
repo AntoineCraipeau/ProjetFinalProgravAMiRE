@@ -1,9 +1,7 @@
 package org.amire.progav_finalproj;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -18,7 +16,7 @@ import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
 
 
-public class Controleur extends HttpServlet {
+public class Controleur extends HttpServlet implements Controleurs {
 
     @EJB
     private UserRepository userRepository;
@@ -34,10 +32,6 @@ public class Controleur extends HttpServlet {
     private PostuleRepository postuleRepository;
 
     UserBean unUtilisateur;
-    // public static String LOGIN_VALIDE;
-    // public static String MOT_DE_PASSE_VALIDE;
-
-    public static final String MESSAGE_ERREUR_CREDENTIALS_KO = "Infos de connexion non valides. Merci de les saisir à nouveau";
 
     public void processRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -190,63 +184,12 @@ public class Controleur extends HttpServlet {
 
         unUtilisateur = new UserBean();
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
-        ActionTypes[] noContextActions = {ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.EndRegisterEcole, ActionTypes.EndRegisterEnseignant, ActionTypes.Logout};
+        ActionTypes[] noContextActions = {ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.Logout};
 
-
-
-        if(action == ActionTypes.Logout||action == ActionTypes.EndRegisterEcole||action == ActionTypes.EndRegisterEnseignant){
+        if(action == ActionTypes.Logout){
             request.getSession().setAttribute("utilisateur", null);
             request.getSession().invalidate();
         }
-
-        if(action == ActionTypes.StartRegisterEcole){
-            request.setAttribute("messageErreur", "");
-
-            EcoleEntity ecole = EcoleFactory.buildEmptyEcole();
-            ecoleRepository.addEcole(ecole);
-
-            UserinfoEntity user = new UserinfoEntity();
-            user.setLogin(request.getParameter("champLogin"));
-            user.setPassword(request.getParameter("champMotDePasse"));
-            user.setIdEcole(ecole.getIdEcole());
-            userRepository.addUser(user);
-
-            unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
-            request.getSession().setAttribute("utilisateur", unUtilisateur);
-        }
-
-        if(action == ActionTypes.StartRegisterEnseignant){
-            request.setAttribute("messageErreur", "");
-
-            EnseignantEntity enseignant = EnseignantFactory.buildEmptyEnseignant();
-            enseignantRepository.addEnseignant(enseignant);
-
-            UserinfoEntity user = new UserinfoEntity();
-            user.setLogin(request.getParameter("champLogin"));
-            user.setPassword(request.getParameter("champMotDePasse"));
-            user.setIdEnseignant(enseignant.getIdEnseignant());
-            userRepository.addUser(user);
-
-            unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
-            request.getSession().setAttribute("utilisateur", unUtilisateur);
-        }
-
-        if(action == ActionTypes.EndRegisterEcole){
-            UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
-            EcoleEntity ecole = user.getEcoleByIdEcole();
-            EcoleEntity fromRequest = EcoleFactory.buildEcoleFromRequest(request);
-            fromRequest.setIdEcole(ecole.getIdEcole());
-            ecoleRepository.editEcole(fromRequest);
-        }
-
-        if(action == ActionTypes.EndRegisterEnseignant){
-            UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
-            EnseignantEntity enseignant = user.getEnseignantByIdEnseignant();
-            EnseignantEntity fromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
-            fromRequest.setIdEnseignant(enseignant.getIdEnseignant());
-            enseignantRepository.editEnseignant(fromRequest);
-        }
-
 
         if(action == ActionTypes.Login){
             if(!verifierInfosConnexion(request)){
@@ -305,8 +248,6 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
         else if (action == ActionTypes.EcoleVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_ecole.jsp").forward(request, response);
-        else if (action == ActionTypes.StartRegisterEcole)
-            request.getRequestDispatcher("WEB-INF/pages_form_ecole.jsp").forward(request, response);
         else {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
     }}
@@ -318,15 +259,10 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
         else if (action == ActionTypes.EnseignantVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
-        else if (action == ActionTypes.StartRegisterEnseignant)
-            request.getRequestDispatcher("WEB-INF/pages_form_enseignant.jsp").forward(request, response);
         else {request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);}
     }
 
     public void init() {
-        // ServletContext context = getServletContext();
-        // LOGIN_VALIDE = context.getInitParameter("login");
-        // MOT_DE_PASSE_VALIDE = context.getInitParameter("password");
     }
 
     public void destroy() {

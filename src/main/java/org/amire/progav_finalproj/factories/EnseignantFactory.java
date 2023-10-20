@@ -24,6 +24,7 @@ public class EnseignantFactory {
         enseignant.setInteretsDomaines("");
         enseignant.setNiveauxSouhaites("");
         enseignant.setInteretsEcoles("");
+        enseignant.setTypeDeContrat("");
         return enseignant;
     }
 
