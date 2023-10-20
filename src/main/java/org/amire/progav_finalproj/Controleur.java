@@ -249,7 +249,7 @@ public class Controleur extends HttpServlet {
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
         if(action != ActionTypes.EnseignantVersDashboard)
-            request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
         else
             request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
     }

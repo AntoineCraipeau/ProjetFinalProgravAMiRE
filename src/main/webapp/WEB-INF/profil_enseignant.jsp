@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
-<%@ page import=".package.Enseignant" %> <!-- Assurez-vous d'importer la classe Enseignant de votre package -->
-
 
 
 <!DOCTYPE html>
@@ -12,25 +9,37 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Users / Profile / Enseignant</title>
+  <title>Users / Profile / Ecole </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${contextPath}/assets/img/favicon.png" rel="icon">
+  <link href="${contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
+
+  <style >
+    @font-face {
+      font-display: block;
+      font-family: "bootstrap-icons";
+      src: url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?2820a3852bdb9a5832199cc61cec4e65") format("woff2"),
+      url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff?2820a3852bdb9a5832199cc61cec4e65") format("woff");
+    }
+  </style>
+
 
 </head>
 
@@ -65,66 +74,56 @@
 
         <nav class="header-nav ms-auto">
           <ul class="d-flex align-items-center">
-      
-              <li class="nav-item d-block d-lg-none">
-                  <a class="nav-link nav-icon search-bar-toggle" href="#">
-                      <i class="bi bi-search"></i>
+
+            <li class="nav-item d-block d-lg-none">
+              <a class="nav-link nav-icon search-bar-toggle" href="#">
+                <i class="bi bi-search"></i>
+              </a>
+            </li><!-- End Search Icon-->
+
+
+            <li class="nav-item dropdown pe-3">
+              <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
+                <span class="d-none d-md-block dropdown-toggle ps-2">${enseignant.nom},${enseignant.prenom}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li class="dropdown-header">
+                  <h6> ${enseignant.nom},${enseignant.prenom}</h6>
+                  <span>Enseignant</span>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
                   </a>
-              </li><!-- End Search Icon-->
-      
-              <!-- Vérifiez si l'utilisateur est connecté et est eseignant en vérifiant la présence de la session -->
-              <% if (session.getAttribute("user") != null && "Enseignant".equals(session.getAttribute("userRole"))) { %>
-    
-                  <!-- Accédez aux attributs de la session -->
-                  <% String username = (String) session.getAttribute("username"); %>
-                  <% String userRole = (String) session.getAttribute("userRole"); %>
-      
-                  <li class="nav-item dropdown pe-3">
-                      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                          <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                          <span class="d-none d-md-block dropdown-toggle ps-2"><%= username %></span>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                          <li class="dropdown-header">
-                              <h6><%= username %></h6>
-                              <span><%= userRole %></span>
-                          </li>
-                          <li>
-                              <hr class="dropdown-divider">
-                          </li>
-      
-                          <li>
-                              <a class="dropdown-item d-flex align-items-center" href="profil_enseignant.jsp">
-                                  <i class="bi bi-person"></i>
-                                  <span>My Profile</span>
-                              </a>
-                          </li>
-      
-                          <li>
-                              <hr class="dropdown-divider">
-                          </li>
-      
-                          <li>
-                            <a class="dropdown-item d-flex align-items-center" href="logout.jsp">
-                              <i class="bi bi-box-arrow-right"></i>
-                              <span>Sign Out</span>
-                          </a>
-                          </li>
-                      </ul>
-                  </li>
-                  <% } else { %>
-                    <!-- L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion -->
-                    <script>
-                        window.location.href = "pages-login.jsp";
-                    </script>
-                <% } %>
-      
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <form action="Controlleur" method="post">
+                    <input type="hidden" name="action" value="Logout">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                      <i class="bi bi-box-arrow-right"></i>
+                      <span>Sign Out</span>
+                    </a>
+                  </form>
+                </li>
+              </ul>
+            </li>
+
+
           </ul><!-- End Profile Dropdown Items -->
-      </nav><!-- End Icons Navigation -->
-      
+        </nav><!-- End Icons Navigation -->
 
 
-  <!-- ======= Sidebar ======= -->
+
+
+        <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -165,6 +164,10 @@
     </ul>
 
 
+      </aside>
+      </ul>
+      </nav>
+
   </header><!-- End Header -->
 
   <main id="main" class="main">
@@ -177,8 +180,8 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-              <h2><%= username %></h2>
-              <h3><%= userRole %></h3>
+              <h2>${enseignant.nom},${enseignant.prenom}</h2>
+              <h3>Enseignant</h3>
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -213,59 +216,57 @@
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">Besoin</h5>
-                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label "> Nom , Prenom</div>
-                    <div class="col-lg-9 col-md-8"> <%= nom %>, <%= prenom %> </div>
+                    <div class="col-lg-9 col-md-8"> ${enseignant.nom},${enseignant.prenom}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label "> Experience , Evaluations</div>
-                    <div class="col-lg-9 col-md-8"> <%= experience %>, <%= evaluations %> </div>
+                    <div class="col-lg-9 col-md-8"> ${enseignant.experience},${enseignant.evaluations} </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8"> <%= adresseElectronique %> </div>
+                    <div class="col-lg-9 col-md-8"> ${enseignant.adresseElectronique} </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telephone</div>
-                    <div class="col-lg-9 col-md-8"><%= telephone %></div>
+                    <div class="col-lg-9 col-md-8">${enseignant.telephone}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label "> Titre Academique</div>
-                    <div class="col-lg-9 col-md-8"> <%= titresAcademiques %> </div>
+                    <div class="col-lg-9 col-md-8"> ${enseignant.titresAcademiques} </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label "> Références </div>
-                    <div class="col-lg-9 col-md-8"><%= references %></div>
+                    <div class="col-lg-9 col-md-8">${enseignant.referencesPro}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8"><%= disponibilites %></div>
+                    <div class="col-lg-9 col-md-8">${enseignant.disponibilites}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Site Web</div>
-                    <div class="col-lg-9 col-md-8"><%= siteWeb %><</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.siteWeb}<</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Compétences</div>
-                    <div class="col-lg-9 col-md-8"><%= competences %></div>
+                    <div class="col-lg-9 col-md-8">${enseignant.competences}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Type de contrats chercher</div>
-                    <div class="col-lg-9 col-md-8"><%= typeContrat %></div>
+                    <div class="col-lg-9 col-md-8">${enseignant.typeDeContrat}</div>
                   </div>
 
                 </div>
@@ -321,62 +322,62 @@
               <div class="row mb-3">
                 <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                 <div class="col-sm-10">
-                  <input type="nom" class="form-control">
+                  <input type="nom" class="form-control" id="inputNom" value=${enseignant.nom}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                 <div class="col-sm-10">
-                  <input type="prenom" class="form-control">
+                  <input type="prenom" class="form-control" id="inputPrenom" value=${enseignant.prenom}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
                 <div class="col-sm-10">
-                  <input type="Experience" class="form-control">
+                  <input type="Experience" class="form-control" id="inputExperience" value=${enseignant.experience}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
                 <div class="col-sm-10">
-                  <input type="Evaluations" class="form-control">
+                  <input type="Evaluations" class="form-control" id="inputEvaluations" value=${enseignant.evaluations}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                  <input type="Mail" class="form-control">
+                  <input type="Mail" class="form-control" id="inputMail" value=${enseignant.nom}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                 <div class="col-sm-10">
-                  <input type="Telephone" class="form-control">
+                  <input type="Telephone" class="form-control" id="inputTelephone" value=${enseignant.telephone}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
                 <div class="col-sm-10">
-                  <input type="TitreAca" class="form-control">
+                  <input type="TitreAca" class="form-control" id="inputTitreAca" value=${enseignant.titresAcademiques}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
                 <div class="col-sm-10">
-                  <input type="Reference" class="form-control">
+                  <input type="Reference" class="form-control" id="inputReference" value=${enseignant.referencesPro}>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
                 <div class="col-sm-10">
-                  <input type="date" class="form-control">
+                  <input type="date" class="form-control" id="inputDate" value=${enseignant.disponibilites}>
                 </div>
               </div>
               
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="file" id="formFile">
+                  <input class="form-control" type="file" id="formFile" id="inputNumber" >
                 </div>
               </div>
 
@@ -406,14 +407,14 @@
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                    <input class="form-check-input" type="checkbox" id="gridCheck3" >
                     <label class="form-check-label" for="gridCheck2">
                       Sciences
                     </label>
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                    <input class="form-check-input" type="checkbox" id="gridCheck4" >
                     <label class="form-check-label" for="gridCheck2">
                       Programmation
                     </label>
@@ -444,7 +445,7 @@
               <div class="row mb-3">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" style="height: 100px"></textarea>
+                  <textarea class="form-control" style="height: 100px" id="inputPassword"></textarea>
                 </div>
               </div>
 

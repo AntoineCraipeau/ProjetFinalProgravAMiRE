@@ -196,7 +196,7 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">Besoin</h5>
-                  <p class="small fst-italic">${ecole.Besoin}</p>
+                  <p class="small fst-italic">${ecole.besoin}</p>
 
                   <h5 class="card-title">Profile Details</h5>
 
@@ -217,7 +217,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${ ecole.Periode}</div>
+                    <div class="col-lg-9 col-md-8">${ ecole.periode}</div>
                   </div>
 
                   <div class="row">
@@ -227,7 +227,7 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Compétences rechercher</div>
-                    <div class="col-lg-9 col-md-8">${ ecole.competences_requises }</div>
+                    <div class="col-lg-9 col-md-8">${ ecole.competencesRequises }</div>
                   </div>
 
                   <div class="row">
@@ -289,13 +289,13 @@
                 <div class="row mb-3">
                   <label for="nom" class="col-sm-2 col-form-label">Raison Sociale</label>
                   <div class="col-sm-10">
-                    <input type="nom" class="form-control" id="nom">
+                    <input type="nom" class="form-control" id="nom" value = ${ecole.raisonSociale}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Besoin</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control" id="inputPrenom">
+                    <input type="prenom" class="form-control" id="inputPrenom" value="${besoin}">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -319,7 +319,7 @@
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaiter</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate">
+                    <input type="date" class="form-control" id="inputDate" >
                   </div>
                 </div>
                 

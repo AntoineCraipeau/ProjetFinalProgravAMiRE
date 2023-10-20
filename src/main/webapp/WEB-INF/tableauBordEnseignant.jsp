@@ -53,61 +53,53 @@
           <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
       </div><!-- End Search Bar -->
-      <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-    
-            <li class="nav-item d-block d-lg-none">
-                <a class="nav-link nav-icon search-bar-toggle" href="#">
-                    <i class="bi bi-search"></i>
-                </a>
-            </li><!-- End Search Icon-->
-    
-            <!-- Vérifiez si l'utilisateur est connecté et est eseignant en vérifiant la présence de la session -->
-            <% if (session.getAttribute("user") != null && "Ecole".equals(session.getAttribute("userRole"))) { %>
-  
-                <!-- Accédez aux attributs de la session -->
-                <% String username = (String) session.getAttribute("username"); %>
-                <% String userRole = (String) session.getAttribute("userRole"); %>
-    
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle" href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2"><%= username %></span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">${enseignant.nom},${enseignant.prenom}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><%= username %></h6>
-                            <span>Ecole</span>
+                            <h6> ${enseignant.nom},${enseignant.prenom}</h6>
+                            <span>Enseignant</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-    
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>
                         </li>
-    
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-    
                         <li>
-                          <a class="dropdown-item d-flex align-items-center" href="logout.jsp">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
-                        </a>
+                            <form action="Controlleur" method="post">
+                                <input type="hidden" name="action" value="Logout">
+                                <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Sign Out</span>
+                                </a>
+                            </form>
                         </li>
                     </ul>
                 </li>
-              <% } %>
-    
-        </ul><!-- End Profile Dropdown Items -->
-    </nav><!-- End Icons Navigation -->
-    
-  
+
+
+            </ul><!-- End Profile Dropdown Items -->
+        </nav><!-- End Icons Navigation -->
   
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
