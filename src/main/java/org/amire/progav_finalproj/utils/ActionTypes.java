@@ -1,13 +1,14 @@
 package org.amire.progav_finalproj.utils;
 
 public enum ActionTypes {
-    Entry,
-    Details,
-    Edit,
-    Supprimer,
+    ToLogin,
+    ToRegister,
     Login,
+    StartRegisterEcole,
+    EndRegisterEcole,
+    StartRegisterEnseignant,
+    EndRegisterEnseignant,
     Logout,
-    Retour,
     AjoutFavorisEcole,
     RetraitFavorisEcole,
     AjoutPosulationEcole,

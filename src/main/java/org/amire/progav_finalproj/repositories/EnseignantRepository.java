@@ -29,6 +29,18 @@ public class EnseignantRepository {
         return q.getResultList();
     }
 
+    public void addEnseignant(EnseignantEntity enseignant) {
+        em.getTransaction().begin();
+        em.persist(enseignant);
+        em.getTransaction().commit();
+    }
+
+    public void editEnseignant(EnseignantEntity enseignant) {
+        em.getTransaction().begin();
+        em.merge(enseignant);
+        em.getTransaction().commit();
+    }
+
     public void deleteEnseignantById(long id){
         Query q = em.createQuery("delete from EnseignantEntity e where e.idEnseignant = :id"); // Requête JPQL
         q.setParameter("id", id);

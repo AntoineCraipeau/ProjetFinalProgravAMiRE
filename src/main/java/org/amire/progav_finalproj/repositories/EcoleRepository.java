@@ -29,6 +29,22 @@ public class EcoleRepository {
         return q.getResultList();
     }
 
+    // Create
+
+    public void addEcole(EcoleEntity ecole) {
+        em.getTransaction().begin();
+        em.persist(ecole);
+        em.getTransaction().commit();
+    }
+
+    // Update
+
+    public void editEcole(EcoleEntity ecole) {
+        em.getTransaction().begin();
+        em.merge(ecole);
+        em.getTransaction().commit();
+    }
+
     public void deleteEcoleById(long id) { // Faut trouver un moyen de respecter l'aspect transactionnel non ?
         Query q = em.createQuery("delete from EcoleEntity e where e.idEcole = :id"); // Requête JPQL
         q.setParameter("id", id);

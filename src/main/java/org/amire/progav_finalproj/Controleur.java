@@ -1,10 +1,15 @@
 package org.amire.progav_finalproj;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import org.amire.progav_finalproj.factories.EcoleFactory;
+import org.amire.progav_finalproj.factories.EnseignantFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
@@ -183,11 +188,63 @@ public class Controleur extends HttpServlet {
 
         unUtilisateur = new UserBean();
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
+        ActionTypes[] noContextActions = {ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.EndRegisterEcole, ActionTypes.EndRegisterEnseignant, ActionTypes.Logout};
 
-        if(action == ActionTypes.Logout){
+
+
+        if(action == ActionTypes.Logout||action == ActionTypes.EndRegisterEcole||action == ActionTypes.EndRegisterEnseignant){
             request.getSession().setAttribute("utilisateur", null);
             request.getSession().invalidate();
         }
+
+        if(action == ActionTypes.StartRegisterEcole){
+            request.setAttribute("messageErreur", "");
+
+            EcoleEntity ecole = EcoleFactory.buildEmptyEcole();
+            ecoleRepository.addEcole(ecole);
+
+            UserinfoEntity user = new UserinfoEntity();
+            user.setLogin(request.getParameter("champLogin"));
+            user.setPassword(request.getParameter("champMotDePasse"));
+            user.setIdEcole(ecole.getIdEcole());
+            userRepository.addUser(user);
+
+            unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
+            request.getSession().setAttribute("utilisateur", unUtilisateur);
+        }
+
+        if(action == ActionTypes.StartRegisterEnseignant){
+            request.setAttribute("messageErreur", "");
+
+            EnseignantEntity enseignant = EnseignantFactory.buildEmptyEnseignant();
+            enseignantRepository.addEnseignant(enseignant);
+
+            UserinfoEntity user = new UserinfoEntity();
+            user.setLogin(request.getParameter("champLogin"));
+            user.setPassword(request.getParameter("champMotDePasse"));
+            user.setIdEnseignant(enseignant.getIdEnseignant());
+            userRepository.addUser(user);
+
+            unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
+            request.getSession().setAttribute("utilisateur", unUtilisateur);
+        }
+
+        if(action == ActionTypes.EndRegisterEcole){
+            UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
+            EcoleEntity ecole = user.getEcoleByIdEcole();
+            EcoleEntity fromRequest = EcoleFactory.buildEcoleFromRequest(request);
+            fromRequest.setIdEcole(ecole.getIdEcole());
+            ecoleRepository.editEcole(fromRequest);
+        }
+
+        if(action == ActionTypes.EndRegisterEnseignant){
+            UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
+            EnseignantEntity enseignant = user.getEnseignantByIdEnseignant();
+            EnseignantEntity fromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
+            fromRequest.setIdEnseignant(enseignant.getIdEnseignant());
+            enseignantRepository.editEnseignant(fromRequest);
+        }
+
 
         if(action == ActionTypes.Login){
             if(!verifierInfosConnexion(request)){
@@ -199,7 +256,7 @@ public class Controleur extends HttpServlet {
                 request.getSession().setAttribute("utilisateur", unUtilisateur);
             }
 
-        } else if (action != ActionTypes.Entry && action != ActionTypes.Logout){
+        } else if (!Arrays.asList(noContextActions).contains(action)){
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
                 unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
@@ -213,10 +270,14 @@ public class Controleur extends HttpServlet {
 
     public void aiguillerVersLaProchainePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
         UserBean userBean = (UserBean) request.getAttribute("utilisateur");
 
         if(userBean.getIdUserinfo() == 0){ // Si l'utilisateur vient d'arriver sur le site ou de se déconnecter
-            request.getRequestDispatcher("WEB-INF/pages-login.jsp").forward(request, response);
+            if(action == ActionTypes.ToRegister)
+                request.getRequestDispatcher("WEB-INF/pages-register.jsp").forward(request, response);
+            else
+                request.getRequestDispatcher("WEB-INF/pages-login.jsp").forward(request, response);
             return;
         }
 
@@ -242,7 +303,7 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
         else if (action == ActionTypes.EcoleVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_ecole.jsp").forward(request, response);
-        else if (action == ActionTypes.EcoleVersForm)
+        else if (action == ActionTypes.StartRegisterEcole)
             request.getRequestDispatcher("WEB-INF/pages_form_ecole.jsp").forward(request, response);
         else {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
@@ -255,7 +316,7 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
         else if (action == ActionTypes.EnseignantVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
-        else if (action == ActionTypes.EnseignantVersForm)
+        else if (action == ActionTypes.StartRegisterEnseignant)
             request.getRequestDispatcher("WEB-INF/pages_form_enseignant.jsp").forward(request, response);
         else {request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);}
     }

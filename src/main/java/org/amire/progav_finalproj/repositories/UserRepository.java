@@ -33,6 +33,12 @@ public class UserRepository {
         return (UserinfoEntity) q.getSingleResult();
     }
 
+    public void addUser(UserinfoEntity user) {
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
+    }
+
     public void editUser(UserinfoEntity user) {
         em.getTransaction().begin();
         em.merge(user);

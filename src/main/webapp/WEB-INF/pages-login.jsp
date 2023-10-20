@@ -69,7 +69,15 @@
                       <input type="submit" name="action" value="Login" class="btn btn-primary w-100"/>
                     </div>
                     <div class="col-12">
-                        <p class="small mb-0">Pas de compte ? <a href="register.jsp">Crée un compte</a></p>
+                      <form action="Controlleur" method="post">
+                        <p class="small mb-0">Pas de compte ?
+                          <input type="hidden" name="action" value="ToRegister">
+                          <a  href="#" onclick="this.parentNode.submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span> Crée un compte</span>
+                          </a>
+                    </p>
+                        </form>
                     </div>
                 </form>
                 <!--<c:if test="${not empty param.error}">
