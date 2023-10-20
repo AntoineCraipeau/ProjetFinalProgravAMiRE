@@ -91,30 +91,74 @@
 </head>
 
 <body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">ProjetProgAv2023</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">    
-        <span class="d-none d-lg-block">ProjetProgAv2023</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle" href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
 
 
-  
-      </ul><!-- End Profile Dropdown Items -->
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>${userInfo.login}</h6>
+            <span>Ecole</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <form action="Controlleur" method="post">
+              <input type="hidden" name="action" value="EcoleVersProfile">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Profile</span>
+              </a>
+            </form>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <form action="Controlleur" method="post">
+              <input type="hidden" name="action" value="Logout">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </form>
+          </li>
+        </ul>
+      </li>
+
+
+    </ul><!-- End Profile Dropdown Items -->
   </nav><!-- End Icons Navigation -->
- 
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
@@ -122,10 +166,13 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersDashboard">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Dashboard</span>
+          </a>
+        </form>
       </li><!-- End Dashboard Nav -->
 
 
@@ -133,10 +180,13 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersProfil">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Profil</span>
+          </a>
+        </form>
       </li><!-- End Profile Page Nav -->
 
 
@@ -148,16 +198,21 @@
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersForm">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Register Form</span>
+          </a>
+        </form>
       </li><!-- End Login Page Nav -->
 
     </ul>
 
+  </aside>
 
-  </header><!-- End Header -->
+
+</header><!-- End Header -->
 
   <main id="main" class="main">
 
@@ -300,6 +355,7 @@
         </div>
       </div>
     </section>
+    </div>
 
   </main><!-- End #main -->
 

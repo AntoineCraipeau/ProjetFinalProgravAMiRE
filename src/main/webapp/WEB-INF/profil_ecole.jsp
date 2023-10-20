@@ -44,7 +44,6 @@
 </head>
 
 <body>
-
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -76,21 +75,24 @@
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">${userInfo.login}</span>
+          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>${ecole.raisonSociale}</h6>
+            <h6>${userInfo.login}</h6>
             <span>Ecole</span>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
-              <i class="bi bi-person"></i>
-              <span>My Profile</span>
-            </a>
+            <form action="Controlleur" method="post">
+              <input type="hidden" name="action" value="EcoleVersProfile">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Profile</span>
+              </a>
+            </form>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -112,43 +114,61 @@
   </nav><!-- End Icons Navigation -->
 
 
-
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersDashboard">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Dashboard</span>
+          </a>
+        </form>
+      </li><!-- End Dashboard Nav -->
 
 
 
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="profil_ecole.jsp">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersProfil">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Profil</span>
+          </a>
+        </form>
       </li><!-- End Profile Page Nav -->
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.jsp">
+        <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.jsp">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
+        <form action="Controlleur" method="post">
+          <input type="hidden" name="action" value="EcoleVersForm">
+          <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Register Form</span>
+          </a>
+        </form>
       </li><!-- End Login Page Nav -->
 
     </ul>
 
+  </aside>
 
-  </header><!-- End Header -->
-  
+
+</header><!-- End Header -->
+
+
   <main id="main" class="main">
 
     <section class="section profile">

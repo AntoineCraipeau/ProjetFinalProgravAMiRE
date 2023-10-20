@@ -88,10 +88,13 @@
                               <hr class="dropdown-divider">
                           </li>
                           <li>
-                              <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
-                                  <i class="bi bi-person"></i>
-                                  <span>My Profile</span>
-                              </a>
+                              <form action="Controlleur" method="post">
+                                  <input type="hidden" name="action" value="EcoleVersProfile">
+                                  <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                      <i class="bi bi-box-arrow-right"></i>
+                                      <span>Profile</span>
+                                  </a>
+                              </form>
                           </li>
                           <li>
                               <hr class="dropdown-divider">
@@ -111,47 +114,58 @@
 
       </ul><!-- End Profile Dropdown Items -->
   </nav><!-- End Icons Navigation -->
- 
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
 
 
+      <!-- ======= Sidebar ======= -->
+      <aside id="sidebar" class="sidebar">
 
-      <li class="nav-heading">Pages</li>
+          <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersDashboard">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </form>
+              </li><!-- End Dashboard Nav -->
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li><!-- End Login Page Nav -->
+              <li class="nav-heading">Pages</li>
 
-    </ul>
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersProfil">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Profil</span>
+                      </a>
+                  </form>
+              </li><!-- End Profile Page Nav -->
+
+
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="pages-register.html">
+                      <i class="bi bi-card-list"></i>
+                      <span>Register</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersForm">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Register Form</span>
+                      </a>
+                  </form>
+              </li><!-- End Login Page Nav -->
+
+          </ul>
+
+      </aside>
 
 
   </header><!-- End Header -->

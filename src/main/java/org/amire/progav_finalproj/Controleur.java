@@ -242,6 +242,8 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
         else if (action == ActionTypes.EcoleVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_ecole.jsp").forward(request, response);
+        else if (action == ActionTypes.EcoleVersForm)
+            request.getRequestDispatcher("WEB-INF/pages_form_ecole.jsp").forward(request, response);
         else {
             request.getRequestDispatcher("WEB-INF/tableauBordEcole.jsp").forward(request, response);
     }}
@@ -253,6 +255,8 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);
         else if (action == ActionTypes.EnseignantVersProfil)
             request.getRequestDispatcher("WEB-INF/profil_enseignant.jsp").forward(request, response);
+        else if (action == ActionTypes.EnseignantVersForm)
+            request.getRequestDispatcher("WEB-INF/pages_form_enseignant.jsp").forward(request, response);
         else {request.getRequestDispatcher("WEB-INF/tableauBordEnseignant.jsp").forward(request, response);}
     }
 

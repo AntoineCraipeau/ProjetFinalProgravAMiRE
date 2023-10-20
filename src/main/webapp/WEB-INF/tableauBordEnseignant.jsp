@@ -103,48 +103,57 @@
 
             </ul><!-- End Profile Dropdown Items -->
         </nav><!-- End Icons Navigation -->
-  
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-  
-      <ul class="sidebar-nav" id="sidebar-nav">
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="index.html">
-            <i class="bi bi-grid"></i>
-            <span>Dashboard</span>
-          </a>
-        </li><!-- End Dashboard Nav -->
-  
-  
-  
-        <li class="nav-heading">Pages</li>
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="users-profile.html">
-            <i class="bi bi-person"></i>
-            <span>Profile</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
-  
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-register.html">
-            <i class="bi bi-card-list"></i>
-            <span>Register</span>
-          </a>
-        </li><!-- End Register Page Nav -->
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
-            <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
-          </a>
-        </li><!-- End Login Page Nav -->
-  
-      </ul>
 
-        </aside><!-- End Sidebar -->
+        <!-- ======= Sidebar ======= -->
+        <aside id="sidebar" class="sidebar">
+
+            <ul class="sidebar-nav" id="sidebar-nav">
+
+                <li class="nav-item">
+                    <form action="Controlleur" method="post">
+                        <input type="hidden" name="action" value="EnseignantVersDashboard">
+                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </form>
+                </li><!-- End Dashboard Nav -->
+
+
+
+                <li class="nav-heading">Pages</li>
+
+                <li class="nav-item">
+                    <form action="Controlleur" method="post">
+                        <input type="hidden" name="action" value="EnseignantVersProfil">
+                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Profil</span>
+                        </a>
+                    </form>
+                </li><!-- End Profile Page Nav -->
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="pages-register.html">
+                        <i class="bi bi-card-list"></i>
+                        <span>Register</span>
+                    </a>
+                </li><!-- End Register Page Nav -->
+
+                <li class="nav-item">
+                    <form action="Controlleur" method="post">
+                        <input type="hidden" name="action" value="EnseignantVersForm">
+                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Register Form</span>
+                        </a>
+                    </form>
+                </li><!-- End Login Page Nav -->
+
+            </ul>
+
+        </aside>
   
     </header><!-- End Header -->
     <main id="main" class="main">
