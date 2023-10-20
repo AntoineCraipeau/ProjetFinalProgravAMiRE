@@ -17,17 +17,20 @@ public class UserRepository {
     EntityManager em = entityManagerFactory.createEntityManager();
 
     public List<UserinfoEntity> getAllUsers() {
+        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e"); // Requête JPQL
         return q.getResultList();
     }
 
     public UserinfoEntity getUserById(long id) {
+        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e where e.idUserinfo = :id"); // Requête JPQL
         q.setParameter("id", id);
         return (UserinfoEntity) q.getSingleResult();
     }
 
     public UserinfoEntity getUserByLogin(String login) {
+        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e where e.login = :login"); // Requête JPQL
         q.setParameter("login", login);
         return (UserinfoEntity) q.getSingleResult();
