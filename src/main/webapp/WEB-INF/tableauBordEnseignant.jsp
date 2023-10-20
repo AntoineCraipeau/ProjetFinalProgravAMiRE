@@ -199,27 +199,32 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody> <!-- Notez l'ajout de la balise <tbody> -->
+                            <tbody>
                                 <c:forEach items="${postulations}" var="postulation">
-                                    <tr>
-
-                                        <td>${postulation.idPostule}</td>
-                                        <td>${postulation.date}</td>
-                                        <td>${postulation.decision}</td>
-                                        <td>${postulation.idEcole}</td>
-                                        <td>${postulation.idEnseignant}</td>
-                                        <td>
-                                            <form action="EnSavoirPlusServlet" method="post">
-                                                <button class="btn btn-primary" type="submit">En savoir plus</button>
-                                            </form>
-                                            <form action="AccepterServlet" method="post">
-                                                <button class="btn btn-primary" type="submit">Accepter</button>
-                                            </form>
-                                            <form action="RefuserServlet" method="post">
-                                                <button class="btn btn-primary" type="submit">Refuser</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    <!--  on affiche les postulations de l'enseignant actuellement connecter  -->
+                                    <c:if test="${postulation.idEnseignant == enseignant.idEnseignant}">
+                                        <tr>
+                                            <td>${postulation.idPostule}</td>
+                                            <td>${postulation.date}</td>
+                                            <td>${postulation.decision}</td>
+                                            <td>${postulation.idEcole}</td>
+                                            <td>${postulation.idEnseignant}</td>
+                                            <td>
+                                                <form action="EnSavoirPlusServlet" method="post">
+                                                    <button class="btn btn-primary" type="submit">En savoir plus</button>
+                                                </form>
+                                                </br>
+                                                <form action="AccepterServlet" method="post">
+                                                    <button class="btn btn-primary" type="submit">Accepter</button>
+                                                </form>
+                                                </br>
+                                                <form action="RefuserServlet" method="post">
+                                                    <button class="btn btn-primary" type="submit">Refuser</button>
+                                                </form>
+                                                </br>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -280,9 +285,6 @@
                                                 </form>
                                             </c:otherwise>
                                         </c:choose>
-
-
-
 
 
                                         </br>
