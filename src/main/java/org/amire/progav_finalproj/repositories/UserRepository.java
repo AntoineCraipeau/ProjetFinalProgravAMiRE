@@ -33,7 +33,11 @@ public class UserRepository {
         em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e where e.login = :login"); // Requête JPQL
         q.setParameter("login", login);
-        return (UserinfoEntity) q.getSingleResult();
+        try {
+            return (UserinfoEntity) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public void addUser(UserinfoEntity user) {

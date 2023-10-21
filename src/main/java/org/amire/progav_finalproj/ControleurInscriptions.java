@@ -68,6 +68,12 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
 
     @Transactional
     public void createEcoleAccount(HttpServletRequest request){
+
+        if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
+            request.setAttribute("messageErreur", "Ce login est déjà utilisé");
+            return;
+        }
+
         //Creation d'une EcoleEntity et d'une UserInfoEntity
         request.setAttribute("messageErreur", "");
 
@@ -78,6 +84,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         user.setLogin(request.getParameter("champLogin"));
         user.setPassword(request.getParameter("champMotDePasse"));
         user.setIdEcole(ecole.getIdEcole());
+        user.setEcoleByIdEcole(ecole);
         userRepository.addUser(user);
 
         //Ajout de l'utilisateur dans la session
@@ -87,6 +94,12 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
 
     @Transactional
     public void createEnseignantAccount(HttpServletRequest request){
+
+        if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
+            request.setAttribute("messageErreur", "Ce login est déjà utilisé");
+            return;
+        }
+
         //Creation d'une EnseignantEntity et d'une UserInfoEntity
         request.setAttribute("messageErreur", "");
 
@@ -97,6 +110,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         user.setLogin(request.getParameter("champLogin"));
         user.setPassword(request.getParameter("champMotDePasse"));
         user.setIdEnseignant(enseignant.getIdEnseignant());
+        user.setEnseignantByIdEnseignant(enseignant);
         userRepository.addUser(user);
 
         //Ajout de l'utilisateur dans la session
@@ -115,6 +129,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         //Invalidation de la session pour être redirigé vers la page de login
         request.getSession().invalidate();
         unUtilisateur = null;
+        request.setAttribute("messageErreur", MESSAGE_SUCCES_CREATION_COMPTE);
     }
 
     public void fillEnseignantAccount(HttpServletRequest request){
@@ -128,6 +143,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         //Invalidation de la session pour être redirigé vers la page de login
         request.getSession().invalidate();
         unUtilisateur = null;
+        request.setAttribute("messageErreur", MESSAGE_SUCCES_CREATION_COMPTE);
     }
 
     @Override
@@ -146,13 +162,13 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         if(unUtilisateur == null || unUtilisateur.getIdUserinfo() == 0){
             //Soit l'utilisateur n'a pas encore renseigné de login et de mot de passe,
             // soit il a fini de renseigner les détails de son compte
-            request.getRequestDispatcher("/WEB-INF/pages_login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages-login.jsp").forward(request, response);
             return;
         }
 
         if(action != ActionTypes.StartRegister){
             //Cas erreur
-            request.getRequestDispatcher("/WEB-INF/pages_login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/pages-login.jsp").forward(request, response);
             return;
         }
 

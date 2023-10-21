@@ -55,59 +55,59 @@
             </br>
 
               <!-- General Form Elements -->
-              <form action="FormEseignantServlet" method="post"></form>
+              <form action="Inscriptions" method="post">
                 <div class="row mb-3">
                   <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                   <div class="col-sm-10">
-                    <input type="nom" class="form-control" id="inputNom">
+                    <input type="text" class="form-control" id="inputNom" name="inputNom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control" id="inputPrenom">
+                    <input type="text" class="form-control" id="inputPrenom" name="inputPrenom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
                   <div class="col-sm-10">
-                    <input type="Experience" class="form-control" id="inputExperience">
+                    <input type="text" class="form-control" id="inputExperience" name="inputExperience">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
                   <div class="col-sm-10">
-                    <input type="Evaluations" class="form-control" id="inputEvaluations">
+                    <input type="text" class="form-control" id="inputEvaluations" name="inputEvaluations">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="Mail" class="form-control" id="inputMail">
+                    <input type="email" class="form-control" id="inputMail" name="inputMail">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="Telephone" class="form-control" id="inputTelephone">
+                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
                   <div class="col-sm-10">
-                    <input type="TitreAca" class="form-control" id="inputTitreAca">
+                    <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
                   <div class="col-sm-10">
-                    <input type="Reference" class="form-control" id="inputReference">
+                    <input type="text" class="form-control" id="inputReference" name="inputReference">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
+                  <label for="inputDispo" class="col-sm-2 col-form-label">Disponibilité</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate">
+                    <input type="date" class="form-control" id="inputDispo" name="inputDispo">
                   </div>
                 </div>
                 
@@ -119,10 +119,10 @@
                 </div>
 
                 
-                <label for="basic-url" class="form-label">Site Web</label>
+                <label for="inputSiteWeb" class="form-label">Site Web</label>
                 <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  <span class="input-group-text" id="basic-addon3">https://</span>
+                  <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
                 </div>
 
                 <div class="row mb-3">
@@ -130,28 +130,28 @@
                   <div class="col-sm-10">
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="Langues">
                       <label class="form-check-label" for="gridCheck1">
                         Langues
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="Mathématiques">
                       <label class="form-check-label" for="gridCheck2">
                         Mathématiques
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck3" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="Sciences">
                       <label class="form-check-label" for="gridCheck2">
                         Sciences
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck4" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="Programmation">
                       <label class="form-check-label" for="gridCheck2">
                         Programmation
                       </label>
@@ -164,13 +164,13 @@
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="CDD">
                       <label class="form-check-label" for="cdd">
                         CDD
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="CDI">
                       <label class="form-check-label" for="cdi">
                         CDI
                       </label>
@@ -182,7 +182,7 @@
                 <div class="row mb-3">
                   <label for="otherthing" class="col-sm-2 col-form-label">Autres remarques</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" style="height: 100px" id="otherthing"></textarea>
+                    <textarea class="form-control" style="height: 100px" id="otherthing" name="remarques"></textarea>
                   </div>
                 </div>
 
@@ -196,7 +196,7 @@
                 </div>
                 </br>
                 <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Envoyer form</button>
+                  <button class="btn btn-primary" type="submit" name="action" value="EndRegister">Envoyer form</button>
                 </div>
 
               </form><!-- End General Form Elements -->

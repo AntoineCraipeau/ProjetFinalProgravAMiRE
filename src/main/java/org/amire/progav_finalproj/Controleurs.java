@@ -10,6 +10,7 @@ public interface Controleurs {
     public static final String MESSAGE_ERREUR_CREDENTIALS_KO = "Les identifiants sont incorrects";
     public static final String MESSAGE_ERREUR_CREDENTIALS_VIDE = "Veuillez remplir les champs";
     public static final String MESSAGE_ERREUR_CREDENTIALS_USED = "Cet identifiant est déjà utilisé";
+    public static final String MESSAGE_SUCCES_CREATION_COMPTE = "Votre compte a bien été créé";
 
     public void processRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException;
 

@@ -30,21 +30,23 @@ public class EnseignantFactory {
 
     public static EnseignantEntity buildEnseignantFromRequest(HttpServletRequest request){
         EnseignantEntity enseignant = new EnseignantEntity();
-        enseignant.setNom(request.getParameter("nom"));
-        enseignant.setPrenom(request.getParameter("prenom"));
-        enseignant.setTelephone(Integer.parseInt(request.getParameter("telephone")));
-        enseignant.setSiteWeb(request.getParameter("siteWeb"));
+        enseignant.setNom(request.getParameter("inputNom"));
+        enseignant.setPrenom(request.getParameter("inputPrenom"));
+        enseignant.setTelephone(Integer.parseInt(request.getParameter("inputTelephone")));
+        enseignant.setSiteWeb(request.getParameter("inputSiteWeb"));
         enseignant.setCompetences(request.getParameter("competences"));
-        enseignant.setAdresseElectronique(request.getParameter("adresseElectronique"));
+        enseignant.setAdresseElectronique(request.getParameter("inputMail"));
         enseignant.setAutresInformations(request.getParameter("autresInformations"));
-        enseignant.setDisponibilites(Timestamp.valueOf(request.getParameter("disponibilites")));
-        enseignant.setExperience(request.getParameter("experience"));
-        enseignant.setReferencesPro(request.getParameter("referencesPro"));
-        enseignant.setTitresAcademiques(request.getParameter("titresAcademiques"));
-        enseignant.setEvaluations(request.getParameter("evaluations"));
-        enseignant.setInteretsDomaines(request.getParameter("interetsDomaines"));
-        enseignant.setNiveauxSouhaites(request.getParameter("niveauxSouhaites"));
-        enseignant.setInteretsEcoles(request.getParameter("interetsEcoles"));
+        enseignant.setDisponibilites(Timestamp.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
+        enseignant.setExperience(request.getParameter("inputExperience"));
+        enseignant.setReferencesPro(request.getParameter("inputReference"));
+        enseignant.setTitresAcademiques(request.getParameter("inputTitreAca"));
+        enseignant.setEvaluations(request.getParameter("inputEvaluations"));
+        enseignant.setInteretsDomaines("No match in form");
+        enseignant.setAutresInformations(request.getParameter("remarques"));
+        enseignant.setNiveauxSouhaites("No match in form");
+        enseignant.setInteretsEcoles("No match in form");
+        enseignant.setTypeDeContrat(request.getParameter("contrat"));
         return enseignant;
     }
 
