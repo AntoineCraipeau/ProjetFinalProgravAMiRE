@@ -6,9 +6,7 @@ import java.util.Arrays;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import org.amire.progav_finalproj.dto.EcoleListElementDto;
-import org.amire.progav_finalproj.dto.EnseignantListElementDto;
-import org.amire.progav_finalproj.dto.PostuleListElementDto;
+import org.amire.progav_finalproj.dto.*;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
@@ -58,7 +56,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEcoleRequest(request);
                         long idEcole = userRepository.getUserById(idUtilisateur).getEcole().getIdEcole();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcole());
+                        request.setAttribute("ecole", new EcoleProfileInfoDto(userRepository.getUserById(idUtilisateur).getEcole()));
                         request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcole().getFavoris().stream().map(FavorisEcoleEntity::getEnseignant).toArray());
                         request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcole().getPostulations().stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("enseignants", enseignantRepository.getAllEnseignants().stream().map(enseignant -> new EnseignantListElementDto(enseignant, idEcole)).toArray());
@@ -67,7 +65,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEnseignantRequest(request);
                         long idEnseignant = userRepository.getUserById(idUtilisateur).getEnseignant().getIdEnseignant();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignant());
+                        request.setAttribute("enseignant", new EnseignantProfileInfoDto(userRepository.getUserById(idUtilisateur).getEnseignant()));
                         request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignant().getFavoris().stream().map(FavorisEnseignantEntity::getEcole).toArray());
                         request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignant().getPostulations().stream().map(postuleEntity -> new PostuleListElementDto(postuleEntity)).toArray());
                         request.setAttribute("ecoles", ecoleRepository.getAllEcoles().stream().map(ecole -> new EcoleListElementDto(ecole, idEnseignant)).toArray());

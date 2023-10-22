@@ -16,4 +16,11 @@ public class ContratSetDto {
         this.cdi = Arrays.asList(contratArray).contains("cdi");
         this.cdd = Arrays.asList(contratArray).contains("cdd");
     }
+
+    public boolean getCdi() {
+        return cdi;
+    }
+    public boolean getCdd() {
+        return cdd;
+    }
 }

@@ -258,22 +258,22 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.disponibilites}</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.dateDebutDispo}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Site Web</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.siteWeb}<</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.siteWeb}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Compétences</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.competences}</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Type de contrats chercher</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.typeDeContrat}</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
                   </div>
 
                 </div>
@@ -400,28 +400,28 @@
                 <div class="col-sm-10">
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                    <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais" <c:if test="${enseignant.competences.francais}">checked</c:if>>
                     <label class="form-check-label" for="gridCheck1">
-                      Langues
+                      Français
                     </label>
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                    <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques" <c:if test="${enseignant.competences.mathematiques}">checked</c:if>>
                     <label class="form-check-label" for="gridCheck2">
                       Mathématiques
                     </label>
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck3" >
+                    <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie" <c:if test="${enseignant.competences.physique_chimie}">checked</c:if>>
                     <label class="form-check-label" for="gridCheck2">
-                      Sciences
+                      Physique-Chimie
                     </label>
                   </div>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck4" >
+                    <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation" <c:if test="${enseignant.competences.programmation}">checked</c:if>>
                     <label class="form-check-label" for="gridCheck2">
                       Programmation
                     </label>
@@ -434,13 +434,13 @@
                 <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
                 <div class="col-sm-10">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="cdd">
+                    <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${enseignant.typeDeContrat.cdd}">checked</c:if>>
                     <label class="form-check-label" for="cdd">
                       CDD
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="cdi">
+                    <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${enseignant.typeDeContrat.cdi}">checked</c:if>>
                     <label class="form-check-label" for="cdi">
                       CDI
                     </label>

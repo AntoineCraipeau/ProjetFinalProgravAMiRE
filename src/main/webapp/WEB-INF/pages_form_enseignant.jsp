@@ -130,28 +130,28 @@
                   <div class="col-sm-10">
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="Langues">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais">
                       <label class="form-check-label" for="gridCheck1">
-                        Langues
+                        Français
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="Mathématiques">
+                      <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques">
                       <label class="form-check-label" for="gridCheck2">
                         Mathématiques
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="Sciences">
+                      <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie">
                       <label class="form-check-label" for="gridCheck2">
-                        Sciences
+                        Physique-Chimie
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="Programmation">
+                      <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation">
                       <label class="form-check-label" for="gridCheck2">
                         Programmation
                       </label>

@@ -9,7 +9,11 @@ public class CompetenceSetDto {
     private boolean histoire_geographie;
     private boolean mathematiques;
     private boolean robotique;
-    private boolean informatique;
+    private boolean programmation;
+    private boolean svt;
+    private boolean physique_chimie;
+    private boolean sciences_sociales;
+    private boolean psychologie;
 
     public CompetenceSetDto(String competences) {
         // competences is a string of the form "[francais,anglais,philosophie,mathematiques,robotique,informatique]"
@@ -23,7 +27,11 @@ public class CompetenceSetDto {
         this.histoire_geographie = Arrays.asList(competenceArray).contains("histoire_geographie");
         this.mathematiques = Arrays.asList(competenceArray).contains("mathematiques");
         this.robotique = Arrays.asList(competenceArray).contains("robotique");
-        this.informatique = Arrays.asList(competenceArray).contains("informatique");
+        this.programmation = Arrays.asList(competenceArray).contains("programmation");
+        this.svt = Arrays.asList(competenceArray).contains("svt");
+        this.physique_chimie = Arrays.asList(competenceArray).contains("physique_chimie");
+        this.sciences_sociales = Arrays.asList(competenceArray).contains("sciences_sociales");
+        this.psychologie = Arrays.asList(competenceArray).contains("psychologie");
     }
 
     public boolean getFrancais() {
@@ -44,7 +52,19 @@ public class CompetenceSetDto {
     public boolean getRobotique() {
         return this.robotique;
     }
-    public boolean getInformatique() {
-        return this.informatique;
+    public boolean getProgrammation() {
+        return this.programmation;
+    }
+    public boolean getSvt() {
+        return this.svt;
+    }
+    public boolean getPhysique_chimie() {
+        return this.physique_chimie;
+    }
+    public boolean getSciences_sociales() {
+        return this.sciences_sociales;
+    }
+    public boolean getPsychologie() {
+        return this.psychologie;
     }
 }

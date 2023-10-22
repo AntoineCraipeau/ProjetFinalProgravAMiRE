@@ -13,7 +13,9 @@ public class EcoleProfileInfoDto {
     private String siteWeb;
     private String besoin;
     private CompetenceSetDto competencesRequises;
+    private String competenceText;
     private ContratSetDto typeDeContrat;
+    private String contratText;
     private String exigences;
     private Date dateDebutDispo;
     private String remarques;
@@ -26,7 +28,9 @@ public class EcoleProfileInfoDto {
         this.siteWeb = ecole.getSiteWeb();
         this.besoin = ecole.getBesoin();
         this.competencesRequises = new CompetenceSetDto(ecole.getCompetencesRequises());
+        this.competenceText = ecole.getCompetencesRequises().replace("[","").replace("]", "");
         this.typeDeContrat = new ContratSetDto(ecole.getTypeDeContrat());
+        this.contratText = ecole.getTypeDeContrat().replace("[","").replace("]", "");
         this.exigences = ecole.getExigences();
         this.dateDebutDispo = ecole.getDateDebutDispo();
         this.remarques = ecole.getRemarques();
@@ -53,8 +57,14 @@ public class EcoleProfileInfoDto {
     public CompetenceSetDto getCompetencesRequises() {
         return competencesRequises;
     }
+    public String getCompetenceText() {
+        return competenceText;
+    }
     public ContratSetDto getTypeDeContrat() {
         return typeDeContrat;
+    }
+    public String getContratText() {
+        return contratText;
     }
     public String getExigences() {
         return exigences;
