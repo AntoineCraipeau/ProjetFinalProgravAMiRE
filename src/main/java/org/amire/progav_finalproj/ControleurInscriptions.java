@@ -31,7 +31,10 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
 
     @Override
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        request.setCharacterEncoding("UTF-8");
         placerUtilisateurDansContexte(request);
+
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
         UserTypes userType;
         String chosenType;

@@ -194,29 +194,27 @@
                               <tbody>
                               <c:forEach items="${postulations}" var="postulation">
                                   <!--  on affiche les postulations de l'enseignant actuellement connecter  -->
-                                  <c:if test="${ecole.idEnseignant == ecole.idEnseignant}">
-                                      <tr>
-                                          <td>${postulation.idPostule}</td>
-                                          <td>${postulation.date}</td>
-                                          <td>${postulation.decision}</td>
-                                          <td>${postulation.idEcole}</td>
-                                          <td>${postulation.idEnseignant}</td>
-                                          <td>
-                                              <form action="EnSavoirPlusServlet" method="post">
-                                                  <button class="btn btn-primary" type="submit">En savoir plus</button>
-                                              </form>
-                                              </br>
-                                              <form action="AccepterServlet" method="post">
-                                                  <button class="btn btn-primary" type="submit">Accepter</button>
-                                              </form>
-                                              </br>
-                                              <form action="RefuserServlet" method="post">
-                                                  <button class="btn btn-primary" type="submit">Refuser</button>
-                                              </form>
-                                              </br>
-                                          </td>
-                                      </tr>
-                                  </c:if>
+                                  <tr>
+                                      <td>${postulation.idPostule}</td>
+                                      <td>${postulation.datePostule}</td>
+                                      <td>${postulation.decision}</td>
+                                      <td>${postulation.nomEcole}</td>
+                                      <td>${postulation.nomEnseignant}</td>
+                                      <td>
+                                          <form action="EnSavoirPlusServlet" method="post">
+                                              <button class="btn btn-primary" type="submit">En savoir plus</button>
+                                          </form>
+                                          </br>
+                                          <form action="AccepterServlet" method="post">
+                                              <button class="btn btn-primary" type="submit">Accepter</button>
+                                          </form>
+                                          </br>
+                                          <form action="RefuserServlet" method="post">
+                                              <button class="btn btn-primary" type="submit">Refuser</button>
+                                          </form>
+                                          </br>
+                                      </td>
+                                  </tr>
                               </c:forEach>
                               </tbody>
                           </table>

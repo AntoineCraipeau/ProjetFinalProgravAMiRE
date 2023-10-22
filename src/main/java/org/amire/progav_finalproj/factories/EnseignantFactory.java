@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class EnseignantFactory {
 
@@ -27,13 +28,13 @@ public class EnseignantFactory {
         return enseignant;
     }
 
-    public static EnseignantEntity buildEnseignantFromRequest(HttpServletRequest request){
+    public static EnseignantEntity buildEnseignantFromRequest(HttpServletRequest request) {
         EnseignantEntity enseignant = new EnseignantEntity();
         enseignant.setNom(request.getParameter("inputNom"));
         enseignant.setPrenom(request.getParameter("inputPrenom"));
         enseignant.setTelephone(request.getParameter("inputTelephone"));
         enseignant.setSiteWeb(request.getParameter("inputSiteWeb"));
-        enseignant.setCompetences(request.getParameter("competences"));
+        enseignant.setCompetences(Arrays.toString(request.getParameterValues("competences")));
         enseignant.setAdresseElectronique(request.getParameter("inputMail"));
         enseignant.setRemarques(request.getParameter("autresInformations")); //!
         enseignant.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
@@ -45,7 +46,7 @@ public class EnseignantFactory {
         enseignant.setRemarques(request.getParameter("remarques"));
         enseignant.setNiveauxSouhaites("No match in form");
         enseignant.setInteretsEcoles("No match in form");
-        enseignant.setTypeDeContrat(request.getParameter("contrat"));
+        enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")));
         return enseignant;
     }
 

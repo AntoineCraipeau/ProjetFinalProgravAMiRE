@@ -200,13 +200,12 @@
                             <tbody>
                                 <c:forEach items="${postulations}" var="postulation">
                                     <!--  on affiche les postulations de l'enseignant actuellement connecter  -->
-                                    <c:if test="${postulation.idEnseignant == enseignant.idEnseignant}">
                                         <tr>
                                             <td>${postulation.idPostule}</td>
-                                            <td>${postulation.date}</td>
+                                            <td>${postulation.datePostule}</td>
                                             <td>${postulation.decision}</td>
-                                            <td>${postulation.idEcole}</td>
-                                            <td>${postulation.idEnseignant}</td>
+                                            <td>${postulation.nomEcole}</td>
+                                            <td>${postulation.nomEnseignant}</td>
                                             <td>
                                                 <form action="EnSavoirPlusServlet" method="post">
                                                     <button class="btn btn-primary" type="submit">En savoir plus</button>
@@ -222,7 +221,6 @@
                                                 </br>
                                             </td>
                                         </tr>
-                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
