@@ -258,7 +258,7 @@
                                     <td>${ecoles.besoin}</td>
                                     <td>${ecoles.competencesRequises}</td>
                                     <td>${ecoles.exigences}</td>
-                                    <td>${ecoles.periode}</td>
+                                    <td>${ecoles.dateDebutDispo}</td>
                                     <td>${ecoles.remarques}</td>
                                     <td>
                                         <c:choose>

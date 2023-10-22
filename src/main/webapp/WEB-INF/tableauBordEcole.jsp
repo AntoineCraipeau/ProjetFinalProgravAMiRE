@@ -270,7 +270,7 @@
                                       <td>${enseignants.adresseElectronique}</td>
                                       <td>${enseignants.telephone}</td>
                                       <td>${enseignants.siteWeb}</td>
-                                      <td>${enseignants.disponibilites}</td>
+                                      <td>${enseignants.dateDebutDispo}</td>
                                       <td>${enseignants.typeDeContrat}</td>
                                       <td>${enseignants.titresAcademiques}</td>
                                       <td>${enseignants.referencesPro}</td>
