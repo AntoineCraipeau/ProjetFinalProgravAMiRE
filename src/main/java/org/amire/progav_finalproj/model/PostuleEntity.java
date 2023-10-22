@@ -23,6 +23,7 @@ public class PostuleEntity {
     @Basic
     @Column(name = "id_enseignant", nullable = false,  insertable = false, updatable = false)
     private long idEnseignant;
+
     @ManyToOne
     @JoinColumn(name = "id_ecole", referencedColumnName = "id_ecole", nullable = false)
     private EcoleEntity ecoleByIdEcole;

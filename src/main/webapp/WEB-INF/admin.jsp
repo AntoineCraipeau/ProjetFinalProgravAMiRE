@@ -33,7 +33,7 @@
     <div class="col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Bar CHart</h5>
+                <h5 class="card-title">Bar Chart</h5>
 
                 <!-- Bar Chart -->
                 <canvas id="barChart" style="max-height: 400px;"></canvas>
@@ -109,6 +109,60 @@
                         });
                     });
                 </script>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pie Chart</h5>
+
+                <!-- Pie Chart -->
+                <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        // Effectuer une requête AJAX pour obtenir les données de l'API
+                        $.get("/TP3/api/postule/decisions", function(decisionData) {
+
+                            // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
+                            var decision = ['Accepté', 'En attente', 'Entretien', 'Refusé'];
+                            var valeursParDefaut = Array(4).fill(0);
+
+                            // Extraire les reponse et les valeurs de l'objet JavaScript
+                            var reponseAPI = Object.keys(decisionData);
+                            var valeursAPI = Object.values(decisionData);
+
+                            // Mettre à jour les valeurs du tableau avec les valeurs de l'API
+                            reponseAPI.forEach(function(reponseAPI, index) {
+                                var reponseIndex = decision.indexOf(reponseAPI);
+                                if (reponseIndex !== -1) {
+                                    valeursParDefaut[reponseIndex] = valeursAPI[index];
+                                }
+                            });
+
+                            var pieChart = new Chart(document.querySelector('#pieChart'), {
+                                type: 'pie',
+                                data: {
+                                    labels: decision,
+                                    datasets: [{
+                                        label: 'Pie chart',
+                                        data: valeursParDefaut,
+                                        backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(255, 205, 86)',
+                                            'rgb(15,154,12)'
+                                        ],
+                                        hoverOffset: 4
+                                    }]
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <!-- End Pie Chart -->
 
             </div>
         </div>
