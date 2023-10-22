@@ -33,7 +33,7 @@ public class ApiEmployee {
         List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
 
         List<Timestamp> dispos = enseignants.stream()
-                .map(EnseignantEntity::getDisponibilites)
+                .map(EnseignantEntity::getDateDebutDispo)
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
 

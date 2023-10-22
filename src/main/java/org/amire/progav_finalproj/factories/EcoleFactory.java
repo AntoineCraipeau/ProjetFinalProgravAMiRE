@@ -12,7 +12,7 @@ public class EcoleFactory {
         ecole.setCompetencesRequises("");
         ecole.setExigences("");
         ecole.setBesoin("");
-        ecole.setPeriode(new Timestamp(System.currentTimeMillis()));
+        ecole.setDateDebutDispo(new Timestamp(System.currentTimeMillis()));
         ecole.setRemarques("");
         return ecole;
     }
@@ -23,7 +23,7 @@ public class EcoleFactory {
         ecole.setCompetencesRequises(request.getParameter("competences"));
         ecole.setExigences(request.getParameter("inputExigences"));
         ecole.setBesoin(request.getParameter("inputBesoin"));
-        ecole.setPeriode(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
+        ecole.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
         ecole.setRemarques(request.getParameter("inputRemarques"));
         return ecole;
     }

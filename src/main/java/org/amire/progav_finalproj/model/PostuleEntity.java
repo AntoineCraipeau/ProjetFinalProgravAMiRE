@@ -12,8 +12,11 @@ public class PostuleEntity {
     @Column(name = "id_postule", nullable = false)
     private long idPostule;
     @Basic
-    @Column(name = "Date", nullable = false)
-    private Timestamp date;
+    @Column(name = "Date_Creation", nullable = true)
+    private Timestamp dateCreation;
+    @Basic
+    @Column(name = "Initiateur", nullable = true, length = 255)
+    private String initiateur;
     @Basic
     @Column(name = "Decision", nullable = true, length = 255)
     private String decision;
@@ -21,15 +24,14 @@ public class PostuleEntity {
     @Column(name = "id_ecole", nullable = false, insertable = false, updatable = false)
     private long idEcole;
     @Basic
-    @Column(name = "id_enseignant", nullable = false,  insertable = false, updatable = false)
+    @Column(name = "id_enseignant", nullable = false, insertable = false, updatable = false)
     private long idEnseignant;
-
     @ManyToOne
     @JoinColumn(name = "id_ecole", referencedColumnName = "id_ecole", nullable = false)
-    private EcoleEntity ecoleByIdEcole;
+    private EcoleEntity ecole;
     @ManyToOne
     @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant", nullable = false)
-    private EnseignantEntity enseignantByIdEnseignant;
+    private EnseignantEntity enseignant;
 
     public long getIdPostule() {
         return idPostule;
@@ -39,12 +41,20 @@ public class PostuleEntity {
         this.idPostule = idPostule;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setDateCreation(Timestamp dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public String getInitiateur() {
+        return initiateur;
+    }
+
+    public void setInitiateur(String initiateur) {
+        this.initiateur = initiateur;
     }
 
     public String getDecision() {
@@ -81,7 +91,8 @@ public class PostuleEntity {
         if (idPostule != that.idPostule) return false;
         if (idEcole != that.idEcole) return false;
         if (idEnseignant != that.idEnseignant) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (dateCreation != null ? !dateCreation.equals(that.dateCreation) : that.dateCreation != null) return false;
+        if (initiateur != null ? !initiateur.equals(that.initiateur) : that.initiateur != null) return false;
         if (decision != null ? !decision.equals(that.decision) : that.decision != null) return false;
 
         return true;
@@ -90,26 +101,27 @@ public class PostuleEntity {
     @Override
     public int hashCode() {
         int result = (int) (idPostule ^ (idPostule >>> 32));
-        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (dateCreation != null ? dateCreation.hashCode() : 0);
+        result = 31 * result + (initiateur != null ? initiateur.hashCode() : 0);
         result = 31 * result + (decision != null ? decision.hashCode() : 0);
         result = 31 * result + (int) (idEcole ^ (idEcole >>> 32));
         result = 31 * result + (int) (idEnseignant ^ (idEnseignant >>> 32));
         return result;
     }
 
-    public EcoleEntity getEcoleByIdEcole() {
-        return ecoleByIdEcole;
+    public EcoleEntity getEcole() {
+        return ecole;
     }
 
-    public void setEcoleByIdEcole(EcoleEntity ecoleByIdEcole) {
-        this.ecoleByIdEcole = ecoleByIdEcole;
+    public void setEcole(EcoleEntity ecole) {
+        this.ecole = ecole;
     }
 
-    public EnseignantEntity getEnseignantByIdEnseignant() {
-        return enseignantByIdEnseignant;
+    public EnseignantEntity getEnseignant() {
+        return enseignant;
     }
 
-    public void setEnseignantByIdEnseignant(EnseignantEntity enseignantByIdEnseignant) {
-        this.enseignantByIdEnseignant = enseignantByIdEnseignant;
+    public void setEnseignant(EnseignantEntity enseignant) {
+        this.enseignant = enseignant;
     }
 }

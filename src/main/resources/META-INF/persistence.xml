@@ -4,14 +4,14 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="default">
-
         <class>org.amire.progav_finalproj.model.AdminEntity</class>
-        <class>org.amire.progav_finalproj.model.CandidatsFavorisEntity</class>
         <class>org.amire.progav_finalproj.model.EcoleEntity</class>
-        <class>org.amire.progav_finalproj.model.EcolesFavorisEntity</class>
         <class>org.amire.progav_finalproj.model.EnseignantEntity</class>
+        <class>org.amire.progav_finalproj.model.FavorisEcoleEntity</class>
+        <class>org.amire.progav_finalproj.model.FavorisEnseignantEntity</class>
         <class>org.amire.progav_finalproj.model.PostuleEntity</class>
         <class>org.amire.progav_finalproj.model.UserinfoEntity</class>
+
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://amireprojet.c0pj4jozbnof.eu-west-2.rds.amazonaws.com:3306/db_prograv_final"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

@@ -84,7 +84,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         user.setLogin(request.getParameter("champLogin"));
         user.setPassword(request.getParameter("champMotDePasse"));
         user.setIdEcole(ecole.getIdEcole());
-        user.setEcoleByIdEcole(ecole);
+        user.setEcole(ecole);
         userRepository.addUser(user);
 
         //Ajout de l'utilisateur dans la session
@@ -110,7 +110,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         user.setLogin(request.getParameter("champLogin"));
         user.setPassword(request.getParameter("champMotDePasse"));
         user.setIdEnseignant(enseignant.getIdEnseignant());
-        user.setEnseignantByIdEnseignant(enseignant);
+        user.setEnseignant(enseignant);
         userRepository.addUser(user);
 
         //Ajout de l'utilisateur dans la session
@@ -121,7 +121,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
     public void fillEcoleAccount(HttpServletRequest request){
         //Remplissage d'une EcoleEntity
         UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
-        EcoleEntity ecole = user.getEcoleByIdEcole();
+        EcoleEntity ecole = user.getEcole();
         EcoleEntity fromRequest = EcoleFactory.buildEcoleFromRequest(request);
         fromRequest.setIdEcole(ecole.getIdEcole());
         ecoleRepository.editEcole(fromRequest);
@@ -135,7 +135,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
     public void fillEnseignantAccount(HttpServletRequest request){
         //Remplissage d'une EnseignantEntity
         UserinfoEntity user = userRepository.getUserById(unUtilisateur.getIdUserinfo());
-        EnseignantEntity enseignant = user.getEnseignantByIdEnseignant();
+        EnseignantEntity enseignant = user.getEnseignant();
         EnseignantEntity fromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
         fromRequest.setIdEnseignant(enseignant.getIdEnseignant());
         enseignantRepository.editEnseignant(fromRequest);

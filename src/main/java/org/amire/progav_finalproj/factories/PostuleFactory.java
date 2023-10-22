@@ -9,10 +9,10 @@ public class PostuleFactory {
     public static PostuleEntity buildPostule(EnseignantEntity enseignant, EcoleEntity ecole){
         PostuleEntity postule = new PostuleEntity();
         postule.setDecision("En attente");
-        postule.setDate(new java.sql.Timestamp(System.currentTimeMillis()));
-        postule.setEnseignantByIdEnseignant(enseignant);
+        postule.setDateCreation(new java.sql.Timestamp(System.currentTimeMillis()));
+        postule.setEnseignant(enseignant);
         postule.setIdEnseignant(enseignant.getIdEnseignant());
-        postule.setEcoleByIdEcole(ecole);
+        postule.setEcole(ecole);
         postule.setIdEcole(ecole.getIdEcole());
         return postule;
     }

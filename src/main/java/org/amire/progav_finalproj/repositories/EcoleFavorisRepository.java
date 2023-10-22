@@ -6,7 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
-import org.amire.progav_finalproj.model.EcolesFavorisEntity;
+import org.amire.progav_finalproj.model.FavorisEcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.util.List;
@@ -20,30 +20,30 @@ public class EcoleFavorisRepository {
     // Read
 
     public List<EnseignantEntity> getAllFavorisOfEcoleById(long idEcole){
-        Query q = em.createQuery("select e from EcolesFavorisEntity e where e.idEcole = :idEcole"); // Requête JPQL
+        Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcole = :idEcole"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
-        List<EcolesFavorisEntity> favoris = q.getResultList();
+        List<FavorisEcoleEntity> favoris = q.getResultList();
         //On extrait les enseignants de la liste
-        return favoris.stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toList();
+        return favoris.stream().map(FavorisEcoleEntity::getEnseignant).toList();
     }
 
-    public EcolesFavorisEntity getFavorisEcoleById(long id){
-        Query q = em.createQuery("select e from EcolesFavorisEntity e where e.idEcolesFavories = :id"); // Requête JPQL
+    public FavorisEcoleEntity getFavorisEcoleById(long id){
+        Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcolesFavories = :id"); // Requête JPQL
         q.setParameter("id", id);
-        return (EcolesFavorisEntity) q.getSingleResult();
+        return (FavorisEcoleEntity) q.getSingleResult();
     }
 
-    public EcolesFavorisEntity getFavorisEcoleByOwnersId(long idEcole, long idEnseignant){
-        Query q = em.createQuery("select e from EcolesFavorisEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
+    public FavorisEcoleEntity getFavorisEcoleByOwnersId(long idEcole, long idEnseignant){
+        Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         q.setParameter("idEnseignant", idEnseignant);
-        return (EcolesFavorisEntity) q.getSingleResult();
+        return (FavorisEcoleEntity) q.getSingleResult();
     }
 
     // Create
 
     public void addFavorisEcole(long idEcole, long idEnseignant){
-        EcolesFavorisEntity favoris = new EcolesFavorisEntity();
+        FavorisEcoleEntity favoris = new FavorisEcoleEntity();
         favoris.setIdEcole(idEcole);
         favoris.setIdEnseignant(idEnseignant);
         em.getTransaction().begin();
@@ -62,7 +62,7 @@ public class EcoleFavorisRepository {
         removeFavorisEcole(getFavorisEcoleByOwnersId(idEcole, idEnseignant));
     }
 
-    public void removeFavorisEcole(EcolesFavorisEntity favoris){
+    public void removeFavorisEcole(FavorisEcoleEntity favoris){
         em.getTransaction().begin();
         em.remove(favoris);
         em.getTransaction().commit();

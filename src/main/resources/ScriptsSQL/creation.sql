@@ -1,12 +1,12 @@
 CREATE TABLE `admin`(
-    `id_admin` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+    `id_admin` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
 );
 CREATE TABLE `enseignant`(
-    `id_enseignant` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_enseignant` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Nom` VARCHAR(255) NULL,
     `Prenom` VARCHAR(255) NULL,
     `Adresse_electronique` VARCHAR(255) NULL,
-    `Telephone` BIGINT NOT NULL,
+    `Telephone` VARCHAR(255) NOT NULL,
     `Site_Web` VARCHAR(255) NULL,
     `Experience` VARCHAR(255) NULL,
     `Evaluations` VARCHAR(255) NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `enseignant`(
     `Lien_CV` VARCHAR(255) NULL
 );
 CREATE TABLE `ecole`(
-    `id_ecole` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_ecole` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Raison_sociale` VARCHAR(255) NULL,
     `Adresse_eletronique` VARCHAR(255) NULL,
     `Telephone` VARCHAR(255) NULL,
@@ -35,12 +35,12 @@ CREATE TABLE `ecole`(
     `Remarques` VARCHAR(255) NULL
 );
 CREATE TABLE `userinfo`(
-    `id_userinfo` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_userinfo` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Login` VARCHAR(255) NOT NULL,
     `Password` VARCHAR(255) NOT NULL,
-    `id_enseignant` BIGINT UNSIGNED NULL,
-    `id_ecole` BIGINT UNSIGNED NULL,
-    `id_admin` BIGINT UNSIGNED NULL,
+    `id_enseignant` BIGINT NULL,
+    `id_ecole` BIGINT NULL,
+    `id_admin` BIGINT NULL,
     UNIQUE(id_enseignant),
     UNIQUE(id_ecole),
     UNIQUE(id_admin),
@@ -49,26 +49,26 @@ CREATE TABLE `userinfo`(
     FOREIGN KEY(id_admin) REFERENCES admin(id_admin)
 );
 CREATE TABLE `postule`(
-    `id_postule` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_postule` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Date_Creation` DATETIME NULL,
     `Initiateur` VARCHAR(255) NULL,
     `Decision` VARCHAR(255) NULL,
-    `id_ecole` BIGINT UNSIGNED NOT NULL,
-    `id_enseignant` BIGINT UNSIGNED NOT NULL,
+    `id_ecole` BIGINT NOT NULL,
+    `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
     FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
 );
-CREATE TABLE `candidats_favoris`(
-    `id_candidats_favoris` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `id_ecole` BIGINT UNSIGNED NOT NULL,
-    `id_enseignant` BIGINT UNSIGNED NOT NULL,
+CREATE TABLE `favoris_enseignant`(
+    `id_candidats_favoris` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_ecole` BIGINT NOT NULL,
+    `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
     FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
 );
-CREATE TABLE `ecoles_favoris`(
-    `id_ecoles_favories` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `id_ecole` BIGINT UNSIGNED NOT NULL,
-    `id_enseignant` BIGINT UNSIGNED NOT NULL,
+CREATE TABLE `favoris_ecole`(
+    `id_ecoles_favories` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_ecole` BIGINT NOT NULL,
+    `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
     FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
 );

@@ -6,8 +6,6 @@ import java.util.Arrays;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import org.amire.progav_finalproj.factories.EcoleFactory;
-import org.amire.progav_finalproj.factories.EnseignantFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
@@ -48,24 +46,24 @@ public class Controleur extends HttpServlet implements Controleurs {
                     case ADMIN:
                         handleAdminRequest(request);
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("admin", userRepository.getUserById(idUtilisateur).getAdminByIdAdmin());
+                        request.setAttribute("admin", userRepository.getUserById(idUtilisateur).getAdmin());
                         request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
                         request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
                         break;
                     case ECOLE:
                         handleEcoleRequest(request);
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole());
-                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getEcolesFavorisesByIdEcole().stream().map(EcolesFavorisEntity::getEnseignantByIdEnseignant).toArray());
-                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcoleByIdEcole().getPostulesByIdEcole());
+                        request.setAttribute("ecole", userRepository.getUserById(idUtilisateur).getEcole());
+                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcole().getFavoris().stream().map(FavorisEcoleEntity::getEnseignant).toArray());
+                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcole().getPostulations());
                         request.setAttribute("enseignants", enseignantRepository.getAllEnseignants());
                         break;
                     case ENSEIGNANT:
                         handleEnseignantRequest(request);
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant());
-                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getCandidatsFavorisesByIdEnseignant().stream().map(CandidatsFavorisEntity::getEcoleByIdEcole).toArray());
-                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignantByIdEnseignant().getPostulesByIdEnseignant());
+                        request.setAttribute("enseignant", userRepository.getUserById(idUtilisateur).getEnseignant());
+                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignant().getFavoris().stream().map(FavorisEnseignantEntity::getEcole).toArray());
+                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignant().getPostulations());
                         request.setAttribute("ecoles", ecoleRepository.getAllEcoles());
                         break;
 
@@ -101,7 +99,7 @@ public class Controleur extends HttpServlet implements Controleurs {
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
         //Ecole ayant envoyé la requête
-        EcoleEntity ecole = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEcoleByIdEcole();
+        EcoleEntity ecole = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEcole();
         long idEcole = ecole.getIdEcole();
         //Enseignant ciblé par la requête (si applicable)
         long idEnseignant = request.getParameter("idEnseignant") != null ? Long.parseLong(request.getParameter("idEnseignant")) : 0;
@@ -133,7 +131,7 @@ public class Controleur extends HttpServlet implements Controleurs {
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
 
         // Enseignant ayant envoyé la requête
-        EnseignantEntity enseignant = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEnseignantByIdEnseignant();
+        EnseignantEntity enseignant = userRepository.getUserById(unUtilisateur.getIdUserinfo()).getEnseignant();
         long idEnseignant = enseignant.getIdEnseignant();
         // Ecole ciblée par la requête (si applicable)
         long idEcole = request.getParameter("idEcole") != null ? Long.parseLong(request.getParameter("idEcole")) : 0;
