@@ -12,6 +12,7 @@ public class CompetenceSetDto {
     private boolean informatique;
 
     public CompetenceSetDto(String competences) {
+        // competences is a string of the form "[francais,anglais,philosophie,mathematiques,robotique,informatique]"
         competences = competences.replace("[", "");
         competences = competences.replace("]", "");
         competences = competences.replace(" ", "");

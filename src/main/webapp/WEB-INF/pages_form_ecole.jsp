@@ -141,13 +141,13 @@
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat disponible</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd">
                       <label class="form-check-label" for="cdd">
                         CDD
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi">
                       <label class="form-check-label" for="cdi">
                         CDI
                       </label>

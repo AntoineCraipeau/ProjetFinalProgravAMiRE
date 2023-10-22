@@ -48,10 +48,6 @@ public class EnseignantListElementDto {
         this.lienCv = enseignant.getLienCv();
         this.isFavoris = isEnseignantInEcoleFavoris(idEnseignant, idEcole);
     }
-    public EnseignantListElementDto(long idEnseignant, long idEcole) {
-        this.idEnseignant = idEnseignant;
-        this.isFavoris = isEnseignantInEcoleFavoris(idEnseignant, idEcole);
-    }
     private boolean isEnseignantInEcoleFavoris(long idEnseignant, long idEcole) {
         EcoleEntity ecole = new EcoleRepository().getEcoleById(idEcole);
         return ecole.getFavoris().stream().anyMatch(fav -> fav.getIdEnseignant() == idEnseignant);

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EcoleEntity;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class EcoleFactory {
     public static EcoleEntity buildEmptyEcole(){
@@ -20,11 +21,14 @@ public class EcoleFactory {
     public static EcoleEntity buildEcoleFromRequest(HttpServletRequest request){
         EcoleEntity ecole = new EcoleEntity();
         ecole.setRaisonSociale(request.getParameter("inputRaisonSociale"));
-        ecole.setCompetencesRequises(request.getParameter("competences"));
+        ecole.setCompetencesRequises(Arrays.toString(request.getParameterValues("competences")));
         ecole.setExigences(request.getParameter("inputExigences"));
         ecole.setBesoin(request.getParameter("inputBesoin"));
         ecole.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
         ecole.setRemarques(request.getParameter("inputRemarques"));
+        ecole.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")));
+        ecole.setAdresseEletronique(request.getParameter("inputMail"));
+        ecole.setTelephone(request.getParameter("inputTelephone"));
         return ecole;
     }
 }
