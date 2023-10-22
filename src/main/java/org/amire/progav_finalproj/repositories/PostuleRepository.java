@@ -21,6 +21,18 @@ public class PostuleRepository {
         return q.getResultList();
     }
 
+    public List<PostuleEntity> getAllPostulesByEcoleId(long idEcole) {
+        Query q = em.createQuery("select e from PostuleEntity e where e.idEcole = :idEcole"); // Requête JPQL
+        q.setParameter("idEcole", idEcole);
+        return q.getResultList();
+    }
+
+    public List<PostuleEntity> getAllPostulesByEnseignantId(long idEnseignant) {
+        Query q = em.createQuery("select e from PostuleEntity e where e.idEnseignant = :idEnseignant"); // Requête JPQL
+        q.setParameter("idEnseignant", idEnseignant);
+        return q.getResultList();
+    }
+
     public PostuleEntity getPostuleById(long id) {
         Query q = em.createQuery("select e from PostuleEntity e where e.idPostule = :id"); // Requête JPQL
         q.setParameter("id", id);

@@ -242,7 +242,6 @@
                             <thead>
                             <h1>Liste des écoles</h1>
                             <tr class="text-center">
-                                <th>Ecole</th>
                                 <th>Raison_sociale</th>
                                 <th>Besoin</th>
                                 <th>Competences_requises</th>

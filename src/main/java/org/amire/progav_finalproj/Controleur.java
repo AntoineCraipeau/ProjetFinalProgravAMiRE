@@ -58,7 +58,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
                         request.setAttribute("ecole", new EcoleProfileInfoDto(userRepository.getUserById(idUtilisateur).getEcole()));
                         request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcole().getFavoris().stream().map(FavorisEcoleEntity::getEnseignant).toArray());
-                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEcole().getPostulations().stream().map(PostuleListElementDto::new).toArray());
+                        request.setAttribute("postulations", postuleRepository.getAllPostulesByEcoleId(idEcole).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("enseignants", enseignantRepository.getAllEnseignants().stream().map(enseignant -> new EnseignantListElementDto(enseignant, idEcole)).toArray());
                         break;
                     case ENSEIGNANT:
@@ -67,7 +67,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
                         request.setAttribute("enseignant", new EnseignantProfileInfoDto(userRepository.getUserById(idUtilisateur).getEnseignant()));
                         request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignant().getFavoris().stream().map(FavorisEnseignantEntity::getEcole).toArray());
-                        request.setAttribute("postulations", userRepository.getUserById(idUtilisateur).getEnseignant().getPostulations().stream().map(postuleEntity -> new PostuleListElementDto(postuleEntity)).toArray());
+                        request.setAttribute("postulations", postuleRepository.getAllPostulesByEnseignantId(idEnseignant).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("ecoles", ecoleRepository.getAllEcoles().stream().map(ecole -> new EcoleListElementDto(ecole, idEnseignant)).toArray());
                         break;
 
