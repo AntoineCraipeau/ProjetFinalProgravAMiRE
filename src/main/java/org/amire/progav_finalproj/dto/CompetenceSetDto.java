@@ -17,6 +17,20 @@ public class CompetenceSetDto {
 
     public CompetenceSetDto(String competences) {
         // competences is a string of the form "[francais,anglais,philosophie,mathematiques,robotique,informatique]"
+        if(competences == null) {
+            this.francais = false;
+            this.anglais = false;
+            this.philosophie = false;
+            this.histoire_geographie = false;
+            this.mathematiques = false;
+            this.robotique = false;
+            this.programmation = false;
+            this.svt = false;
+            this.physique_chimie = false;
+            this.sciences_sociales = false;
+            this.psychologie = false;
+            return;
+        }
         competences = competences.replace("[", "");
         competences = competences.replace("]", "");
         competences = competences.replace(" ", "");

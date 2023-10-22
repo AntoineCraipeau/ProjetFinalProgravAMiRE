@@ -37,13 +37,13 @@ public class EnseignantProfileInfoDto {
         this.experience = enseignant.getExperience();
         this.evaluations = enseignant.getEvaluations();
         this.competences = new CompetenceSetDto(enseignant.getCompetences());
-        this.competenceText = enseignant.getCompetences().replace("[","").replace("]", "");
+        this.competenceText = enseignant.getCompetences() == null ? "" : enseignant.getCompetences().replace("[","").replace("]", "");
         this.interetsDomaines = enseignant.getInteretsDomaines();
         this.interetsEcoles = enseignant.getInteretsEcoles();
         this.niveauxSouhaites = enseignant.getNiveauxSouhaites();
         this.dateDebutDispo = enseignant.getDateDebutDispo();
         this.typeDeContrat = new ContratSetDto(enseignant.getTypeDeContrat());
-        this.contratText = enseignant.getTypeDeContrat().replace("[","").replace("]", "");
+        this.contratText = enseignant.getTypeDeContrat() == null ? "" : enseignant.getTypeDeContrat().replace("[","").replace("]", "");
         this.titresAcademiques = enseignant.getTitresAcademiques();
         this.remarques = enseignant.getRemarques();
         this.referencesPro = enseignant.getReferencesPro();

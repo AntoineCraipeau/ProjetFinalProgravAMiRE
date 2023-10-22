@@ -391,7 +391,7 @@
               
               <label for="basic-url" class="form-label">Site Web</label>
               <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                <span class="input-group-text" id="basic-addon3">https://</span>
                 <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
               </div>
 

@@ -44,18 +44,21 @@ public class UserRepository {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
+        em.clear();
     }
 
     public void editUser(UserinfoEntity user) {
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();
+        em.clear();
     }
 
     public void deleteUser(UserinfoEntity user) {
         em.getTransaction().begin();
         em.remove(user);
         em.getTransaction().commit();
+        em.clear();
     }
 
     public UserTypes getUserTypeFromUserId(long id){

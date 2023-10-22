@@ -36,12 +36,12 @@ public class EnseignantListElementDto {
         this.siteWeb = enseignant.getSiteWeb();
         this.experience = enseignant.getExperience();
         this.evaluations = enseignant.getEvaluations();
-        this.competences = enseignant.getCompetences();
+        this.competences = enseignant.getCompetences() == null ? "" : enseignant.getCompetences().replace("[","").replace("]", "");
         this.interetsDomaines = enseignant.getInteretsDomaines();
         this.interetsEcoles = enseignant.getInteretsEcoles();
         this.niveauxSouhaites = enseignant.getNiveauxSouhaites();
         this.dateDebutDispo = enseignant.getDateDebutDispo();
-        this.typeDeContrat = enseignant.getTypeDeContrat();
+        this.typeDeContrat = enseignant.getTypeDeContrat() == null ? "" : enseignant.getTypeDeContrat().replace("[","").replace("]", "");
         this.titresAcademiques = enseignant.getTitresAcademiques();
         this.remarques = enseignant.getRemarques();
         this.referencesPro = enseignant.getReferencesPro();

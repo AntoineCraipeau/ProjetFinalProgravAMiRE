@@ -28,9 +28,9 @@ public class EcoleProfileInfoDto {
         this.siteWeb = ecole.getSiteWeb();
         this.besoin = ecole.getBesoin();
         this.competencesRequises = new CompetenceSetDto(ecole.getCompetencesRequises());
-        this.competenceText = ecole.getCompetencesRequises().replace("[","").replace("]", "");
+        this.competenceText = ecole.getCompetencesRequises() == null ? "" : ecole.getCompetencesRequises().replace("[","").replace("]", "");
         this.typeDeContrat = new ContratSetDto(ecole.getTypeDeContrat());
-        this.contratText = ecole.getTypeDeContrat().replace("[","").replace("]", "");
+        this.contratText = ecole.getTypeDeContrat() == null ? "" : ecole.getTypeDeContrat().replace("[","").replace("]", "");
         this.exigences = ecole.getExigences();
         this.dateDebutDispo = ecole.getDateDebutDispo();
         this.remarques = ecole.getRemarques();

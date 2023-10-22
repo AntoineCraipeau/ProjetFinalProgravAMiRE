@@ -19,12 +19,14 @@ public class EcoleRepository {
     // Read
 
     public EcoleEntity getEcoleById(long id) {
+        em.clear();
         Query q = em.createQuery("select e from EcoleEntity e where e.idEcole = :id"); // Requête JPQL
         q.setParameter("id", id);
         return (EcoleEntity) q.getSingleResult();
     }
 
     public List<EcoleEntity> getAllEcoles() {
+        em.clear();
         Query q = em.createQuery("select e from EcoleEntity e"); // Requête JPQL
         return q.getResultList();
     }
@@ -35,6 +37,7 @@ public class EcoleRepository {
         em.getTransaction().begin();
         em.persist(ecole);
         em.getTransaction().commit();
+        em.clear();
     }
 
     // Update
@@ -43,6 +46,7 @@ public class EcoleRepository {
         em.getTransaction().begin();
         em.merge(ecole);
         em.getTransaction().commit();
+        em.clear();
     }
 
     public void deleteEcoleById(long id) { // Faut trouver un moyen de respecter l'aspect transactionnel non ?
@@ -53,6 +57,7 @@ public class EcoleRepository {
         Query q2 = em.createQuery("delete from UserinfoEntity u where u.idEcole = :id"); // Requête JPQL
         q2.setParameter("id", id);
         q2.executeUpdate();
+        em.clear();
     }
 
 }

@@ -9,6 +9,11 @@ public class ContratSetDto {
 
     public ContratSetDto(String contrats) {
         // contrats is a string of the form "[cdi,cdd]"
+        if(contrats == null) {
+            this.cdi = false;
+            this.cdd = false;
+            return;
+        }
         contrats = contrats.replace("[", "");
         contrats = contrats.replace("]", "");
         contrats = contrats.replace(" ", "");

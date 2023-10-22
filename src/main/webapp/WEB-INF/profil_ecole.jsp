@@ -227,32 +227,32 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8"> ${ adresseElectronique } </div>
+                    <div class="col-lg-9 col-md-8"> ${ecole.adresseElectronique} </div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Telephone</div>
-                    <div class="col-lg-9 col-md-8">${ telephone }</div>
+                    <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${ ecole.periode}</div>
+                    <div class="col-lg-3 col-md-4 label">Date de début souhaitée</div>
+                    <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Site Web</div>
-                    <div class="col-lg-9 col-md-8">${siteWeb}<</div>
+                    <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Compétences rechercher</div>
-                    <div class="col-lg-9 col-md-8">${ ecole.competencesRequises }</div>
+                    <div class="col-lg-3 col-md-4 label">Compétences recherchés</div>
+                    <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Type de contrats souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${typeContrat}</div>
+                    <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                    <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
                   </div>
                   </div>
 
@@ -315,39 +315,39 @@
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Besoin</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control" id="inputPrenom" value="${besoin}">
+                    <input type="prenom" class="form-control" id="inputPrenom" value="${ecole.besoin}">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Exigences</label>
                   <div class="col-sm-10">
-                    <input type="Experience" class="form-control" id="inputExperience">
+                    <input type="Experience" class="form-control" id="inputExperience" name="inputExperience" value="${ecole.exigences}">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="Mail" class="form-control" id="inputMail">
+                    <input type="Mail" class="form-control" id="inputMail" name="inputMail" value=${ecole.adresseElectronique}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="Telephone" class="form-control" id="inputTelephone">
+                    <input type="Telephone" class="form-control" id="inputTelephone" name="inputTelephone" value=${ecole.telephone}>
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaiter</label>
+                  <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaitée</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate" >
+                    <input type="date" class="form-control" id="inputDate" name="inputDate" value="${ecole.dateDebutDispo}">
                   </div>
                 </div>
                 
                 
                 <label for="basic-url" class="form-label">Site Web</label>
                 <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  <span class="input-group-text" id="basic-addon3">https://</span>
+                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="inputSiteweb" value="${ecole.siteWeb}">
                 </div>
 
                 <div class="row mb-3">
@@ -355,29 +355,29 @@
                   <div class="col-sm-10">
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais" <c:if test="${ecole.competencesRequises.francais}">checked</c:if>>
                       <label class="form-check-label" for="gridCheck1">
-                        Langues
+                        Français
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
+                      <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques" <c:if test="${ecole.competencesRequises.mathematiques}">checked</c:if>>
                       <label class="form-check-label" for="gridCheck2">
                         Mathématiques
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck3" >
-                      <label class="form-check-label" for="gridCheck3">
-                        Sciences
+                      <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie" <c:if test="${ecole.competencesRequises.physique_chimie}">checked</c:if>>
+                      <label class="form-check-label" for="gridCheck2">
+                        Physique-Chimie
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck4" >
-                      <label class="form-check-label" for="gridCheck4">
+                      <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation" <c:if test="${ecole.competencesRequises.programmation}">checked</c:if>>
+                      <label class="form-check-label" for="gridCheck2">
                         Programmation
                       </label>
                     </div>
@@ -389,13 +389,13 @@
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat disponible</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd" <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
                       <label class="form-check-label" for="cdd">
                         CDD
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${ecole.typeDeContrat.cdi}">checked</c:if>>
                       <label class="form-check-label" for="cdi">
                         CDI
                       </label>
@@ -407,7 +407,7 @@
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="inputPassword" style="height: 100px"></textarea>
+                    <textarea class="form-control" id="inputPassword" style="height: 100px" name="inputRemarques">${ecole.remarques}</textarea>
                   </div>
                 </div>
 

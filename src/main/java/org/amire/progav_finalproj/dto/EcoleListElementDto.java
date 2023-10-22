@@ -28,8 +28,8 @@ public class EcoleListElementDto {
         this.telephone = ecole.getTelephone();
         this.siteWeb = ecole.getSiteWeb();
         this.besoin = ecole.getBesoin();
-        this.competencesRequises = ecole.getCompetencesRequises();
-        this.typeDeContrat = ecole.getTypeDeContrat();
+        this.competencesRequises = ecole.getCompetencesRequises() == null ? "" : ecole.getCompetencesRequises().replace("[","").replace("]", "");
+        this.typeDeContrat = ecole.getTypeDeContrat() == null ? "" : ecole.getTypeDeContrat().replace("[","").replace("]", "");
         this.exigences = ecole.getExigences();
         this.dateDebutDispo = ecole.getDateDebutDispo();
         this.remarques = ecole.getRemarques();

@@ -89,7 +89,7 @@
                           </li>
                           <li>
                               <form action="Controlleur" method="post">
-                                  <input type="hidden" name="action" value="EcoleVersProfile">
+                                  <input type="hidden" name="action" value="EcoleVersProfil">
                                   <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                                       <i class="bi bi-box-arrow-right"></i>
                                       <span>Profile</span>
