@@ -75,9 +75,10 @@ public class EcoleEntity {
         this.exigences = exigences;
     }
 
-    public Timestamp getPeriode() {
-        return periode;
+    public String getPeriode() {
+        return periode.toString();
     }
+
 
     public void setPeriode(Timestamp periode) {
         this.periode = periode;

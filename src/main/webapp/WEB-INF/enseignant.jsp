@@ -12,7 +12,7 @@
 </head>
 <body>
     <h1>Bonjour ${enseignant.prenom} ${enseignant.nom} ! Vous êtes un enseignant ! </h1>
-    <form action="hello-servlet" method="post">
+    <form action="Controlleur" method="post">
         <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
     </form>
 </body>
