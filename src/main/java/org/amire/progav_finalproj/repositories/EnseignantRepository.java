@@ -19,14 +19,12 @@ public class EnseignantRepository {
     // Read
 
     public EnseignantEntity getEnseignantById(long id) {
-        em.clear();
         Query q = em.createQuery("select e from EnseignantEntity e where e.idEnseignant = :id"); // Requête JPQL
         q.setParameter("id", id);
         return (EnseignantEntity) q.getSingleResult();
     }
 
     public List<EnseignantEntity> getAllEnseignants() {
-        em.clear();
         Query q = em.createQuery("select e from EnseignantEntity e"); // Requête JPQL
         return q.getResultList();
     }
@@ -35,14 +33,12 @@ public class EnseignantRepository {
         em.getTransaction().begin();
         em.persist(enseignant);
         em.getTransaction().commit();
-        em.clear();
     }
 
     public void editEnseignant(EnseignantEntity enseignant) {
         em.getTransaction().begin();
         em.merge(enseignant);
         em.getTransaction().commit();
-        em.clear();
     }
 
     public void deleteEnseignantById(long id){
@@ -53,7 +49,6 @@ public class EnseignantRepository {
         Query q2 = em.createQuery("delete from UserinfoEntity u where u.idEnseignant = :id"); // Requête JPQL
         q2.setParameter("id", id);
         q2.executeUpdate();
-        em.clear();
     }
 
 }

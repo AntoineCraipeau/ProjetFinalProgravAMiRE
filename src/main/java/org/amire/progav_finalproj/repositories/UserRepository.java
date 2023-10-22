@@ -17,20 +17,17 @@ public class UserRepository {
     EntityManager em = entityManagerFactory.createEntityManager();
 
     public List<UserinfoEntity> getAllUsers() {
-        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e"); // Requête JPQL
         return q.getResultList();
     }
 
     public UserinfoEntity getUserById(long id) {
-        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e where e.idUserinfo = :id"); // Requête JPQL
         q.setParameter("id", id);
         return (UserinfoEntity) q.getSingleResult();
     }
 
     public UserinfoEntity getUserByLogin(String login) {
-        em.clear();
         Query q = em.createQuery("select e from UserinfoEntity e where e.login = :login"); // Requête JPQL
         q.setParameter("login", login);
         try {
@@ -44,21 +41,18 @@ public class UserRepository {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
-        em.clear();
     }
 
     public void editUser(UserinfoEntity user) {
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();
-        em.clear();
     }
 
     public void deleteUser(UserinfoEntity user) {
         em.getTransaction().begin();
         em.remove(user);
         em.getTransaction().commit();
-        em.clear();
     }
 
     public UserTypes getUserTypeFromUserId(long id){
