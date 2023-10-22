@@ -5,8 +5,9 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.model.EnseignantSessionBean;
-import org.amire.progav_finalproj.model.UserSessionBean;
+import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.repositories.UserRepository;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,13 +17,13 @@ import java.util.stream.*;
 @Path("/users")
 public class ApiEmployee {
 
-    EnseignantSessionBean enseignantSessionBean = new EnseignantSessionBean();
-    UserSessionBean userSessionBean = new UserSessionBean();
+    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
+    UserRepository userSessionBean = new UserRepository();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllUsers() {
-        return userRepository.getAllUsers().toString();
+        return userSessionBean.getAllUsers().toString();
     }
 
     @GET
