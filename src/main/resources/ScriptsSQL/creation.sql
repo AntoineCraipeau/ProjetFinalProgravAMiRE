@@ -3,30 +3,35 @@ CREATE TABLE `admin`(
 );
 CREATE TABLE `enseignant`(
     `id_enseignant` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Nom` VARCHAR(255) NOT NULL,
-    `Prenom` VARCHAR(255) NOT NULL,
-    `Experience` VARCHAR(255) NOT NULL,
-    `Evaluations` VARCHAR(255) NOT NULL,
-    `Competences` VARCHAR(255) NOT NULL,
-    `Interets_domaines` VARCHAR(255) NULL,
-    `Interets_ecoles` VARCHAR(255) NOT NULL,
-    `Niveaux_souhaites` VARCHAR(255) NOT NULL,
-    `Adresse_electronique` VARCHAR(255) NOT NULL,
+    `Nom` VARCHAR(255) NULL,
+    `Prenom` VARCHAR(255) NULL,
+    `Adresse_electronique` VARCHAR(255) NULL,
     `Telephone` BIGINT NOT NULL,
-    `Site_Web` VARCHAR(255) NOT NULL,
-    `Disponibilites` DATETIME NOT NULL,
-    `Type_de_contrat` VARCHAR(255) NOT NULL,
-    `Titres_academiques` VARCHAR(255) NOT NULL,
-    `Autres_informations` VARCHAR(255) NULL,
-    `References_pro` VARCHAR(255) NOT NULL
+    `Site_Web` VARCHAR(255) NULL,
+    `Experience` VARCHAR(255) NULL,
+    `Evaluations` VARCHAR(255) NULL,
+    `Competences` VARCHAR(512) NULL,
+    `Interets_domaines` VARCHAR(255) NULL,
+    `Interets_ecoles` VARCHAR(255) NULL,
+    `Niveaux_souhaites` VARCHAR(255) NULL,
+    `Date_Debut_Dispo` DATETIME NULL,
+    `Type_de_contrat` VARCHAR(512) NULL,
+    `Titres_academiques` VARCHAR(255) NULL,
+    `Remarques` VARCHAR(255) NULL,
+    `References_pro` VARCHAR(255) NULL,
+    `Lien_CV` VARCHAR(255) NULL
 );
 CREATE TABLE `ecole`(
     `id_ecole` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Raison_sociale` VARCHAR(255) NOT NULL,
-    `Besoin` VARCHAR(255) NOT NULL,
-    `Competences_requises` VARCHAR(255) NOT NULL,
-    `Exigences` VARCHAR(255) NOT NULL,
-    `Periode` DATETIME NOT NULL,
+    `Raison_sociale` VARCHAR(255) NULL,
+    `Adresse_eletronique` VARCHAR(255) NULL,
+    `Telephone` VARCHAR(255) NULL,
+    `Site_Web` VARCHAR(255) NULL,
+    `Besoin` VARCHAR(255) NULL,
+    `Competences_requises` VARCHAR(512) NULL,
+    `Type_de_contrat` VARCHAR(512) NULL,
+    `Exigences` VARCHAR(255) NULL,
+    `Date_Debut_Dispo` DATETIME NULL,
     `Remarques` VARCHAR(255) NULL
 );
 CREATE TABLE `userinfo`(
@@ -45,7 +50,8 @@ CREATE TABLE `userinfo`(
 );
 CREATE TABLE `postule`(
     `id_postule` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Date` DATETIME NOT NULL,
+    `Date_Creation` DATETIME NULL,
+    `Initiateur` VARCHAR(255) NULL,
     `Decision` VARCHAR(255) NULL,
     `id_ecole` BIGINT UNSIGNED NOT NULL,
     `id_enseignant` BIGINT UNSIGNED NOT NULL,
