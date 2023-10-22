@@ -10,6 +10,8 @@ public class PostuleListElementDto {
     private String decision;
     private String nomEcole;
     private String nomEnseignant;
+    private long idEcole;
+    private long idEnseignant;
 
     public PostuleListElementDto(PostuleEntity postulation) {
         this.idPostule = postulation.getIdPostule();
@@ -18,6 +20,8 @@ public class PostuleListElementDto {
         this.decision = postulation.getDecision();
         this.nomEcole = postulation.getEcole().getRaisonSociale();
         this.nomEnseignant = postulation.getEnseignant().getNom() + " " + postulation.getEnseignant().getPrenom();
+        this.idEcole = postulation.getEcole().getIdEcole();
+        this.idEnseignant = postulation.getEnseignant().getIdEnseignant();
     }
 
     public PostuleListElementDto(long id){
@@ -46,5 +50,13 @@ public class PostuleListElementDto {
 
     public String getNomEnseignant() {
         return nomEnseignant;
+    }
+
+    public long getIdEcole() {
+        return idEcole;
+    }
+
+    public long getIdEnseignant() {
+        return idEnseignant;
     }
 }

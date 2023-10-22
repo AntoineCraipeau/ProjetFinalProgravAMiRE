@@ -200,20 +200,33 @@
                                       <td>${postulation.decision}</td>
                                       <td>${postulation.nomEcole}</td>
                                       <td>${postulation.nomEnseignant}</td>
-                                      <td>
-                                          <form action="EnSavoirPlusServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">En savoir plus</button>
-                                          </form>
-                                          </br>
-                                          <form action="AccepterServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">Accepter</button>
-                                          </form>
-                                          </br>
-                                          <form action="RefuserServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">Refuser</button>
-                                          </form>
-                                          </br>
-                                      </td>
+                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <button class="btn btn-primary" type="submit">En savoir plus</button>
+                                              </form>
+                                              </br>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleAcc" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="AccepterPostulationEcole">Accepter</button>
+                                              </form>
+                                              </br>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleRef" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="RefuserPostulationEcole">Refuser</button>
+                                              </form>
+                                              </br>
+                                          </td>
+                                      </c:if>
+                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleAnn" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="RetraitPostulationEcole">Annuler</button>
+                                              </form>
+                                              </br>
+                                          </td>
+                                      </c:if>
                                   </tr>
                               </c:forEach>
                               </tbody>
@@ -301,7 +314,7 @@
 
                                           <form action="Controlleur" method="post">
                                               <input type="hidden" name="idEnseignant" value="${enseignants.idEnseignant}">
-                                              <button class="btn btn-primary" name="action" value="AjoutPosulationEcole" type="submit">AjoutPosulationEnseignant</button>
+                                              <button class="btn btn-primary" name="action" value="AjoutPostulationEcole" type="submit">AjoutPosulationEnseignant</button>
                                           </form>
 
 

@@ -108,6 +108,7 @@ public class Controleur extends HttpServlet implements Controleurs {
         //Enseignant ciblé par la requête (si applicable)
         long idEnseignant = request.getParameter("idEnseignant") != null ? Long.parseLong(request.getParameter("idEnseignant")) : 0;
         EnseignantEntity enseignant = idEnseignant != 0 ? enseignantRepository.getEnseignantById(idEnseignant) : null;
+        PostuleEntity postule;
 
         switch (action) {
             case AjoutFavorisEcole:
@@ -116,16 +117,26 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitFavorisEcole:
                 ecoleFavorisRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
                 break;
-            case AjoutPosulationEcole:
-                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole));
+            case AjoutPostulationEcole:
+                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "ecole"));
                 break;
-            case ModifPosulationEcole:
-                PostuleEntity postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+            case AccepterPostulationEcole:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision("Accepté");
+                postuleRepository.editPostule(postule);
+                break;
+            case RefuserPostulationEcole:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision("Refusé");
+                postuleRepository.editPostule(postule);
+                break;
+            case ModifPostulationEcole:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 postule.setDecision(request.getParameter("decision"));
                 postuleRepository.editPostule(postule);
                 // Y'a besoin de changer autre chose que la décision ?
                 break;
-            case RetraitPosulationEcole:
+            case RetraitPostulationEcole:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
         }
@@ -140,6 +151,7 @@ public class Controleur extends HttpServlet implements Controleurs {
         // Ecole ciblée par la requête (si applicable)
         long idEcole = request.getParameter("idEcole") != null ? Long.parseLong(request.getParameter("idEcole")) : 0;
         EcoleEntity ecole = idEcole != 0 ? ecoleRepository.getEcoleById(idEcole) : null;
+        PostuleEntity postule;
 
         switch (action){
             case AjoutFavorisEnseignant:
@@ -148,16 +160,26 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitFavorisEnseignant:
                 candidatsFavorisRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
                 break;
-            case AjoutPosulationEnseignant:
-                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole));
+            case AjoutPostulationEnseignant:
+                postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "enseignant"));
                 break;
-            case ModifPosulationEnseignant:
-                PostuleEntity postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+            case AccepterPostulationEnseignant:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision("Accepté");
+                postuleRepository.editPostule(postule);
+                break;
+            case RefuserPostulationEnseignant:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                postule.setDecision("Refusé");
+                postuleRepository.editPostule(postule);
+                break;
+            case ModifPostulationEnseignant:
+                postule = postuleRepository.getPostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 postule.setDecision(request.getParameter("decision"));
                 postuleRepository.editPostule(postule);
                 // Y'a besoin de changer autre chose que la décision ?
                 break;
-            case RetraitPosulationEnseignant:
+            case RetraitPostulationEnseignant:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
         }

@@ -6,12 +6,13 @@ import org.amire.progav_finalproj.model.PostuleEntity;
 
 public class PostuleFactory {
 
-    public static PostuleEntity buildPostule(EnseignantEntity enseignant, EcoleEntity ecole){
+    public static PostuleEntity buildPostule(EnseignantEntity enseignant, EcoleEntity ecole, String initiateur){
         PostuleEntity postule = new PostuleEntity();
         postule.setDecision("En attente");
         postule.setDateCreation(new java.sql.Timestamp(System.currentTimeMillis()));
         postule.setEnseignant(enseignant);
         postule.setIdEnseignant(enseignant.getIdEnseignant());
+        postule.setInitiateur(initiateur);
         postule.setEcole(ecole);
         postule.setIdEcole(ecole.getIdEcole());
         return postule;
