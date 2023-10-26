@@ -398,33 +398,24 @@
               <div class="row mb-3">
                 <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
                 <div class="col-sm-10">
+                  <div class="row mb-3">
+                    <div class="col-sm-10">
+                      <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais" <c:if test="${enseignant.competences.francais}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck1">
-                      Français
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques" <c:if test="${enseignant.competences.mathematiques}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Mathématiques
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie" <c:if test="${enseignant.competences.physique_chimie}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Physique-Chimie
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation" <c:if test="${enseignant.competences.programmation}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Programmation
-                    </label>
+                      <c:forEach var="competence" items="${competenceNames}">
+                        <div class="form-check">
+                          <c:if test="${ enseignant.competences[competence]}">
+                            <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}" checked>
+                          </c:if>
+                          <c:if test="${not enseignant.competences[competence]}">
+                            <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
+                          </c:if>
+                          <label class="form-check-label" for="gridCheck${competence}">
+                              ${competence}
+                          </label>
+                        </div>
+                      </c:forEach>
+                    </div>
                   </div>
 
                 </div>

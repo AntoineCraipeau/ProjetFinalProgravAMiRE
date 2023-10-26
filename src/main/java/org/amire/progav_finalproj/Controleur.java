@@ -32,6 +32,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
     UserBean unUtilisateur;
 
+
     public void processRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         request.setCharacterEncoding("UTF-8");
