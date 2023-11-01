@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@Path("/postule")
+@Path("/competences")
 public class ApiCompetences {
     EnseignantSessionBean enseignantSessionBean = new EnseignantSessionBean();
     EcoleSessionBean ecoleSessionBean = new EcoleSessionBean();
@@ -59,7 +59,7 @@ public class ApiCompetences {
     }
 
     @GET
-    @Path("/enseignant-par-competence")
+    @Path("/ecole-par-competence")
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, Integer> getEcoleParComp() {
         List<String> comps = getCompetencesEcoles();
