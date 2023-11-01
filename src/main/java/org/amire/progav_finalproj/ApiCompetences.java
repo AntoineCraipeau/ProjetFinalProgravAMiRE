@@ -1,58 +1,77 @@
 package org.amire.progav_finalproj;
 
-import jakarta.persistence.Query;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import org.amire.progav_finalproj.model.PostuleEntity;
-import org.amire.progav_finalproj.model.PostuleProjection;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
+import org.amire.progav_finalproj.model.EcoleEntity;
+import org.amire.progav_finalproj.model.EcoleSessionBean;
+import org.amire.progav_finalproj.model.EnseignantEntity;
+import org.amire.progav_finalproj.model.EnseignantSessionBean;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Path("/postule")
-public class ApiPostule {
-    EntityManagerFactory entityManagerFactory = jakarta.persistence.Persistence.createEntityManagerFactory("default");
-    EntityManager em = entityManagerFactory.createEntityManager();
+public class ApiCompetences {
+    EnseignantSessionBean enseignantSessionBean = new EnseignantSessionBean();
+    EcoleSessionBean ecoleSessionBean = new EcoleSessionBean();
 
     @GET
+    @Path("/competences-enseignants")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<PostuleProjection> getAllPostule() {
-        Query q = em.createQuery("SELECT NEW org.amire.progav_finalproj.model.PostuleProjection(e.idPostule, e.date, e.decision, e.idEcole, e.idEnseignant) FROM PostuleEntity e");
-        List<PostuleProjection> postules = q.getResultList();
-
-        // Vérifier et remplacer les valeurs null de decision
-        for (PostuleProjection postule : postules) {
-            if (postule.getDecision() == null) {
-                // Remplacez la valeur null par une valeur par défaut ou une chaîne vide, selon vos besoins.
-                postule.setDecision("En attente"); // Vous pouvez utiliser la valeur souhaitée ici.
-            }
-        } q.getResultList();
-
-        return postules;
+    public List<String> getCompetencesEnseignants() {
+        List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
+        List<String> compsEnseigne = enseignants.stream()
+                .map(EnseignantEntity::getCompetences)
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
+        return compsEnseigne;
     }
 
     @GET
-    @Path("/decisions")
+    @Path("/enseignant-par-competence")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, Integer> getDecisionsByResponse() {
-        List<PostuleProjection> postules = getAllPostule();
-        List<String> decisions = postules.stream()
-                .map(PostuleProjection::getDecision)
-                .collect(Collectors.toList());
+    public Map<String, Integer> getEnseignantParComp() {
+        List<String> comps = getCompetencesEnseignants();
 
-        // Créer un TreeMap pour stocker les données triées par type de réponse
-        Map<String, Integer> decisionByResponse = new TreeMap<>();
+        // Créer un TreeMap pour stocker les données triées par mois
+        Map<String, Integer> enseignantsParComp = new TreeMap<>();
 
-        for (String decision : decisions) {
-            String response = decision;
-            decisionByResponse.put(response, decisionByResponse.getOrDefault(response, 0) + 1);
+        for (String comp : comps) {
+            enseignantsParComp.put(comp, enseignantsParComp.getOrDefault(comp, 0) + 1);
         }
 
-        return decisionByResponse;
+        return enseignantsParComp;
     }
+
+    @GET
+    @Path("/competences-ecoles")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getCompetencesEcoles() {
+        List<EcoleEntity> ecoles = ecoleSessionBean.getAllEcoles();
+        List<String> compsEcole = ecoles.stream()
+                .map(EcoleEntity::getCompetencesRequises)
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
+        return compsEcole;
+    }
+
+    @GET
+    @Path("/enseignant-par-competence")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Map<String, Integer> getEcoleParComp() {
+        List<String> comps = getCompetencesEcoles();
+
+        // Créer un TreeMap pour stocker les données triées par mois
+        Map<String, Integer> ecoleParComp = new TreeMap<>();
+
+        for (String comp : comps) {
+            ecoleParComp.put(comp, ecoleParComp.getOrDefault(comp, 0) + 1);
+        }
+
+        return ecoleParComp;
+    }
+
 }
