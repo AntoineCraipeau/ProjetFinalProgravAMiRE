@@ -372,8 +372,6 @@
                   </div>
                 </div>
 
-                  </div>
-                </div>
 
                 <div class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat disponible</legend>
