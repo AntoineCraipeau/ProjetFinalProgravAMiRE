@@ -81,4 +81,18 @@ public class CompetenceSetDto {
     public boolean getPsychologie() {
         return this.psychologie;
     }
+
+    public boolean hasMatch(CompetenceSetDto other){
+        return (this.francais && other.getFrancais()) ||
+                (this.anglais && other.getAnglais()) ||
+                (this.philosophie && other.getPhilosophie()) ||
+                (this.histoire_geographie && other.getHistoire_geographie()) ||
+                (this.mathematiques && other.getMathematiques()) ||
+                (this.robotique && other.getRobotique()) ||
+                (this.programmation && other.getProgrammation()) ||
+                (this.svt && other.getSvt()) ||
+                (this.physique_chimie && other.getPhysique_chimie()) ||
+                (this.sciences_sociales && other.getSciences_sociales()) ||
+                (this.psychologie && other.getPsychologie());
+    }
 }

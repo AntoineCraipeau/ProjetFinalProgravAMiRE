@@ -28,4 +28,8 @@ public class ContratSetDto {
     public boolean getCdd() {
         return cdd;
     }
+
+    public boolean hasMatch(ContratSetDto other) {
+        return (this.cdi && other.cdi) || (this.cdd && other.cdd);
+    }
 }
