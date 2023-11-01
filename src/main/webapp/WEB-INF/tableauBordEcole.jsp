@@ -346,9 +346,9 @@
               </tr>
               </thead>
               <tbody>
-              <c:forEach items="${ecole.favoris}" var="favorisEnseignant">
+              <c:forEach items="${favoris}" var="favorisEnseignant">
                   <tr>
-                      <td>${favorisEnseignant.enseignant.nom}</td>
+                      <td>${favorisEnseignant.nom}</td>
                       <td>
                           <form action="Controlleur" method="post">
                               <input type="hidden" name="idFavorisEcole" value="${favorisEnseignant.idEnseignant}">

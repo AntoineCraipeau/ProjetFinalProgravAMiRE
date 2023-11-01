@@ -191,116 +191,192 @@
           </div>
 
         </div>
-
         <div class="col-xl-8">
-
           <div class="card">
             <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
-
+              <!-- Onglets avec des liens vers les sections -->
+              <ul class="nav nav-tabs nav-tabs-bordered" id="profileTabs">
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Profil</button>
+                  <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Profil</a>
                 </li>
-
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier le Profil</a>
                 </li>
-
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Mot de passe</button>
+                  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le Mot de Passe</a>
                 </li>
-
               </ul>
               <div class="tab-content pt-2">
-
+                <!-- Section Profil -->
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">Besoin</h5>
-                  <p class="small fst-italic">${ecole.besoin}</p>
-
                   <h5 class="card-title">Profile Details</h5>
-
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Raison Sociale</div>
+                    <div class="col-lg-3 col-md-4 label">Raison Sociale</div>
                     <div class="col-lg-9 col-md-8">${ecole.raisonSociale}</div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8"> ${ecole.adresseElectronique} </div>
+                    <div class="col-lg-9 col-md-8">${ecole.adresseEletronique}</div>
                   </div>
-
-                  <div class="row">
+                  <div class ="row">
                     <div class="col-lg-3 col-md-4 label">Telephone</div>
                     <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
                   </div>
-
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Date de début souhaitée</div>
+                    <div class="col-lg-3 col-md-4 label">Besoin</div>
+                    <div class="col-lg-9 col-md-8">${ecole.besoin}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Exigences</div>
+                    <div class="col-lg-9 col-md-8">${ecole.exigences}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
                     <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Site Web</div>
                     <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Experience</div>
-                    <div class="col-lg-9 col-md-8">${ecole.experience}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Evaluations</div>
-                    <div class="col-lg-9 col-md-8">${ecole.evaluations}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Compétences recherchés</div>
-                    <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Interets Ecole </div>
-                    <div class="col-lg-9 col-md-8">${ecole.interetsEcoles}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Niveaux Souhaites </div>
-                    <div class="col-lg-9 col-md-8">${ecole.niveauxSouhaites}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Interets Domaines </div>
-                    <div class="col-lg-9 col-md-8">${ecole.interetsDomaines}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Titres Academiques </div>
-                    <div class="col-lg-9 col-md-8">${ecole.titresAcademiques}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">References Pro </div>
-                    <div class="col-lg-9 col-md-8">${ecole.referencesPro}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Lien Cv </div>
-                    <div class="col-lg-9 col-md-8">${ecole.lienCv}</div>
-                  </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
                     <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
                   </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Competences Requises</div>
+                    <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
                   </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Remarque</div>
+                    <div class="col-lg-9 col-md-8">${ecole.remarques}</div>
+                  </div>
+                </div>
+                <!-- Section Modifier le Profil -->
+                <div class="tab-pane fade pt-3" id="profile-edit">
+                  <h5 class="card-title">Modifier le Profil</h5>
+                  <form action="FormEseignantServlet" method="post">
+                    <div class="row mb-3">
+                      <label for="inputraisonSociale" class="col-sm-2 col-form-label">Nom</label>
+                      <div class="col-sm-10">
+                        <input type="raisonSociale" class="form-control" id="inputraisonSociale" value=${ecole.raisonSociale}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputMail" class="col-sm-2 col-form-label">adresse Eletronique"</label>
+                      <div class="col-sm-10">
+                        <input type="Mail" class="form-control" id="inputMail" value=${ecole.adresseEletronique}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputtelephone" class="col-sm-2 col-form-label">telephone</label>
+                      <div class="col-sm-10">
+                        <input type="telephone" class="form-control" id="inputtelephone" value=${ecole.telephone}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputbesoin" class="col-sm-2 col-form-label">besoin</label>
+                      <div class="col-sm-10">
+                        <input type="besoin" class="form-control" id="inputbesoin" value=${ecole.besoin}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputexigences" class="col-sm-2 col-form-label">exigences</label>
+                      <div class="col-sm-10">
+                        <input type="exigences" class="form-control" id="inputexigences" value=${ecole.exigences}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
+                      <div class="col-sm-10">
+                        <input type="date" class="form-control" id="inputDate" value=${ecole.disponibilites}>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputremarques" class="col-sm-2 col-form-label">Remarques</label>
+                      <div class="col-sm-10">
+                        <input type="remarques" class="form-control" id="inputremarques" value=${ecole.remarques}>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="formFile" class="col-sm-2 col-form-label">CV</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="file" id="formFile" >
+                      </div>
+                    </div>
+
+
+                    <label for="basic-url" class="form-label">Site Web</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon3">https://</span>
+                      <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    </div>
+
+                    <div class="row mb-3">
+                      <legend class="col-form-label col-sm-2 pt-0">Competences Requises</legend>
+                      <div class="col-sm-10">
+                        <div class="row mb-3">
+                          <div class="col-sm-10">
+                            <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
+
+                            <c:forEach var="competence" items="${competenceNames}">
+                              <div class="form-check">
+                                <c:if test="${ ecole.competencesRequises[competence]}">
+                                  <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}" checked>
+                                </c:if>
+                                <c:if test="${not ecole.competencesRequises[competence]}">
+                                  <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
+                                </c:if>
+                                <label class="form-check-label" for="gridCheck${competence}">
+                                    ${competence}
+                                </label>
+                              </div>
+                            </c:forEach>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
+                      <div class="col-sm-10">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
+                          <label class="form-check-label" for="cdd">
+                            CDD
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${ecole.typeDeContrat.cdi}">checked</c:if>>
+                          <label class="form-check-label" for="cdi">
+                            CDI
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                        <label class="form-check-label" for="invalidCheck2">
+                          Accepter les thermes et conditions
+                        </label>
+                      </div>
+                    </div>
+                    </br>
+                    <div class="col-12">
+                      <button class="btn btn-primary" type="submit">Envoyer form</button>
+                    </div>
+
+                  </form><!-- End General Form Elements -->
+
 
                 </div>
-
-             
+                <!-- Section Modifier le Mot de Passe -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
+                  <h5 class="card-title">Modifier le Mot de Passe</h5>
                   <form action="ChangePasswordServlet" method="post">
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
@@ -308,164 +384,34 @@
                         <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                       </div>
                     </div>
-                
+
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                       </div>
                     </div>
-                
+
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewPassword" type="password" class="form-control" id="renewPassword" required>
                       </div>
                     </div>
-                
+
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
-                </div>                
-
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                <!-- Profile Edit Form -->
-                            
-                <h3>Fiche renseignement école</h3>
-                </br>
-                <section class="section">
-                  <div class="row">
-                    <div class="col-lg-20">
-
-                      <div class="card">
-                        <div class="card-body">
-                        </br>
-
-                         
-              <!-- General Form Elements -->
-              <form action="FormEcoleServlet" method="post">
-                <div class="row mb-3">
-                  <label for="nom" class="col-sm-2 col-form-label">Raison Sociale</label>
-                  <div class="col-sm-10">
-                    <input type="nom" class="form-control" id="nom" value = ${ecole.raisonSociale}>
-                  </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="inputPrenom" class="col-sm-2 col-form-label">Besoin</label>
-                  <div class="col-sm-10">
-                    <input type="prenom" class="form-control" id="inputPrenom" value="${ecole.besoin}">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputExperience" class="col-sm-2 col-form-label">Exigences</label>
-                  <div class="col-sm-10">
-                    <input type="Experience" class="form-control" id="inputExperience" name="inputExperience" value="${ecole.exigences}">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="Mail" class="form-control" id="inputMail" name="inputMail" value=${ecole.adresseElectronique}>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
-                  <div class="col-sm-10">
-                    <input type="Telephone" class="form-control" id="inputTelephone" name="inputTelephone" value=${ecole.telephone}>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaitée</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate" name="inputDate" value="${ecole.dateDebutDispo}">
-                  </div>
-                </div>
-                
-                
-                <label for="basic-url" class="form-label">Site Web</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">https://</span>
-                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="inputSiteweb" value="${ecole.siteWeb}">
-                </div>
-
-                <div class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Compétences necéssaires</legend>
-                  <div class="col-sm-10">
-                    <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
-
-
-                    <c:forEach var="competence" items="${competenceNames}">
-                      <div class="form-check">
-                        <c:if test="${ ecole.competencesRequises[competence]}">
-                          <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}" checked>
-                        </c:if>
-                        <c:if test="${not ecole.competencesRequises[competence]}">
-                          <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
-                        </c:if>
-                        <label class="form-check-label" for="gridCheck${competence}">
-                            ${competence}
-                        </label>
-                      </div>
-                    </c:forEach>
-                  </div>
-                </div>
-
-
-                <div class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Type de Contrat disponible</legend>
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd" <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
-                      <label class="form-check-label" for="cdd">
-                        CDD
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${ecole.typeDeContrat.cdi}">checked</c:if>>
-                      <label class="form-check-label" for="cdi">
-                        CDI
-                      </label>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" id="inputPassword" style="height: 100px" name="inputRemarques">${ecole.remarques}</textarea>
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                    <label class="form-check-label" for="invalidCheck2">
-                      Accepter les thermes et conditions
-                    </label>
-                  </div>
-                </div>
-                </br>
-                <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Envoyer form</button>
-                </div>
-
-              </form><!-- End General Form Elements -->
-
-                </div>
-
-              </div><!-- End Bordered Tabs -->
-
+              </div>
             </div>
-          </div>
-                </section>
+
+          </div><!-- End Bordered Tabs -->
+
         </div>
       </div>
-          </div>
-        </div>
-      </div>
+
     </section>
 
   </main><!-- End #main -->

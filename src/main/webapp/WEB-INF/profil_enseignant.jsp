@@ -414,13 +414,6 @@
                   </div>
                 </div>
 
-                <div class="row mb-3">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" style="height: 100px" id="inputPassword"></textarea>
-                  </div>
-                </div>
-
                 <div class="col-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
@@ -476,10 +469,6 @@
             </div>
           </div>
 
-        </div>
-      </div>
-        </div>
-      </div>
     </section>
 
   </main><!-- End #main -->
