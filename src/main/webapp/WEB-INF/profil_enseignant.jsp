@@ -201,87 +201,241 @@
         </div>
 
         <div class="col-xl-8">
-
           <div class="card">
             <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
-
+              <!-- Onglets avec des liens vers les sections -->
+              <ul class="nav nav-tabs nav-tabs-bordered" id="profileTabs">
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Profil</button>
+                  <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Profil</a>
                 </li>
-
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier le Profil</a>
                 </li>
-
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Mot de passe</button>
+                  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le Mot de Passe</a>
                 </li>
-
               </ul>
               <div class="tab-content pt-2">
-
+                <!-- Section Profil -->
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
                   <h5 class="card-title">Profile Details</h5>
-
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label "> Nom , Prenom</div>
-                    <div class="col-lg-9 col-md-8"> ${enseignant.nom},${enseignant.prenom}</div>
+                    <div class="col-lg-3 col-md-4 label">Nom, Prénom</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.nom}, ${enseignant.prenom}</div>
                   </div>
-
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label "> Experience , Evaluations</div>
-                    <div class="col-lg-9 col-md-8"> ${enseignant.experience},${enseignant.evaluations} </div>
+                    <div class="col-lg-3 col-md-4 label">Experience, Evaluations</div>
+                    <div class="col-lg-9 col-md-8">${enseignant.experience}, ${enseignant.evaluations}</div>
                   </div>
-
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8"> ${enseignant.adresseElectronique} </div>
+                    <div class="col-lg-9 col-md-8">${enseignant.adresseElectronique}</div>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Telephone</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.telephone}</div>
+                  <div class ="row">
+                  <div class="col-lg-3 col-md-4 label">Telephone</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.telephone}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Titre Academique</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.titresAcademiques}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Références</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.referencesPro}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.dateDebutDispo}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Site Web</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.siteWeb}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Experience</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.experience}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Compétences recherchées</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Interets Ecole</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.interetsEcoles}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Niveaux Souhaites</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.niveauxSouhaites}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Interets Domaines</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.interetsDomaines}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Lien Cv</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.lienCv}</div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                  <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
+                </div>
+              </div>
+              <!-- Section Modifier le Profil -->
+              <div class="tab-pane fade pt-3" id="profile-edit">
+                <h5 class="card-title">Modifier le Profil</h5>
+                  <form action="FormEseignantServlet" method="post">
+                <div class="row mb-3">
+                  <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
+                  <div class="col-sm-10">
+                    <input type="nom" class="form-control" id="inputNom" value=${enseignant.nom}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label "> Titre Academique</div>
-                    <div class="col-lg-9 col-md-8"> ${enseignant.titresAcademiques} </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
+                  <div class="col-sm-10">
+                    <input type="prenom" class="form-control" id="inputPrenom" value=${enseignant.prenom}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label "> Références </div>
-                    <div class="col-lg-9 col-md-8">${enseignant.referencesPro}</div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                  <div class="col-sm-10">
+                    <input type="Experience" class="form-control" id="inputExperience" value=${enseignant.experience}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Date de début souhaiter</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.dateDebutDispo}</div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
+                  <div class="col-sm-10">
+                    <input type="Evaluations" class="form-control" id="inputEvaluations" value=${enseignant.evaluations}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Site Web</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.siteWeb}</div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="Mail" class="form-control" id="inputMail" value=${enseignant.nom}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Compétences</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
+                  <div class="col-sm-10">
+                    <input type="Telephone" class="form-control" id="inputTelephone" value=${enseignant.telephone}>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Type de contrats chercher</div>
-                    <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
+                  <div class="col-sm-10">
+                    <input type="TitreAca" class="form-control" id="inputTitreAca" value=${enseignant.titresAcademiques}>
                   </div>
-
+                </div>
+                <div class="row mb-3">
+                  <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
+                  <div class="col-sm-10">
+                    <input type="Reference" class="form-control" id="inputReference" value=${enseignant.referencesPro}>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control" id="inputDate" value=${enseignant.disponibilites}>
+                  </div>
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <!-- Change Password Form -->
-                  <form action="ChangePasswordServlet" method="post">
+                <div class="row mb-3">
+                  <label for="inputNiveauSouhaite" class="col-sm-2 col-form-label">Niveau Souhaite</label>
+                  <div class="col-sm-10">
+                    <input type="Niveau" class="form-control" id="inputNiveauSouhaite" value=${enseignant.niveauxSouhaites}>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputInteretDomaine" class="col-sm-2 col-form-label">Interet Domaine</label>
+                  <div class="col-sm-10">
+                    <input type="Domaine" class="form-control" id="inputInteretDomaine" value=${enseignant.interetsDomaines}>
+                  </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="formFile" id="inputNumber" >
+                  </div>
+                </div>
+
+
+                <label for="basic-url" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon3">https://</span>
+                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                </div>
+
+                <div class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
+                  <div class="col-sm-10">
                     <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
+
+                        <c:forEach var="competence" items="${competenceNames}">
+                          <div class="form-check">
+                            <c:if test="${ enseignant.competences[competence]}">
+                              <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}" checked>
+                            </c:if>
+                            <c:if test="${not enseignant.competences[competence]}">
+                              <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
+                            </c:if>
+                            <label class="form-check-label" for="gridCheck${competence}">
+                                ${competence}
+                            </label>
+                          </div>
+                        </c:forEach>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${enseignant.typeDeContrat.cdd}">checked</c:if>>
+                      <label class="form-check-label" for="cdd">
+                        CDD
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${enseignant.typeDeContrat.cdi}">checked</c:if>>
+                      <label class="form-check-label" for="cdi">
+                        CDI
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                    <label class="form-check-label" for="invalidCheck2">
+                      Accepter les thermes et conditions
+                    </label>
+                  </div>
+                </div>
+                </br>
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit">Envoyer form</button>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+
+              </div>
+              <!-- Section Modifier le Mot de Passe -->
+              <div class="tab-pane fade pt-3" id="profile-change-password">
+                <h5 class="card-title">Modifier le Mot de Passe</h5>
+                <form action="ChangePasswordServlet" method="post">
+                  <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
@@ -306,172 +460,8 @@
                       <button type="submit" class="btn btn-primary">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
-                </div>                
-
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                <!-- Profile Edit Form -->
-                            
-
-              <!-- General Form Elements -->
-
-              <h3>Fiche renseignement enseignant</h3>
-            </br>
-            <section class="section">
-              <div class="row">
-                <div class="col-lg-20">
-        
-                  <div class="card">
-                    <div class="card-body">
-                    </br>
-                            <!-- General Form Elements -->
-              <form action="FormEseignantServlet" method="post"></form>
-              <div class="row mb-3">
-                <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
-                <div class="col-sm-10">
-                  <input type="nom" class="form-control" id="inputNom" value=${enseignant.nom}>
                 </div>
               </div>
-              <div class="row mb-3">
-                <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
-                <div class="col-sm-10">
-                  <input type="prenom" class="form-control" id="inputPrenom" value=${enseignant.prenom}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                <div class="col-sm-10">
-                  <input type="Experience" class="form-control" id="inputExperience" value=${enseignant.experience}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
-                <div class="col-sm-10">
-                  <input type="Evaluations" class="form-control" id="inputEvaluations" value=${enseignant.evaluations}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                  <input type="Mail" class="form-control" id="inputMail" value=${enseignant.nom}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
-                <div class="col-sm-10">
-                  <input type="Telephone" class="form-control" id="inputTelephone" value=${enseignant.telephone}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
-                <div class="col-sm-10">
-                  <input type="TitreAca" class="form-control" id="inputTitreAca" value=${enseignant.titresAcademiques}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
-                <div class="col-sm-10">
-                  <input type="Reference" class="form-control" id="inputReference" value=${enseignant.referencesPro}>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
-                <div class="col-sm-10">
-                  <input type="date" class="form-control" id="inputDate" value=${enseignant.disponibilites}>
-                </div>
-              </div>
-              
-              <div class="row mb-3">
-                <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
-                <div class="col-sm-10">
-                  <input class="form-control" type="file" id="formFile" id="inputNumber" >
-                </div>
-              </div>
-
-              
-              <label for="basic-url" class="form-label">Site Web</label>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">https://</span>
-                <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-              </div>
-
-              <div class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
-                <div class="col-sm-10">
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais" <c:if test="${enseignant.competences.francais}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck1">
-                      Français
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques" <c:if test="${enseignant.competences.mathematiques}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Mathématiques
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie" <c:if test="${enseignant.competences.physique_chimie}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Physique-Chimie
-                    </label>
-                  </div>
-
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation" <c:if test="${enseignant.competences.programmation}">checked</c:if>>
-                    <label class="form-check-label" for="gridCheck2">
-                      Programmation
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
-                <div class="col-sm-10">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${enseignant.typeDeContrat.cdd}">checked</c:if>>
-                    <label class="form-check-label" for="cdd">
-                      CDD
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi" <c:if test="${enseignant.typeDeContrat.cdi}">checked</c:if>>
-                    <label class="form-check-label" for="cdi">
-                      CDI
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" style="height: 100px" id="inputPassword"></textarea>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                  <label class="form-check-label" for="invalidCheck2">
-                    Accepter les thermes et conditions
-                  </label>
-                </div>
-              </div>
-              </br>
-              <div class="col-12">
-                <button class="btn btn-primary" type="submit">Envoyer form</button>
-              </div>
-
-            </form><!-- End General Form Elements -->
-
-
                 </div>
 
               </div><!-- End Bordered Tabs -->
@@ -479,8 +469,6 @@
             </div>
           </div>
 
-        </div>
-      </div>
     </section>
 
   </main><!-- End #main -->

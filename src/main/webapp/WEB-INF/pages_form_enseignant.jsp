@@ -112,9 +112,9 @@
                 </div>
                 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
+                  <label for="inputCV" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" id="inputNumber">
+                    <input class="form-control" type="file" id="formFile" id="inputCV">
                   </div>
                 </div>
 
@@ -125,36 +125,32 @@
                   <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
                 </div>
 
+                <label for="inputNiveauSouhaite" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputNiveauSouhaite" name="inputNiveauSouhaite">
+                </div>
+
+                <label for="inputInteretDomaine" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine">
+                </div>
+
                 <div class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
                   <div class="col-sm-10">
+                    <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
 
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1" name="competences" value="francais">
-                      <label class="form-check-label" for="gridCheck1">
-                        Français
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" name="competences" value="mathematiques">
-                      <label class="form-check-label" for="gridCheck2">
-                        Mathématiques
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck3" name="competences" value="physique_chimie">
-                      <label class="form-check-label" for="gridCheck2">
-                        Physique-Chimie
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck4" name="competences" value="programmation">
-                      <label class="form-check-label" for="gridCheck2">
-                        Programmation
-                      </label>
+                        <c:forEach var="competence" items="${competenceNames}">
+                          <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
+                            <label class="form-check-label" for="gridCheck${competence}">
+                                ${competence}
+                            </label>
+                          </div>
+                        </c:forEach>
+                      </div>
                     </div>
 
                   </div>

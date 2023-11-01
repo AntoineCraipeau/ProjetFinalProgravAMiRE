@@ -288,28 +288,6 @@
                                       <td>${enseignants.titresAcademiques}</td>
                                       <td>${enseignants.referencesPro}</td>
                                       <td>
-                                          <c:choose>
-                                              <c:when test="${candidatsFavorisEntity.isEcoleDansFavoris(unUtilisateur.getIdUserinfo(), ecoles.idEcole)}">
-                                                  <form action="Controlleur" method="post">
-                                                      <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
-                                                      <input type="hidden" name="action" value="RetraitFavorisEnseignant">
-                                                      <button type="submit" class="btn btn-link">
-                                                          <i class="bi bi-heart-fill"></i> <!-- Cœur rempli (icone solide) -->
-                                                      </button>
-                                                  </form>
-                                              </c:when>
-                                              <c:otherwise>
-                                                  <form action="Controlleur" method="post">
-                                                      <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
-                                                      <input type="hidden" name="action" value="AjoutFavorisEnseignant">
-                                                      <button type="submit" class="btn btn-link">
-                                                          <i class="bi bi-heart"></i> <!-- Cœur vide (icone régulière) -->
-                                                      </button>
-                                                  </form>
-                                              </c:otherwise>
-                                          </c:choose>
-
-
                                           </br>
 
                                           <form action="Controlleur" method="post">
@@ -317,16 +295,72 @@
                                               <button class="btn btn-primary" name="action" value="AjoutPostulationEcole" type="submit">AjoutPosulationEnseignant</button>
                                           </form>
 
-
                                       </td>
                                   </tr>
                               </c:forEach>
                               </tbody>
                           </table>
+
                       </div>
                   </div>
               </div>
           </div>
+      </section>
+
+
+      <section class="testfav">
+          <h1>Liste des enseignants</h1>
+          <table class="table">
+              <thead>
+              <tr class="text-center">
+                  <th>Nom</th>
+                  <!-- Autres colonnes -->
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach items="${enseignants}" var="enseignant">
+                  <tr>
+                      <td>${enseignant.nom}</td>
+                      <td>
+                          <form action="Controlleur" method="post">
+                              <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
+                              <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
+                                  Ajouter aux favoris
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              </c:forEach>
+              </tbody>
+          </table>
+      </section>
+
+      <section class="section">
+          <h1>Liste des enseignants favoris</h1>
+          <table class="table">
+              <thead>
+              <tr class="text-center">
+                  <th>Nom</th>
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach items="${favoris}" var="favorisEnseignant">
+                  <tr>
+                      <td>${favorisEnseignant.nom}</td>
+                      <td>
+                          <form action="Controlleur" method="post">
+                              <input type="hidden" name="idFavorisEcole" value="${favorisEnseignant.idEnseignant}">
+                              <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
+                                  Retirer des favoris
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              </c:forEach>
+              </tbody>
+          </table>
       </section>
 
 
