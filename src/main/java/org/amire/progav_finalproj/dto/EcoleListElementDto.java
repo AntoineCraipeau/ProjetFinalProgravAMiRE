@@ -77,7 +77,7 @@ public class EcoleListElementDto {
     public String getRemarques() {
         return remarques;
     }
-    public boolean isFavoris() {
+    public boolean getIsFavoris() {
         return isFavoris;
     }
 }

@@ -274,7 +274,7 @@
                                     <td>${ecoles.remarques}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${candidatsFavorisEntity.isEcoleDansFavoris(unUtilisateur.getIdUserinfo(), ecoles.idEcole)}">
+                                            <c:when test="${ecoles.isFavoris}">
                                                 <form action="Controlleur" method="post">
                                                     <input type="hidden" name="idEcole" value="${ecoles.idEcole}">
                                                     <input type="hidden" name="action" value="RetraitFavorisEnseignant">

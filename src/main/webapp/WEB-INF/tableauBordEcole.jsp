@@ -77,7 +77,7 @@
                   <li class="nav-item dropdown pe-3">
                       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+                          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                           <li class="dropdown-header">
@@ -325,7 +325,7 @@
                       <td>
                           <form action="Controlleur" method="post">
                               <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
-                              <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
+                              <button class="btn btn-primary" name="action" value="AjoutFavorisEcole" type="submit">
                                   Ajouter aux favoris
                               </button>
                           </form>
@@ -352,7 +352,7 @@
                       <td>
                           <form action="Controlleur" method="post">
                               <input type="hidden" name="idFavorisEcole" value="${favorisEnseignant.idEnseignant}">
-                              <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
+                              <button class="btn btn-danger" name="action" value="RetraitFavorisEcole" type="submit">
                                   Retirer des favoris
                               </button>
                           </form>
