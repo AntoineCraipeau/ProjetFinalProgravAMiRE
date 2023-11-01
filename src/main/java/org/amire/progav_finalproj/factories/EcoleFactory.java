@@ -15,20 +15,26 @@ public class EcoleFactory {
         ecole.setBesoin("");
         ecole.setDateDebutDispo(new Timestamp(System.currentTimeMillis()));
         ecole.setRemarques("");
+        ecole.setSiteWeb("");
         return ecole;
     }
 
     public static EcoleEntity buildEcoleFromRequest(HttpServletRequest request){
         EcoleEntity ecole = new EcoleEntity();
         ecole.setRaisonSociale(request.getParameter("inputRaisonSociale"));
-        ecole.setCompetencesRequises(Arrays.toString(request.getParameterValues("competences")));
+        ecole.setCompetencesRequises(Arrays.toString(request.getParameterValues("competences")).replace(" ", ""));
         ecole.setExigences(request.getParameter("inputExigences"));
         ecole.setBesoin(request.getParameter("inputBesoin"));
-        ecole.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
+        try {
+            ecole.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
+        } catch (IllegalArgumentException e) {
+            ecole.setDateDebutDispo(null);
+        }
         ecole.setRemarques(request.getParameter("inputRemarques"));
-        ecole.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")));
+        ecole.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")).replace(" ", ""));
         ecole.setAdresseEletronique(request.getParameter("inputMail"));
         ecole.setTelephone(request.getParameter("inputTelephone"));
+        ecole.setSiteWeb(request.getParameter("inputSiteWeb"));
         return ecole;
     }
 }

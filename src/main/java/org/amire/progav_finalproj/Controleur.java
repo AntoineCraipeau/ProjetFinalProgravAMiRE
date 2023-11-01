@@ -7,6 +7,8 @@ import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import org.amire.progav_finalproj.dto.*;
+import org.amire.progav_finalproj.factories.EcoleFactory;
+import org.amire.progav_finalproj.factories.EnseignantFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
@@ -81,6 +83,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         } catch (Exception e) { // Des exceptions peuvent être levées par les repositories
             request.setAttribute("messageErreur", e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         aiguillerVersLaProchainePage(request, response);
@@ -143,7 +146,11 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitPostulationEcole:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
-        }
+            case ModifierProfil:
+                EcoleEntity ecoleFromRequest = EcoleFactory.buildEcoleFromRequest(request);
+                ecoleFromRequest.setIdEcole(idEcole);
+                ecoleRepository.editEcole(ecoleFromRequest);
+            }
     }
 
     public void handleEnseignantRequest(HttpServletRequest request){
@@ -186,6 +193,10 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitPostulationEnseignant:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
+            case ModifierProfil:
+                EnseignantEntity enseignantFromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
+                enseignantFromRequest.setIdEnseignant(idEnseignant);
+                enseignantRepository.editEnseignant(enseignantFromRequest);
         }
     }
 
@@ -233,6 +244,9 @@ public class Controleur extends HttpServlet implements Controleurs {
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
                 unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
+                System.out.println("Le contexte utilisateur a été trouvé avec l'action " + action);
+            } else {
+                System.out.println("Le contexte utilisateur n'a pas été trouvé avec l'action " + action);
             }
         }
 

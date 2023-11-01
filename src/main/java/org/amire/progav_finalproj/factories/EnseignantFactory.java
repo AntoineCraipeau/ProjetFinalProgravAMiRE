@@ -34,19 +34,23 @@ public class EnseignantFactory {
         enseignant.setPrenom(request.getParameter("inputPrenom"));
         enseignant.setTelephone(request.getParameter("inputTelephone"));
         enseignant.setSiteWeb(request.getParameter("inputSiteWeb"));
-        enseignant.setCompetences(Arrays.toString(request.getParameterValues("competences")));
+        enseignant.setCompetences(Arrays.toString(request.getParameterValues("competences")).replace(" ", ""));
         enseignant.setAdresseElectronique(request.getParameter("inputMail"));
         enseignant.setRemarques(request.getParameter("autresInformations")); //!
-        enseignant.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
+        try {
+            enseignant.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
+        } catch (IllegalArgumentException e) {
+            enseignant.setDateDebutDispo(null);
+        }
         enseignant.setExperience(request.getParameter("inputExperience"));
         enseignant.setReferencesPro(request.getParameter("inputReference"));
         enseignant.setTitresAcademiques(request.getParameter("inputTitreAca"));
         enseignant.setEvaluations(request.getParameter("inputEvaluations"));
-        enseignant.setInteretsDomaines("No match in form");
+        enseignant.setInteretsDomaines(request.getParameter("inputInteretDomaine"));
         enseignant.setRemarques(request.getParameter("remarques"));
-        enseignant.setNiveauxSouhaites("No match in form");
+        enseignant.setNiveauxSouhaites(request.getParameter("inputNiveauSouhaite"));
         enseignant.setInteretsEcoles("No match in form");
-        enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")));
+        enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")).replace(" ", ""));
         return enseignant;
     }
 

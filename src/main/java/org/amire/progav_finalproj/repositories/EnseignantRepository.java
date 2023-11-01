@@ -2,13 +2,11 @@ package org.amire.progav_finalproj.repositories;
 
 
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Stateless
 public class EnseignantRepository {
