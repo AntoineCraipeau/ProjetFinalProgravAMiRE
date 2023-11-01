@@ -112,9 +112,9 @@
                 </div>
                 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
+                  <label for="inputCV" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" id="inputNumber">
+                    <input class="form-control" type="file" id="formFile" id="inputCV">
                   </div>
                 </div>
 
@@ -123,6 +123,16 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon3">https://</span>
                   <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
+                </div>
+
+                <label for="inputNiveauSouhaite" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputNiveauSouhaite" name="inputNiveauSouhaite">
+                </div>
+
+                <label for="inputInteretDomaine" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine">
                 </div>
 
                 <div class="row mb-3">

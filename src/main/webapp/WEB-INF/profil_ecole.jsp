@@ -246,8 +246,48 @@
                   </div>
 
                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Experience</div>
+                    <div class="col-lg-9 col-md-8">${ecole.experience}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Evaluations</div>
+                    <div class="col-lg-9 col-md-8">${ecole.evaluations}</div>
+                  </div>
+
+                  <div class="row">
                     <div class="col-lg-3 col-md-4 label">Compétences recherchés</div>
                     <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Interets Ecole </div>
+                    <div class="col-lg-9 col-md-8">${ecole.interetsEcoles}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Niveaux Souhaites </div>
+                    <div class="col-lg-9 col-md-8">${ecole.niveauxSouhaites}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Interets Domaines </div>
+                    <div class="col-lg-9 col-md-8">${ecole.interetsDomaines}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Titres Academiques </div>
+                    <div class="col-lg-9 col-md-8">${ecole.titresAcademiques}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">References Pro </div>
+                    <div class="col-lg-9 col-md-8">${ecole.referencesPro}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Lien Cv </div>
+                    <div class="col-lg-9 col-md-8">${ecole.lienCv}</div>
                   </div>
 
                   <div class="row">
