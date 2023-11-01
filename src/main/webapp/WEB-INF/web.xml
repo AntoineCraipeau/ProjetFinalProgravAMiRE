@@ -21,9 +21,19 @@
         <servlet-class>org.amire.progav_finalproj.Controleur</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ControleurInscriptions</servlet-name>
+        <servlet-class>org.amire.progav_finalproj.ControleurInscriptions</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Controleur</servlet-name>
         <url-pattern>/Controlleur</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ControleurInscriptions</servlet-name>
+        <url-pattern>/Inscriptions</url-pattern>
     </servlet-mapping>
 
     <jsp-config>

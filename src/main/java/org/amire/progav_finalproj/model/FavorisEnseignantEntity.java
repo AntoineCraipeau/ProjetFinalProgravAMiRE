@@ -3,8 +3,8 @@ package org.amire.progav_finalproj.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "candidats_favoris", schema = "db_prograv_final")
-public class CandidatsFavorisEntity {
+@Table(name = "favoris_enseignant", schema = "db_prograv_final")
+public class FavorisEnseignantEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_candidats_favoris", nullable = false)
@@ -17,10 +17,10 @@ public class CandidatsFavorisEntity {
     private long idEnseignant;
     @ManyToOne
     @JoinColumn(name = "id_ecole", referencedColumnName = "id_ecole", nullable = false)
-    private EcoleEntity ecoleByIdEcole;
+    private EcoleEntity ecole;
     @ManyToOne
     @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant", nullable = false)
-    private EnseignantEntity enseignantByIdEnseignant;
+    private EnseignantEntity enseignant;
 
     public long getIdCandidatsFavoris() {
         return idCandidatsFavoris;
@@ -51,7 +51,7 @@ public class CandidatsFavorisEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CandidatsFavorisEntity that = (CandidatsFavorisEntity) o;
+        FavorisEnseignantEntity that = (FavorisEnseignantEntity) o;
 
         if (idCandidatsFavoris != that.idCandidatsFavoris) return false;
         if (idEcole != that.idEcole) return false;
@@ -68,19 +68,19 @@ public class CandidatsFavorisEntity {
         return result;
     }
 
-    public EcoleEntity getEcoleByIdEcole() {
-        return ecoleByIdEcole;
+    public EcoleEntity getEcole() {
+        return ecole;
     }
 
-    public void setEcoleByIdEcole(EcoleEntity ecoleByIdEcole) {
-        this.ecoleByIdEcole = ecoleByIdEcole;
+    public void setEcole(EcoleEntity ecole) {
+        this.ecole = ecole;
     }
 
-    public EnseignantEntity getEnseignantByIdEnseignant() {
-        return enseignantByIdEnseignant;
+    public EnseignantEntity getEnseignant() {
+        return enseignant;
     }
 
-    public void setEnseignantByIdEnseignant(EnseignantEntity enseignantByIdEnseignant) {
-        this.enseignantByIdEnseignant = enseignantByIdEnseignant;
+    public void setEnseignant(EnseignantEntity enseignant) {
+        this.enseignant = enseignant;
     }
 }

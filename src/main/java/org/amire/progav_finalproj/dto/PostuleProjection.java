@@ -1,4 +1,4 @@
-package org.amire.progav_finalproj.model;
+package org.amire.progav_finalproj.dto;
 import java.sql.Timestamp;
 public class PostuleProjection {
     public long idPostule;

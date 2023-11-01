@@ -1,4 +1,4 @@
-package org.amire.progav_finalproj.model;
+package org.amire.progav_finalproj.repositories;
 
 
 import jakarta.ejb.Stateless;
@@ -6,18 +6,39 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.util.List;
 
 @Stateless
-public class EnseignantSessionBean {
+public class EnseignantRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 
+    // Read
+
+    public EnseignantEntity getEnseignantById(long id) {
+        Query q = em.createQuery("select e from EnseignantEntity e where e.idEnseignant = :id"); // Requête JPQL
+        q.setParameter("id", id);
+        return (EnseignantEntity) q.getSingleResult();
+    }
+
     public List<EnseignantEntity> getAllEnseignants() {
         Query q = em.createQuery("select e from EnseignantEntity e"); // Requête JPQL
         return q.getResultList();
+    }
+
+    public void addEnseignant(EnseignantEntity enseignant) {
+        em.getTransaction().begin();
+        em.persist(enseignant);
+        em.getTransaction().commit();
+    }
+
+    public void editEnseignant(EnseignantEntity enseignant) {
+        em.getTransaction().begin();
+        em.merge(enseignant);
+        em.getTransaction().commit();
     }
 
     public void deleteEnseignantById(long id){

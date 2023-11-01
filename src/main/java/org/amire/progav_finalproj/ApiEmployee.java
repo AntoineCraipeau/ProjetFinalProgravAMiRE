@@ -1,13 +1,13 @@
 package org.amire.progav_finalproj;
 
-import jakarta.annotation.Resource;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.model.EnseignantSessionBean;
-import org.amire.progav_finalproj.model.UserSessionBean;
+import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.repositories.UserRepository;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -17,8 +17,8 @@ import java.util.stream.*;
 @Path("/users")
 public class ApiEmployee {
 
-    EnseignantSessionBean enseignantSessionBean = new EnseignantSessionBean();
-    UserSessionBean userSessionBean = new UserSessionBean();
+    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
+    UserRepository userSessionBean = new UserRepository();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,7 +33,7 @@ public class ApiEmployee {
         List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
 
         List<Timestamp> dispos = enseignants.stream()
-                .map(EnseignantEntity::getDisponibilites)
+                .map(EnseignantEntity::getDateDebutDispo)
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
 

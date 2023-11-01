@@ -5,8 +5,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import org.amire.progav_finalproj.model.PostuleEntity;
-import org.amire.progav_finalproj.model.PostuleProjection;
+import org.amire.progav_finalproj.dto.PostuleProjection;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -22,7 +21,7 @@ public class ApiPostule {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<PostuleProjection> getAllPostule() {
-        Query q = em.createQuery("SELECT NEW org.amire.progav_finalproj.model.PostuleProjection(e.idPostule, e.date, e.decision, e.idEcole, e.idEnseignant) FROM PostuleEntity e");
+        Query q = em.createQuery("SELECT NEW org.amire.progav_finalproj.dto.PostuleProjection(e.idPostule, e.dateCreation, e.decision, e.idEcole, e.idEnseignant) FROM PostuleEntity e");
         List<PostuleProjection> postules = q.getResultList();
 
         // Vérifier et remplacer les valeurs null de decision

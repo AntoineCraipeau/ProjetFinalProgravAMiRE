@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
+
+
 
 <head>
   <meta charset="utf-8">
@@ -9,22 +13,24 @@
   <title> Register </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+
+  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${contextPath}/assets/img/favicon.png" rel="icon">
+  <link href="${contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -48,25 +54,36 @@
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour crée un compte</p>
                   </div>
 
-                  <form action="RegisterServlet" method="post">
+                  <form action="Inscriptions" method="post">
                     <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" id="username" name="username" required>
+                        <label for="champLogin">Nom d'utilisateur</label>
+                        <input type="text" id="champLogin" name="champLogin" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
+                        <label for="champMotDePasse">Mot de passe</label>
+                        <input type="password" id="champMotDePasse" name="champMotDePasse" required>
                     </div>
                     <div class="form-group">
-                      <label for="userType">Type d'utilisateur</label>
+                      <label>Type d'utilisateur</label>
                       <input type="checkbox" id="enseignant" name="userType" value="enseignant"> Enseignant
                       <input type="checkbox" id="ecole" name="userType" value="ecole"> École
-                      <input type="checkbox" id="admin" name="userType" value="admin"> Admin
-                  </div>
-                    <div class="form-group">
-                        <button type="submit">S'inscrire</button>
+                      <!--<input type="checkbox" id="admin" name="userType" value="admin"> Admin-->
+                      <!--USE RADIO BUTTONS-->
                     </div>
-                </form>
+                    <div class="form-group">
+                        <button type="submit" name="action" value="StartRegister" class="btn btn-primary w-100">S'inscrire</button>
+                    </div>
+                  </form>
+                  <div class="col-12">
+                    <form action="Controlleur" method="post">
+                      <p class="small mb-0">Pas de compte ? </p>
+                      <input type="hidden" name="action" value="ToLogin">
+                      <a  href="#" onclick="this.parentNode.submit();">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <p class="small mb-0">Déjà inscrit ?</p>
+                      </a>
+                    </form>
+                  </div>
 
                 </div>
               </div>

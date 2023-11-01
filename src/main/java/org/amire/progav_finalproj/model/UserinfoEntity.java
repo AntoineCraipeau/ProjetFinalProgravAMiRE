@@ -26,13 +26,13 @@ public class UserinfoEntity {
     private Long idAdmin;
     @ManyToOne
     @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
-    private EnseignantEntity enseignantByIdEnseignant;
+    private EnseignantEntity enseignant;
     @ManyToOne
     @JoinColumn(name = "id_ecole", referencedColumnName = "id_ecole")
-    private EcoleEntity ecoleByIdEcole;
+    private EcoleEntity ecole;
     @ManyToOne
     @JoinColumn(name = "id_admin", referencedColumnName = "id_admin")
-    private AdminEntity adminByIdAdmin;
+    private AdminEntity admin;
 
     public long getIdUserinfo() {
         return idUserinfo;
@@ -110,27 +110,27 @@ public class UserinfoEntity {
         return result;
     }
 
-    public EnseignantEntity getEnseignantByIdEnseignant() {
-        return enseignantByIdEnseignant;
+    public EnseignantEntity getEnseignant() {
+        return enseignant;
     }
 
-    public void setEnseignantByIdEnseignant(EnseignantEntity enseignantByIdEnseignant) {
-        this.enseignantByIdEnseignant = enseignantByIdEnseignant;
+    public void setEnseignant(EnseignantEntity enseignant) {
+        this.enseignant = enseignant;
     }
 
-    public EcoleEntity getEcoleByIdEcole() {
-        return ecoleByIdEcole;
+    public EcoleEntity getEcole() {
+        return ecole;
     }
 
-    public void setEcoleByIdEcole(EcoleEntity ecoleByIdEcole) {
-        this.ecoleByIdEcole = ecoleByIdEcole;
+    public void setEcole(EcoleEntity ecole) {
+        this.ecole = ecole;
     }
 
-    public AdminEntity getAdminByIdAdmin() {
-        return adminByIdAdmin;
+    public AdminEntity getAdmin() {
+        return admin;
     }
 
-    public void setAdminByIdAdmin(AdminEntity adminByIdAdmin) {
-        this.adminByIdAdmin = adminByIdAdmin;
+    public void setAdmin(AdminEntity admin) {
+        this.admin = admin;
     }
 }

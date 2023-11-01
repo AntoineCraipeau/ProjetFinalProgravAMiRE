@@ -43,6 +43,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"> 
               <img src="./assets/img/logo.png" alt="" width=50% height=50%>
+            </br>
               
               <div class="card mb-3">
 
@@ -53,7 +54,7 @@
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour se connecter</p>
                   </div>
-                  <form class="row g-3 needs-validation" novalidate method="post" action="Controlleur">
+                  <form class="row g-3 " method="post" action="Controlleur">
                     <div class="col-12">
                         <label for="champLogin" class="form-label">Nom d'utilisateur</label>
                       <input class="form-control" placeholder="Login" name="champLogin" autofocus="" id ="champLogin">
@@ -67,10 +68,18 @@
                     <div class="col-12">
                       <input type="submit" name="action" value="Login" class="btn btn-primary w-100"/>
                     </div>
-                    <div class="col-12">
-                        <p class="small mb-0">Pas de compte ? <a href="register.jsp">Crée un compte</a></p>
-                    </div>
-                </form>
+                  </form>
+                  <div class="col-12">
+                    <form action="Controlleur" method="post">
+                      <p class="small mb-0">Pas de compte ? </p>
+                        <input type="hidden" name="action" value="ToRegister">
+                        <a  href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <p class="small mb-0"> Crée un compte</p>
+                        </a>
+                    </form>
+                  </div>
+
                 <!--<c:if test="${not empty param.error}">
                     <p class="small text-danger">Nom d'utilisateur ou mot de passe incorrect.</p>
                 </c:if>-->

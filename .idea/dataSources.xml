@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="0b65cf0d-7339-4e15-8d6d-d03d1fdca2fd">
+    <data-source source="LOCAL" name="MySQL" uuid="7d1ce553-0c0d-4568-ae92-188e8ac72b7d">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="db_prograv_final@localhost" uuid="079c1d38-2061-4210-bb46-3009d9595d1c">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/db_prograv_final</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="@amireprojet.c0pj4jozbnof.eu-west-2.rds.amazonaws.com" uuid="0fe919f2-561c-46ec-9fa6-83353d552449">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://amireprojet.c0pj4jozbnof.eu-west-2.rds.amazonaws.com:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://amireprojet.c0pj4jozbnof.eu-west-2.rds.amazonaws.com:3306/db_prograv_final</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

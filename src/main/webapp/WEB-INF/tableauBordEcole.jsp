@@ -77,7 +77,7 @@
                   <li class="nav-item dropdown pe-3">
                       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                          <span class="d-none d-md-block dropdown-toggle ps-2">${username}</span>
+                          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                           <li class="dropdown-header">
@@ -88,10 +88,13 @@
                               <hr class="dropdown-divider">
                           </li>
                           <li>
-                              <a class="dropdown-item d-flex align-items-center" href="profil_ecole.jsp">
-                                  <i class="bi bi-person"></i>
-                                  <span>My Profile</span>
-                              </a>
+                              <form action="Controlleur" method="post">
+                                  <input type="hidden" name="action" value="EcoleVersProfil">
+                                  <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                      <i class="bi bi-box-arrow-right"></i>
+                                      <span>Profile</span>
+                                  </a>
+                              </form>
                           </li>
                           <li>
                               <hr class="dropdown-divider">
@@ -111,104 +114,256 @@
 
       </ul><!-- End Profile Dropdown Items -->
   </nav><!-- End Icons Navigation -->
- 
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
 
 
+      <!-- ======= Sidebar ======= -->
+      <aside id="sidebar" class="sidebar">
 
-      <li class="nav-heading">Pages</li>
+          <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersDashboard">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </form>
+              </li><!-- End Dashboard Nav -->
 
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li><!-- End Login Page Nav -->
+              <li class="nav-heading">Pages</li>
 
-    </ul>
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersProfil">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Profil</span>
+                      </a>
+                  </form>
+              </li><!-- End Profile Page Nav -->
+
+
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="pages-register.html">
+                      <i class="bi bi-card-list"></i>
+                      <span>Register</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+
+              <li class="nav-item">
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersForm">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Register Form</span>
+                      </a>
+                  </form>
+              </li><!-- End Login Page Nav -->
+
+          </ul>
+
+      </aside>
 
 
   </header><!-- End Header -->
   <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Les offres d'enseignants</h1>
-    </div>
-  
-        
-    <section class="section">
-      <div class="row">
-          <div class="col-lg-20">
-              <div class="card">
-                  <div class="card-body">
-                      <h5 class="card-title">Contacté</h5>
 
-                      <!-- Table with stripped rows -->
-                      <table class="table datatable">
-                          <thead>
+      <section class="section">
+          <div class="row">
+              <div class="col-lg-20">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">Contacté</h5>
+
+                          <!-- Table with stripped rows -->
+                          <table class="table datatable">
+                              <thead>
                               <h1>Liste des postulations</h1>
                               <tr class="text-center">
-                                  <th>Sél</th>
-                                  <th>Ecole</th>
-                                  <th>Enseignant</th>
+                                  <th>IDPostule</th>
                                   <th>Date</th>
                                   <th>Decision</th>
+                                  <th>Ecole</th>
+                                  <th>Enseignant</th>
                                   <th>Actions</th>
                               </tr>
-                          </thead>
-                          <tbody> <!-- Notez l'ajout de la balise <tbody> -->
+                              </thead>
+                              <tbody>
                               <c:forEach items="${postulations}" var="postulation">
+                                  <!--  on affiche les postulations de l'enseignant actuellement connecter  -->
                                   <tr>
-                                      <td><input type="radio" name="idPostulation" value="${postulation.id_postule}" required></td>
-                                      <td>${postulation.Ecole}</td>
-                                      <td>${postulation.Enseignant}</td>
-                                      <td>${postulation.Date}</td>
-                                      <td><span class="badge bg-success">${postulation.Decision}</span></td>
-                                      <td>
-                                          <form action="EnSavoirPlusServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">En savoir plus</button>
-                                          </form>
-                                          <form action="AccepterServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">Accepter</button>
-                                          </form>
-                                          <form action="RefuserServlet" method="post">
-                                              <button class="btn btn-primary" type="submit">Refuser</button>
-                                          </form>
-                                      </td>
+                                      <td>${postulation.idPostule}</td>
+                                      <td>${postulation.datePostule}</td>
+                                      <td>${postulation.decision}</td>
+                                      <td>${postulation.nomEcole}</td>
+                                      <td>${postulation.nomEnseignant}</td>
+                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <button class="btn btn-primary" type="submit">En savoir plus</button>
+                                              </form>
+                                              </br>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleAcc" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="AccepterPostulationEcole">Accepter</button>
+                                              </form>
+                                              </br>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleRef" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="RefuserPostulationEcole">Refuser</button>
+                                              </form>
+                                              </br>
+                                          </td>
+                                      </c:if>
+                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="idPostuleAnn" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="RetraitPostulationEcole">Annuler</button>
+                                              </form>
+                                              </br>
+                                          </td>
+                                      </c:if>
                                   </tr>
                               </c:forEach>
-                          </tbody>
-                      </table>
+                              </tbody>
+                          </table>
+                      </div>
                   </div>
               </div>
           </div>
-      </div>
-  </section>
+      </section>
+
+
+
+      <section class="section">
+          <div class="row">
+              <div class="col-lg-20">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">Liste des enseignants</h5>
+
+                          <!-- Table with stripped rows -->
+                          <table class="table datatable">
+                              <thead>
+                              <h1>Liste des enseignants</h1>
+                              <tr class="text-center">
+                                  <th>Nom</th>
+                                  <th>Prenom</th>
+                                  <th>Besoin</th>
+                                  <th>Experience</th>
+                                  <th>Evaluation</th>
+                                  <th>Competences</th>
+                                  <th>interetsDomaines</th>
+                                  <th>interetsEcoles</th>
+                                  <th>niveauxSouhaites</th>
+                                  <th>adresseElectronique</th>
+                                  <th>telephone</th>
+                                  <th>siteWeb</th>
+                                  <th>disponibilites</th>
+                                  <th>typeDeContrat</th>
+                                  <th>titresAcademiques</th>
+                                  <th>referencesPro</th>
+                              </tr>
+                              </thead>
+                              <tbody> <!-- Notez l'ajout de la balise <tbody> -->
+                              <c:forEach items="${enseignants}" var="enseignants">
+                                  <tr>
+                                      <td>${enseignants.nom}</td>
+                                      <td>${enseignants.prenom}</td>
+                                      <td>${enseignants.experience}</td>
+                                      <td>${enseignants.evaluations}</td>
+                                      <td>${enseignants.competences}</td>
+                                      <td>${enseignants.interetsDomaines}</td>
+                                      <td>${enseignants.interetsEcoles}</td>
+                                      <td>${enseignants.niveauxSouhaites}</td>
+                                      <td>${enseignants.adresseElectronique}</td>
+                                      <td>${enseignants.telephone}</td>
+                                      <td>${enseignants.siteWeb}</td>
+                                      <td>${enseignants.dateDebutDispo}</td>
+                                      <td>${enseignants.typeDeContrat}</td>
+                                      <td>${enseignants.titresAcademiques}</td>
+                                      <td>${enseignants.referencesPro}</td>
+                                      <td>
+                                          </br>
+
+                                          <form action="Controlleur" method="post">
+                                              <input type="hidden" name="idEnseignant" value="${enseignants.idEnseignant}">
+                                              <button class="btn btn-primary" name="action" value="AjoutPostulationEcole" type="submit">AjoutPosulationEnseignant</button>
+                                          </form>
+
+                                      </td>
+                                  </tr>
+                              </c:forEach>
+                              </tbody>
+                          </table>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+
+      <section class="testfav">
+          <h1>Liste des enseignants</h1>
+          <table class="table">
+              <thead>
+              <tr class="text-center">
+                  <th>Nom</th>
+                  <!-- Autres colonnes -->
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach items="${enseignants}" var="enseignant">
+                  <tr>
+                      <td>${enseignant.nom}</td>
+                      <td>
+                          <form action="Controlleur" method="post">
+                              <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
+                              <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
+                                  Ajouter aux favoris
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              </c:forEach>
+              </tbody>
+          </table>
+      </section>
+
+      <section class="section">
+          <h1>Liste des enseignants favoris</h1>
+          <table class="table">
+              <thead>
+              <tr class="text-center">
+                  <th>Nom</th>
+                  <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <c:forEach items="${favoris}" var="favorisEnseignant">
+                  <tr>
+                      <td>${favorisEnseignant.nom}</td>
+                      <td>
+                          <form action="Controlleur" method="post">
+                              <input type="hidden" name="idFavorisEcole" value="${favorisEnseignant.idEnseignant}">
+                              <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
+                                  Retirer des favoris
+                              </button>
+                          </form>
+                      </td>
+                  </tr>
+              </c:forEach>
+              </tbody>
+          </table>
+      </section>
+
+
   </main>
   </main>
   

@@ -1,147 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Forms enseignant</title>
+  <title>Users / Profile / Ecole </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${contextPath}/assets/img/favicon.png" rel="icon">
+  <link href="${contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
+
+  <style >
+    @font-face {
+      font-display: block;
+      font-family: "bootstrap-icons";
+      src: url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2?2820a3852bdb9a5832199cc61cec4e65") format("woff2"),
+      url("${contextPath}/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff?2820a3852bdb9a5832199cc61cec4e65") format("woff");
+    }
+  </style>
+
 
 </head>
 
 <body>
 
-  <body>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-  
-      <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="">
-          <span class="d-none d-lg-block">ProjetProgAv2023</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div><!-- End Logo -->
-  
-      <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-      </div><!-- End Search Bar -->
-  
-      <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-  
-          <li class="nav-item d-block d-lg-none">
-            <a class="nav-link nav-icon search-bar-toggle " href="#">
-              <i class="bi bi-search"></i>
-            </a>
-          </li><!-- End Search Icon-->
-  
-          <li class="nav-item dropdown pe-3">
-  
-            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle ps-2"> Enseignant </span>
-            </a><!-- End Profile Iamge Icon -->
-  
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-              <li class="dropdown-header">
-                <h6>John Macron</h6>
-                <span>Enseignant</span>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-  
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i class="bi bi-person"></i>
-                  <span>My Profile</span>
-                </a>
-              </li>
-  
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-  
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
-                </a>
-              </li>
-  
-            </ul><!-- End Profile Dropdown Items -->
-          </li><!-- End Profile Nav -->
-  
-        </ul>
-      </nav><!-- End Icons Navigation -->
-  
-  
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-  
-      <ul class="sidebar-nav" id="sidebar-nav">
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="index.html">
-            <i class="bi bi-grid"></i>
-            <span>Dashboard</span>
-          </a>
-        </li><!-- End Dashboard Nav -->
-  
-  
-  
-        <li class="nav-heading">Pages</li>
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="users-profile.html">
-            <i class="bi bi-person"></i>
-            <span>Profile</span>
-          </a>
-        </li><!-- End Profile Page Nav -->
-  
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-register.html">
-            <i class="bi bi-card-list"></i>
-            <span>Register</span>
-          </a>
-        </li><!-- End Register Page Nav -->
-  
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="pages-login.html">
-            <i class="bi bi-box-arrow-in-right"></i>
-            <span>Login</span>
-          </a>
-        </li><!-- End Login Page Nav -->
-  
-      </ul>
-  
-  
-    </header><!-- End Header -->
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -156,106 +55,102 @@
             </br>
 
               <!-- General Form Elements -->
-              <form action="FormEseignantServlet" method="post"></form>
+              <form action="Inscriptions" method="post">
                 <div class="row mb-3">
                   <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                   <div class="col-sm-10">
-                    <input type="nom" class="form-control">
+                    <input type="text" class="form-control" id="inputNom" name="inputNom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control">
+                    <input type="text" class="form-control" id="inputPrenom" name="inputPrenom">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
                   <div class="col-sm-10">
-                    <input type="Experience" class="form-control">
+                    <input type="text" class="form-control" id="inputExperience" name="inputExperience">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
                   <div class="col-sm-10">
-                    <input type="Evaluations" class="form-control">
+                    <input type="text" class="form-control" id="inputEvaluations" name="inputEvaluations">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="Mail" class="form-control">
+                    <input type="email" class="form-control" id="inputMail" name="inputMail">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="Telephone" class="form-control">
+                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
                   <div class="col-sm-10">
-                    <input type="TitreAca" class="form-control">
+                    <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
                   <div class="col-sm-10">
-                    <input type="Reference" class="form-control">
+                    <input type="text" class="form-control" id="inputReference" name="inputReference">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
+                  <label for="inputDispo" class="col-sm-2 col-form-label">Disponibilité</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" id="inputDispo" name="inputDispo">
                   </div>
                 </div>
                 
                 <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
+                  <label for="inputCV" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile">
+                    <input class="form-control" type="file" id="formFile" id="inputCV">
                   </div>
                 </div>
 
                 
-                <label for="basic-url" class="form-label">Site Web</label>
+                <label for="inputSiteWeb" class="form-label">Site Web</label>
                 <div class="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  <span class="input-group-text" id="basic-addon3">https://</span>
+                  <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
+                </div>
+
+                <label for="inputNiveauSouhaite" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputNiveauSouhaite" name="inputNiveauSouhaite">
+                </div>
+
+                <label for="inputInteretDomaine" class="form-label">Site Web</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine">
                 </div>
 
                 <div class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
                   <div class="col-sm-10">
+                    <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
 
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Langues
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
-                      <label class="form-check-label" for="gridCheck2">
-                        Mathématiques
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
-                      <label class="form-check-label" for="gridCheck2">
-                        Sciences
-                      </label>
-                    </div>
-
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" >
-                      <label class="form-check-label" for="gridCheck2">
-                        Programmation
-                      </label>
+                        <c:forEach var="competence" items="${competenceNames}">
+                          <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="gridCheck${competence}" name="competences" value="${competence}">
+                            <label class="form-check-label" for="gridCheck${competence}">
+                                ${competence}
+                            </label>
+                          </div>
+                        </c:forEach>
+                      </div>
                     </div>
 
                   </div>
@@ -265,13 +160,13 @@
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="CDD">
                       <label class="form-check-label" for="cdd">
                         CDD
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="CDI">
                       <label class="form-check-label" for="cdi">
                         CDI
                       </label>
@@ -281,9 +176,9 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Autres remarques</label>
+                  <label for="otherthing" class="col-sm-2 col-form-label">Autres remarques</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" style="height: 100px"></textarea>
+                    <textarea class="form-control" style="height: 100px" id="otherthing" name="remarques"></textarea>
                   </div>
                 </div>
 
@@ -297,7 +192,7 @@
                 </div>
                 </br>
                 <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Envoyer form</button>
+                  <button class="btn btn-primary" type="submit" name="action" value="EndRegister">Envoyer form</button>
                 </div>
 
               </form><!-- End General Form Elements -->
@@ -308,12 +203,9 @@
         </div>
       </div>
     </section>
+    </div>
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -332,7 +224,7 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  </body>
 
-</body>
 
 </html>

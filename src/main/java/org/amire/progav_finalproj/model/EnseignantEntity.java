@@ -13,57 +13,60 @@ public class EnseignantEntity {
     @Column(name = "id_enseignant", nullable = false)
     private long idEnseignant;
     @Basic
-    @Column(name = "Nom", nullable = false, length = 255)
+    @Column(name = "Nom", nullable = true, length = 255)
     private String nom;
     @Basic
-    @Column(name = "Prenom", nullable = false, length = 255)
+    @Column(name = "Prenom", nullable = true, length = 255)
     private String prenom;
     @Basic
-    @Column(name = "Experience", nullable = false, length = 255)
+    @Column(name = "Adresse_electronique", nullable = true, length = 255)
+    private String adresseElectronique;
+    @Basic
+    @Column(name = "Telephone", nullable = false, length = 255)
+    private String telephone;
+    @Basic
+    @Column(name = "Site_Web", nullable = true, length = 255)
+    private String siteWeb;
+    @Basic
+    @Column(name = "Experience", nullable = true, length = 255)
     private String experience;
     @Basic
-    @Column(name = "Evaluations", nullable = false, length = 255)
+    @Column(name = "Evaluations", nullable = true, length = 255)
     private String evaluations;
     @Basic
-    @Column(name = "Competences", nullable = false, length = 255)
+    @Column(name = "Competences", nullable = true, length = 512)
     private String competences;
     @Basic
     @Column(name = "Interets_domaines", nullable = true, length = 255)
     private String interetsDomaines;
     @Basic
-    @Column(name = "Interets_ecoles", nullable = false, length = 255)
+    @Column(name = "Interets_ecoles", nullable = true, length = 255)
     private String interetsEcoles;
     @Basic
-    @Column(name = "Niveaux_souhaites", nullable = false, length = 255)
+    @Column(name = "Niveaux_souhaites", nullable = true, length = 255)
     private String niveauxSouhaites;
     @Basic
-    @Column(name = "Adresse_electronique", nullable = false, length = 255)
-    private String adresseElectronique;
+    @Column(name = "Date_Debut_Dispo", nullable = true)
+    private Timestamp dateDebutDispo;
     @Basic
-    @Column(name = "Telephone", nullable = false)
-    private long telephone;
-    @Basic
-    @Column(name = "Site_Web", nullable = false, length = 255)
-    private String siteWeb;
-    @Basic
-    @Column(name = "Disponibilites", nullable = false)
-    private Timestamp disponibilites;
-    @Basic
-    @Column(name = "Type_de_contrat", nullable = false, length = 255)
+    @Column(name = "Type_de_contrat", nullable = true, length = 512)
     private String typeDeContrat;
     @Basic
-    @Column(name = "Titres_academiques", nullable = false, length = 255)
+    @Column(name = "Titres_academiques", nullable = true, length = 255)
     private String titresAcademiques;
     @Basic
-    @Column(name = "Autres_informations", nullable = true, length = 255)
-    private String autresInformations;
+    @Column(name = "Remarques", nullable = true, length = 255)
+    private String remarques;
     @Basic
-    @Column(name = "References_pro", nullable = false, length = 255)
+    @Column(name = "References_pro", nullable = true, length = 255)
     private String referencesPro;
-    @OneToMany(mappedBy = "enseignantByIdEnseignant")
-    private Collection<CandidatsFavorisEntity> candidatsFavorisesByIdEnseignant;
-    @OneToMany(mappedBy = "enseignantByIdEnseignant")
-    private Collection<PostuleEntity> postulesByIdEnseignant;
+    @Basic
+    @Column(name = "Lien_CV", nullable = true, length = 255)
+    private String lienCv;
+    @OneToMany(mappedBy = "enseignant")
+    private Collection<FavorisEnseignantEntity> favoris;
+    @OneToMany(mappedBy = "enseignant")
+    private Collection<PostuleEntity> postulations;
 
     public long getIdEnseignant() {
         return idEnseignant;
@@ -87,6 +90,30 @@ public class EnseignantEntity {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getAdresseElectronique() {
+        return adresseElectronique;
+    }
+
+    public void setAdresseElectronique(String adresseElectronique) {
+        this.adresseElectronique = adresseElectronique;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getSiteWeb() {
+        return siteWeb;
+    }
+
+    public void setSiteWeb(String siteWeb) {
+        this.siteWeb = siteWeb;
     }
 
     public String getExperience() {
@@ -137,36 +164,12 @@ public class EnseignantEntity {
         this.niveauxSouhaites = niveauxSouhaites;
     }
 
-    public String getAdresseElectronique() {
-        return adresseElectronique;
+    public Timestamp getDateDebutDispo() {
+        return dateDebutDispo;
     }
 
-    public void setAdresseElectronique(String adresseElectronique) {
-        this.adresseElectronique = adresseElectronique;
-    }
-
-    public long getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(long telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getSiteWeb() {
-        return siteWeb;
-    }
-
-    public void setSiteWeb(String siteWeb) {
-        this.siteWeb = siteWeb;
-    }
-
-    public Timestamp getDisponibilites() {
-        return disponibilites;
-    }
-
-    public void setDisponibilites(Timestamp disponibilites) {
-        this.disponibilites = disponibilites;
+    public void setDateDebutDispo(Timestamp dateDebutDispo) {
+        this.dateDebutDispo = dateDebutDispo;
     }
 
     public String getTypeDeContrat() {
@@ -185,12 +188,12 @@ public class EnseignantEntity {
         this.titresAcademiques = titresAcademiques;
     }
 
-    public String getAutresInformations() {
-        return autresInformations;
+    public String getRemarques() {
+        return remarques;
     }
 
-    public void setAutresInformations(String autresInformations) {
-        this.autresInformations = autresInformations;
+    public void setRemarques(String remarques) {
+        this.remarques = remarques;
     }
 
     public String getReferencesPro() {
@@ -201,6 +204,14 @@ public class EnseignantEntity {
         this.referencesPro = referencesPro;
     }
 
+    public String getLienCv() {
+        return lienCv;
+    }
+
+    public void setLienCv(String lienCv) {
+        this.lienCv = lienCv;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -209,9 +220,12 @@ public class EnseignantEntity {
         EnseignantEntity that = (EnseignantEntity) o;
 
         if (idEnseignant != that.idEnseignant) return false;
-        if (telephone != that.telephone) return false;
         if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
         if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
+        if (adresseElectronique != null ? !adresseElectronique.equals(that.adresseElectronique) : that.adresseElectronique != null)
+            return false;
+        if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
+        if (siteWeb != null ? !siteWeb.equals(that.siteWeb) : that.siteWeb != null) return false;
         if (experience != null ? !experience.equals(that.experience) : that.experience != null) return false;
         if (evaluations != null ? !evaluations.equals(that.evaluations) : that.evaluations != null) return false;
         if (competences != null ? !competences.equals(that.competences) : that.competences != null) return false;
@@ -221,19 +235,16 @@ public class EnseignantEntity {
             return false;
         if (niveauxSouhaites != null ? !niveauxSouhaites.equals(that.niveauxSouhaites) : that.niveauxSouhaites != null)
             return false;
-        if (adresseElectronique != null ? !adresseElectronique.equals(that.adresseElectronique) : that.adresseElectronique != null)
-            return false;
-        if (siteWeb != null ? !siteWeb.equals(that.siteWeb) : that.siteWeb != null) return false;
-        if (disponibilites != null ? !disponibilites.equals(that.disponibilites) : that.disponibilites != null)
+        if (dateDebutDispo != null ? !dateDebutDispo.equals(that.dateDebutDispo) : that.dateDebutDispo != null)
             return false;
         if (typeDeContrat != null ? !typeDeContrat.equals(that.typeDeContrat) : that.typeDeContrat != null)
             return false;
         if (titresAcademiques != null ? !titresAcademiques.equals(that.titresAcademiques) : that.titresAcademiques != null)
             return false;
-        if (autresInformations != null ? !autresInformations.equals(that.autresInformations) : that.autresInformations != null)
-            return false;
+        if (remarques != null ? !remarques.equals(that.remarques) : that.remarques != null) return false;
         if (referencesPro != null ? !referencesPro.equals(that.referencesPro) : that.referencesPro != null)
             return false;
+        if (lienCv != null ? !lienCv.equals(that.lienCv) : that.lienCv != null) return false;
 
         return true;
     }
@@ -243,36 +254,37 @@ public class EnseignantEntity {
         int result = (int) (idEnseignant ^ (idEnseignant >>> 32));
         result = 31 * result + (nom != null ? nom.hashCode() : 0);
         result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
+        result = 31 * result + (adresseElectronique != null ? adresseElectronique.hashCode() : 0);
+        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (siteWeb != null ? siteWeb.hashCode() : 0);
         result = 31 * result + (experience != null ? experience.hashCode() : 0);
         result = 31 * result + (evaluations != null ? evaluations.hashCode() : 0);
         result = 31 * result + (competences != null ? competences.hashCode() : 0);
         result = 31 * result + (interetsDomaines != null ? interetsDomaines.hashCode() : 0);
         result = 31 * result + (interetsEcoles != null ? interetsEcoles.hashCode() : 0);
         result = 31 * result + (niveauxSouhaites != null ? niveauxSouhaites.hashCode() : 0);
-        result = 31 * result + (adresseElectronique != null ? adresseElectronique.hashCode() : 0);
-        result = 31 * result + (int) (telephone ^ (telephone >>> 32));
-        result = 31 * result + (siteWeb != null ? siteWeb.hashCode() : 0);
-        result = 31 * result + (disponibilites != null ? disponibilites.hashCode() : 0);
+        result = 31 * result + (dateDebutDispo != null ? dateDebutDispo.hashCode() : 0);
         result = 31 * result + (typeDeContrat != null ? typeDeContrat.hashCode() : 0);
         result = 31 * result + (titresAcademiques != null ? titresAcademiques.hashCode() : 0);
-        result = 31 * result + (autresInformations != null ? autresInformations.hashCode() : 0);
+        result = 31 * result + (remarques != null ? remarques.hashCode() : 0);
         result = 31 * result + (referencesPro != null ? referencesPro.hashCode() : 0);
+        result = 31 * result + (lienCv != null ? lienCv.hashCode() : 0);
         return result;
     }
 
-    public Collection<CandidatsFavorisEntity> getCandidatsFavorisesByIdEnseignant() {
-        return candidatsFavorisesByIdEnseignant;
+    public Collection<FavorisEnseignantEntity> getFavoris() {
+        return favoris;
     }
 
-    public void setCandidatsFavorisesByIdEnseignant(Collection<CandidatsFavorisEntity> candidatsFavorisesByIdEnseignant) {
-        this.candidatsFavorisesByIdEnseignant = candidatsFavorisesByIdEnseignant;
+    public void setFavoris(Collection<FavorisEnseignantEntity> favoris) {
+        this.favoris = favoris;
     }
 
-    public Collection<PostuleEntity> getPostulesByIdEnseignant() {
-        return postulesByIdEnseignant;
+    public Collection<PostuleEntity> getPostulations() {
+        return postulations;
     }
 
-    public void setPostulesByIdEnseignant(Collection<PostuleEntity> postulesByIdEnseignant) {
-        this.postulesByIdEnseignant = postulesByIdEnseignant;
+    public void setPostulations(Collection<PostuleEntity> postulations) {
+        this.postulations = postulations;
     }
 }
