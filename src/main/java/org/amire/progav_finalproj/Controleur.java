@@ -25,11 +25,11 @@ public class Controleur extends HttpServlet implements Controleurs {
     @EJB
     private EnseignantRepository enseignantRepository;
     @EJB
-    private CandidatsFavorisRepository candidatsFavorisRepository;
+    private FavorisEnseignantRepository favorisEnseignantRepository;
     @EJB
     private EcoleRepository ecoleRepository;
     @EJB
-    private EcoleFavorisRepository ecoleFavorisRepository;
+    private FavorisEcoleRepository favorisEcoleRepository;
     @EJB
     private PostuleRepository postuleRepository;
     @EJB
@@ -63,7 +63,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         long idEcole = userRepository.getUserById(idUtilisateur).getEcole().getIdEcole();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
                         request.setAttribute("ecole", new EcoleProfileInfoDto(ecoleRepository.getEcoleById(idEcole)));
-                        request.setAttribute("favoris", ecoleFavorisRepository.getAllFavorisOfEcoleById(idEcole));
+                        request.setAttribute("favoris", favorisEcoleRepository.getAllFavorisOfEcoleById(idEcole));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEcoleId(idEcole).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("enseignants", preferenceMatcherService.getMatchingEnseignant(idEcole));
                         break;
@@ -72,7 +72,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         long idEnseignant = userRepository.getUserById(idUtilisateur).getEnseignant().getIdEnseignant();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
                         request.setAttribute("enseignant", new EnseignantProfileInfoDto(enseignantRepository.getEnseignantById(idEnseignant)));
-                        request.setAttribute("favoris", candidatsFavorisRepository.getAllFavorisOfCandidatById(idEnseignant));
+                        request.setAttribute("favoris", favorisEnseignantRepository.getAllFavorisOfCandidatById(idEnseignant));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEnseignantId(idEnseignant).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("ecoles", preferenceMatcherService.getMatchingEcole(idEnseignant));
                         break;
@@ -119,10 +119,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action) {
             case AjoutFavorisEcole:
-                ecoleFavorisRepository.addFavorisEcole(ecole, enseignant);
+                favorisEcoleRepository.addFavorisEcole(ecole, enseignant);
                 break;
             case RetraitFavorisEcole:
-                ecoleFavorisRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
+                favorisEcoleRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
                 break;
             case AjoutPostulationEcole:
                 postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "ecole"));
@@ -166,10 +166,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action){
             case AjoutFavorisEnseignant:
-                candidatsFavorisRepository.addCandidatsFavoris(enseignant, ecole);
+                favorisEnseignantRepository.addCandidatsFavoris(enseignant, ecole);
                 break;
             case RetraitFavorisEnseignant:
-                candidatsFavorisRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
+                favorisEnseignantRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
                 break;
             case AjoutPostulationEnseignant:
                 postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "enseignant"));

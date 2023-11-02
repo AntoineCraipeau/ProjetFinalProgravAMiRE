@@ -13,7 +13,7 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 import java.util.List;
 
 @Stateless
-public class CandidatsFavorisRepository {
+public class FavorisEnseignantRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
