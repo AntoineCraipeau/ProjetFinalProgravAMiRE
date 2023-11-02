@@ -146,13 +146,17 @@
                     </form>
                 </li><!-- End Profile Page Nav -->
 
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="pages-register.html">
-                        <i class="bi bi-card-list"></i>
-                        <span>Register</span>
-                    </a>
-                </li><!-- End Register Page Nav -->
+                    <form action="Controlleur" method="post">
+                        <input type="hidden" name="action" value="EnseignantVersMatch">
+                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>MatchEcole</span>
+                        </a>
+                    </form>
+                </li><!-- End Profile Page Nav -->
+
+
 
                 <li class="nav-item">
                     <form action="Controlleur" method="post">
