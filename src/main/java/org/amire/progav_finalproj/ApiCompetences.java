@@ -5,29 +5,38 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.amire.progav_finalproj.model.EcoleEntity;
-import org.amire.progav_finalproj.model.EcoleSessionBean;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.model.EnseignantSessionBean;
+import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.repositories.EcoleRepository;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Path("/competences")
 public class ApiCompetences {
-    EnseignantSessionBean enseignantSessionBean = new EnseignantSessionBean();
-    EcoleSessionBean ecoleSessionBean = new EcoleSessionBean();
+    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
+    EcoleRepository ecoleSessionBean = new EcoleRepository();
 
     @GET
     @Path("/competences-enseignants")
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getCompetencesEnseignants() {
         List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
-        List<String> compsEnseigne = enseignants.stream()
-                .map(EnseignantEntity::getCompetences)
-                .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
-        return compsEnseigne;
+
+        List<String> competencesIndividuelles = new ArrayList<>();
+        Matcher match = null;
+
+        for (EnseignantEntity enseignant : enseignants) {
+            Pattern competences = Pattern.compile("\\w+");
+            match = competences.matcher(enseignant.getCompetences());
+            while (match.find()) {
+                competencesIndividuelles.add(match.group());
+            }
+        }
+
+        return competencesIndividuelles;
     }
 
     @GET
@@ -51,11 +60,19 @@ public class ApiCompetences {
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getCompetencesEcoles() {
         List<EcoleEntity> ecoles = ecoleSessionBean.getAllEcoles();
-        List<String> compsEcole = ecoles.stream()
-                .map(EcoleEntity::getCompetencesRequises)
-                .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
-        return compsEcole;
+
+        List<String> competencesIndividuelles = new ArrayList<>();
+        Matcher match = null;
+
+        for (EcoleEntity ecole : ecoles) {
+            Pattern competences = Pattern.compile("\\w+");
+            match = competences.matcher(ecole.getCompetencesRequises());
+            while (match.find()) {
+                competencesIndividuelles.add(match.group());
+            }
+        }
+
+        return competencesIndividuelles;
     }
 
     @GET

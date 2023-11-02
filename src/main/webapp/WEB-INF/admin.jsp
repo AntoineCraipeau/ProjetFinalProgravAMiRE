@@ -171,7 +171,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Radar Chart</h5>
-
+                <div id="competenceDataDisplay1"></div>
+                <div id="competenceDataDisplay2"></div>
+                <div id="competenceDataDisplay3"></div>
+                <div id="competenceDataDisplay4"></div>
                 <!-- Radar Chart -->
                 <canvas id="radarChart" style="max-height: 400px;"></canvas>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -181,26 +184,28 @@
                         // Effectuer une requête AJAX pour obtenir les données de l'API
                         $.get("/TP3/api/competences/enseignant-par-competence", function(competenceEnseignantData) {
 
+                            // Créez un tableau de toutes les compétences avec une valeur par défaut de 0
+                            var competences = ['mathematiques', 'svt', 'physique_chimie', 'histoire_géographie', 'francais', 'philosophie', 'sciences_sociales', 'psychologie', 'robotique', 'musique', 'education_physique', 'programmation'];
+                            var valeursEnseignantParDefaut = Array(11).fill(0);
+
+                            // Extraire les compétences et les valeurs de l'objet JavaScript
+                            var competencesEnseignantAPI = Object.keys(competenceEnseignantData);
+                            var valeursEnseignantAPI = Object.values(competenceEnseignantData);
+
+                            // Mettre à jour les valeurs du tableau avec les valeurs de l'API
+                            competencesEnseignantAPI.forEach(function (competencesEnseignantAPI, index) {
+                                var CompetencesEnseignantIndex = competences.indexOf(competencesEnseignantAPI);
+                                if (CompetencesEnseignantIndex !== -1) {
+                                    valeursEnseignantParDefaut[CompetencesEnseignantIndex] = valeursEnseignantAPI[index];
+                                }
+                            });
+
                             $.get("/TP3/api/competences/ecole-par-competence", function (competenceEcoleData) {
 
-                                // Créez un tableau de toutes les compétences avec une valeur par défaut de 0
-                                var competences = ['Mathématiques', 'SVT', 'Physique-Chimie', 'Histoire-Géographie', 'Français', 'Philosophie', 'Sciences Sociales', 'Psychologie', 'Robotique', 'Musique', 'Éducation Physique'];
-                                var valeursEnseignantParDefaut = Array(10).fill(0);
                                 var valeursEcoleParDefaut = Array(10).fill(0);
 
-                                // Extraire les compétences et les valeurs de l'objet JavaScript
-                                var competencesEnseignantAPI = Object.keys(competenceEnseignantData);
-                                var valeursEnseignantAPI = Object.values(competenceEnseignantData);
                                 var competencesEcoleAPI = Object.keys(competenceEcoleData);
                                 var valeursEcoleAPI = Object.values(competenceEcoleData);
-
-                                // Mettre à jour les valeurs du tableau avec les valeurs de l'API
-                                competencesEnseignantAPI.forEach(function (competencesEnseignantAPI, index) {
-                                    var CompetencesEnseignantIndex = competences.indexOf(competencesEnseignantAPI);
-                                    if (CompetencesEnseignantIndex !== -1) {
-                                        valeursEnseignantParDefaut[CompetencesEnseignantIndex] = valeursEnseignantAPI[index];
-                                    }
-                                });
 
                                 competencesEcoleAPI.forEach(function (competencesEcoleAPI, index) {
                                     var CompetencesEcoleIndex = competences.indexOf(competencesEcoleAPI);
