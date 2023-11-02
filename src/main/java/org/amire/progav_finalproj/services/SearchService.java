@@ -1,6 +1,7 @@
 package org.amire.progav_finalproj.services;
 
 import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
@@ -8,6 +9,7 @@ import org.amire.progav_finalproj.repositories.EnseignantRepository;
 
 import java.util.List;
 
+@Stateless
 public class SearchService {
 
     @EJB
