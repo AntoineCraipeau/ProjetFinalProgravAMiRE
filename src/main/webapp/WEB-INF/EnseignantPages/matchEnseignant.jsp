@@ -243,12 +243,26 @@
                                                     <button class="btn btn-primary mb-2 " name="action" value="AjoutPostulationEnseignant" type="submit">Proposer profil</button>
                                             </form>
 
-                                            <form action="Controlleur" method="post">
-                                                <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                                <button class="btn btn-success mb-3" name="action" value="AddToFavorites" type="submit">
-                                                    <i class="bi bi-heart"></i> Add to Favorites
-                                                </button>
-                                            </form>
+                                            <c:choose>
+                                                <c:when test="${ecole.isFavoris}">
+                                                    <form action="Controlleur" method="post">
+                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
+                                                        <input type="hidden" name="action" value="RetraitFavorisEnseignant">
+                                                        <button type="submit" class="btn btn-link">
+                                                            <i class="bi bi-heart-fill"></i> <!-- Cœur rempli (icone solide) -->
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form action="Controlleur" method="post">
+                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
+                                                        <input type="hidden" name="action" value="AjoutFavorisEnseignant">
+                                                        <button type="submit" class="btn btn-link">
+                                                            <i class="bi bi-heart"></i> <!-- Cœur vide (icone régulière) -->
+                                                        </button>
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
 
