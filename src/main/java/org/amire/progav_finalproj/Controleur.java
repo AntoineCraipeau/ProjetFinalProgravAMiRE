@@ -13,6 +13,7 @@ import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
 import org.amire.progav_finalproj.services.PreferenceMatcherService;
+import org.amire.progav_finalproj.services.SearchService;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
@@ -34,6 +35,8 @@ public class Controleur extends HttpServlet implements Controleurs {
     private PostuleRepository postuleRepository;
     @EJB
     private PreferenceMatcherService preferenceMatcherService;
+    @EJB
+    private SearchService searchService;
 
     UserBean unUtilisateur;
 
