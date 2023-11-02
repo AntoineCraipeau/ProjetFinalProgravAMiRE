@@ -283,73 +283,73 @@
               <!-- Section Modifier le Profil -->
               <div class="tab-pane fade pt-3" id="profile-edit">
                 <h5 class="card-title">Modifier le Profil</h5>
-                  <form action="FormEseignantServlet" method="post">
+                  <form action="Controlleur" method="post">
                 <div class="row mb-3">
                   <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                   <div class="col-sm-10">
-                    <input type="nom" class="form-control" id="inputNom" value=${enseignant.nom}>
+                    <input type="text" class="form-control" id="inputNom" name="inputNom" value=${enseignant.nom} >
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                   <div class="col-sm-10">
-                    <input type="prenom" class="form-control" id="inputPrenom" value=${enseignant.prenom}>
+                    <input type="text" class="form-control" id="inputPrenom" name="inputPrenom" value=${enseignant.prenom}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
                   <div class="col-sm-10">
-                    <input type="Experience" class="form-control" id="inputExperience" value=${enseignant.experience}>
+                    <input type="text" class="form-control" id="inputExperience" name="inputExperience" value=${enseignant.experience}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
                   <div class="col-sm-10">
-                    <input type="Evaluations" class="form-control" id="inputEvaluations" value=${enseignant.evaluations}>
+                    <input type="text" class="form-control" id="inputEvaluations" name="inputEvaluations" value=${enseignant.evaluations}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="Mail" class="form-control" id="inputMail" value=${enseignant.nom}>
+                    <input type="email" class="form-control" id="inputMail" name="inputMail" value=${enseignant.adresseElectronique}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="Telephone" class="form-control" id="inputTelephone" value=${enseignant.telephone}>
+                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone" value=${enseignant.telephone}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
                   <div class="col-sm-10">
-                    <input type="TitreAca" class="form-control" id="inputTitreAca" value=${enseignant.titresAcademiques}>
+                    <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca" value=${enseignant.titresAcademiques}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
                   <div class="col-sm-10">
-                    <input type="Reference" class="form-control" id="inputReference" value=${enseignant.referencesPro}>
+                    <input type="text" class="form-control" id="inputReference" name="inputReference" value=${enseignant.referencesPro}>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate" value=${enseignant.disponibilites}>
+                    <input type="date" class="form-control" id="inputDate" name="inputDispo" value=${enseignant.dateDebutDispo}>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputNiveauSouhaite" class="col-sm-2 col-form-label">Niveau Souhaite</label>
                   <div class="col-sm-10">
-                    <input type="Niveau" class="form-control" id="inputNiveauSouhaite" value=${enseignant.niveauxSouhaites}>
+                    <input type="text" class="form-control" id="inputNiveauSouhaite" name="inputNiveauSouhaite" value=${enseignant.niveauxSouhaites}>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputInteretDomaine" class="col-sm-2 col-form-label">Interet Domaine</label>
                   <div class="col-sm-10">
-                    <input type="Domaine" class="form-control" id="inputInteretDomaine" value=${enseignant.interetsDomaines}>
+                    <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine" value=${enseignant.interetsDomaines}>
                   </div>
                 </div>
 
@@ -358,7 +358,7 @@
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" id="inputNumber" >
+                    <input class="form-control" type="file" id="inputNumber" >
                   </div>
                 </div>
 
@@ -366,7 +366,7 @@
                 <label for="basic-url" class="form-label">Site Web</label>
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon3">https://</span>
-                  <input type="siteweb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  <input type="text" class="form-control" id="basic-url" name="inputSiteWeb" value=${enseignant.siteWeb} aria-describedby="basic-addon3">
                 </div>
 
                 <div class="row mb-3">
@@ -418,13 +418,13 @@
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                     <label class="form-check-label" for="invalidCheck2">
-                      Accepter les thermes et conditions
+                      Accepter les termes et conditions
                     </label>
                   </div>
                 </div>
                 </br>
                 <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Envoyer form</button>
+                  <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Envoyer form</button>
                 </div>
 
               </form><!-- End General Form Elements -->

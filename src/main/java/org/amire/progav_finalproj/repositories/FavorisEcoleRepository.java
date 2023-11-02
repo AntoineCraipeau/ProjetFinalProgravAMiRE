@@ -6,13 +6,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.FavorisEcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.util.List;
 
 @Stateless
-public class EcoleFavorisRepository {
+public class FavorisEcoleRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
@@ -42,10 +43,10 @@ public class EcoleFavorisRepository {
 
     // Create
 
-    public void addFavorisEcole(long idEcole, long idEnseignant){
+    public void addFavorisEcole(EcoleEntity ecole, EnseignantEntity enseignant){
         FavorisEcoleEntity favoris = new FavorisEcoleEntity();
-        favoris.setIdEcole(idEcole);
-        favoris.setIdEnseignant(idEnseignant);
+        favoris.setEcole(ecole);
+        favoris.setEnseignant(enseignant);
         em.getTransaction().begin();
         em.persist(favoris);
         em.getTransaction().commit();

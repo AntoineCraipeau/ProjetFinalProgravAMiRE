@@ -7,10 +7,13 @@ import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import org.amire.progav_finalproj.dto.*;
+import org.amire.progav_finalproj.factories.EcoleFactory;
+import org.amire.progav_finalproj.factories.EnseignantFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
 import org.amire.progav_finalproj.services.PreferenceMatcherService;
+import org.amire.progav_finalproj.services.SearchService;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
@@ -23,15 +26,17 @@ public class Controleur extends HttpServlet implements Controleurs {
     @EJB
     private EnseignantRepository enseignantRepository;
     @EJB
-    private CandidatsFavorisRepository candidatsFavorisRepository;
+    private FavorisEnseignantRepository favorisEnseignantRepository;
     @EJB
     private EcoleRepository ecoleRepository;
     @EJB
-    private EcoleFavorisRepository ecoleFavorisRepository;
+    private FavorisEcoleRepository favorisEcoleRepository;
     @EJB
     private PostuleRepository postuleRepository;
     @EJB
     private PreferenceMatcherService preferenceMatcherService;
+    @EJB
+    private SearchService searchService;
 
     UserBean unUtilisateur;
 
@@ -60,8 +65,8 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEcoleRequest(request);
                         long idEcole = userRepository.getUserById(idUtilisateur).getEcole().getIdEcole();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("ecole", new EcoleProfileInfoDto(userRepository.getUserById(idUtilisateur).getEcole()));
-                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEcole().getFavoris().stream().map(FavorisEcoleEntity::getEnseignant).toArray());
+                        request.setAttribute("ecole", new EcoleProfileInfoDto(ecoleRepository.getEcoleById(idEcole)));
+                        request.setAttribute("favoris", favorisEcoleRepository.getAllFavorisOfEcoleById(idEcole));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEcoleId(idEcole).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("enseignants", preferenceMatcherService.getMatchingEnseignant(idEcole));
                         break;
@@ -69,8 +74,8 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEnseignantRequest(request);
                         long idEnseignant = userRepository.getUserById(idUtilisateur).getEnseignant().getIdEnseignant();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("enseignant", new EnseignantProfileInfoDto(userRepository.getUserById(idUtilisateur).getEnseignant()));
-                        request.setAttribute("favoris", userRepository.getUserById(idUtilisateur).getEnseignant().getFavoris().stream().map(FavorisEnseignantEntity::getEcole).toArray());
+                        request.setAttribute("enseignant", new EnseignantProfileInfoDto(enseignantRepository.getEnseignantById(idEnseignant)));
+                        request.setAttribute("favoris", favorisEnseignantRepository.getAllFavorisOfCandidatById(idEnseignant));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEnseignantId(idEnseignant).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("ecoles", preferenceMatcherService.getMatchingEcole(idEnseignant));
                         break;
@@ -81,6 +86,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         } catch (Exception e) { // Des exceptions peuvent être levées par les repositories
             request.setAttribute("messageErreur", e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         aiguillerVersLaProchainePage(request, response);
@@ -116,10 +122,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action) {
             case AjoutFavorisEcole:
-                ecoleFavorisRepository.addFavorisEcole(idEcole, idEnseignant);
+                favorisEcoleRepository.addFavorisEcole(ecole, enseignant);
                 break;
             case RetraitFavorisEcole:
-                ecoleFavorisRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
+                favorisEcoleRepository.removeFavorisEcoleByOwnersIds(idEcole, idEnseignant);
                 break;
             case AjoutPostulationEcole:
                 postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "ecole"));
@@ -143,7 +149,11 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitPostulationEcole:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
-        }
+            case ModifierProfil:
+                EcoleEntity ecoleFromRequest = EcoleFactory.buildEcoleFromRequest(request);
+                ecoleFromRequest.setIdEcole(idEcole);
+                ecoleRepository.editEcole(ecoleFromRequest);
+            }
     }
 
     public void handleEnseignantRequest(HttpServletRequest request){
@@ -159,10 +169,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action){
             case AjoutFavorisEnseignant:
-                candidatsFavorisRepository.addCandidatsFavoris(idEnseignant, idEcole);
+                favorisEnseignantRepository.addCandidatsFavoris(enseignant, ecole);
                 break;
             case RetraitFavorisEnseignant:
-                candidatsFavorisRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
+                favorisEnseignantRepository.removeCandidatsFavorisByOwnersId(idEnseignant, idEcole);
                 break;
             case AjoutPostulationEnseignant:
                 postuleRepository.addPostule(PostuleFactory.buildPostule(enseignant, ecole, "enseignant"));
@@ -186,6 +196,10 @@ public class Controleur extends HttpServlet implements Controleurs {
             case RetraitPostulationEnseignant:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
+            case ModifierProfil:
+                EnseignantEntity enseignantFromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
+                enseignantFromRequest.setIdEnseignant(idEnseignant);
+                enseignantRepository.editEnseignant(enseignantFromRequest);
         }
     }
 
@@ -233,6 +247,9 @@ public class Controleur extends HttpServlet implements Controleurs {
             UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
             if (utilisateurInfoSession != null){
                 unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
+                System.out.println("Le contexte utilisateur a été trouvé avec l'action " + action);
+            } else {
+                System.out.println("Le contexte utilisateur n'a pas été trouvé avec l'action " + action);
             }
         }
 
