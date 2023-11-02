@@ -62,7 +62,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEcoleRequest(request);
                         long idEcole = userRepository.getUserById(idUtilisateur).getEcole().getIdEcole();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("ecole", new EcoleProfileInfoDto(userRepository.getUserById(idUtilisateur).getEcole()));
+                        request.setAttribute("ecole", new EcoleProfileInfoDto(ecoleRepository.getEcoleById(idEcole)));
                         request.setAttribute("favoris", ecoleFavorisRepository.getAllFavorisOfEcoleById(idEcole));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEcoleId(idEcole).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("enseignants", preferenceMatcherService.getMatchingEnseignant(idEcole));
@@ -71,7 +71,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         handleEnseignantRequest(request);
                         long idEnseignant = userRepository.getUserById(idUtilisateur).getEnseignant().getIdEnseignant();
                         request.setAttribute("userInfo", userRepository.getUserById(idUtilisateur));
-                        request.setAttribute("enseignant", new EnseignantProfileInfoDto(userRepository.getUserById(idUtilisateur).getEnseignant()));
+                        request.setAttribute("enseignant", new EnseignantProfileInfoDto(enseignantRepository.getEnseignantById(idEnseignant)));
                         request.setAttribute("favoris", candidatsFavorisRepository.getAllFavorisOfCandidatById(idEnseignant));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEnseignantId(idEnseignant).stream().map(PostuleListElementDto::new).toArray());
                         request.setAttribute("ecoles", preferenceMatcherService.getMatchingEcole(idEnseignant));
