@@ -17,6 +17,8 @@ public enum ActionTypes {
     EcoleVersDashboard,
     EcoleVersProfil,
     EcoleVersForm,
+    EcoleVersMatch,
+    EnseignantVersMatch,
     AjoutFavorisEnseignant,
     RetraitFavorisEnseignant,
     AjoutPostulationEnseignant,

@@ -32,6 +32,11 @@
     <!-- Template Main CSS File -->
     <link href="${contextPath}/assets/css/style.css" rel="stylesheet">
 
+    <!-- Inclure les fichiers JavaScript Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <style >
         @font-face {
             font-display: block;
@@ -77,7 +82,7 @@
                   <li class="nav-item dropdown pe-3">
                       <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
+                          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
                       </a>
                       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                           <li class="dropdown-header">
@@ -108,12 +113,13 @@
                                   </a>
                               </form>
                           </li>
+
                       </ul>
                   </li>
 
 
-      </ul><!-- End Profile Dropdown Items -->
-  </nav><!-- End Icons Navigation -->
+        </ul><!-- End Profile Dropdown Items -->
+    </nav><!-- End Icons Navigation -->
 
 
       <!-- ======= Sidebar ======= -->
@@ -147,11 +153,14 @@
 
 
               <li class="nav-item">
-                  <a class="nav-link collapsed" href="pages-register.html">
-                      <i class="bi bi-card-list"></i>
-                      <span>Register</span>
-                  </a>
-              </li><!-- End Register Page Nav -->
+                  <form action="Controlleur" method="post">
+                      <input type="hidden" name="action" value="EcoleVersMatch">
+                      <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                          <i class="bi bi-box-arrow-right"></i>
+                          <span>Match Enseignant</span>
+                      </a>
+                  </form>
+              </li><!-- End Login Page Nav -->
 
               <li class="nav-item">
                   <form action="Controlleur" method="post">
@@ -238,76 +247,6 @@
       </section>
 
 
-
-      <section class="section">
-          <div class="row">
-              <div class="col-lg-20">
-                  <div class="card">
-                      <div class="card-body">
-                          <h5 class="card-title">Liste des enseignants</h5>
-
-                          <!-- Table with stripped rows -->
-                          <table class="table datatable">
-                              <thead>
-                              <h1>Liste des enseignants</h1>
-                              <tr class="text-center">
-                                  <th>Nom</th>
-                                  <th>Prenom</th>
-                                  <th>Besoin</th>
-                                  <th>Experience</th>
-                                  <th>Evaluation</th>
-                                  <th>Competences</th>
-                                  <th>interetsDomaines</th>
-                                  <th>interetsEcoles</th>
-                                  <th>niveauxSouhaites</th>
-                                  <th>adresseElectronique</th>
-                                  <th>telephone</th>
-                                  <th>siteWeb</th>
-                                  <th>disponibilites</th>
-                                  <th>typeDeContrat</th>
-                                  <th>titresAcademiques</th>
-                                  <th>referencesPro</th>
-                              </tr>
-                              </thead>
-                              <tbody> <!-- Notez l'ajout de la balise <tbody> -->
-                              <c:forEach items="${enseignants}" var="enseignants">
-                                  <tr>
-                                      <td>${enseignants.nom}</td>
-                                      <td>${enseignants.prenom}</td>
-                                      <td>${enseignants.experience}</td>
-                                      <td>${enseignants.evaluations}</td>
-                                      <td>${enseignants.competences}</td>
-                                      <td>${enseignants.interetsDomaines}</td>
-                                      <td>${enseignants.interetsEcoles}</td>
-                                      <td>${enseignants.niveauxSouhaites}</td>
-                                      <td>${enseignants.adresseElectronique}</td>
-                                      <td>${enseignants.telephone}</td>
-                                      <td>${enseignants.siteWeb}</td>
-                                      <td>${enseignants.dateDebutDispo}</td>
-                                      <td>${enseignants.typeDeContrat}</td>
-                                      <td>${enseignants.titresAcademiques}</td>
-                                      <td>${enseignants.referencesPro}</td>
-                                      <td>
-                                          </br>
-
-                                          <form action="Controlleur" method="post">
-                                              <input type="hidden" name="idEnseignant" value="${enseignants.idEnseignant}">
-                                              <button class="btn btn-primary" name="action" value="AjoutPostulationEcole" type="submit">AjoutPosulationEnseignant</button>
-                                          </form>
-
-                                      </td>
-                                  </tr>
-                              </c:forEach>
-                              </tbody>
-                          </table>
-
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-
       <section class="testfav">
           <h1>Liste des enseignants</h1>
           <table class="table">
@@ -325,7 +264,7 @@
                       <td>
                           <form action="Controlleur" method="post">
                               <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
-                              <button class="btn btn-primary" name="action" value="AjoutFavorisEcole" type="submit">
+                              <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
                                   Ajouter aux favoris
                               </button>
                           </form>
@@ -352,7 +291,7 @@
                       <td>
                           <form action="Controlleur" method="post">
                               <input type="hidden" name="idFavorisEcole" value="${favorisEnseignant.idEnseignant}">
-                              <button class="btn btn-danger" name="action" value="RetraitFavorisEcole" type="submit">
+                              <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
                                   Retirer des favoris
                               </button>
                           </form>
@@ -365,8 +304,6 @@
 
 
   </main>
-  </main>
-  
 
 
   <!-- ======= Footer ======= -->
