@@ -43,12 +43,19 @@ public class PostuleRepository {
         Query q = em.createQuery("select e from PostuleEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         q.setParameter("idEnseignant", idEnseignant);
-        return (PostuleEntity) q.getSingleResult();
+        try {
+            return (PostuleEntity) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Create & Update
 
     public void addPostule(PostuleEntity postule) {
+        if(getPostuleByOwnersIds(postule.getIdEcole(), postule.getIdEnseignant()) != null) {
+            return;
+        }
         em.getTransaction().begin();
         em.persist(postule);
         em.getTransaction().commit();

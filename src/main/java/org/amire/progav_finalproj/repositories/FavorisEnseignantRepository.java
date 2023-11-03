@@ -44,6 +44,9 @@ public class FavorisEnseignantRepository {
     // Create
 
     public void addCandidatsFavoris(EnseignantEntity enseignant, EcoleEntity ecole){
+        if(getFavorisCandidatByOwnersId(enseignant.getIdEnseignant(), ecole.getIdEcole()) != null) {
+            return;
+        }
         FavorisEnseignantEntity favoris = new FavorisEnseignantEntity();
         favoris.setEcole(ecole);
         favoris.setEnseignant(enseignant);

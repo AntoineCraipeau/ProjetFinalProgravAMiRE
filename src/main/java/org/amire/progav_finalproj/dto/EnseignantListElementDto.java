@@ -117,7 +117,7 @@ public class EnseignantListElementDto {
     public String getLienCv() {
         return lienCv;
     }
-    public boolean isFavoris() {
+    public boolean getIsFavoris() {
         return isFavoris;
     }
 }

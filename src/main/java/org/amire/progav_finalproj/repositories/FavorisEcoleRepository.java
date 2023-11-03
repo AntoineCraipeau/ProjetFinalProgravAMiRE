@@ -38,12 +38,19 @@ public class FavorisEcoleRepository {
         Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         q.setParameter("idEnseignant", idEnseignant);
-        return (FavorisEcoleEntity) q.getSingleResult();
+        try {
+            return (FavorisEcoleEntity) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Create
 
     public void addFavorisEcole(EcoleEntity ecole, EnseignantEntity enseignant){
+        if(getFavorisEcoleByOwnersId(ecole.getIdEcole(), enseignant.getIdEnseignant()) != null) {
+            return;
+        }
         FavorisEcoleEntity favoris = new FavorisEcoleEntity();
         favoris.setEcole(ecole);
         favoris.setEnseignant(enseignant);
