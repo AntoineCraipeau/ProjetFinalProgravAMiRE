@@ -260,7 +260,7 @@
                 <tbody>
                 <c:forEach items="${ecoles}" var="ecole">
                     <tr>
-                        <td>${ecole.RaisonSociale}</td>
+                        <td>${ecole.raisonSociale}</td>
                         <td>
                             <form action="Controlleur" method="post">
                                 <input type="hidden" name="idEcole" value="${ecole.idEcole}">
@@ -287,7 +287,7 @@
                 <tbody>
                 <c:forEach items="${favoris}" var="favorisEnseignant">
                     <tr>
-                        <td>${favorisEnseignant.nom}</td>
+                        <td>${favorisEnseignant.raisonSociale}</td>
                         <td>
                             <form action="Controlleur" method="post">
                                 <input type="hidden" name="idFavorisEnseignant" value="${favorisEnseignant.idEcole}">
