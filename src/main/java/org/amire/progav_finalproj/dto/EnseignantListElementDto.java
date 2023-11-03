@@ -15,12 +15,14 @@ public class EnseignantListElementDto {
     private String siteWeb;
     private String experience;
     private String evaluations;
-    private String competences;
+    private CompetenceSetDto competences;
+    private String competenceText;
     private String interetsDomaines;
     private String interetsEcoles;
     private String niveauxSouhaites;
     private Date dateDebutDispo;
-    private String typeDeContrat;
+    private ContratSetDto typeDeContrat;
+    private String contratText;
     private String titresAcademiques;
     private String remarques;
     private String referencesPro;
@@ -36,12 +38,14 @@ public class EnseignantListElementDto {
         this.siteWeb = enseignant.getSiteWeb();
         this.experience = enseignant.getExperience();
         this.evaluations = enseignant.getEvaluations();
-        this.competences = enseignant.getCompetences() == null ? "" : enseignant.getCompetences().replace("[","").replace("]", "");
+        this.competences = new CompetenceSetDto(enseignant.getCompetences());
+        this.competenceText = enseignant.getCompetences() == null ? "" : enseignant.getCompetences().replace("[","").replace("]", "");
         this.interetsDomaines = enseignant.getInteretsDomaines();
         this.interetsEcoles = enseignant.getInteretsEcoles();
         this.niveauxSouhaites = enseignant.getNiveauxSouhaites();
         this.dateDebutDispo = enseignant.getDateDebutDispo();
-        this.typeDeContrat = enseignant.getTypeDeContrat() == null ? "" : enseignant.getTypeDeContrat().replace("[","").replace("]", "");
+        this.typeDeContrat = new ContratSetDto(enseignant.getTypeDeContrat());
+        this.contratText = enseignant.getTypeDeContrat() == null ? "" : enseignant.getTypeDeContrat().replace("[","").replace("]", "");
         this.titresAcademiques = enseignant.getTitresAcademiques();
         this.remarques = enseignant.getRemarques();
         this.referencesPro = enseignant.getReferencesPro();
@@ -77,8 +81,11 @@ public class EnseignantListElementDto {
     public String getEvaluations() {
         return evaluations;
     }
-    public String getCompetences() {
+    public CompetenceSetDto getCompetences() {
         return competences;
+    }
+    public String getCompetenceText() {
+        return competenceText;
     }
     public String getInteretsDomaines() {
         return interetsDomaines;
@@ -92,8 +99,11 @@ public class EnseignantListElementDto {
     public Date getDateDebutDispo() {
         return dateDebutDispo;
     }
-    public String getTypeDeContrat() {
+    public ContratSetDto getTypeDeContrat() {
         return typeDeContrat;
+    }
+    public String getContratText() {
+        return contratText;
     }
     public String getTitresAcademiques() {
         return titresAcademiques;

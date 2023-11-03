@@ -82,7 +82,7 @@
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="assets/img/img_profil_ecole.png" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
@@ -267,7 +267,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-4 label"><strong>Compétences recherchées</strong></div>
-                                                <div class="col-lg-9 col-md-8">${enseignant.competences}</div>
+                                                <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-4 label"><strong>Intérêts École</strong></div>
