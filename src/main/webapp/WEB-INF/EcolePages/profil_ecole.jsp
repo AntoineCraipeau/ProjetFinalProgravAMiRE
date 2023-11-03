@@ -75,7 +75,7 @@
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
@@ -216,7 +216,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8">${ecole.adresseEletronique}</div>
+                    <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
                   </div>
                   <div class ="row">
                     <div class="col-lg-3 col-md-4 label">Telephone</div>
