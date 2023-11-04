@@ -3,6 +3,8 @@ package org.amire.progav_finalproj.dto;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
+import org.amire.progav_finalproj.repositories.FavorisEcoleRepository;
+import org.amire.progav_finalproj.repositories.FavorisEnseignantRepository;
 
 import java.util.Date;
 
@@ -53,8 +55,7 @@ public class EnseignantListElementDto {
         this.isFavoris = isEnseignantInEcoleFavoris(idEnseignant, idEcole);
     }
     private boolean isEnseignantInEcoleFavoris(long idEnseignant, long idEcole) {
-        EcoleEntity ecole = new EcoleRepository().getEcoleById(idEcole);
-        return ecole.getFavoris().stream().anyMatch(fav -> fav.getIdEnseignant() == idEnseignant);
+        return new FavorisEcoleRepository().getFavorisEcoleByOwnersId(idEcole, idEnseignant) != null;
     }
 
     public long getIdEnseignant() {
