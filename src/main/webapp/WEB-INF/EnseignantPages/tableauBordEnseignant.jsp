@@ -264,7 +264,7 @@
                         <td>
                             <form action="Controlleur" method="post">
                                 <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                <button class="btn btn-primary" name="action" value="AjoutFavorisEcole" type="submit">
+                                <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
                                     Ajouter aux favoris
                                 </button>
                             </form>
@@ -290,7 +290,7 @@
                         <td>${favorisEnseignant.raisonSociale}</td>
                         <td>
                             <form action="Controlleur" method="post">
-                                <input type="hidden" name="idFavorisEnseignant" value="${favorisEnseignant.idEcole}">
+                                <input type="hidden" name="idEcole" value="${favorisEnseignant.idEcole}">
                                 <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
                                     Retirer des favoris
                                 </button>
