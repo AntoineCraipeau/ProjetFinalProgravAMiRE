@@ -206,6 +206,8 @@
                   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le Mot de Passe</a>
                 </li>
               </ul>
+              <p class="small text-danger">${messageErreur}</p>
+              <p class="small text-success">${messageSucces}</p>
               <div class="tab-content pt-2">
                 <!-- Section Profil -->
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">

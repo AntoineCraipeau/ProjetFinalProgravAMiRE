@@ -152,9 +152,14 @@ public class Controleur extends HttpServlet implements Controleurs {
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
             case ModifierProfil:
-                EcoleEntity ecoleFromRequest = EcoleFactory.buildEcoleFromRequest(request);
-                ecoleFromRequest.setIdEcole(idEcole);
-                ecoleRepository.editEcole(ecoleFromRequest);
+                try {
+                    EcoleEntity ecoleFromRequest = EcoleFactory.buildEcoleFromRequest(request);
+                    ecoleFromRequest.setIdEcole(idEcole);
+                    ecoleRepository.editEcole(ecoleFromRequest);
+                    request.setAttribute("messageSucces", MESSAGE_SUCCES_MODIFICATION_COMPTE);
+                } catch (Exception e) {
+                    request.setAttribute("messageErreur", MESSAGE_ERREUR_PROFIL_MODIFICATION_ECHEC);
+                }
             }
     }
 
@@ -199,9 +204,14 @@ public class Controleur extends HttpServlet implements Controleurs {
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
                 break;
             case ModifierProfil:
-                EnseignantEntity enseignantFromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
-                enseignantFromRequest.setIdEnseignant(idEnseignant);
-                enseignantRepository.editEnseignant(enseignantFromRequest);
+                try {
+                    EnseignantEntity enseignantFromRequest = EnseignantFactory.buildEnseignantFromRequest(request);
+                    enseignantFromRequest.setIdEnseignant(idEnseignant);
+                    enseignantRepository.editEnseignant(enseignantFromRequest);
+                    request.setAttribute("messageSucces", MESSAGE_SUCCES_MODIFICATION_COMPTE);
+                } catch (Exception e) {
+                    request.setAttribute("messageErreur", MESSAGE_ERREUR_PROFIL_MODIFICATION_ECHEC);
+                }
         }
     }
 

@@ -96,10 +96,13 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item d-flex align-items-center" href="../EcolePages/profil_ecole.jsp">
-                    <i class="bi bi-person"></i>
-                    <span>My Profile</span>
-                  </a>
+                  <form action="Controlleur" method="post">
+                    <input type="hidden" name="action" value="EnseignantVersProfil">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                      <i class="bi bi-person"></i>
+                      <span>My Profile</span>
+                    </a>
+                  </form>
                 </li>
                 <li>
                   <hr class="dropdown-divider">
@@ -215,6 +218,8 @@
                   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le Mot de Passe</a>
                 </li>
               </ul>
+              <p class="small text-danger">${messageErreur}</p>
+              <p class="small text-success">${messageSucces}</p>
               <div class="tab-content pt-2">
                 <!-- Section Profil -->
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">

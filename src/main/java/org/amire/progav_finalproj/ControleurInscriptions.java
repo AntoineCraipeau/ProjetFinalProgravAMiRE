@@ -73,7 +73,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
     public void createEcoleAccount(HttpServletRequest request){
 
         if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
-            request.setAttribute("messageErreur", "Ce login est déjà utilisé");
+            request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_USED);
             return;
         }
 
@@ -99,7 +99,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
     public void createEnseignantAccount(HttpServletRequest request){
 
         if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
-            request.setAttribute("messageErreur", "Ce login est déjà utilisé");
+            request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_USED);
             return;
         }
 
@@ -132,7 +132,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         //Invalidation de la session pour être redirigé vers la page de login
         request.getSession().invalidate();
         unUtilisateur = null;
-        request.setAttribute("messageErreur", MESSAGE_SUCCES_CREATION_COMPTE);
+        request.setAttribute("messageSucces", MESSAGE_SUCCES_CREATION_COMPTE);
     }
 
     public void fillEnseignantAccount(HttpServletRequest request){
@@ -146,7 +146,7 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         //Invalidation de la session pour être redirigé vers la page de login
         request.getSession().invalidate();
         unUtilisateur = null;
-        request.setAttribute("messageErreur", MESSAGE_SUCCES_CREATION_COMPTE);
+        request.setAttribute("messageSucces", MESSAGE_SUCCES_CREATION_COMPTE);
     }
 
     @Override

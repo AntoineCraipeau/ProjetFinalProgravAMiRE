@@ -48,12 +48,13 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-                  <p class="small text-danger">${messageErreur}</p>
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                     <p class="text-center small">Entrer votre nom d'utilisateur & mot de passe pour se connecter</p>
                   </div>
+                  <p class="small text-danger">${messageErreur}</p>
+                  <p class="small text-success">${messageSucces}</p>
                   <form class="row g-3 " method="post" action="Controlleur">
                     <div class="col-12">
                         <label for="champLogin" class="form-label">Nom d'utilisateur</label>
