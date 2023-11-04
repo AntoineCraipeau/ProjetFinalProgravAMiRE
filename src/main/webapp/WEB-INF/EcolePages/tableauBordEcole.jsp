@@ -63,9 +63,9 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
       </form>
     </div><!-- End Search Bar -->
 

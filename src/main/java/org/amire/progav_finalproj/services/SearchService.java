@@ -2,6 +2,8 @@ package org.amire.progav_finalproj.services;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import org.amire.progav_finalproj.dto.EcoleListElementDto;
+import org.amire.progav_finalproj.dto.EnseignantListElementDto;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
@@ -30,6 +32,18 @@ public class SearchService {
         return enseignants;
     }
 
+    public List<EnseignantListElementDto> filterAsEcole(List<EnseignantListElementDto> enseignants, String searchQuery) {
+        if (searchQuery == null) return enseignants;
+        if (searchQuery.isBlank()) return enseignants;
+        enseignants.removeIf(enseignant ->
+                !enseignant.getNom().contains(searchQuery) &&
+                !enseignant.getPrenom().contains(searchQuery) &&
+                !enseignant.getCompetenceText().contains(searchQuery) &&
+                !enseignant.getContratText().contains(searchQuery)
+        );
+        return enseignants;
+    }
+
     public List<EcoleEntity> searchAsEnseignant(String searchQuery) {
         List<EcoleEntity> ecoles = ecoleRepository.getAllEcoles();
         if (searchQuery == null) return ecoles;
@@ -38,6 +52,17 @@ public class SearchService {
                 !ecole.getRaisonSociale().contains(searchQuery) &&
                 !ecole.getCompetencesRequises().contains(searchQuery) &&
                 !ecole.getTypeDeContrat().contains(searchQuery)
+        );
+        return ecoles;
+    }
+
+    public List<EcoleListElementDto> filterAsEnseignant(List<EcoleListElementDto> ecoles, String searchQuery) {
+        if (searchQuery == null) return ecoles;
+        if (searchQuery.isBlank()) return ecoles;
+        ecoles.removeIf(ecole ->
+                !ecole.getRaisonSociale().contains(searchQuery) &&
+                !ecole.getCompetenceText().contains(searchQuery) &&
+                !ecole.getContratText().contains(searchQuery)
         );
         return ecoles;
     }

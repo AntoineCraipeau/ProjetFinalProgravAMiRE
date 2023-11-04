@@ -52,6 +52,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
                 long idUtilisateur = unUtilisateur.getIdUserinfo();
                 UserTypes typeUtilisateur = userRepository.getUserTypeFromUserId(idUtilisateur);
+                String searchQuery = request.getParameter("query");
 
                 switch (typeUtilisateur) {
                     case ADMIN:
@@ -68,7 +69,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         request.setAttribute("ecole", new EcoleProfileInfoDto(ecoleRepository.getEcoleById(idEcole)));
                         request.setAttribute("favoris", favorisEcoleRepository.getAllFavorisOfEcoleById(idEcole));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEcoleId(idEcole).stream().map(PostuleListElementDto::new).toArray());
-                        request.setAttribute("enseignants", preferenceMatcherService.getMatchingEnseignant(idEcole));
+                        request.setAttribute("enseignants", searchService.filterAsEcole(preferenceMatcherService.getMatchingEnseignant(idEcole), searchQuery));
                         break;
                     case ENSEIGNANT:
                         handleEnseignantRequest(request);
@@ -77,7 +78,7 @@ public class Controleur extends HttpServlet implements Controleurs {
                         request.setAttribute("enseignant", new EnseignantProfileInfoDto(enseignantRepository.getEnseignantById(idEnseignant)));
                         request.setAttribute("favoris", favorisEnseignantRepository.getAllFavorisOfCandidatById(idEnseignant));
                         request.setAttribute("postulations", postuleRepository.getAllPostulesByEnseignantId(idEnseignant).stream().map(PostuleListElementDto::new).toArray());
-                        request.setAttribute("ecoles", preferenceMatcherService.getMatchingEcole(idEnseignant));
+                        request.setAttribute("ecoles", searchService.filterAsEnseignant(preferenceMatcherService.getMatchingEcole(idEnseignant), searchQuery));
                         break;
 
                 }
@@ -292,9 +293,9 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         if(action == ActionTypes.EcoleVersDashboard)
             request.getRequestDispatcher("WEB-INF/EcolePages/tableauBordEcole.jsp").forward(request, response);
-        else if (action == ActionTypes.EcoleVersProfil)
+        else if (action == ActionTypes.EcoleVersProfil || action == ActionTypes.ModifierProfil)
             request.getRequestDispatcher("WEB-INF/EcolePages/profil_ecole.jsp").forward(request, response);
-        else if (action == ActionTypes.EcoleVersMatch)
+        else if (action == ActionTypes.EcoleVersMatch || action == ActionTypes.Recherche)
             request.getRequestDispatcher("WEB-INF/EcolePages/matchEcole.jsp").forward(request, response);
         else {
             request.getRequestDispatcher("WEB-INF/EcolePages/tableauBordEcole.jsp").forward(request, response);
@@ -305,9 +306,9 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         if(action == ActionTypes.EnseignantVersDashboard)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/tableauBordEnseignant.jsp").forward(request, response);
-        else if (action == ActionTypes.EnseignantVersProfil)
+        else if (action == ActionTypes.EnseignantVersProfil || action == ActionTypes.ModifierProfil)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/profil_enseignant.jsp").forward(request, response);
-        else if (action == ActionTypes.EnseignantVersMatch)
+        else if (action == ActionTypes.EnseignantVersMatch || action == ActionTypes.Recherche)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/matchEnseignant.jsp").forward(request, response);
         else {request.getRequestDispatcher("WEB-INF/EnseignantPages/tableauBordEnseignant.jsp").forward(request, response);}
     }
