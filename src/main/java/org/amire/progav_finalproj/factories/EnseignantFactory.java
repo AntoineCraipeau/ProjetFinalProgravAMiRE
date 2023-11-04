@@ -39,8 +39,8 @@ public class EnseignantFactory {
         enseignant.setAdresseElectronique(request.getParameter("inputMail"));
         enseignant.setRemarques(request.getParameter("autresInformations")); //!
         try {
-            enseignant.setDateDebutDispo(Date.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
-        } catch (IllegalArgumentException e) {
+            enseignant.setDateDebutDispo(Date.valueOf(request.getParameter("inputDispo")));
+        } catch (Exception e) {
             enseignant.setDateDebutDispo(null);
         }
         enseignant.setExperience(request.getParameter("inputExperience"));
@@ -50,7 +50,7 @@ public class EnseignantFactory {
         enseignant.setInteretsDomaines(request.getParameter("inputInteretDomaine"));
         enseignant.setRemarques(request.getParameter("remarques"));
         enseignant.setNiveauxSouhaites(request.getParameter("inputNiveauSouhaite"));
-        enseignant.setInteretsEcoles("No match in form");
+        enseignant.setInteretsEcoles("Not implemented");
         enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")).replace(" ", ""));
         return enseignant;
     }

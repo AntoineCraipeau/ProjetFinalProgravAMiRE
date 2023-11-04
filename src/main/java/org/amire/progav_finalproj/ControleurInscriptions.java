@@ -179,10 +179,10 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
 
         switch (userType){
             case ECOLE:
-                request.getRequestDispatcher("/WEB-INF/pages_form_ecole.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/EcolePages/pages_form_ecole.jsp").forward(request, response);
                 break;
             case ENSEIGNANT:
-                request.getRequestDispatcher("/WEB-INF/pages_form_enseignant.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/EnseignantPages/pages_form_enseignant.jsp").forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher("/WEB-INF/pages_login.jsp").forward(request, response);

@@ -59,62 +59,62 @@
                 <div class="row mb-3">
                   <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputNom" name="inputNom">
+                    <input type="text" class="form-control" id="inputNom" name="inputNom" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPrenom" class="col-sm-2 col-form-label">Prenom</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPrenom" name="inputPrenom">
+                    <input type="text" class="form-control" id="inputPrenom" name="inputPrenom" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputExperience" name="inputExperience">
+                    <input type="text" class="form-control" id="inputExperience" name="inputExperience" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEvaluations" class="col-sm-2 col-form-label">Evaluations</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputEvaluations" name="inputEvaluations">
+                    <input type="text" class="form-control" id="inputEvaluations" name="inputEvaluations" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputMail" name="inputMail">
+                    <input type="email" class="form-control" id="inputMail" name="inputMail" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone">
+                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca">
+                    <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputReference" name="inputReference">
+                    <input type="text" class="form-control" id="inputReference" name="inputReference" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputDispo" class="col-sm-2 col-form-label">Disponibilité</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDispo" name="inputDispo">
+                    <input type="date" class="form-control" id="inputDispo" name="inputDispo" required>
                   </div>
                 </div>
                 
                 <div class="row mb-3">
                   <label for="inputCV" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" id="inputCV">
+                    <input class="form-control" type="file" id="formFile" id="inputCV" >
                   </div>
                 </div>
 
@@ -125,12 +125,12 @@
                   <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
                 </div>
 
-                <label for="inputNiveauSouhaite" class="form-label">Site Web</label>
+                <label for="inputNiveauSouhaite" class="form-label">Niveau Souhaite</label>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="inputNiveauSouhaite" name="inputNiveauSouhaite">
                 </div>
 
-                <label for="inputInteretDomaine" class="form-label">Site Web</label>
+                <label for="inputInteretDomaine" class="form-label">Interet Domaine</label>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine">
                 </div>
@@ -160,13 +160,13 @@
                   <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
                   <div class="col-sm-10">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="CDD">
+                      <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd">
                       <label class="form-check-label" for="cdd">
                         CDD
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="CDI">
+                      <input class="form-check-input" type="checkbox" id="cdi" name="contrat" value="cdi">
                       <label class="form-check-label" for="cdi">
                         CDI
                       </label>
@@ -186,7 +186,7 @@
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                     <label class="form-check-label" for="invalidCheck2">
-                      Accepter les thermes et conditions
+                      Accepter les termes et conditions
                     </label>
                   </div>
                 </div>

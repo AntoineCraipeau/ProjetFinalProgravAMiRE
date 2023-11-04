@@ -65,8 +65,8 @@
                     </div>
                     <div class="form-group">
                       <label>Type d'utilisateur</label>
-                      <input type="checkbox" id="enseignant" name="userType" value="enseignant"> Enseignant
-                      <input type="checkbox" id="ecole" name="userType" value="ecole"> École
+                      <input type="radio" id="enseignant" name="userType" value="enseignant" checked> Enseignant
+                      <input type="radio" id="ecole" name="userType" value="ecole"> École
                       <!--<input type="checkbox" id="admin" name="userType" value="admin"> Admin-->
                       <!--USE RADIO BUTTONS-->
                     </div>

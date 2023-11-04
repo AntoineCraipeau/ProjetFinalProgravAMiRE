@@ -27,8 +27,8 @@ public class EcoleFactory {
         ecole.setExigences(request.getParameter("inputExigences"));
         ecole.setBesoin(request.getParameter("inputBesoin"));
         try {
-            ecole.setDateDebutDispo(Date.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
-        } catch (IllegalArgumentException e) {
+            ecole.setDateDebutDispo(Date.valueOf(request.getParameter("inputDate")));
+        } catch (Exception e) {
             ecole.setDateDebutDispo(null);
         }
         ecole.setRemarques(request.getParameter("inputRemarques"));
