@@ -2,8 +2,7 @@ package org.amire.progav_finalproj.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
-import java.util.Collection;
+import java.sql.Date;
 
 @Entity
 @Table(name = "ecole", schema = "db_prograv_final")
@@ -38,14 +37,10 @@ public class EcoleEntity {
     private String exigences;
     @Basic
     @Column(name = "Date_Debut_Dispo", nullable = true)
-    private Timestamp dateDebutDispo;
+    private Date dateDebutDispo;
     @Basic
     @Column(name = "Remarques", nullable = true, length = 255)
     private String remarques;
-    @OneToMany(mappedBy = "ecole")
-    private Collection<FavorisEcoleEntity> favoris;
-    @OneToMany(mappedBy = "ecole")
-    private Collection<PostuleEntity> postulations;
 
     public long getIdEcole() {
         return idEcole;
@@ -119,11 +114,11 @@ public class EcoleEntity {
         this.exigences = exigences;
     }
 
-    public Timestamp getDateDebutDispo() {
+    public Date getDateDebutDispo() {
         return dateDebutDispo;
     }
 
-    public void setDateDebutDispo(Timestamp dateDebutDispo) {
+    public void setDateDebutDispo(Date dateDebutDispo) {
         this.dateDebutDispo = dateDebutDispo;
     }
 
@@ -176,21 +171,5 @@ public class EcoleEntity {
         result = 31 * result + (dateDebutDispo != null ? dateDebutDispo.hashCode() : 0);
         result = 31 * result + (remarques != null ? remarques.hashCode() : 0);
         return result;
-    }
-
-    public Collection<FavorisEcoleEntity> getFavoris() {
-        return favoris;
-    }
-
-    public void setFavoris(Collection<FavorisEcoleEntity> favoris) {
-        this.favoris = favoris;
-    }
-
-    public Collection<PostuleEntity> getPostulations() {
-        return postulations;
-    }
-
-    public void setPostulations(Collection<PostuleEntity> postulations) {
-        this.postulations = postulations;
     }
 }

@@ -2,7 +2,7 @@ package org.amire.progav_finalproj.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 @Entity
 @Table(name = "postule", schema = "db_prograv_final")
@@ -13,7 +13,7 @@ public class PostuleEntity {
     private long idPostule;
     @Basic
     @Column(name = "Date_Creation", nullable = true)
-    private Timestamp dateCreation;
+    private Date dateCreation;
     @Basic
     @Column(name = "Initiateur", nullable = true, length = 255)
     private String initiateur;
@@ -41,11 +41,11 @@ public class PostuleEntity {
         this.idPostule = idPostule;
     }
 
-    public Timestamp getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(Timestamp dateCreation) {
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
 

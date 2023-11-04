@@ -86,7 +86,8 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         } catch (Exception e) { // Des exceptions peuvent être levées par les repositories
             request.setAttribute("messageErreur", e.getMessage());
-            System.out.println(e.getMessage());
+            System.out.println("Main loop error:"+ e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
 
         aiguillerVersLaProchainePage(request, response);

@@ -2,8 +2,7 @@ package org.amire.progav_finalproj.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
-import java.util.Collection;
+import java.sql.Date;
 
 @Entity
 @Table(name = "enseignant", schema = "db_prograv_final")
@@ -47,7 +46,7 @@ public class EnseignantEntity {
     private String niveauxSouhaites;
     @Basic
     @Column(name = "Date_Debut_Dispo", nullable = true)
-    private Timestamp dateDebutDispo;
+    private Date dateDebutDispo;
     @Basic
     @Column(name = "Type_de_contrat", nullable = true, length = 512)
     private String typeDeContrat;
@@ -63,10 +62,6 @@ public class EnseignantEntity {
     @Basic
     @Column(name = "Lien_CV", nullable = true, length = 255)
     private String lienCv;
-    @OneToMany(mappedBy = "enseignant")
-    private Collection<FavorisEnseignantEntity> favoris;
-    @OneToMany(mappedBy = "enseignant")
-    private Collection<PostuleEntity> postulations;
 
     public long getIdEnseignant() {
         return idEnseignant;
@@ -164,11 +159,11 @@ public class EnseignantEntity {
         this.niveauxSouhaites = niveauxSouhaites;
     }
 
-    public Timestamp getDateDebutDispo() {
+    public Date getDateDebutDispo() {
         return dateDebutDispo;
     }
 
-    public void setDateDebutDispo(Timestamp dateDebutDispo) {
+    public void setDateDebutDispo(Date dateDebutDispo) {
         this.dateDebutDispo = dateDebutDispo;
     }
 
@@ -270,21 +265,5 @@ public class EnseignantEntity {
         result = 31 * result + (referencesPro != null ? referencesPro.hashCode() : 0);
         result = 31 * result + (lienCv != null ? lienCv.hashCode() : 0);
         return result;
-    }
-
-    public Collection<FavorisEnseignantEntity> getFavoris() {
-        return favoris;
-    }
-
-    public void setFavoris(Collection<FavorisEnseignantEntity> favoris) {
-        this.favoris = favoris;
-    }
-
-    public Collection<PostuleEntity> getPostulations() {
-        return postulations;
-    }
-
-    public void setPostulations(Collection<PostuleEntity> postulations) {
-        this.postulations = postulations;
     }
 }

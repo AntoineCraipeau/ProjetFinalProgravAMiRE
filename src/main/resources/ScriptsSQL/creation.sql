@@ -14,7 +14,7 @@ CREATE TABLE `enseignant`(
     `Interets_domaines` VARCHAR(255) NULL,
     `Interets_ecoles` VARCHAR(255) NULL,
     `Niveaux_souhaites` VARCHAR(255) NULL,
-    `Date_Debut_Dispo` DATETIME NULL,
+    `Date_Debut_Dispo` DATE NULL,
     `Type_de_contrat` VARCHAR(512) NULL,
     `Titres_academiques` VARCHAR(255) NULL,
     `Remarques` VARCHAR(255) NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `ecole`(
     `Competences_requises` VARCHAR(512) NULL,
     `Type_de_contrat` VARCHAR(512) NULL,
     `Exigences` VARCHAR(255) NULL,
-    `Date_Debut_Dispo` DATETIME NULL,
+    `Date_Debut_Dispo` DATE NULL,
     `Remarques` VARCHAR(255) NULL
 );
 CREATE TABLE `userinfo`(
@@ -50,25 +50,28 @@ CREATE TABLE `userinfo`(
 );
 CREATE TABLE `postule`(
     `id_postule` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Date_Creation` DATETIME NULL,
+    `Date_Creation` DATE NULL,
     `Initiateur` VARCHAR(255) NULL,
     `Decision` VARCHAR(255) NULL,
     `id_ecole` BIGINT NOT NULL,
     `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
-    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
+    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant),
+    UNIQUE(id_ecole, id_enseignant)
 );
 CREATE TABLE `favoris_enseignant`(
     `id_candidats_favoris` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `id_ecole` BIGINT NOT NULL,
     `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
-    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
+    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant),
+    UNIQUE(id_ecole, id_enseignant)
 );
 CREATE TABLE `favoris_ecole`(
     `id_ecoles_favories` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `id_ecole` BIGINT NOT NULL,
     `id_enseignant` BIGINT NOT NULL,
     FOREIGN KEY(id_ecole) REFERENCES ecole(id_ecole),
-    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant)
+    FOREIGN KEY(id_enseignant) REFERENCES enseignant(id_enseignant),
+    UNIQUE(id_ecole, id_enseignant)
 );

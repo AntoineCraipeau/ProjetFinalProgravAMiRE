@@ -8,6 +8,7 @@ import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.repositories.EnseignantRepository;
 import org.amire.progav_finalproj.repositories.UserRepository;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,10 +30,10 @@ public class ApiEmployee {
     @GET
     @Path("/disponibilites")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Timestamp> getDisponibilites() {
+    public List<Date> getDisponibilites() {
         List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
 
-        List<Timestamp> dispos = enseignants.stream()
+        List<Date> dispos = enseignants.stream()
                 .map(EnseignantEntity::getDateDebutDispo)
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
@@ -44,7 +45,7 @@ public class ApiEmployee {
     @Path("/enseignants-par-mois")
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, Integer> getEnseignantsParMois() {
-        List<Timestamp> dispos = getDisponibilites();
+        List<Date> dispos = getDisponibilites();
 
         // Créer un TreeMap pour stocker les données triées par mois
         Map<String, Integer> enseignantsParMois = new TreeMap<>();
@@ -52,7 +53,7 @@ public class ApiEmployee {
         // Formateur de date pour extraire le mois avec la locale en_US
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM", new Locale("en_US"));
 
-        for (Timestamp dispo : dispos) {
+        for (Date dispo : dispos) {
             String mois = monthFormat.format(dispo);
             enseignantsParMois.put(mois, enseignantsParMois.getOrDefault(mois, 0) + 1);
         }

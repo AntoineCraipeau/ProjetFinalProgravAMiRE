@@ -38,18 +38,18 @@ public class FavorisEnseignantRepository {
     public FavorisEnseignantEntity getFavorisCandidatById(long id){
         Query q = em.createQuery("select e from FavorisEnseignantEntity e where e.idCandidatsFavoris = :id"); // Requête JPQL
         q.setParameter("id", id);
-        try {
-            return (FavorisEnseignantEntity) q.getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
+        return (FavorisEnseignantEntity) q.getSingleResult();
     }
 
     public FavorisEnseignantEntity getFavorisCandidatByOwnersId(long idEnseignant, long idEcole){
         Query q = em.createQuery("select e from FavorisEnseignantEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         q.setParameter("idEnseignant", idEnseignant);
-        return (FavorisEnseignantEntity) q.getSingleResult();
+        try {
+            return (FavorisEnseignantEntity) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Create
