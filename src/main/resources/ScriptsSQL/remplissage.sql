@@ -41,11 +41,11 @@ INSERT INTO `postule` (`Date_Creation`, `Decision`, `Initiateur` , `id_ecole`, `
 VALUES
     ('2023-10-10', 'Refusé', 'enseignant', 4, 1),
     ('2023-07-23', 'Accepté', 'ecole', 4, 6),
-    ('2023-09-08', 'Entretien', 'enseignant', 2, 4),
-    ('2023-09-13', NULL, 'ecole', 5, 3),
-    ('2023-10-01', 'Entretien', 'enseignant', 3, 3),
-    ('2023-09-14', NULL, 'enseignant', 2, 5),
-    ('2023-10-01', 'Entretien', 'ecole', 7, 4),
+    ('2023-09-08', 'En attente', 'enseignant', 2, 4),
+    ('2023-09-13', 'En attente', 'ecole', 5, 3),
+    ('2023-10-01', 'En attente', 'enseignant', 3, 3),
+    ('2023-09-14', 'En attente', 'enseignant', 2, 5),
+    ('2023-10-01', 'En attente', 'ecole', 7, 4),
     ('2023-10-01', 'Refusé', 'enseignant', 7, 5),
     ('2023-08-31', 'Accepté', 'enseignant', 5, 2);
 
