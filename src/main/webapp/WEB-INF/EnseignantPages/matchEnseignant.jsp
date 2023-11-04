@@ -61,9 +61,9 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
             <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
 
@@ -127,7 +127,7 @@
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersDashboard">
+                    <input type="hidden" name="action" value="EnseignantVersDashboard">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Dashboard</span>
@@ -141,7 +141,7 @@
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersProfil">
+                    <input type="hidden" name="action" value="EnseignantVersProfil">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Profil</span>
@@ -152,7 +152,7 @@
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersMatch">
+                    <input type="hidden" name="action" value="EnseignantVersMatch">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Match Enseignant</span>
@@ -162,7 +162,7 @@
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersForm">
+                    <input type="hidden" name="action" value="EnseignantVersForm">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Register Form</span>
@@ -201,7 +201,7 @@
                                 <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">E-mail</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.adresseEletronique}</div>
+                                        <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
                                     </div>
                                     <div class ="row">
                                         <div class="col-lg-3 col-md-4 label">Telephone</div>
