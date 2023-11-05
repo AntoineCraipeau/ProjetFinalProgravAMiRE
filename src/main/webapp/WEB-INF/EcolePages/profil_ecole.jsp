@@ -241,11 +241,11 @@
                     <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                    <div class="col-lg-3 col-md-4 label">Type de contrats proposés</div>
                     <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Competences Requises</div>
+                    <div class="col-lg-3 col-md-4 label">Competences recherchées</div>
                     <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
                   </div>
                   <div class="row">
@@ -264,25 +264,25 @@
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputMail" class="col-sm-2 col-form-label">adresse Eletronique"</label>
+                      <label for="inputMail" class="col-sm-2 col-form-label">Adresse Eletronique"</label>
                       <div class="col-sm-10">
                         <input type="email" class="form-control" id="inputMail" name="inputMail" value="${ecole.adresseElectronique}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputTelephone" class="col-sm-2 col-form-label">telephone</label>
+                      <label for="inputTelephone" class="col-sm-2 col-form-label">Téléphone</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputTelephone" name="inputTelephone" value="${ecole.telephone}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputBesoin" class="col-sm-2 col-form-label">besoin</label>
+                      <label for="inputBesoin" class="col-sm-2 col-form-label">Besoin</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" value="${ecole.besoin}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputexigences" class="col-sm-2 col-form-label">exigences</label>
+                      <label for="inputexigences" class="col-sm-2 col-form-label">Exigences</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputExigences" name="inputExigences" value="${ecole.exigences}">
                       </div>
@@ -307,7 +307,7 @@
                     </div>
 
                     <div class="row mb-3">
-                      <legend class="col-form-label col-sm-2 pt-0">Competences Requises</legend>
+                      <legend class="col-form-label col-sm-2 pt-0">Compétences recherchées</legend>
                       <div class="col-sm-10">
                         <div class="row mb-3">
                           <div class="col-sm-10">
@@ -333,7 +333,7 @@
                     </div>
 
                     <div class="row mb-3">
-                      <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
+                      <legend class="col-form-label col-sm-2 pt-0">Types de contrats proposés</legend>
                       <div class="col-sm-10">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd" <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
@@ -361,7 +361,7 @@
                     </div>
                     </br>
                     <div class="col-12">
-                      <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Envoyer form</button>
+                      <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Confirmer</button>
                     </div>
 
                   </form><!-- End General Form Elements -->
@@ -371,30 +371,30 @@
                 <!-- Section Modifier le Mot de Passe -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <h5 class="card-title">Modifier le Mot de Passe</h5>
-                  <form action="ChangePasswordServlet" method="post">
+                  <form action="Controlleur" method="post">
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le mot de passe actuel:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Entrez à nouveau le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewPassword" type="password" class="form-control" id="renewPassword" required>
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary" name="action" value="ModifierMdp">Confirmer</button>
                     </div>
                   </form><!-- End Change Password Form -->
                 </div>

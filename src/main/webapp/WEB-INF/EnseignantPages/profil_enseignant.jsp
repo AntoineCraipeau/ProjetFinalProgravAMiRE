@@ -261,7 +261,7 @@
                   <div class="col-lg-9 col-md-8">${enseignant.experience}</div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Compétences recherchées</div>
+                  <div class="col-lg-3 col-md-4 label">Compétences proposées</div>
                   <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
                 </div>
                 <div class="row">
@@ -281,7 +281,7 @@
                   <div class="col-lg-9 col-md-8">${enseignant.lienCv}</div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                  <div class="col-lg-3 col-md-4 label">Type de contrats recherchés</div>
                   <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
                 </div>
                 <div class="row">
@@ -330,13 +330,13 @@
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="inputTitreAca" class="col-sm-2 col-form-label">TitreAcademique</label>
+                    <label for="inputTitreAca" class="col-sm-2 col-form-label">Titre Academique</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputTitreAca" name="inputTitreAca" value="${enseignant.titresAcademiques}">
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="inputReference" class="col-sm-2 col-form-label">Reference</label>
+                    <label for="inputReference" class="col-sm-2 col-form-label">References</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputReference" name="inputReference" value="${enseignant.referencesPro}">
                     </div>
@@ -384,7 +384,7 @@
                   </div>
 
                   <div class="row mb-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Compétences</legend>
+                    <legend class="col-form-label col-sm-2 pt-0">Compétences proposées</legend>
                     <div class="col-sm-10">
                       <div class="row mb-3">
                         <div class="col-sm-10">
@@ -410,7 +410,7 @@
                   </div>
 
                   <div class="row mb-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
+                    <legend class="col-form-label col-sm-2 pt-0">Type de contrats recherchés</legend>
                     <div class="col-sm-10">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${enseignant.typeDeContrat.cdd}">checked</c:if>>
@@ -445,7 +445,7 @@
                   </div>
                   </br>
                   <div class="col-12">
-                    <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Envoyer form</button>
+                    <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Confirmer</button>
                   </div>
 
                 </form><!-- End General Form Elements -->
@@ -455,30 +455,30 @@
               <!-- Section Modifier le Mot de Passe -->
               <div class="tab-pane fade pt-3" id="profile-change-password">
                 <h5 class="card-title">Modifier le Mot de Passe</h5>
-                <form action="ChangePasswordServlet" method="post">
+                <form action="Controlleur" method="post">
                   <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le mot de passe actuel:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                       </div>
                     </div>
                 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                       </div>
                     </div>
                 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Entrez à nouveau le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewPassword" type="password" class="form-control" id="renewPassword" required>
                       </div>
                     </div>
                 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary" name="action" value="ModifierMdp">Confirmer</button>
                     </div>
                   </form><!-- End Change Password Form -->
                 </div>

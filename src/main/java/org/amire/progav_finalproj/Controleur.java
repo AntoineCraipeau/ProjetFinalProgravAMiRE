@@ -1,6 +1,7 @@
 package org.amire.progav_finalproj;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import jakarta.ejb.EJB;
@@ -12,6 +13,7 @@ import org.amire.progav_finalproj.factories.EnseignantFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.*;
 import org.amire.progav_finalproj.repositories.*;
+import org.amire.progav_finalproj.services.AuthService;
 import org.amire.progav_finalproj.services.PreferenceMatcherService;
 import org.amire.progav_finalproj.services.SearchService;
 import org.amire.progav_finalproj.utils.ActionTypes;
@@ -37,6 +39,8 @@ public class Controleur extends HttpServlet implements Controleurs {
     private PreferenceMatcherService preferenceMatcherService;
     @EJB
     private SearchService searchService;
+    @EJB
+    private AuthService authService;
 
     UserBean unUtilisateur;
 
@@ -124,6 +128,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action) {
             case AjoutFavorisEcole:
+                if(enseignant == null){
+                    request.setAttribute("messageErreur", "L'enseignant n'existe pas");
+                    break;
+                }
                 favorisEcoleRepository.addFavorisEcole(ecole, enseignant);
                 break;
             case RetraitFavorisEcole:
@@ -160,6 +168,10 @@ public class Controleur extends HttpServlet implements Controleurs {
                 } catch (Exception e) {
                     request.setAttribute("messageErreur", MESSAGE_ERREUR_PROFIL_MODIFICATION_ECHEC);
                 }
+                break;
+            case ModifierMdp:
+                authService.modifierMotDePasse(request, unUtilisateur);
+                break;
             }
     }
 
@@ -176,6 +188,10 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         switch (action){
             case AjoutFavorisEnseignant:
+                if(ecole == null){
+                    request.setAttribute("messageErreur", "L'école n'existe pas");
+                    break;
+                }
                 favorisEnseignantRepository.addCandidatsFavoris(enseignant, ecole);
                 break;
             case RetraitFavorisEnseignant:
@@ -212,57 +228,27 @@ public class Controleur extends HttpServlet implements Controleurs {
                 } catch (Exception e) {
                     request.setAttribute("messageErreur", MESSAGE_ERREUR_PROFIL_MODIFICATION_ECHEC);
                 }
+                break;
+            case ModifierMdp:
+                authService.modifierMotDePasse(request, unUtilisateur);
+                break;
         }
     }
-
-    public boolean verifierInfosConnexion(HttpServletRequest request){
-        try {
-
-            String login = request.getParameter("champLogin");
-            String password = request.getParameter("champMotDePasse");
-
-            if (login == null || password == null) {
-                return false;
-            }
-
-            UserinfoEntity user = userRepository.getUserByLogin(login);
-            return password.equals(user.getPassword());
-
-        } catch (Exception e) { // Une exception est levée par getUserByLogin si le login n'existe pas
-            return false;
-        }
-    }
-
 
     public void placerUtilisateurDansContexte(HttpServletRequest request){
 
         unUtilisateur = new UserBean();
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);
-        ActionTypes[] noContextActions = {ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.Logout};
+        ArrayList<ActionTypes> noContextActions = new ArrayList<>(Arrays.asList(ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.Logout));
 
         if(action == ActionTypes.Logout){
-            request.getSession().setAttribute("utilisateur", null);
-            request.getSession().invalidate();
+            authService.deconnexion(request);
         }
 
         if(action == ActionTypes.Login){
-            if(!verifierInfosConnexion(request)){
-                request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_KO);
-            } else{
-                request.setAttribute("messageErreur", "");
-                String login = request.getParameter("champLogin");
-                unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(login).getIdUserinfo());
-                request.getSession().setAttribute("utilisateur", unUtilisateur);
-            }
-
-        } else if (!Arrays.asList(noContextActions).contains(action)){
-            UserBean utilisateurInfoSession = (UserBean) request.getSession().getAttribute("utilisateur");
-            if (utilisateurInfoSession != null){
-                unUtilisateur.setIdUserinfo(utilisateurInfoSession.getIdUserinfo());
-                System.out.println("Le contexte utilisateur a été trouvé avec l'action " + action);
-            } else {
-                System.out.println("Le contexte utilisateur n'a pas été trouvé avec l'action " + action);
-            }
+            authService.connexion(request, unUtilisateur);
+        } else if (!noContextActions.contains(action)){ // Si l'action n'est pas une action sans contexte utilisateur
+            authService.decoderSession(request, unUtilisateur); // Placer l'utilisateur dans le contexte
         }
 
         //Si l'utilisateur vient d'arriver, l'IdUserinfo sera à 0
@@ -303,7 +289,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         if(action == ActionTypes.EcoleVersDashboard)
             request.getRequestDispatcher("WEB-INF/EcolePages/tableauBordEcole.jsp").forward(request, response);
-        else if (action == ActionTypes.EcoleVersProfil || action == ActionTypes.ModifierProfil)
+        else if (action == ActionTypes.EcoleVersProfil || action == ActionTypes.ModifierProfil || action == ActionTypes.ModifierMdp)
             request.getRequestDispatcher("WEB-INF/EcolePages/profil_ecole.jsp").forward(request, response);
         else if (action == ActionTypes.EcoleVersMatch || action == ActionTypes.Recherche)
             request.getRequestDispatcher("WEB-INF/EcolePages/matchEcole.jsp").forward(request, response);
@@ -316,7 +302,7 @@ public class Controleur extends HttpServlet implements Controleurs {
 
         if(action == ActionTypes.EnseignantVersDashboard)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/tableauBordEnseignant.jsp").forward(request, response);
-        else if (action == ActionTypes.EnseignantVersProfil || action == ActionTypes.ModifierProfil)
+        else if (action == ActionTypes.EnseignantVersProfil || action == ActionTypes.ModifierProfil || action == ActionTypes.ModifierMdp)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/profil_enseignant.jsp").forward(request, response);
         else if (action == ActionTypes.EnseignantVersMatch || action == ActionTypes.Recherche)
             request.getRequestDispatcher("WEB-INF/EnseignantPages/matchEnseignant.jsp").forward(request, response);

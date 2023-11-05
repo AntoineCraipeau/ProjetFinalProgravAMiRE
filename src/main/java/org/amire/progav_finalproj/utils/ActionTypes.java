@@ -32,5 +32,6 @@ public enum ActionTypes {
     SupprimerEcole,
     SupprimerEnseignant,
     ModifierProfil,
-    Recherche
+    Recherche,
+    ModifierMdp,
 }
