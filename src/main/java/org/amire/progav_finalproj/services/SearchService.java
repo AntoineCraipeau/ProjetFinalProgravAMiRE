@@ -24,10 +24,10 @@ public class SearchService {
         if (searchQuery == null) return enseignants;
         if (searchQuery.isBlank()) return enseignants;
         enseignants.removeIf(enseignant ->
-                !enseignant.getNom().contains(searchQuery) &&
-                !enseignant.getPrenom().contains(searchQuery) &&
-                !enseignant.getCompetences().contains(searchQuery) &&
-                !enseignant.getTypeDeContrat().contains(searchQuery)
+                !enseignant.getNom().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getPrenom().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getCompetences().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getTypeDeContrat().toLowerCase().contains(searchQuery.toLowerCase())
         );
         return enseignants;
     }
@@ -36,10 +36,10 @@ public class SearchService {
         if (searchQuery == null) return enseignants;
         if (searchQuery.isBlank()) return enseignants;
         enseignants.removeIf(enseignant ->
-                !enseignant.getNom().contains(searchQuery) &&
-                !enseignant.getPrenom().contains(searchQuery) &&
-                !enseignant.getCompetenceText().contains(searchQuery) &&
-                !enseignant.getContratText().contains(searchQuery)
+                !enseignant.getNom().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getPrenom().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getCompetenceText().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !enseignant.getContratText().toLowerCase().contains(searchQuery.toLowerCase())
         );
         return enseignants;
     }
@@ -49,9 +49,9 @@ public class SearchService {
         if (searchQuery == null) return ecoles;
         if (searchQuery.isBlank()) return ecoles;
         ecoles.removeIf(ecole ->
-                !ecole.getRaisonSociale().contains(searchQuery) &&
-                !ecole.getCompetencesRequises().contains(searchQuery) &&
-                !ecole.getTypeDeContrat().contains(searchQuery)
+                !ecole.getRaisonSociale().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !ecole.getCompetencesRequises().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !ecole.getTypeDeContrat().toLowerCase().contains(searchQuery.toLowerCase())
         );
         return ecoles;
     }
@@ -60,9 +60,9 @@ public class SearchService {
         if (searchQuery == null) return ecoles;
         if (searchQuery.isBlank()) return ecoles;
         ecoles.removeIf(ecole ->
-                !ecole.getRaisonSociale().contains(searchQuery) &&
-                !ecole.getCompetenceText().contains(searchQuery) &&
-                !ecole.getContratText().contains(searchQuery)
+                !ecole.getRaisonSociale().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !ecole.getCompetenceText().toLowerCase().contains(searchQuery.toLowerCase()) &&
+                !ecole.getContratText().toLowerCase().contains(searchQuery.toLowerCase())
         );
         return ecoles;
     }
