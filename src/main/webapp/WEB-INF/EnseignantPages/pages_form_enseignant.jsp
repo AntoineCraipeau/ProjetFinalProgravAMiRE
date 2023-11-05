@@ -114,7 +114,7 @@
                 <div class="row mb-3">
                   <label for="inputCV" class="col-sm-2 col-form-label">CV</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="file" id="formFile" id="inputCV" >
+                    <input type="text" class="form-control" id="inputCV" name="inputCV" placeholder="Enter a link to your CV">
                   </div>
                 </div>
 
@@ -133,6 +133,13 @@
                 <label for="inputInteretDomaine" class="form-label">Interet Domaine</label>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="inputInteretDomaine" name="inputInteretDomaine">
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputInteretEcole" class="col-sm-2 col-form-label">Interets Ecoles</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputInteretEcole" name="inputInteretEcole">
+                  </div>
                 </div>
 
                 <div class="row mb-3">

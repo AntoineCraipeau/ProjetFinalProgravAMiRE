@@ -50,8 +50,9 @@ public class EnseignantFactory {
         enseignant.setInteretsDomaines(request.getParameter("inputInteretDomaine"));
         enseignant.setRemarques(request.getParameter("remarques"));
         enseignant.setNiveauxSouhaites(request.getParameter("inputNiveauSouhaite"));
-        enseignant.setInteretsEcoles("Not implemented");
+        enseignant.setInteretsEcoles(request.getParameter("inputInteretEcole"));
         enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")).replace(" ", ""));
+        enseignant.setLienCv(request.getParameter("inputCV"));
         return enseignant;
     }
 

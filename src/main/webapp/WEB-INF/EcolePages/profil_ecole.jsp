@@ -260,58 +260,50 @@
                     <div class="row mb-3">
                       <label for="inputRaisonSociale" class="col-sm-2 col-form-label">Nom</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale" value=${ecole.raisonSociale}>
+                        <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale" value="${ecole.raisonSociale}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputMail" class="col-sm-2 col-form-label">adresse Eletronique"</label>
                       <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputMail" name="inputMail" value=${ecole.adresseElectronique}>
+                        <input type="email" class="form-control" id="inputMail" name="inputMail" value="${ecole.adresseElectronique}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputTelephone" class="col-sm-2 col-form-label">telephone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTelephone" name="inputTelephone" value=${ecole.telephone}>
+                        <input type="text" class="form-control" id="inputTelephone" name="inputTelephone" value="${ecole.telephone}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputBesoin" class="col-sm-2 col-form-label">besoin</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" value=${ecole.besoin}>
+                        <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" value="${ecole.besoin}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputexigences" class="col-sm-2 col-form-label">exigences</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputExigences" name="inputExigences" value=${ecole.exigences}>
+                        <input type="text" class="form-control" id="inputExigences" name="inputExigences" value="${ecole.exigences}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
                       <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputDate" name="inputDate" value=${ecole.dateDebutDispo}>
+                        <input type="date" class="form-control" id="inputDate" name="inputDate" value="${ecole.dateDebutDispo}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputremarques" class="col-sm-2 col-form-label">Remarques</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputremarques" name="inputRemarques" value=${ecole.remarques}>
+                        <input type="text" class="form-control" id="inputremarques" name="inputRemarques" value="${ecole.remarques}">
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="formFile" class="col-sm-2 col-form-label">CV</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile" >
-                      </div>
-                    </div>
-
 
                     <label for="basic-url" class="form-label">Site Web</label>
                     <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon3">https://</span>
-                      <input type="text" class="form-control" id="basic-url" name="inputSiteWeb" value=${ecole.siteWeb} aria-describedby="basic-addon3">
+                      <input type="text" class="form-control" id="basic-url" name="inputSiteWeb" value="${ecole.siteWeb}" aria-describedby="basic-addon3">
                     </div>
 
                     <div class="row mb-3">
@@ -344,7 +336,7 @@
                       <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
                       <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
+                          <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd" <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
                           <label class="form-check-label" for="cdd">
                             CDD
                           </label>
