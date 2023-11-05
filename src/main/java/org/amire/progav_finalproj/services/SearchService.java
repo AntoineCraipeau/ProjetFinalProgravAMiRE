@@ -19,19 +19,6 @@ public class SearchService {
     @EJB
     private EcoleRepository ecoleRepository;
 
-    public List<EnseignantEntity> searchAsEcole(String searchQuery) {
-        List<EnseignantEntity> enseignants = enseignantRepository.getAllEnseignants();
-        if (searchQuery == null) return enseignants;
-        if (searchQuery.isBlank()) return enseignants;
-        enseignants.removeIf(enseignant ->
-                !enseignant.getNom().toLowerCase().contains(searchQuery.toLowerCase()) &&
-                !enseignant.getPrenom().toLowerCase().contains(searchQuery.toLowerCase()) &&
-                !enseignant.getCompetences().toLowerCase().contains(searchQuery.toLowerCase()) &&
-                !enseignant.getTypeDeContrat().toLowerCase().contains(searchQuery.toLowerCase())
-        );
-        return enseignants;
-    }
-
     public List<EnseignantListElementDto> filterAsEcole(List<EnseignantListElementDto> enseignants, String searchQuery) {
         if (searchQuery == null) return enseignants;
         if (searchQuery.isBlank()) return enseignants;
@@ -43,19 +30,6 @@ public class SearchService {
         );
         return enseignants;
     }
-
-    public List<EcoleEntity> searchAsEnseignant(String searchQuery) {
-        List<EcoleEntity> ecoles = ecoleRepository.getAllEcoles();
-        if (searchQuery == null) return ecoles;
-        if (searchQuery.isBlank()) return ecoles;
-        ecoles.removeIf(ecole ->
-                !ecole.getRaisonSociale().toLowerCase().contains(searchQuery.toLowerCase()) &&
-                !ecole.getCompetencesRequises().toLowerCase().contains(searchQuery.toLowerCase()) &&
-                !ecole.getTypeDeContrat().toLowerCase().contains(searchQuery.toLowerCase())
-        );
-        return ecoles;
-    }
-
     public List<EcoleListElementDto> filterAsEnseignant(List<EcoleListElementDto> ecoles, String searchQuery) {
         if (searchQuery == null) return ecoles;
         if (searchQuery.isBlank()) return ecoles;
