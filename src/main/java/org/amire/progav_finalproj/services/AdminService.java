@@ -1,4 +1,4 @@
-package org.amire.progav_finalproj.utils;
+package org.amire.progav_finalproj.services;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
 import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.utils.ActionTypes;
+import org.amire.progav_finalproj.utils.ActionTypesUtils;
 
 import java.io.IOException;
 
