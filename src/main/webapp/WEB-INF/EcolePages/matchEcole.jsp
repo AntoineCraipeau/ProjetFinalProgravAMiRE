@@ -82,7 +82,7 @@
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="assets/img/img_profil_ecole.png" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2"> Bonjour, ${ecole.raisonSociale}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
@@ -127,6 +127,8 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
+            <li class="nav-heading">Pages</li>
+
             <li class="nav-item">
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EcoleVersDashboard">
@@ -136,10 +138,6 @@
                     </a>
                 </form>
             </li><!-- End Dashboard Nav -->
-
-
-
-            <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
@@ -162,16 +160,6 @@
                 </form>
             </li><!-- End Login Page Nav -->
 
-            <li class="nav-item">
-                <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersForm">
-                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Register Form</span>
-                    </a>
-                </form>
-            </li><!-- End Login Page Nav -->
-
         </ul>
 
     </aside>
@@ -184,12 +172,36 @@
 
     <!-- definition variable of the filter -->
     <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
-    <c:set var="competenceselec" value="${paramValues.competence}" />
-    <c:set var="contratselec" value="${paramValues.contrat}" />
+
+    <c:choose>
+        <c:when test="${empty paramValues.competence}">
+            <c:set var="competenceselec" value="all" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="competenceselec" value="${paramValues.competence}" />
+        </c:otherwise>
+    </c:choose>
+
+    <c:choose>
+        <c:when test="${empty paramValues.contrat}">
+            <c:set var="contrats" value="all" />
+        </c:when>
+        <c:when test="${fn:contains(paramValues.contrat, 'cdd') && fn:contains(paramValues.contrat, 'cdi')}">
+            <c:set var="contrats" value="all" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="contrats" value="${paramValues.contrat[0]}" />
+        </c:otherwise>
+    </c:choose>
 
     <script>
-        console.log('Competence selection: ${competenceselec}');
+        var competences = "${competenceselec}";
+        var typeContrat = "${contrats}";
+
+        console.log("Compétences sélectionnées : " + competences);
+        console.log("Types de contrat sélectionnés : " + typeContrat);
     </script>
+
 
     <form method="GET" action="Controlleur" class="form">
     <div class="card" style="max-height: 10%;">
@@ -230,8 +242,6 @@
     </div>
     </form>
 
-    </br>
-
     <h5>Liste des enseignants</h5>
     <section class="section">
         <div class="container ">
@@ -244,120 +254,111 @@
                 <div class="carousel-inner">
                     <c:forEach items="${enseignants}" var="enseignant" varStatus="loop">
                         <c:forEach items="${competenceselec}" var="competenceID" >
-                            <script>console.log('${competenceID}');</script>
-                            <script>
-                                console.log('enseignant.competences[competence] : ${competenceNames[competenceID]}');
-                            </script>
                             <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
                             <!-- select only the enseignant who have the selected competences -->
-                            <c:if test="${competenceID == 'all' || enseignant.competences[competenceNames[competenceID]] && enseignant.typeDeContrat[contratselec]}">
-                                <div class="carousel-item ${loop.first ? 'active' : ''}">
-                                    <script>
-                                        console.log('Condition is true for ${enseignant.nom}, ${enseignant.prenom}');
-                                    </script>
-                                    <div class="d-flex " style="height: 60vh;">
-                                            <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
-                                                <h5>${enseignant.nom}, ${enseignant.prenom}</h5>
-                                            </div>
-                                            <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Expérience, Evaluations</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.experience}, ${enseignant.evaluations}</div>
+                            <c:if test="${competenceID == 'all' || enseignant.competences[competenceNames[competenceID]] }">
+                                <c:if test="${ contrats == 'all' || enseignant.typeDeContrat[contrats] }">
+                                    <div class="carousel-item ${loop.first ? 'active' : ''}">
+                                        <div class="d-flex " style="height: 60vh;">
+                                                <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
+                                                    <h5>${enseignant.nom}, ${enseignant.prenom}</h5>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>E-mail</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.adresseElectronique}</div>
-                                                </div>
-                                                <div class ="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Téléphone</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.telephone}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Titre Académique</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.titresAcademiques}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Références</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.referencesPro}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Date de début souhaité</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.dateDebutDispo}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Site Web</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.siteWeb}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Expérience</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.experience}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Compétences recherchées</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Intérêts École</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.interetsEcoles}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Niveaux Souhaités</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.niveauxSouhaites}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Intérêts Domaines</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.interetsDomaines}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Lien CV</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.lienCv}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-4 label"><strong>Type de contrats souhaités</strong></div>
-                                                    <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="d-flex justify-content-center align-items-center flex-column ">
-                                                        <form action="Controlleur" method="post">
-                                                            <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
-                                                                <button class="btn btn-primary mb-2 " name="action" value="AjoutPostulationEcole" type="submit">Proposer profil</button>
-                                                        </form>
-
-                                                        <c:choose>
-                                                            <c:when test="${enseignant.isFavoris}">
-                                                                <form action="Controlleur" method="post">
-                                                                    <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
-                                                                    <input type="hidden" name="action" value="RetraitFavorisEcole">
-                                                                    <button type="submit" class="btn btn-link">
-                                                                        <i class="bi bi-heart-fill"></i> <!-- Cœur rempli (icone solide) -->
-                                                                    </button>
-                                                                </form>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <form action="Controlleur" method="post">
-                                                                    <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
-                                                                    <input type="hidden" name="action" value="AjoutFavorisEcole">
-                                                                    <button type="submit" class="btn btn-link">
-                                                                        <i class="bi bi-heart"></i> <!-- Cœur vide (icone régulière) -->
-                                                                    </button>
-                                                                </form>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Expérience, Evaluations</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.experience}, ${enseignant.evaluations}</div>
                                                     </div>
-                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>E-mail</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.adresseElectronique}</div>
+                                                    </div>
+                                                    <div class ="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Téléphone</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.telephone}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Titre Académique</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.titresAcademiques}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Références</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.referencesPro}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Date de début souhaité</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.dateDebutDispo}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Site Web</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.siteWeb}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Expérience</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.experience}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Compétences recherchées</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.competenceText}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Intérêts École</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.interetsEcoles}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Niveaux Souhaités</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.niveauxSouhaites}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Intérêts Domaines</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.interetsDomaines}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Lien CV</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.lienCv}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label"><strong>Type de contrats souhaités</strong></div>
+                                                        <div class="col-lg-9 col-md-8">${enseignant.contratText}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="d-flex justify-content-center align-items-center flex-column ">
+                                                            <form action="Controlleur" method="post">
+                                                                <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
+                                                                    <button class="btn btn-primary mb-2 " name="action" value="AjoutPostulationEcole" type="submit">Proposer profil</button>
+                                                            </form>
 
+                                                            <c:choose>
+                                                                <c:when test="${enseignant.isFavoris}">
+                                                                    <form action="Controlleur" method="post">
+                                                                        <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
+                                                                        <input type="hidden" name="action" value="RetraitFavorisEcole">
+                                                                        <button class="btn btn-primary mb-2" type="submit">
+                                                                            Retirer des favoris <i class="bi bi-heart-fill"></i> <!-- Cœur rempli -->
+                                                                        </button>
+                                                                    </form>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form action="Controlleur" method="post">
+                                                                        <input type="hidden" name="idEnseignant" value="${enseignant.idEnseignant}">
+                                                                        <input type="hidden" name="action" value="AjoutFavorisEcole">
+                                                                        <button class="btn btn-primary mb-2" type="submit">
+                                                                            Ajouter aux favoris <i class="bi bi-heart"></i> <!-- Cœur vide -->
+                                                                        </button>
+                                                                    </form>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </c:if>
                                 </c:if>
                         </c:forEach>
                     </c:forEach>
                 </div>
-                <a class="carousel-control-prev" href="#teacherCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Précédent</span>
-                </a>
-                <a class="carousel-control-next" href="#teacherCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next " style="margin-right: -10%;" href="#teacherCarousel" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Suivant</span>
                 </a>
