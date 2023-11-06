@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,7 @@
     <title>Carousel</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+
     <c:set var="contextPath" value="${pageContext.request.contextPath}" />
     <!-- Favicons -->
     <link href="${contextPath}/assets/img/favicon.png" rel="icon">
@@ -53,7 +55,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ProjetProgAv2023</span>
         </a>
@@ -79,20 +81,20 @@
 
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/img_profil_ecole.png" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+                    <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">Bonjour, ${enseignant.nom}  ${enseignant.prenom}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>${userInfo.login}</h6>
-                        <span>Ecole</span>
+                        <span>Enseignant</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li>
                         <form action="Controlleur" method="post">
-                            <input type="hidden" name="action" value="EcoleVersProfil">
+                            <input type="hidden" name="action" value="EnseignantVersProfil">
                             <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Profile</span>
@@ -125,6 +127,8 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
+            <li class="nav-heading">Pages</li>
+
             <li class="nav-item">
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EnseignantVersDashboard">
@@ -134,10 +138,6 @@
                     </a>
                 </form>
             </li><!-- End Dashboard Nav -->
-
-
-
-            <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
@@ -160,15 +160,6 @@
                 </form>
             </li><!-- End Login Page Nav -->
 
-            <li class="nav-item">
-                <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EnseignantVersForm">
-                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Register Form</span>
-                    </a>
-                </form>
-            </li><!-- End Login Page Nav -->
 
         </ul>
 
@@ -179,109 +170,181 @@
 
 
 <main id="main" class="main">
-    <h5>Liste des écoles</h5>
-    </br>
-    </br>
 
-    <section class="section">
-        <div class="container ">
-            <div id="teacherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                <ol class="carousel-indicators">
-                    <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
-                        <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
-                    </c:forEach>
-                </ol>
-                <div class="carousel-inner">
-                    <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
-                        <div class="carousel-item ${loop.first ? 'active' : ''}">
-                            <div class="d-flex " style="height: 60vh;">
-                                <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
-                                    <h5>${ecole.raisonSociale}</h5>
+    <!-- definition variable of the filter -->
+
+    <!-- definition variable of the filter -->
+    <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
+
+    <c:choose>
+        <c:when test="${empty paramValues.competence}">
+            <c:set var="competenceselec" value="all" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="competenceselec" value="${paramValues.competence}" />
+        </c:otherwise>
+    </c:choose>
+
+    <c:choose>
+        <c:when test="${empty paramValues.contrat}">
+            <c:set var="contrats" value="all" />
+        </c:when>
+        <c:when test="${fn:contains(paramValues.contrat, 'cdd') && fn:contains(paramValues.contrat, 'cdi')}">
+            <c:set var="contrats" value="all" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="contrats" value="${paramValues.contrat[0]}" />
+        </c:otherwise>
+    </c:choose>
+
+    <script>
+        var competences = "${competenceselec}";
+        var typeContrat = "${contrats}";
+
+        console.log("Compétences sélectionnées : " + competences);
+        console.log("Types de contrat sélectionnés : " + typeContrat);
+    </script>
+
+    <form method="GET" action="Controlleur" class="form">
+        <div class="card" style="max-height: 10%;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="mr-2 small">Filtrer par compétence :</label>
+                        <div class="form-group">
+                            <c:forEach var="competence" items="${competenceNames}" varStatus="status">
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" name="competence" value="${status.index}" class="form-check-input" id="competence-${status.index}">
+                                    <label class="form-check-label small" for="competence-${status.index}">${competence}</label>
                                 </div>
-                                <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">E-mail</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
-                                    </div>
-                                    <div class ="row">
-                                        <div class="col-lg-3 col-md-4 label">Telephone</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Besoin</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.besoin}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Exigences</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.exigences}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Site Web</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Competences Requises</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Remarque</div>
-                                        <div class="col-lg-9 col-md-8">${ecole.remarques}</div>
-                                    </div>
-                                    </br></br></br>
-                                    <div class="row">
-                                        <div class="d-flex justify-content-center align-items-center flex-column ">
-                                            <form action="Controlleur" method="post">
-                                                <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                                    <button class="btn btn-primary mb-2 " name="action" value="AjoutPostulationEnseignant" type="submit">Proposer profil</button>
-                                            </form>
+                            </c:forEach>
+                        </div>
+                    </div>
 
-                                            <c:choose>
-                                                <c:when test="${ecole.isFavoris}">
-                                                    <form action="Controlleur" method="post">
-                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                                        <input type="hidden" name="action" value="RetraitFavorisEnseignant">
-                                                        <button type="submit" class="btn btn-link">
-                                                            <i class="bi bi-heart-fill"></i> <!-- Cœur rempli (icone solide) -->
-                                                        </button>
-                                                    </form>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <form action="Controlleur" method="post">
-                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                                        <input type="hidden" name="action" value="AjoutFavorisEnseignant">
-                                                        <button type="submit" class="btn btn-link">
-                                                            <i class="bi bi-heart"></i> <!-- Cœur vide (icone régulière) -->
-                                                        </button>
-                                                    </form>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </div>
-
-                                </div>
+                    <div class="col-md-6">
+                        <label class="mr-2 small">Filtrer par type de contrat :</label>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="contrat" value="cdd" class="form-check-input" id="contrat-cdd">
+                                <label class="form-check-label small" for="contrat-cdd">CDD</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="contrat" value="cdi" class="form-check-input" id="contrat-cdi">
+                                <label class="form-check-label small" for="contrat-cdi">CDI</label>
                             </div>
                         </div>
-                    </c:forEach>
+                        <button type="submit" name="action" value="EnseignantVersMatch" class="btn btn-primary btn-sm">Filtrer</button>
+                    </div>
                 </div>
             </div>
-                <a class="carousel-control-prev" href="#teacherCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Précédent</span>
-                </a>
-                <a class="carousel-control-next" href="#teacherCarousel" role="button" data-slide="next">
+        </div>
+    </form>
+
+    <h5>Liste des ecoles</h5>
+    <section class="section">
+        <div class="container ">
+        <div id="teacherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators">
+            <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
+                <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
+            </c:forEach>
+        </ol>
+        <div class="carousel-inner">
+        <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
+            <c:forEach items="${competenceselec}" var="competenceID" >
+                <c:set var="competenceNames" value="${['francais', 'anglais', 'philosophie', 'histoire_geographie', 'mathematiques', 'robotique', 'programmation', 'svt', 'physique_chimie', 'sciences_sociales', 'psychologie']}"/>
+                <!-- select only the ecole who have the selected competences -->
+                <c:if test="${competenceID == 'all' || ecole.competencesRequises[competenceNames[competenceID]] }">
+                    <c:if test="${ contrats == 'all' || ecole.typeDeContrat[contrats] }">
+
+                        <div class="carousel-item ${loop.first ? 'active' : ''}">
+                                <div class="d-flex " style="height: 60vh;">
+                                                <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
+                                                    <h5>${ecole.raisonSociale}</h5>
+                                                </div>
+                                                <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">E-mail</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
+                                                    </div>
+                                                    <div class ="row">
+                                                        <div class="col-lg-3 col-md-4 label">Telephone</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Besoin</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.besoin}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Exigences</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.exigences}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Site Web</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Competences Requises</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3 col-md-4 label">Remarque</div>
+                                                        <div class="col-lg-9 col-md-8">${ecole.remarques}</div>
+                                                    </div>
+                                                    </br></br></br>
+                                                    <div class="row">
+                                                        <div class="d-flex justify-content-center align-items-center flex-column ">
+                                                            <form action="Controlleur" method="post">
+                                                                <input type="hidden" name="idEcole" value="${ecole.idEcole}">
+                                                                    <button class="btn btn-primary mb-2 " name="action" value="AjoutPostulationEnseignant" type="submit">Proposer profil</button>
+                                                            </form>
+
+                                                            <c:choose>
+                                                                <c:when test="${ecole.isFavoris}">
+                                                                    <form action="Controlleur" method="post">
+                                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
+                                                                        <input type="hidden" name="action" value="RetraitFavorisEnseignant">
+                                                                        <button class="btn btn-primary mb-2" type="submit">
+                                                                            Retirer des favoris <i class="bi bi-heart-fill"></i> <!-- Cœur rempli -->
+                                                                        </button>
+                                                                    </form>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form action="Controlleur" method="post">
+                                                                        <input type="hidden" name="idEcole" value="${ecole.idEcole}">
+                                                                        <input type="hidden" name="action" value="AjoutFavorisEnseignant">
+                                                                        <button class="btn btn-primary mb-2" type="submit">
+                                                                            Ajouter aux favoris <i class="bi bi-heart"></i> <!-- Cœur vide -->
+                                                                        </button>
+                                                                    </form>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                    </div>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+
+                <a class="carousel-control-next " style="margin-right: -10%;" href="#teacherCarousel" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Suivant</span>
                 </a>
             </div>
-
+    </div>
     </section>
 </main>
 <!-- ======= Footer ======= -->

@@ -104,6 +104,8 @@ public class EcoleService {
             request.getRequestDispatcher("WEB-INF/EcolePages/profil_ecole.jsp").forward(request, response);
         else if (action == ActionTypes.EcoleVersMatch || action == ActionTypes.Recherche)
             request.getRequestDispatcher("WEB-INF/EcolePages/matchEcole.jsp").forward(request, response);
+        else if (action == ActionTypes.EcoleVersProfilEnseignant)
+            request.getRequestDispatcher("WEB-INF/EcolePages/EcoleprofilEnseignant.jsp").forward(request, response);
         else {
             request.getRequestDispatcher("WEB-INF/EcolePages/tableauBordEcole.jsp").forward(request, response);
         }
