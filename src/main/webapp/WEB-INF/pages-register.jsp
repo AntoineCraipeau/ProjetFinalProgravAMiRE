@@ -5,7 +5,6 @@
 <html lang="en">
 
 
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -55,20 +54,23 @@
                   </div>
 
                   <form action="Inscriptions" method="post">
-                    <div class="form-group">
-                        <label for="champLogin">Nom d'utilisateur</label>
-                        <input type="text" id="champLogin" name="champLogin" required>
+                      <div class="col-12">
+                        <div class="form-group">
+                            <label for="champLogin" class="form-label">Nom d'utilisateur</label>
+                            <input  class="form-control" placeholder="Login" name="champLogin" type="text" id="champLogin" name="champLogin" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="champMotDePasse">Mot de passe</label>
-                        <input type="password" id="champMotDePasse" name="champMotDePasse" required>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="champMotDePasse" class="form-label">Mot de passe</label>
+                            <input class="form-control" placeholder="Mot de passe" name="champMotDePasse" type="password"  id="champMotDePasse" name="champMotDePasse" required>
+                        </div>
                     </div>
+                    <br>
                     <div class="form-group">
                       <label>Type d'utilisateur</label>
                       <input type="radio" id="enseignant" name="userType" value="enseignant" checked> Enseignant
                       <input type="radio" id="ecole" name="userType" value="ecole"> École
-                      <!--<input type="checkbox" id="admin" name="userType" value="admin"> Admin-->
-                      <!--USE RADIO BUTTONS-->
                     </div>
                     <div class="form-group">
                         <button type="submit" name="action" value="StartRegister" class="btn btn-primary w-100">S'inscrire</button>
@@ -79,7 +81,6 @@
                       <p class="small mb-0">Pas de compte ? </p>
                       <input type="hidden" name="action" value="ToLogin">
                       <a  href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
                         <p class="small mb-0">Déjà inscrit ?</p>
                       </a>
                     </form>

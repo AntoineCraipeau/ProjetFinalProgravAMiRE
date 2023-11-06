@@ -75,7 +75,6 @@
                       <p class="small mb-0">Pas de compte ? </p>
                         <input type="hidden" name="action" value="ToRegister">
                         <a  href="#" onclick="this.parentNode.submit();">
-                          <i class="bi bi-box-arrow-right"></i>
                           <p class="small mb-0"> Crée un compte</p>
                         </a>
                     </form>

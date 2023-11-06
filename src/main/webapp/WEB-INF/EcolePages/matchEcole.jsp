@@ -210,10 +210,6 @@
                 <div class="col-md-6">
                     <label class="mr-2 small">Filtrer par compétence :</label>
                         <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input type="checkbox" name="competence" value="all" class="form-check-input" id="all-competences">
-                                <label class="form-check-label small" for="all-competences">Toutes les compétences</label>
-                            </div>
                             <c:forEach var="competence" items="${competenceNames}" varStatus="status">
                                 <div class="form-check form-check-inline">
                                     <input type="checkbox" name="competence" value="${status.index}" class="form-check-input" id="competence-${status.index}">
