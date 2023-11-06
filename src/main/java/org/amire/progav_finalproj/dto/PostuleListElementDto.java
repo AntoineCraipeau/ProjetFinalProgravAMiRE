@@ -15,7 +15,7 @@ public class PostuleListElementDto {
 
     public PostuleListElementDto(PostuleEntity postulation) {
         this.idPostule = postulation.getIdPostule();
-        this.datePostule = Date.from(postulation.getDateCreation().toInstant());
+        this.datePostule = postulation.getDateCreation();
         this.initiateur = postulation.getInitiateur();
         this.decision = postulation.getDecision();
         this.nomEcole = postulation.getEcole().getRaisonSociale();

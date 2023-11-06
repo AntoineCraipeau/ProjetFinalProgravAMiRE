@@ -61,37 +61,37 @@
                 <div class="row mb-3">
                   <label for="inputRaisonSociale" class="col-sm-2 col-form-label">Raison Sociale</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale">
+                    <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputBesoin" class="col-sm-2 col-form-label">Besoin</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputBesoin" name="inputBesoin">
+                    <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputExigences" class="col-sm-2 col-form-label">Exigences</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputExigences" name="inputExigences">
+                    <input type="text" class="form-control" id="inputExigences" name="inputExigences" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputMail" name="inputMail">
+                    <input type="email" class="form-control" id="inputMail" name="inputMail" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                   <div class="col-sm-10">
-                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone">
+                    <input type="tel" class="form-control" id="inputTelephone" name="inputTelephone" required>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Date de début souhaitée</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputDate" name="inputDate">
+                    <input type="date" class="form-control" id="inputDate" name="inputDate" required>
                   </div>
                 </div>
                 
@@ -99,7 +99,7 @@
                 <label for="inputSiteWeb" class="form-label">Site Web</label>
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon3">https://</span>
-                  <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb">
+                  <input type="text" class="form-control" id="inputSiteWeb" aria-describedby="basic-addon3" name="inputSiteWeb" required>
                 </div>
 
                 <div class="row mb-3">

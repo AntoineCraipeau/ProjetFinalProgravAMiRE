@@ -3,6 +3,7 @@ package org.amire.progav_finalproj.factories;
 import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
@@ -16,7 +17,7 @@ public class EnseignantFactory {
         enseignant.setSiteWeb("");
         enseignant.setCompetences("");
         enseignant.setAdresseElectronique("");
-        enseignant.setDateDebutDispo(new Timestamp(System.currentTimeMillis()));
+        enseignant.setDateDebutDispo(new Date(System.currentTimeMillis()));
         enseignant.setExperience("");
         enseignant.setReferencesPro("");
         enseignant.setTitresAcademiques("");
@@ -38,8 +39,8 @@ public class EnseignantFactory {
         enseignant.setAdresseElectronique(request.getParameter("inputMail"));
         enseignant.setRemarques(request.getParameter("autresInformations")); //!
         try {
-            enseignant.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDispo") + " 00:00:00"));
-        } catch (IllegalArgumentException e) {
+            enseignant.setDateDebutDispo(Date.valueOf(request.getParameter("inputDispo")));
+        } catch (Exception e) {
             enseignant.setDateDebutDispo(null);
         }
         enseignant.setExperience(request.getParameter("inputExperience"));
@@ -49,8 +50,9 @@ public class EnseignantFactory {
         enseignant.setInteretsDomaines(request.getParameter("inputInteretDomaine"));
         enseignant.setRemarques(request.getParameter("remarques"));
         enseignant.setNiveauxSouhaites(request.getParameter("inputNiveauSouhaite"));
-        enseignant.setInteretsEcoles("No match in form");
+        enseignant.setInteretsEcoles(request.getParameter("inputInteretEcole"));
         enseignant.setTypeDeContrat(Arrays.toString(request.getParameterValues("contrat")).replace(" ", ""));
+        enseignant.setLienCv(request.getParameter("inputCV"));
         return enseignant;
     }
 

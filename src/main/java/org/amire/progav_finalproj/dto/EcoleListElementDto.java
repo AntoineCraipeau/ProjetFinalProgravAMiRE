@@ -3,6 +3,8 @@ package org.amire.progav_finalproj.dto;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.repositories.FavorisEcoleRepository;
+import org.amire.progav_finalproj.repositories.FavorisEnseignantRepository;
 
 import java.util.Date;
 
@@ -13,8 +15,10 @@ public class EcoleListElementDto {
     private String telephone;
     private String siteWeb;
     private String besoin;
-    private String competencesRequises;
-    private String typeDeContrat;
+    private CompetenceSetDto competencesRequises;
+    private String competenceText;
+    private ContratSetDto typeDeContrat;
+    private String contratText;
     private String exigences;
     private Date dateDebutDispo;
     private String remarques;
@@ -28,8 +32,10 @@ public class EcoleListElementDto {
         this.telephone = ecole.getTelephone();
         this.siteWeb = ecole.getSiteWeb();
         this.besoin = ecole.getBesoin();
-        this.competencesRequises = ecole.getCompetencesRequises() == null ? "" : ecole.getCompetencesRequises().replace("[","").replace("]", "");
-        this.typeDeContrat = ecole.getTypeDeContrat() == null ? "" : ecole.getTypeDeContrat().replace("[","").replace("]", "");
+        this.competencesRequises = new CompetenceSetDto(ecole.getCompetencesRequises());
+        this.competenceText = ecole.getCompetencesRequises() == null ? "" : ecole.getCompetencesRequises().replace("[","").replace("]", "");
+        this.typeDeContrat = new ContratSetDto(ecole.getTypeDeContrat());
+        this.contratText = ecole.getTypeDeContrat() == null ? "" : ecole.getTypeDeContrat().replace("[","").replace("]", "");
         this.exigences = ecole.getExigences();
         this.dateDebutDispo = ecole.getDateDebutDispo();
         this.remarques = ecole.getRemarques();
@@ -40,8 +46,7 @@ public class EcoleListElementDto {
         this.isFavoris = isEcoleInEnseignantFavoris(idEcole, idEnseignant);
     }
     private boolean isEcoleInEnseignantFavoris(long idEcole, long idEnseignant) {
-        EnseignantEntity enseignant = new EnseignantRepository().getEnseignantById(idEnseignant);
-        return enseignant.getFavoris().stream().anyMatch(fav -> fav.getIdEcole() == idEcole);
+        return new FavorisEnseignantRepository().getFavorisCandidatByOwnersId(idEnseignant, idEcole) != null;
     }
 
     public long getIdEcole() {
@@ -62,11 +67,17 @@ public class EcoleListElementDto {
     public String getBesoin() {
         return besoin;
     }
-    public String getCompetencesRequises() {
+    public CompetenceSetDto getCompetencesRequises() {
         return competencesRequises;
     }
-    public String getTypeDeContrat() {
+    public String getCompetenceText() {
+        return competenceText;
+    }
+    public ContratSetDto getTypeDeContrat() {
         return typeDeContrat;
+    }
+    public String getContratText() {
+        return contratText;
     }
     public String getExigences() {
         return exigences;

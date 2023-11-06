@@ -61,9 +61,9 @@
       </div><!-- End Logo -->
   
       <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
           <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+          <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
         </form>
       </div><!-- End Search Bar -->
         <nav class="header-nav ms-auto">
@@ -260,11 +260,11 @@
                 <tbody>
                 <c:forEach items="${ecoles}" var="ecole">
                     <tr>
-                        <td>${ecole.RaisonSociale}</td>
+                        <td>${ecole.raisonSociale}</td>
                         <td>
                             <form action="Controlleur" method="post">
                                 <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                <button class="btn btn-primary" name="action" value="AjoutFavorisEcole" type="submit">
+                                <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
                                     Ajouter aux favoris
                                 </button>
                             </form>
@@ -287,10 +287,10 @@
                 <tbody>
                 <c:forEach items="${favoris}" var="favorisEnseignant">
                     <tr>
-                        <td>${favorisEnseignant.nom}</td>
+                        <td>${favorisEnseignant.raisonSociale}</td>
                         <td>
                             <form action="Controlleur" method="post">
-                                <input type="hidden" name="idFavorisEnseignant" value="${favorisEnseignant.idEcole}">
+                                <input type="hidden" name="idEcole" value="${favorisEnseignant.idEcole}">
                                 <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
                                     Retirer des favoris
                                 </button>

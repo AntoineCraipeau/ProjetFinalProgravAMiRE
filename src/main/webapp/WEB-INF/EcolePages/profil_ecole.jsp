@@ -56,9 +56,9 @@
   </div><!-- End Logo -->
 
   <div class="search-bar">
-    <form class="search-form d-flex align-items-center" method="POST" action="#">
+    <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
       <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
     </form>
   </div><!-- End Search Bar -->
 
@@ -75,7 +75,7 @@
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.Raison}</span>
+          <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
@@ -206,6 +206,8 @@
                   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Modifier le Mot de Passe</a>
                 </li>
               </ul>
+              <p class="small text-danger">${messageErreur}</p>
+              <p class="small text-success">${messageSucces}</p>
               <div class="tab-content pt-2">
                 <!-- Section Profil -->
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
@@ -216,7 +218,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">E-mail</div>
-                    <div class="col-lg-9 col-md-8">${ecole.adresseEletronique}</div>
+                    <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
                   </div>
                   <div class ="row">
                     <div class="col-lg-3 col-md-4 label">Telephone</div>
@@ -239,11 +241,11 @@
                     <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                    <div class="col-lg-3 col-md-4 label">Type de contrats proposés</div>
                     <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Competences Requises</div>
+                    <div class="col-lg-3 col-md-4 label">Competences recherchées</div>
                     <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
                   </div>
                   <div class="row">
@@ -258,62 +260,54 @@
                     <div class="row mb-3">
                       <label for="inputRaisonSociale" class="col-sm-2 col-form-label">Nom</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale" value=${ecole.raisonSociale}>
+                        <input type="text" class="form-control" id="inputRaisonSociale" name="inputRaisonSociale" value="${ecole.raisonSociale}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputMail" class="col-sm-2 col-form-label">adresse Eletronique"</label>
+                      <label for="inputMail" class="col-sm-2 col-form-label">Adresse Eletronique"</label>
                       <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputMail" name="inputMail" value=${ecole.adresseElectronique}>
+                        <input type="email" class="form-control" id="inputMail" name="inputMail" value="${ecole.adresseElectronique}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputTelephone" class="col-sm-2 col-form-label">telephone</label>
+                      <label for="inputTelephone" class="col-sm-2 col-form-label">Téléphone</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputTelephone" name="inputTelephone" value=${ecole.telephone}>
+                        <input type="text" class="form-control" id="inputTelephone" name="inputTelephone" value="${ecole.telephone}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputBesoin" class="col-sm-2 col-form-label">besoin</label>
+                      <label for="inputBesoin" class="col-sm-2 col-form-label">Besoin</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" value=${ecole.besoin}>
+                        <input type="text" class="form-control" id="inputBesoin" name="inputBesoin" value="${ecole.besoin}">
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="inputexigences" class="col-sm-2 col-form-label">exigences</label>
+                      <label for="inputexigences" class="col-sm-2 col-form-label">Exigences</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputExigences" name="inputExigences" value=${ecole.exigences}>
+                        <input type="text" class="form-control" id="inputExigences" name="inputExigences" value="${ecole.exigences}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputDate" class="col-sm-2 col-form-label">Disponibilité</label>
                       <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputDate" name="inputDate" value=${ecole.dateDebutDispo}>
+                        <input type="date" class="form-control" id="inputDate" name="inputDate" value="${ecole.dateDebutDispo}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="inputremarques" class="col-sm-2 col-form-label">Remarques</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputremarques" name="inputRemarques" value=${ecole.remarques}>
+                        <input type="text" class="form-control" id="inputremarques" name="inputRemarques" value="${ecole.remarques}">
                       </div>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="formFile" class="col-sm-2 col-form-label">CV</label>
-                      <div class="col-sm-10">
-                        <input class="form-control" type="file" id="formFile" >
-                      </div>
-                    </div>
-
 
                     <label for="basic-url" class="form-label">Site Web</label>
                     <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon3">https://</span>
-                      <input type="text" class="form-control" id="basic-url" name="inputSiteWeb" value=${ecole.siteWeb} aria-describedby="basic-addon3">
+                      <input type="text" class="form-control" id="basic-url" name="inputSiteWeb" value="${ecole.siteWeb}" aria-describedby="basic-addon3">
                     </div>
 
                     <div class="row mb-3">
-                      <legend class="col-form-label col-sm-2 pt-0">Competences Requises</legend>
+                      <legend class="col-form-label col-sm-2 pt-0">Compétences recherchées</legend>
                       <div class="col-sm-10">
                         <div class="row mb-3">
                           <div class="col-sm-10">
@@ -339,10 +333,10 @@
                     </div>
 
                     <div class="row mb-3">
-                      <legend class="col-form-label col-sm-2 pt-0">Type de Contrat</legend>
+                      <legend class="col-form-label col-sm-2 pt-0">Types de contrats proposés</legend>
                       <div class="col-sm-10">
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd " <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
+                          <input class="form-check-input" type="checkbox" id="cdd" name="contrat" value="cdd" <c:if test="${ecole.typeDeContrat.cdd}">checked</c:if>>
                           <label class="form-check-label" for="cdd">
                             CDD
                           </label>
@@ -367,7 +361,7 @@
                     </div>
                     </br>
                     <div class="col-12">
-                      <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Envoyer form</button>
+                      <button class="btn btn-primary" type="submit" name="action" value="ModifierProfil">Confirmer</button>
                     </div>
 
                   </form><!-- End General Form Elements -->
@@ -377,30 +371,30 @@
                 <!-- Section Modifier le Mot de Passe -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <h5 class="card-title">Modifier le Mot de Passe</h5>
-                  <form action="ChangePasswordServlet" method="post">
+                  <form action="Controlleur" method="post">
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le mot de passe actuel:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Entrez le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newPassword" type="password" class="form-control" id="newPassword" required>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Entrez à nouveau le nouveau mot de passe:</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewPassword" type="password" class="form-control" id="renewPassword" required>
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary" name="action" value="ModifierMdp">Confirmer</button>
                     </div>
                   </form><!-- End Change Password Form -->
                 </div>

@@ -1,6 +1,7 @@
 package org.amire.progav_finalproj.repositories;
 
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,6 +18,8 @@ public class FavorisEnseignantRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
+    @EJB
+    EcoleRepository ecoleRepository;
 
     // Read
 
@@ -24,8 +27,12 @@ public class FavorisEnseignantRepository {
         Query q = em.createQuery("select e from FavorisEnseignantEntity e where e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEnseignant", idEnseignant);
         List<FavorisEnseignantEntity> favoris = q.getResultList();
-        //On extrait les écoles de la liste
-        return favoris.stream().map(FavorisEnseignantEntity::getEcole).toList();
+        List<Long> favorisIds = favoris.stream().map(FavorisEnseignantEntity::getIdEcole).toList();
+
+        List<EcoleEntity> ecoles = ecoleRepository.getAllEcoles();
+        ecoles.removeIf(ecole -> !favorisIds.contains(ecole.getIdEcole()));
+
+        return ecoles;
     }
 
     public FavorisEnseignantEntity getFavorisCandidatById(long id){
@@ -38,15 +45,24 @@ public class FavorisEnseignantRepository {
         Query q = em.createQuery("select e from FavorisEnseignantEntity e where e.idEcole = :idEcole and e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         q.setParameter("idEnseignant", idEnseignant);
-        return (FavorisEnseignantEntity) q.getSingleResult();
+        try {
+            return (FavorisEnseignantEntity) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Create
 
     public void addCandidatsFavoris(EnseignantEntity enseignant, EcoleEntity ecole){
+        if(getFavorisCandidatByOwnersId(enseignant.getIdEnseignant(), ecole.getIdEcole()) != null) {
+            return;
+        }
         FavorisEnseignantEntity favoris = new FavorisEnseignantEntity();
         favoris.setEcole(ecole);
         favoris.setEnseignant(enseignant);
+        favoris.setIdEnseignant(enseignant.getIdEnseignant());
+        favoris.setIdEcole(ecole.getIdEcole());
         em.getTransaction().begin();
         em.persist(favoris);
         em.getTransaction().commit();

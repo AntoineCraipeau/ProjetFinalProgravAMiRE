@@ -3,6 +3,7 @@ package org.amire.progav_finalproj.factories;
 import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EcoleEntity;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ public class EcoleFactory {
         ecole.setCompetencesRequises("");
         ecole.setExigences("");
         ecole.setBesoin("");
-        ecole.setDateDebutDispo(new Timestamp(System.currentTimeMillis()));
+        ecole.setDateDebutDispo(new Date(System.currentTimeMillis()));
         ecole.setRemarques("");
         ecole.setSiteWeb("");
         return ecole;
@@ -26,8 +27,8 @@ public class EcoleFactory {
         ecole.setExigences(request.getParameter("inputExigences"));
         ecole.setBesoin(request.getParameter("inputBesoin"));
         try {
-            ecole.setDateDebutDispo(Timestamp.valueOf(request.getParameter("inputDate")+ " 00:00:00"));
-        } catch (IllegalArgumentException e) {
+            ecole.setDateDebutDispo(Date.valueOf(request.getParameter("inputDate")));
+        } catch (Exception e) {
             ecole.setDateDebutDispo(null);
         }
         ecole.setRemarques(request.getParameter("inputRemarques"));
