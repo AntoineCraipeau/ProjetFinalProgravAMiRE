@@ -49,130 +49,122 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-  
-      <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="">
-          <span class="d-none d-lg-block">ProjetProgAv2023</span>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="#" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">ProjetProgAv2023</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div><!-- End Logo -->
-  
-      <div class="search-bar">
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
-          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-          <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
         </form>
-      </div><!-- End Search Bar -->
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
+    </div><!-- End Search Bar -->
 
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle" href="#">
-                        <i class="bi bi-search"></i>
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle" href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+
+            <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">Bonjour, ${enseignant.nom}  ${enseignant.prenom}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>${userInfo.login}</h6>
+                        <span>Enseignant</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form action="Controlleur" method="post">
+                            <input type="hidden" name="action" value="EnseignantVersProfil">
+                            <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Profile</span>
+                            </a>
+                        </form>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form action="Controlleur" method="post">
+                            <input type="hidden" name="action" value="Logout">
+                            <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </form>
+                    </li>
+
+                </ul>
+            </li>
+
+
+        </ul><!-- End Profile Dropdown Items -->
+    </nav><!-- End Icons Navigation -->
+
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-heading">Pages</li>
+
+            <li class="nav-item">
+                <form action="Controlleur" method="post">
+                    <input type="hidden" name="action" value="EnseignantVersDashboard">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Dashboard</span>
                     </a>
-                </li><!-- End Search Icon-->
+                </form>
+            </li><!-- End Dashboard Nav -->
 
-
-                <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">${enseignant.nom},${enseignant.prenom}</span>
+            <li class="nav-item">
+                <form action="Controlleur" method="post">
+                    <input type="hidden" name="action" value="EnseignantVersProfil">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Profil</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6> ${enseignant.nom},${enseignant.prenom}</h6>
-                            <span>Enseignant</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form action="Controlleur" method="post">
-                                <input type="hidden" name="action" value="EnseignantVersProfil">
-                                <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                                    <i class="bi bi-person"></i>
-                                    <span>My Profile</span>
-                                </a>
-                            </form>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form action="Controlleur" method="post">
-                                <input type="hidden" name="action" value="Logout">
-                                <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Sign Out</span>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
+                </form>
+            </li><!-- End Profile Page Nav -->
 
 
-            </ul><!-- End Profile Dropdown Items -->
-        </nav><!-- End Icons Navigation -->
-
-        <!-- ======= Sidebar ======= -->
-        <aside id="sidebar" class="sidebar">
-
-            <ul class="sidebar-nav" id="sidebar-nav">
-
-                <li class="nav-item">
-                    <form action="Controlleur" method="post">
-                        <input type="hidden" name="action" value="EnseignantVersDashboard">
-                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </form>
-                </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <form action="Controlleur" method="post">
+                    <input type="hidden" name="action" value="EnseignantVersMatch">
+                    <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Match Enseignant</span>
+                    </a>
+                </form>
+            </li><!-- End Login Page Nav -->
 
 
+        </ul>
 
-                <li class="nav-heading">Pages</li>
-
-                <li class="nav-item">
-                    <form action="Controlleur" method="post">
-                        <input type="hidden" name="action" value="EnseignantVersProfil">
-                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Profil</span>
-                        </a>
-                    </form>
-                </li><!-- End Profile Page Nav -->
-
-                <li class="nav-item">
-                    <form action="Controlleur" method="post">
-                        <input type="hidden" name="action" value="EnseignantVersMatch">
-                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>MatchEcole</span>
-                        </a>
-                    </form>
-                </li><!-- End Profile Page Nav -->
+    </aside>
 
 
-
-                <li class="nav-item">
-                    <form action="Controlleur" method="post">
-                        <input type="hidden" name="action" value="EnseignantVersForm">
-                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Register Form</span>
-                        </a>
-                    </form>
-                </li><!-- End Login Page Nav -->
-
-            </ul>
-
-        </aside>
-  
-    </header><!-- End Header -->
+</header><!-- End Header -->
     <main id="main" class="main">
 
 
@@ -227,6 +219,11 @@
                                                     </form>
                                                     </br>
                                                 </td>
+
+                                                <form action="Controlleur" method="post">
+                                                    <input type="text" id="${idEcole}" name="idEcole" value="${postulation.idEcole}" hidden>
+                                                    <button class="btn btn-primary" type="submit" name="action" value="EnseignantVersProfilEcole">Voir profil</button>
+                                                </form>
                                             </c:if>
                                             <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
                                                 <td>
@@ -247,62 +244,42 @@
         </div>
       </section>
 
-        <section class="testfav">
-            <h1>Liste des écoles</h1>
-            <table class="table">
-                <thead>
-                <tr class="text-center">
-                    <th>Nom</th>
-                    <!-- Autres colonnes -->
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${ecoles}" var="ecole">
-                    <tr>
-                        <td>${ecole.raisonSociale}</td>
-                        <td>
-                            <form action="Controlleur" method="post">
-                                <input type="hidden" name="idEcole" value="${ecole.idEcole}">
-                                <button class="btn btn-primary" name="action" value="AjoutFavorisEnseignant" type="submit">
-                                    Ajouter aux favoris
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </section>
 
         <section class="section">
-            <h1>Liste des enseignants favoris</h1>
-            <table class="table">
-                <thead>
-                <tr class="text-center">
-                    <th>Nom</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${favoris}" var="favorisEnseignant">
-                    <tr>
-                        <td>${favorisEnseignant.raisonSociale}</td>
-                        <td>
-                            <form action="Controlleur" method="post">
-                                <input type="hidden" name="idEcole" value="${favorisEnseignant.idEcole}">
-                                <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
-                                    Retirer des favoris
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-lg-20">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Favoris</h5>
+                    <h1>Liste des enseignants favoris</h1>
+                    <table class="table">
+                        <thead>
+                        <tr class="text-center">
+                            <th>Nom</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${favoris}" var="favorisEnseignant">
+                            <tr>
+                                <td>${favorisEnseignant.raisonSociale}</td>
+                                <td>
+                                    <form action="Controlleur" method="post">
+                                        <input type="hidden" name="idEcole" value="${favorisEnseignant.idEcole}">
+                                        <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
+                                            Retirer des favoris
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-
-
 
 
     </main>

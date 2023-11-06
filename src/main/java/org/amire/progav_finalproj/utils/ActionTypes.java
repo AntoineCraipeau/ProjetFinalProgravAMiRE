@@ -30,6 +30,7 @@ public enum ActionTypes {
     EnseignantVersDashboard,
     EnseignantVersForm,
     EnseignantVersProfil,
+    EnseignantVersProfilEcole,
     SupprimerEcole,
     SupprimerEnseignant,
     ModifierProfil,
