@@ -23,12 +23,158 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
+    <style>
+        .table-container {
+            max-width: 100%; /* Make the container as wide as the available space */
+            overflow-x: auto; /* Add horizontal scrolling if necessary */
+        }
+        .table {
+            width: 100%; /* Make the table fill the container */
+            table-layout: fixed; /* Prevent table from expanding beyond its container */
+            border-collapse: collapse; /* Ensure cells don't overlap */
+        }
+        .table th, .table td {
+            word-wrap: break-word; /* Wrap long words */
+        }
+    </style>
+
 </head>
 <body>
     <h1>Bonjour admin n°${admin.idAdmin} ! Vous êtes un admin ! </h1>
+
     <form action="Controlleur" method="post">
         <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
     </form>
+
+    <div class="delete-users-container">
+        <div class="user-list">
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                var deleteUser = $('.user-list').on('click', '.delete-user', function(e) {
+                    e.preventDefault();
+                    var userId = $(this).data('user-id');
+
+                    // Make an AJAX request to delete the user with the userId.
+                    $.ajax({
+                        url: '/TP3/api/users/' + userId,
+                        type: 'DELETE',
+                        log: console.log('url = ' + '/TP3/api/users/' + userId),
+                        success: function() {
+                            console.log('User deleted successfully.');
+                            // Remove the row from the table upon successful deletion.
+                            $(e.target).closest('tr').remove();
+                        },
+                        error: function() {
+                            console.log('Failed to delete user.');
+                            alert('Failed to delete user.');
+                        }
+                    });
+                });
+                fetch("/TP3/api/users/ecoles")
+                    .then((res) => {
+                        if (!res.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return res.json();
+                    })
+                    .then((ecolesData) => {
+                        console.log("Ecoles Data: ", ecolesData); // Log the data
+                        if (ecolesData && ecolesData.length > 0) {
+                            var temp = "";
+                            ecolesData.forEach((itemData) => {
+                                temp += "<tr>";
+                                temp += "<td>" + itemData.idEcole + "</td>";
+                                temp += "<td>" + itemData.raisonSociale + "</td>";
+                                temp += "<td>" + itemData.adresseElectronique + "</td>";
+                                temp += "<td>" + itemData.telephone + "</td>";
+                                temp += "<td>" + itemData.competenceText + "</td>";
+                                temp += "<td>" + itemData.contratText + "</td>";
+                                temp += "<td>" + itemData.dateDebutDispo + "</td>";
+                                temp +=
+                                    "<td><button class='delete-user' data-user-id='" +
+                                    itemData.idEcole +
+                                    "'>Delete</button></td>" + "</tr>";
+                            });
+                            document.getElementById("ecolesData").innerHTML = temp;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching Ecoles data: ", error);
+                    });
+                fetch("/TP3/api/users/enseignants")
+                    .then((res) => {
+                        if (!res.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return res.json();
+                    })
+                    .then((enseignantsData) => {
+                        console.log("Enseignants Data: ", enseignantsData); // Log the data
+                        if (enseignantsData && enseignantsData.length > 0) {
+                            var temp = "";
+                            enseignantsData.forEach((itemData) => {
+                                temp += "<tr>";
+                                temp += "<td>" + itemData.idEnseignant + "</td>";
+                                temp += "<td>" + itemData.nom + "</td>";
+                                temp += "<td>" + itemData.prenom + "</td>";
+                                temp += "<td>" + itemData.adresseElectronique + "</td>";
+                                temp += "<td>" + itemData.telephone + "</td>";
+                                temp += "<td>" + itemData.competenceText + "</td>";
+                                temp += "<td>" + itemData.dateDebutDispo + "</td>";
+                                temp +=
+                                    "<td><button class='delete-user' data-user-id='" +
+                                    itemData.nom +
+                                    "'>Delete</button></td>" + "</tr>";
+                            });
+                            document.getElementById("enseignantsData").innerHTML = temp;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching Enseignants data: ", error);
+                    });
+
+            </script>
+
+            <div class="table-container">
+                <h1>Liste Écoles</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Raison Sociale</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Compétences Requise</th>
+                        <th>Type de Contrat</th>
+                        <th>Date de début de Contrat</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ecolesData">
+
+                    </tbody>
+                </table>
+                <h1>Liste Enseignants</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Compétences</th>
+                        <th>Date de début de disponibilité</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="enseignantsData">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div class="col-lg-6">
         <div class="card">
@@ -41,7 +187,7 @@
                 <script>
                     $(document).ready(function() {
                         // Effectuer une requête AJAX pour obtenir les données de l'API
-                        $.get("/TP3/api/users/enseignants-par-mois", function(moisData) {
+                        $.get("/TP3/api/employee/enseignants-par-mois", function(moisData) {
 
                             // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
                             var mois = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
