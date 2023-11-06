@@ -196,14 +196,14 @@
                                               </form>
                                               </br>
                                               <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostuleAcc" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="AccepterPostulationEcole">Accepter</button>
+                                                  <input type="text" id="idPostule" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <select name="action">
+                                                      <option value="AccepterPostulationEcole">Accepter</option>
+                                                      <option value="RefuserPostulationEcole">Refuser</option>
+                                                  </select>
+                                                  <button class="btn btn-primary" type="submit">Confirmer</button>
                                               </form>
-                                              </br>
-                                              <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostuleRef" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="RefuserPostulationEcole">Refuser</button>
-                                              </form>
+
                                               </br>
                                           </td>
                                       </c:if>
