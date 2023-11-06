@@ -50,7 +50,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ProjetProgAv2023</span>
         </a>
@@ -58,9 +58,9 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
             <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
 
@@ -76,8 +76,8 @@
 
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/img_profil_enseignant.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">${ecole.raisonSociale}</span>
+                    <img src="assets/img/img_profil_ecole.png" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2"> Bonjour, ${ecole.raisonSociale}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
@@ -89,7 +89,7 @@
                     </li>
                     <li>
                         <form action="Controlleur" method="post">
-                            <input type="hidden" name="action" value="EcoleVersProfile">
+                            <input type="hidden" name="action" value="EcoleVersProfil">
                             <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Profile</span>
@@ -108,6 +108,7 @@
                             </a>
                         </form>
                     </li>
+
                 </ul>
             </li>
 
@@ -121,6 +122,8 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
+            <li class="nav-heading">Pages</li>
+
             <li class="nav-item">
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EcoleVersDashboard">
@@ -130,10 +133,6 @@
                     </a>
                 </form>
             </li><!-- End Dashboard Nav -->
-
-
-
-            <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
                 <form action="Controlleur" method="post">
@@ -147,18 +146,11 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-register.html">
-                    <i class="bi bi-card-list"></i>
-                    <span>Register</span>
-                </a>
-            </li><!-- End Register Page Nav -->
-
-            <li class="nav-item">
                 <form action="Controlleur" method="post">
-                    <input type="hidden" name="action" value="EcoleVersForm">
+                    <input type="hidden" name="action" value="EcoleVersMatch">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
                         <i class="bi bi-box-arrow-right"></i>
-                        <span>Register Form</span>
+                        <span>Match Enseignant</span>
                     </a>
                 </form>
             </li><!-- End Login Page Nav -->
@@ -169,6 +161,7 @@
 
 
 </header><!-- End Header -->
+
 
 
   <main id="main" class="main">

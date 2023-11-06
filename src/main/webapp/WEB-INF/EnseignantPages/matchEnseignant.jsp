@@ -53,7 +53,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ProjetProgAv2023</span>
         </a>
@@ -240,13 +240,13 @@
 
     <h5>Liste des ecoles</h5>
     <section class="section">
-    <div class="container ">
-    <div id="teacherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-    <ol class="carousel-indicators">
-        <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
-            <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
-        </c:forEach>
-    </ol>
+        <div class="container ">
+        <div id="teacherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators">
+            <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
+                <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
+            </c:forEach>
+        </ol>
         <div class="carousel-inner">
         <c:forEach items="${ecoles}" var="ecole" varStatus="loop">
             <c:forEach items="${competenceselec}" var="competenceID" >

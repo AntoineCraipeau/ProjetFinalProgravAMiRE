@@ -55,7 +55,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ProjetProgAv2023</span>
         </a>
@@ -126,7 +126,6 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
@@ -200,6 +199,7 @@
 
         console.log("Compétences sélectionnées : " + competences);
         console.log("Types de contrat sélectionnés : " + typeContrat);
+        console.log("Types de EnseignantID sélectionnés : " + EnseignantID);
     </script>
 
 
@@ -247,10 +247,9 @@
         <div class="container ">
             <div id="teacherCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 <ol class="carousel-indicators">
-                    <c:forEach items="${enseignants}" var="enseignant" varStatus="loop">
-                        <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
-                    </c:forEach>
+                    <li data-target="#teacherCarousel" data-slide-to="${loop.index}" class="${loop.first ? 'active' : ''}"></li>
                 </ol>
+
                 <div class="carousel-inner">
                     <c:forEach items="${enseignants}" var="enseignant" varStatus="loop">
                         <c:forEach items="${competenceselec}" var="competenceID" >

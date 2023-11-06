@@ -16,6 +16,7 @@ public enum ActionTypes {
     RetraitPostulationEcole,
     EcoleVersDashboard,
     EcoleVersProfil,
+    EcoleVersProfilEnseignant,
     EcoleVersForm,
     EcoleVersMatch,
     EnseignantVersMatch,
