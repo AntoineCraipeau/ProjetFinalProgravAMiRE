@@ -188,6 +188,7 @@
                                     <th>IDPostule</th>
                                     <th>Date</th>
                                     <th>Decision</th>
+                                    <th>Initiateur</th>
                                     <th>Ecole</th>
                                     <th>Enseignant</th>
                                     <th>Actions</th>
@@ -200,6 +201,7 @@
                                             <td>${postulation.idPostule}</td>
                                             <td>${postulation.datePostule}</td>
                                             <td>${postulation.decision}</td>
+                                            <td>${postulation.initiateur}</td>
                                             <td>${postulation.nomEcole}</td>
                                             <td>${postulation.nomEnseignant}</td>
                                             <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
