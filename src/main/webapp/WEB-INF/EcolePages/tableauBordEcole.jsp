@@ -203,8 +203,13 @@
                                                   </select>
                                                   <button class="btn btn-primary" type="submit">Confirmer</button>
                                               </form>
-
                                               </br>
+                                          </td>
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
+                                              </form>
                                           </td>
                                       </c:if>
                                       <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
@@ -215,11 +220,11 @@
                                               </form>
                                               </br>
                                           </td>
-                                        <td>
-                                            <form action="Controlleur" method="post">
-                                                <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
-                                                <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
-                                            </form>
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
+                                              </form>
                                         </td>
                                       </c:if>
                                   </tr>

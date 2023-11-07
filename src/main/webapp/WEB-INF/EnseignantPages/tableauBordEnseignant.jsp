@@ -216,14 +216,14 @@
                                                         </select>
                                                         <button class="btn btn-primary" type="submit">Confirmer</button>
                                                     </form>
-
                                                     </br>
                                                 </td>
-
-                                                <form action="Controlleur" method="post">
-                                                    <input type="text" id="${idEcole}" name="idEcole" value="${postulation.idEcole}" hidden>
-                                                    <button class="btn btn-primary" type="submit" name="action" value="EnseignantVersProfilEcole">Voir profil</button>
-                                                </form>
+                                                <td>
+                                                    <form action="Controlleur" method="post">
+                                                        <input type="text" id="${idEcole}" name="idEcole" value="${postulation.idEcole}" hidden>
+                                                        <button class="btn btn-primary" type="submit" name="action" value="EnseignantVersProfilEcole">Voir profil</button>
+                                                    </form>
+                                                </td>
                                             </c:if>
                                             <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
                                                 <td>
@@ -232,6 +232,12 @@
                                                         <button class="btn btn-primary" type="submit" name="action" value="RetraitPostulationEnseignant">Annuler</button>
                                                     </form>
                                                     </br>
+                                                </td>
+                                                <td>
+                                                    <form action="Controlleur" method="post">
+                                                        <input type="text" id="${idEcole}" name="idEcole" value="${postulation.idEcole}" hidden>
+                                                        <button class="btn btn-primary" type="submit" name="action" value="EnseignantVersProfilEcole">Voir profil</button>
+                                                    </form>
                                                 </td>
                                             </c:if>
                                         </tr>

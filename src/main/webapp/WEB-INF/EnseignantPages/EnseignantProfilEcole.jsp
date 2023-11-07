@@ -171,60 +171,48 @@
 
 <main id="main" class="main">
 
-
-    <c:set var="EcoleID" value="${paramValues.idEcole[0]}" />
-    <c:forEach items="${ecoles}" var="enseignant">
-        <c:if test="${ecole.idEnseignant eq EcoleID}">
-            <c:set var="ecole" value="${ecole}" />
-        </c:if>
-    </c:forEach>
-
-        <script>
-            var nom = ${ecole.nom};
-            console.log("nom enseignantToDisplay : " + nom);
-        </script>
-
-            <form method="GET" action="Controlleur" class="form">
-                <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
-                    <h5>${ecole.raisonSociale}</h5>
-                </div>
-                <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">E-mail</div>
-                        <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
-                    </div>
-                    <div class ="row">
-                        <div class="col-lg-3 col-md-4 label">Telephone</div>
-                        <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Besoin</div>
-                        <div class="col-lg-9 col-md-8">${ecole.besoin}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Exigences</div>
-                        <div class="col-lg-9 col-md-8">${ecole.exigences}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
-                        <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Site Web</div>
-                        <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
-                        <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Competences Requises</div>
-                        <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Remarque</div>
-                        <div class="col-lg-9 col-md-8">${ecole.remarques}</div>
-                    </div>
+    <form method="GET" action="Controlleur" class="form">
+        <div class="card-header rounded d-flex align-items-center justify-content-center h-20" style="background-color: #007BFF;  color: #fff; font-size: 24px;">
+            <h5>${ecole.raisonSociale}</h5>
+        </div>
+        <div class="card-body rounded pt-3 w-70 h-20" style="border: 2px solid #ddd; width: 100%;">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">E-mail</div>
+                <div class="col-lg-9 col-md-8">${ecole.adresseElectronique}</div>
+            </div>
+            <div class ="row">
+                <div class="col-lg-3 col-md-4 label">Telephone</div>
+                <div class="col-lg-9 col-md-8">${ecole.telephone}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Besoin</div>
+                <div class="col-lg-9 col-md-8">${ecole.besoin}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Exigences</div>
+                <div class="col-lg-9 col-md-8">${ecole.exigences}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Date de début souhaité</div>
+                <div class="col-lg-9 col-md-8">${ecole.dateDebutDispo}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Site Web</div>
+                <div class="col-lg-9 col-md-8">${ecole.siteWeb}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Type de contrats souhaités</div>
+                <div class="col-lg-9 col-md-8">${ecole.contratText}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Competences Requises</div>
+                <div class="col-lg-9 col-md-8">${ecole.competenceText}</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">Remarque</div>
+                <div class="col-lg-9 col-md-8">${ecole.remarques}</div>
+            </div>
+        </div>
     </form>
 </main>
 <!-- ======= Footer ======= -->
