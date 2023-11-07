@@ -262,10 +262,8 @@
                     <h1>Liste des enseignants favoris</h1>
                     <table class="table">
                         <thead>
-                        <tr class="text-center">
                             <th>Nom</th>
                             <th>Actions</th>
-                        </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${favoris}" var="favorisEnseignant">
@@ -277,6 +275,12 @@
                                         <button class="btn btn-danger" name="action" value="RetraitFavorisEnseignant" type="submit">
                                             Retirer des favoris
                                         </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="Controlleur" method="post">
+                                        <input type="text" id="${favorisEnseignant.idEcole}" name="idEcole" value="${favorisEnseignant.idEcole}" hidden>
+                                        <button class="btn btn-primary" type="submit" name="action" value="EnseignantVersProfilEcole">Voir profil</button>
                                     </form>
                                 </td>
                             </tr>
