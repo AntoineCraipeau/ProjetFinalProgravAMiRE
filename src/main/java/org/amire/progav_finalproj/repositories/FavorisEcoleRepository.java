@@ -35,6 +35,12 @@ public class FavorisEcoleRepository {
         return enseignants;
     }
 
+    private List<FavorisEcoleEntity> getAllFavorisOfEcoleByIdAsFavoris(long idEcole){
+        Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcole = :idEcole"); // Requête JPQL
+        q.setParameter("idEcole", idEcole);
+        return q.getResultList();
+    }
+
     public FavorisEcoleEntity getFavorisEcoleById(long id){
         Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcolesFavories = :id"); // Requête JPQL
         q.setParameter("id", id);
@@ -83,6 +89,13 @@ public class FavorisEcoleRepository {
         em.getTransaction().begin();
         em.remove(favoris);
         em.getTransaction().commit();
+    }
+
+    public void removeAllFavorisEcoleByEcoleId(long idEcole){
+        List<FavorisEcoleEntity> favoris = getAllFavorisOfEcoleByIdAsFavoris(idEcole);
+        for (FavorisEcoleEntity favori : favoris) {
+            removeFavorisEcole(favori);
+        }
     }
 
 }

@@ -1,15 +1,23 @@
 package org.amire.progav_finalproj.repositories;
 
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 import org.amire.progav_finalproj.model.EnseignantEntity;
+import org.amire.progav_finalproj.model.UserinfoEntity;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Stateless
 public class EnseignantRepository {
+
+    @EJB
+    UserRepository userRepository;
+    @EJB
+    PostuleRepository postuleRepository;
+    @EJB
+    FavorisEnseignantRepository favorisEnseignantRepository;
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
@@ -39,14 +47,20 @@ public class EnseignantRepository {
         em.getTransaction().commit();
     }
 
-    public void deleteEnseignantById(long id){
-        Query q = em.createQuery("delete from EnseignantEntity e where e.idEnseignant = :id"); // Requête JPQL
-        q.setParameter("id", id);
-        q.executeUpdate();
+    public void deleteEnseignantById(long userId){
 
-        Query q2 = em.createQuery("delete from UserinfoEntity u where u.idEnseignant = :id"); // Requête JPQL
-        q2.setParameter("id", id);
-        q2.executeUpdate();
+        UserinfoEntity userinfo = userRepository.getUserById(userId);
+        EnseignantEntity enseignant = getEnseignantById(userinfo.getIdEnseignant());
+
+        postuleRepository.removeAllPostulesByEnseignantId(enseignant.getIdEnseignant());
+        favorisEnseignantRepository.removeAllCandidatsFavorisByEnseignantId(enseignant.getIdEnseignant());
+
+        em.getTransaction().begin();
+        em.remove(enseignant);
+        em.getTransaction().commit();
+
+        userRepository.deleteUser(userinfo);
+
     }
 
 }
