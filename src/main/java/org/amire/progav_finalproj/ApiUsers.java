@@ -7,14 +7,16 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
-import org.amire.progav_finalproj.dto.EnseignantProfileInfoDto;
+
+import org.amire.progav_finalproj.dto.EnseignantApiDto;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.dto.EcoleProfileInfoDto;
+import org.amire.progav_finalproj.dto.EcoleApiDto;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.repositories.EnseignantRepository;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
 import org.amire.progav_finalproj.repositories.UserRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -24,6 +26,8 @@ public class ApiUsers {
     EnseignantRepository enseignantSessionBean = new EnseignantRepository();
     UserRepository userSessionBean = new UserRepository();
     EcoleRepository ecoleSessionBean = new EcoleRepository();
+
+    SimpleDateFormat dispoFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @GET
     @Path ("/all")
@@ -35,13 +39,15 @@ public class ApiUsers {
     @GET
     @Path("/enseignants")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<EnseignantProfileInfoDto> getEnseignants() {
+    public List<EnseignantApiDto> getEnseignants() {
         List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
-        List<EnseignantProfileInfoDto> enseignantDtos = new ArrayList<>();
+        List<EnseignantApiDto> enseignantDtos = new ArrayList<>();
         for (EnseignantEntity enseignant : enseignants) {
-            EnseignantProfileInfoDto enseignantDto = new EnseignantProfileInfoDto(enseignant);
+            EnseignantApiDto enseignantDto = new EnseignantApiDto(enseignant);
             enseignantDtos.add(enseignantDto);
         }
+
+
 
         return enseignantDtos;
     }
@@ -49,11 +55,11 @@ public class ApiUsers {
     @GET
     @Path("/ecoles")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<EcoleProfileInfoDto> getEcoles() {
+    public List<EcoleApiDto> getEcoles() {
         List<EcoleEntity> ecoles = ecoleSessionBean.getAllEcoles();
-        List<EcoleProfileInfoDto> ecoleDtos = new ArrayList<>();
+        List<EcoleApiDto> ecoleDtos = new ArrayList<>();
         for (EcoleEntity ecole : ecoles) {
-            EcoleProfileInfoDto ecoleDto = new EcoleProfileInfoDto(ecole);
+            EcoleApiDto ecoleDto = new EcoleApiDto(ecole);
             ecoleDtos.add(ecoleDto);
             }
 
