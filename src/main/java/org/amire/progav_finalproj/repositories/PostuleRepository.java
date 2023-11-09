@@ -82,4 +82,18 @@ public class PostuleRepository {
         em.remove(postule);
         em.getTransaction().commit();
     }
+
+    public void removeAllPostulesByEcoleId(long idEcole){
+        List<PostuleEntity> postules = getAllPostulesByEcoleId(idEcole);
+        for(PostuleEntity postule : postules){
+            removePostule(postule);
+        }
+    }
+
+    public void removeAllPostulesByEnseignantId(long idEnseignant){
+        List<PostuleEntity> postules = getAllPostulesByEnseignantId(idEnseignant);
+        for(PostuleEntity postule : postules){
+            removePostule(postule);
+        }
+    }
 }

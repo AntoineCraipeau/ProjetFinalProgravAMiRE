@@ -1,17 +1,26 @@
 package org.amire.progav_finalproj.repositories;
 
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import org.amire.progav_finalproj.model.EcoleEntity;
+import org.amire.progav_finalproj.model.UserinfoEntity;
 
 import java.util.List;
 
 @Stateless
 public class EcoleRepository {
+
+    @EJB
+    UserRepository userRepository;
+    @EJB
+    PostuleRepository postuleRepository;
+    @EJB
+    FavorisEcoleRepository favorisEcoleRepository;
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
@@ -45,14 +54,19 @@ public class EcoleRepository {
         em.getTransaction().commit();
     }
 
-    public void deleteEcoleById(long id) { // Faut trouver un moyen de respecter l'aspect transactionnel non ?
-        Query q = em.createQuery("delete from EcoleEntity e where e.idEcole = :id"); // Requête JPQL
-        q.setParameter("id", id);
-        q.executeUpdate();
+    public void deleteEcoleById(long userId) { // Faut trouver un moyen de respecter l'aspect transactionnel non ?
 
-        Query q2 = em.createQuery("delete from UserinfoEntity u where u.idEcole = :id"); // Requête JPQL
-        q2.setParameter("id", id);
-        q2.executeUpdate();
+        UserinfoEntity userinfo = userRepository.getUserById(userId);
+        EcoleEntity ecole = getEcoleById(userinfo.getIdEcole());
+
+        postuleRepository.removeAllPostulesByEcoleId(ecole.getIdEcole());
+        favorisEcoleRepository.removeAllFavorisEcoleByEcoleId(ecole.getIdEcole());
+
+        em.getTransaction().begin();
+        em.remove(ecole);
+        em.getTransaction().commit();
+
+        userRepository.deleteUser(userRepository.getUserById(userId));
     }
 
 }
