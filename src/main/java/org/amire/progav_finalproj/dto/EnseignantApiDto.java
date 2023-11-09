@@ -4,6 +4,7 @@ import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EnseignantApiDto {
@@ -20,7 +21,7 @@ public class EnseignantApiDto {
     private String interetsDomaines;
     private String interetsEcoles;
     private String niveauxSouhaites;
-    private Timestamp dateDebutDispo;
+    private String dateDebutDispo;
     private ContratSetDto typeDeContrat;
     private String contratText;
     private String titresAcademiques;
@@ -42,7 +43,7 @@ public class EnseignantApiDto {
         this.interetsDomaines = enseignant.getInteretsDomaines();
         this.interetsEcoles = enseignant.getInteretsEcoles();
         this.niveauxSouhaites = enseignant.getNiveauxSouhaites();
-        this.dateDebutDispo = new Timestamp(enseignant.getDateDebutDispo().getTime());
+        this.dateDebutDispo = new SimpleDateFormat("dd/MM/yyyy").format(enseignant.getDateDebutDispo());
         this.typeDeContrat = new ContratSetDto(enseignant.getTypeDeContrat());
         this.contratText = enseignant.getTypeDeContrat() == null ? "" : enseignant.getTypeDeContrat().replace("[","").replace("]", "");
         this.titresAcademiques = enseignant.getTitresAcademiques();
@@ -90,7 +91,7 @@ public class EnseignantApiDto {
     public String getNiveauxSouhaites() {
         return niveauxSouhaites;
     }
-    public Timestamp getDateDebutDispo() {
+    public String getDateDebutDispo() {
         return dateDebutDispo;
     }
     public ContratSetDto getTypeDeContrat() {

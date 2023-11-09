@@ -4,6 +4,7 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EcoleApiDto {
@@ -19,7 +20,7 @@ public class EcoleApiDto {
     private ContratSetDto typeDeContrat;
     private String contratText;
     private String exigences;
-    private Timestamp dateDebutDispo;
+    private String dateDebutDispo;
     private String remarques;
 
     public EcoleApiDto(EcoleEntity ecole) {
@@ -34,7 +35,7 @@ public class EcoleApiDto {
         this.typeDeContrat = new ContratSetDto(ecole.getTypeDeContrat());
         this.contratText = ecole.getTypeDeContrat() == null ? "" : ecole.getTypeDeContrat().replace("[","").replace("]", "");
         this.exigences = ecole.getExigences();
-        this.dateDebutDispo = new Timestamp(ecole.getDateDebutDispo().getTime());
+        this.dateDebutDispo = new SimpleDateFormat("dd/MM/yyyy").format(ecole.getDateDebutDispo());
         this.remarques = ecole.getRemarques();
     }
 
@@ -71,7 +72,7 @@ public class EcoleApiDto {
     public String getExigences() {
         return exigences;
     }
-    public Timestamp getDateDebutDispo() {
+    public String getDateDebutDispo() {
         return dateDebutDispo;
     }
     public String getRemarques() {
