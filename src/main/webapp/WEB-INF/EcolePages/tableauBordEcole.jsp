@@ -173,12 +173,13 @@
                           <table class="table datatable">
                               <thead>
                               <h1>Liste des postulations</h1>
-                                  <th>IDPostule</th>
-                                  <th>Date</th>
-                                  <th>Decision</th>
-                                  <th>Ecole</th>
-                                  <th>Enseignant</th>
-                                  <th>Actions</th>
+                                <th>IDPostule</th>
+                                <th>Date</th>
+                                <th>Decision</th>
+                                <th>Initiateur</th>
+                                <th>Ecole</th>
+                                <th>Enseignant</th>
+                                <th>Actions</th>
                               </thead>
                               <tbody>
                               <c:forEach items="${postulations}" var="postulation">
@@ -187,6 +188,7 @@
                                       <td>${postulation.idPostule}</td>
                                       <td>${postulation.datePostule}</td>
                                       <td>${postulation.decision}</td>
+                                      <td>${postulation.initiateur}</td>
                                       <td>${postulation.nomEcole}</td>
                                       <td>${postulation.nomEnseignant}</td>
                                       <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
@@ -196,15 +198,20 @@
                                               </form>
                                               </br>
                                               <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostuleAcc" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="AccepterPostulationEcole">Accepter</button>
+                                                  <input type="text" id="idPostule" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                  <select name="action">
+                                                      <option value="AccepterPostulationEcole">Accepter</option>
+                                                      <option value="RefuserPostulationEcole">Refuser</option>
+                                                  </select>
+                                                  <button class="btn btn-primary" type="submit">Confirmer</button>
                                               </form>
                                               </br>
+                                          </td>
+                                          <td>
                                               <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostuleRef" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="RefuserPostulationEcole">Refuser</button>
+                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
                                               </form>
-                                              </br>
                                           </td>
                                       </c:if>
                                       <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
@@ -215,11 +222,11 @@
                                               </form>
                                               </br>
                                           </td>
-                                        <td>
-                                            <form action="Controlleur" method="post">
-                                                <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
-                                                <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
-                                            </form>
+                                          <td>
+                                              <form action="Controlleur" method="post">
+                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
+                                              </form>
                                         </td>
                                       </c:if>
                                   </tr>
@@ -246,15 +253,21 @@
                               <th>Actions</th>
                           </thead>
                           <tbody>
-                          <c:forEach items="${favoris}" var="favorisEnseignant">
+                          <c:forEach items="${favoris}" var="favorisEcole">
                               <tr>
-                                  <td>${favorisEnseignant.nom}</td>
+                                  <td>${favorisEcole.nom}</td>
                                   <td>
                                       <form action="Controlleur" method="post">
-                                          <input type="hidden" name="idEnseignant" value="${favorisEnseignant.idEnseignant}">
+                                          <input type="hidden" name="idEnseignant" value="${favorisEcole.idEnseignant}">
                                           <button class="btn btn-danger" name="action" value="RetraitFavorisEcole" type="submit">
                                               Retirer des favoris
                                           </button>
+                                      </form>
+                                  </td>
+                                  <td>
+                                      <form action="Controlleur" method="post">
+                                          <input type="text" id="${favorisEcole.idEnseignant}" name="idEnseignant" value="${favorisEcole.idEnseignant}" hidden>
+                                          <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
                                       </form>
                                   </td>
                               </tr>
