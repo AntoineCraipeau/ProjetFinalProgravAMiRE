@@ -15,6 +15,7 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.repositories.EnseignantRepository;
 import org.amire.progav_finalproj.repositories.EcoleRepository;
 import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.utils.UserTypes;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -26,6 +27,7 @@ public class ApiUsers {
     EnseignantRepository enseignantSessionBean = new EnseignantRepository();
     UserRepository userSessionBean = new UserRepository();
     EcoleRepository ecoleSessionBean = new EcoleRepository();
+    UserTypes userType;
 
     SimpleDateFormat dispoFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -47,8 +49,6 @@ public class ApiUsers {
             enseignantDtos.add(enseignantDto);
         }
 
-
-
         return enseignantDtos;
     }
 
@@ -67,13 +67,25 @@ public class ApiUsers {
     }
 
     @DELETE
-    @Path("/{userId}")
+    @Path("{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteUser(@PathParam("userId") long userId) {
+    public Response deleteEnseignant(@PathParam("userId") long userId) {
         try {
-            // Attempt to delete the user by userId
-            userSessionBean.deleteUser(userSessionBean.getUserById(userId));
-            // Return a success response
+            if(userSessionBean.getUserTypeFromUserId(userId) == userType.ENSEIGNANT){
+                // Attempt to delete the user by userId
+                enseignantSessionBean.deleteEnseignantById(userId);
+                //userSessionBean.deleteUser(userSessionBean.getUserById(userId));
+            }
+            else if(userSessionBean.getUserTypeFromUserId(userId) == userType.ECOLE){
+                ecoleSessionBean.deleteEcoleById(userId);
+                //userSessionBean.deleteUser(userSessionBean.getUserById(userId));
+            }
+            else{
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity("Failed to delete user: " + userId + "\nUser is not an enseignant or an ecole")
+                        .build();
+            }
+            // Return a successful response
             return Response.status(Response.Status.OK).entity("User deleted successfully").build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,5 +95,4 @@ public class ApiUsers {
                     .build();
         }
     }
-
 }
