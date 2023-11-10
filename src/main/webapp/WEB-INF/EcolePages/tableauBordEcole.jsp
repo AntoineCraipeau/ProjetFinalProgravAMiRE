@@ -90,7 +90,7 @@
                         <form action="Controlleur" method="post">
                             <input type="hidden" name="action" value="EcoleVersProfil">
                             <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                                <i class="bi bi-box-arrow-right"></i>
+                                <i class="bi bi-person-circle"></i>
                                 <span>Profile</span>
                             </a>
                         </form>
@@ -102,7 +102,7 @@
                         <form action="Controlleur" method="post">
                             <input type="hidden" name="action" value="Logout">
                             <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                                <i class="bi bi-box-arrow-right"></i>
+                                <i class="bi bi-unindent"></i>
                                 <span>Sign Out</span>
                             </a>
                         </form>
@@ -127,8 +127,8 @@
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EcoleVersDashboard">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Dashboard</span>
+                        <i class="bi bi-clipboard-data me-2"></i>
+                        <span> Dashboard</span>
                     </a>
                 </form>
             </li><!-- End Dashboard Nav -->
@@ -137,8 +137,8 @@
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EcoleVersProfil">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Profil</span>
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span> Profil</span>
                     </a>
                 </form>
             </li><!-- End Profile Page Nav -->
@@ -148,8 +148,8 @@
                 <form action="Controlleur" method="post">
                     <input type="hidden" name="action" value="EcoleVersMatch">
                     <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Match Enseignant</span>
+                        <i class="bi bi-clipboard-heart-fill me-2"></i>
+                        <span> Match Enseignant</span>
                     </a>
                 </form>
             </li><!-- End Login Page Nav -->
@@ -163,122 +163,139 @@
 
 <main id="main" class="main">
 
+
+
+    <section class="section">
+            <div class="col-lg-4">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <h5 class="card-title">Favoris</h5>
+                        <table class="table datatable ">
+                            <thead>
+                            <th>  </th>
+                            <th>  </th>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${favoris}" var="favorisEcole">
+                                <tr>
+                                    <td> <form action="Controlleur" method="post" class="d-inline-block text-center" >
+                                        <input type="hidden" name="idEnseignant" value="${favorisEcole.idEnseignant}">
+                                        <button class="btn btn-danger" name="action" value="RetraitFavorisEcole" type="submit">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </button>
+                                        </form>
+                                        <form action="Controlleur" method="post" class="d-inline-block text-center">
+                                            <input type="text" id="${favorisEcole.idEnseignant}" name="idEnseignant" value="${favorisEcole.idEnseignant}" hidden>
+                                            <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant"><i class="bi bi-eye-fill"> </i> </button>
+                                        </form>
+                                    </td>
+                                    <td><strong>${favorisEcole.nom}, ${favorisEcole.prenom} </strong></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </section>
+
       <section class="section">
-          <div class="row">
-              <div class="col-lg-20">
-                  <div class="card">
+              <div class="col-lg-10">
+                  <div class="card rounded">
                       <div class="card-body">
-                          <h5 class="card-title">Contacté</h5>
+                          <h5 class="card-title">Postulations en cours</h5>
                           <!-- Table with stripped rows -->
-                          <table class="table datatable">
-                              <thead>
-                              <h1>Liste des postulations</h1>
-                                <th>IDPostule</th>
-                                <th>Date</th>
-                                <th>Decision</th>
-                                <th>Initiateur</th>
+                          <table class="table datatable ">
+                              <thead class="table-light">
                                 <th>Ecole</th>
                                 <th>Enseignant</th>
-                                <th>Actions</th>
+                                <th>Initiateur</th>
+                                <th>Date de création</th>
+                                <th>Decision</th>
+                                <th> </th>
                               </thead>
                               <tbody>
                               <c:forEach items="${postulations}" var="postulation">
                                   <!--  on affiche les postulations de l'enseignant actuellement connecter  -->
-                                  <tr>
-                                      <td>${postulation.idPostule}</td>
-                                      <td>${postulation.datePostule}</td>
-                                      <td>${postulation.decision}</td>
-                                      <td>${postulation.initiateur}</td>
+
+                                  <tr >
+
                                       <td>${postulation.nomEcole}</td>
                                       <td>${postulation.nomEnseignant}</td>
-                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
-                                          <td>
-                                              <form action="Controlleur" method="post">
-                                                  <button class="btn btn-primary" type="submit">En savoir plus</button>
-                                              </form>
-                                              </br>
-                                              <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostule" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <select name="action">
-                                                      <option value="AccepterPostulationEcole">Accepter</option>
-                                                      <option value="RefuserPostulationEcole">Refuser</option>
-                                                  </select>
-                                                  <button class="btn btn-primary" type="submit">Confirmer</button>
-                                              </form>
-                                              </br>
-                                          </td>
-                                          <td>
-                                              <form action="Controlleur" method="post">
-                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
-                                              </form>
-                                          </td>
-                                      </c:if>
-                                      <c:if test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
-                                          <td>
-                                              <form action="Controlleur" method="post">
-                                                  <input type="text" id="idPostuleAnn" name="idPostule" value="${postulation.idPostule}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="RetraitPostulationEcole">Annuler</button>
-                                              </form>
-                                              </br>
-                                          </td>
-                                          <td>
-                                              <form action="Controlleur" method="post">
-                                                  <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
-                                                  <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
-                                              </form>
-                                        </td>
-                                      </c:if>
+
+                                      <c:choose>
+                                          <c:when test="${postulation.initiateur == 'ecole'}">
+                                              <td><span class="badge rounded-pill text-bg-info">${postulation.initiateur}</span></td>
+                                          </c:when>
+                                          <c:when test="${postulation.initiateur == 'enseignant'}">
+                                              <td><span class="badge rounded-pill text-bg-warning">${postulation.initiateur}</span></td>
+                                          </c:when>
+                                      </c:choose>
+
+                                      <td>${postulation.datePostule}</td>
+
+                                      <c:choose>
+                                          <c:when test="${postulation.decision == 'Refusé'}">
+                                              <td><span class="badge rounded-pill text-bg-danger">${postulation.decision}</span></td>
+                                          </c:when>
+                                          <c:when test="${postulation.decision == 'Accepté'}">
+                                              <td><span class="badge rounded-pill text-bg-success">${postulation.decision}</span></td>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <td><span class="badge rounded-pill text-bg-secondary">${postulation.decision}</span></td>
+                                          </c:otherwise>
+                                      </c:choose>
+
+
+                                      <c:choose>
+                                          <c:when test="${postulation.decision == 'En attente' && postulation.initiateur == 'enseignant'}">
+                                              <td class="text-end">
+                                                  <form action="Controlleur" method="post" class="d-inline-block">
+                                                      <button class="btn btn-success" type="submit" name="action" value="AccepterPostulationEcole"><i class="bi bi-check-square"></i></button>
+                                                  </form>
+                                                  <form action="Controlleur" method="post" class="d-inline-block">
+                                                      <button class="btn btn-danger" type="submit" name="action" value="RefuserPostulationEcole"><i class="bi bi-x-square-fill"></i></button>
+                                                  </form>
+                                                  <form action="Controlleur" method="post" class="d-inline-block">
+                                                      <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                      <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">
+                                                          <i class="bi bi-eye-fill"></i>
+                                                      </button>
+                                                  </form>
+                                              </td>
+
+                                          </c:when>
+                                          <c:when test="${postulation.decision == 'En attente' && postulation.initiateur == 'ecole'}">
+                                              <td class="text-end">
+                                                  <form action="Controlleur" method="post" class="d-inline-block ">
+                                                      <input type="text" id="idPostuleAnn" name="idPostule" value="${postulation.idPostule}" hidden>
+                                                      <button class="btn btn-danger" type="submit" name="action" value="RetraitPostulationEcole"> <i class="bi bi-trash3-fill"></i> </button>
+                                                  </form>
+                                                  <form action="Controlleur" method="post" class="d-inline-block">
+                                                      <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                      <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant"> <i class="bi bi-eye-fill"> </i> </button>
+                                                  </form>
+                                              </td>
+                                          </c:when>
+                                          <c:otherwise>
+                                              <td class="text-end">
+                                                  <form action="Controlleur" method="post" class="d-inline-block">
+                                                      <input type="text" id="${idEnseignant}" name="idEnseignant" value="${postulation.idEnseignant}" hidden>
+                                                      <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant"> <i class="bi bi-eye-fill"> </i> </button>
+                                                  </form>
+                                              </td>
+                                          </c:otherwise>
+                                      </c:choose>
+
                                   </tr>
                               </c:forEach>
                               </tbody>
                           </table>
                       </div>
-                  </div>
               </div>
           </div>
       </section>
 
-
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-20">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Favoris</h5>
-                      <h1>Liste des enseignants favoris</h1>
-                      <table class="table">
-                          <thead>
-                              <th>Nom</th>
-                              <th>Actions</th>
-                          </thead>
-                          <tbody>
-                          <c:forEach items="${favoris}" var="favorisEcole">
-                              <tr>
-                                  <td>${favorisEcole.nom}</td>
-                                  <td>
-                                      <form action="Controlleur" method="post">
-                                          <input type="hidden" name="idEnseignant" value="${favorisEcole.idEnseignant}">
-                                          <button class="btn btn-danger" name="action" value="RetraitFavorisEcole" type="submit">
-                                              Retirer des favoris
-                                          </button>
-                                      </form>
-                                  </td>
-                                  <td>
-                                      <form action="Controlleur" method="post">
-                                          <input type="text" id="${favorisEcole.idEnseignant}" name="idEnseignant" value="${favorisEcole.idEnseignant}" hidden>
-                                          <button class="btn btn-primary" type="submit" name="action" value="EcoleVersProfilEnseignant">Voir profil</button>
-                                      </form>
-                                  </td>
-                              </tr>
-                          </c:forEach>
-                          </tbody>
-                      </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
   </main>
