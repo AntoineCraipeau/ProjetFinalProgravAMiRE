@@ -18,6 +18,8 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
@@ -25,6 +27,9 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
+    .section{
+      padding: 60px 0;
+    }
     .table-container {
       max-width: 100%;
       overflow-x: auto;
@@ -43,391 +48,456 @@
 
 </head>
 
-<body>
-<div id="adminInfo"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function(){
-    var idUserinfo = sessionStorage.getItem('idUserinfo');
-    document.getElementById("adminInfo").innerHTML = "<h1>Bonjour admin n°" + idUserinfo + " ! Vous êtes un admin ! </h1>";
-  });
-</script>
+<body class="admin-dashboard">
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-<form action="Controlleur" method="post" style="text-align: right; margin-right: 20px">
-  <input type="submit" name="action" value="Logout" style="color: red; text-decoration: underline"/>
-</form>
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="#" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">ProjetProgAv2023</span>
+    </a>
+  </div><!-- End Logo -->
 
-<div class="delete-users-container">
-  <div class="user-list">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.user-list').on('click', '.delete-user', function (e) {
-          e.preventDefault();
-          var userId = $(this).data('user-id');
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="Controlleur">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search" name="action" value="Recherche"><i class="bi bi-search"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
 
-          // Make an AJAX request to delete the user with the userId.
-          $.ajax({
-            url: '/TP3/api/users/' + userId,
-            type: 'DELETE',
-            log: console.log('url = ' + '/TP3/api/users/' + userId),
-            success: function (data) {
-              console.log('User deleted successfully. Response: ' + data.message);
-              // Remove the row from the table upon successful deletion.
-              $(e.target).closest('tr').remove();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-              console.log('Failed to delete user. Error:', errorThrown);
-              console.log('Status:', textStatus);
-              console.log('Response:', jqXHR.responseText);
-              alert('Failed to delete user.');
-            }
-          });
-        });
-        fetch("/TP3/api/users/ecoles")
-                .then((res) => {
-                  if (!res.ok) {
-                    throw new Error("Network response was not ok");
-                  }
-                  return res.json();
-                })
-                .then((ecolesData) => {
-                  console.log("Ecoles Data: ", ecolesData); // Log the data
-                  if (ecolesData && ecolesData.length > 0) {
-                    var temp = "";
-                    ecolesData.forEach((itemData) => {
-                      temp += "<tr>";
-                      temp += "<td>" + itemData.idUser + "</td>";
-                      temp += "<td>" + itemData.idEcole + "</td>";
-                      temp += "<td>" + itemData.raisonSociale + "</td>";
-                      temp += "<td>" + itemData.adresseElectronique + "</td>";
-                      temp += "<td>" + itemData.telephone + "</td>";
-                      temp += "<td>" + itemData.competenceText + "</td>";
-                      temp += "<td>" + itemData.contratText + "</td>";
-                      temp += "<td>" + itemData.dateDebutDispo + "</td>";
-                      temp +=
-                              "<td><button class='delete-user' data-user-id='" +
-                              itemData.idUser +
-                              "'>Delete</button></td>" + "</tr>";
-                    });
-                    document.getElementById("ecolesData").innerHTML = temp;
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error fetching Ecoles data: ", error);
-                });
-        fetch("/TP3/api/users/enseignants")
-                .then((res) => {
-                  if (!res.ok) {
-                    throw new Error("Network response was not ok");
-                  }
-                  return res.json();
-                })
-                .then((enseignantsData) => {
-                  console.log("Enseignants Data: ", enseignantsData); // Log the data
-                  if (enseignantsData && enseignantsData.length > 0) {
-                    var temp = "";
-                    enseignantsData.forEach((itemData) => {
-                      temp += "<tr>";
-                      temp += "<td>" + itemData.idUser + "</td>";
-                      temp += "<td>" + itemData.idEnseignant + "</td>";
-                      temp += "<td>" + itemData.nom + "</td>";
-                      temp += "<td>" + itemData.prenom + "</td>";
-                      temp += "<td>" + itemData.adresseElectronique + "</td>";
-                      temp += "<td>" + itemData.telephone + "</td>";
-                      temp += "<td>" + itemData.competenceText + "</td>";
-                      temp += "<td>" + itemData.dateDebutDispo + "</td>";
-                      temp +=
-                              "<td><button class='delete-user' data-user-id='" +
-                              itemData.idUser +
-                              "'>Delete</button></td>" + "</tr>";
-                    });
-                    //<button className="btn btn-danger" type="submit" name="action" > <i className="bi bi-trash3-fill"></i> </button>
-                    document.getElementById("enseignantsData").innerHTML = temp;
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error fetching Enseignants data: ", error);
-                });
-      });
-    </script>
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
 
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle" href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/img_profil_admin.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2"> Bonjour, Admin!</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>Admin</h6>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <form action="Controlleur" method="post">
+              <input type="hidden" name="action" value="Logout">
+              <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </form>
+          </li>
+        </ul>
+      </li>
+    </ul><!-- End Profile Dropdown Items -->
+
+  </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+  <section class="section">
     <div class="table-container">
-      <h1>Liste Écoles</h1>
-      <table class="table datatable border-black">
-        <thead>
-        <tr>
-          <th>User ID</th>
-          <th>Ecole ID</th>
-          <th>Raison Sociale</th>
-          <th>Email</th>
-          <th>Téléphone</th>
-          <th>Compétences Requise</th>
-          <th>Type de Contrat</th>
-          <th>Date de début de Contrat</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody id="ecolesData">
+      <div class="row">
+        <div class="col-lg-3 col-md-12"></div>
+        <div class="col-lg-6 col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center">Compétences</h5>
+              <div id="competenceDataDisplay1"></div>
+              <div id="competenceDataDisplay2"></div>
+              <div id="competenceDataDisplay3"></div>
+              <div id="competenceDataDisplay4"></div>
+              <!-- Radar Chart -->
+              <canvas id="radarChart" style="max-height: 400px;"></canvas>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script>
+                $(document).ready(function() {
 
-        </tbody>
-      </table>
-      <h1>Liste Enseignants</h1>
-      <table class="table datatable border-black">
-        <thead>
-        <tr>
-          <th>User ID</th>
-          <th>Enseignant ID</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <th>Téléphone</th>
-          <th>Compétences</th>
-          <th>Date de début de disponibilité</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody id="enseignantsData">
+                  // Effectuer une requête AJAX pour obtenir les données de l'API
+                  $.get("/TP3/api/competences/enseignant-par-competence", function(competenceEnseignantData) {
 
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+                    // Créez un tableau de toutes les compétences avec une valeur par défaut de 0
+                    var competences = ['mathematiques', 'svt', 'physique_chimie', 'histoire_géographie', 'francais', 'philosophie', 'sciences_sociales', 'psychologie', 'robotique', 'musique', 'education_physique', 'programmation'];
+                    var valeursEnseignantParDefaut = Array(11).fill(0);
 
-<div class="graphs" style="text-align: center">
-  <div class="graph-row" style="display: flex; justify-content: center; margin-bottom: 20px">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Disponibilités Enseignants</h5>
+                    // Extraire les compétences et les valeurs de l'objet JavaScript
+                    var competencesEnseignantAPI = Object.keys(competenceEnseignantData);
+                    var valeursEnseignantAPI = Object.values(competenceEnseignantData);
 
-          <!-- Bar Chart -->
-          <canvas id="barChart" style="max-height: 600px;"></canvas>
-          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-          <script>
-            $(document).ready(function() {
-              // Effectuer une requête AJAX pour obtenir les données de l'API
-              $.get("/TP3/api/employee/enseignants-par-mois", function(moisData) {
-
-                // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
-                var mois = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-                var valeursParDefaut = Array(12).fill(0);
-
-                // Extraire les mois et les valeurs de l'objet JavaScript
-                var moisAPI = Object.keys(moisData);
-                var valeursAPI = Object.values(moisData);
-
-                // Mettre à jour les valeurs du tableau avec les valeurs de l'API
-                moisAPI.forEach(function(moisAPI, index) {
-                  var moisIndex = mois.indexOf(moisAPI);
-                  if (moisIndex !== -1) {
-                    valeursParDefaut[moisIndex] = valeursAPI[index];
-                  }
-                });
-
-                // Mettre à jour les données du graphique
-                var barChart = new Chart(document.querySelector('#barChart'), {
-                  type: 'bar',
-                  data: {
-                    labels: mois, // Utilisez tous les mois de l'année
-                    datasets: [{
-                      label: 'Bar Chart',
-                      data: valeursParDefaut, // Utilisez les valeurs mises à jour
-                      backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)',
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)'
-                      ],
-                      borderWidth: 1
-                    }]
-                  },
-                  options: {
-                    scales: {
-                      y: {
-                        beginAtZero: true
+                    // Mettre à jour les valeurs du tableau avec les valeurs de l'API
+                    competencesEnseignantAPI.forEach(function (competencesEnseignantAPI, index) {
+                      var CompetencesEnseignantIndex = competences.indexOf(competencesEnseignantAPI);
+                      if (CompetencesEnseignantIndex !== -1) {
+                        valeursEnseignantParDefaut[CompetencesEnseignantIndex] = valeursEnseignantAPI[index];
                       }
-                    }
-                  }
-                });
-              });
-            });
-          </script>
+                    });
 
+                    $.get("/TP3/api/competences/ecole-par-competence", function (competenceEcoleData) {
+
+                      var valeursEcoleParDefaut = Array(10).fill(0);
+
+                      var competencesEcoleAPI = Object.keys(competenceEcoleData);
+                      var valeursEcoleAPI = Object.values(competenceEcoleData);
+
+                      competencesEcoleAPI.forEach(function (competencesEcoleAPI, index) {
+                        var CompetencesEcoleIndex = competences.indexOf(competencesEcoleAPI);
+                        if (CompetencesEcoleIndex !== -1) {
+                          valeursEcoleParDefaut[CompetencesEcoleIndex] = valeursEcoleAPI[index];
+                        }
+                      });
+
+                      // Mettre à jour les données du graphique
+                      var radarChart = new Chart(document.querySelector('#radarChart'), {
+                        type: 'radar',
+                        data: {
+                          labels: competences, // Utilisez toutes les compétences
+                          datasets: [{
+                            label: 'Compétences Enseignants',
+                            data: valeursEnseignantParDefaut, // Utilisez les valeurs mises à jour
+                            fill: true,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            pointBackgroundColor: 'rgb(255, 99, 132)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(255, 99, 132)'
+                          },{
+                            label: 'Compétences Écoles',
+                            data: valeursEcoleParDefaut, // Utilisez les valeurs mises à jour
+                            fill: true,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            pointBackgroundColor: 'rgb(54, 162, 235)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(54, 162, 235)'
+                          }]
+                        },
+                        options: {
+                          elements: {
+                            line: {
+                              borderWidth: 3
+                            }
+                          }
+                        }
+                      });
+                    });
+                  });
+                });
+              </script>
+              <!-- End Radar CHart -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12"></div>
+      </div>
+    </div>
+    <div class="graphs" style="text-align: center">
+      <div class="card">
+        <div class="card-body" style="padding: 20px;">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <h5 class="card-title">Disponibilités Enseignants</h5>
+                <div class="card">
+                  <div class="card-body" style="padding-top: 20px;">
+                    <!-- Bar Chart -->
+                    <canvas id="barChart" style="max-height: 600px;"></canvas>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                      $(document).ready(function() {
+                        // Effectuer une requête AJAX pour obtenir les données de l'API
+                        $.get("/TP3/api/employee/enseignants-par-mois", function(moisData) {
+
+                          // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
+                          var mois = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+                          var valeursParDefaut = Array(12).fill(0);
+
+                          // Extraire les mois et les valeurs de l'objet JavaScript
+                          var moisAPI = Object.keys(moisData);
+                          var valeursAPI = Object.values(moisData);
+
+                          // Mettre à jour les valeurs du tableau avec les valeurs de l'API
+                          moisAPI.forEach(function(moisAPI, index) {
+                            var moisIndex = mois.indexOf(moisAPI);
+                            if (moisIndex !== -1) {
+                              valeursParDefaut[moisIndex] = valeursAPI[index];
+                            }
+                          });
+
+                          // Mettre à jour les données du graphique
+                          var barChart = new Chart(document.querySelector('#barChart'), {
+                            type: 'bar',
+                            data: {
+                              labels: mois, // Utilisez tous les mois de l'année
+                              datasets: [{
+                                label: 'Bar Chart',
+                                data: valeursParDefaut, // Utilisez les valeurs mises à jour
+                                backgroundColor: [
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)',
+                                  'rgba(255, 205, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(54, 162, 235, 0.2)',
+                                  'rgba(153, 102, 255, 0.2)',
+                                  'rgba(201, 203, 207, 0.2)',
+                                  'rgba(255, 99, 132, 0.2)',
+                                  'rgba(255, 159, 64, 0.2)',
+                                  'rgba(255, 205, 86, 0.2)',
+                                  'rgba(75, 192, 192, 0.2)',
+                                  'rgba(54, 162, 235, 0.2)'
+                                ],
+                                borderColor: [
+                                  'rgb(255, 99, 132)',
+                                  'rgb(255, 159, 64)',
+                                  'rgb(255, 205, 86)',
+                                  'rgb(75, 192, 192)',
+                                  'rgb(54, 162, 235)',
+                                  'rgb(153, 102, 255)',
+                                  'rgb(201, 203, 207)',
+                                  'rgb(255, 99, 132)',
+                                  'rgb(255, 159, 64)',
+                                  'rgb(255, 205, 86)',
+                                  'rgb(75, 192, 192)',
+                                  'rgb(54, 162, 235)'
+                                ],
+                                borderWidth: 1
+                              }]
+                            },
+                            options: {
+                              scales: {
+                                y: {
+                                  beginAtZero: true
+                                }
+                              }
+                            }
+                          });
+                        });
+                      });
+                    </script>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <h5 class="card-title">Decisions Ecoles</h5>
+                <div class="card">
+                  <div class="card-body" style="padding-top: 20px;">
+                    <!-- Pie Chart -->
+                    <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                      $(document).ready(function() {
+                        // Effectuer une requête AJAX pour obtenir les données de l'API
+                        $.get("/TP3/api/postule/decisions", function(decisionData) {
+
+                          // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
+                          var decision = ['Accepté', 'En attente', 'Entretien', 'Refusé'];
+                          var valeursParDefaut = Array(4).fill(0);
+
+                          // Extraire les reponse et les valeurs de l'objet JavaScript
+                          var reponseAPI = Object.keys(decisionData);
+                          var valeursAPI = Object.values(decisionData);
+
+                          // Mettre à jour les valeurs du tableau avec les valeurs de l'API
+                          reponseAPI.forEach(function(reponseAPI, index) {
+                            var reponseIndex = decision.indexOf(reponseAPI);
+                            if (reponseIndex !== -1) {
+                              valeursParDefaut[reponseIndex] = valeursAPI[index];
+                            }
+                          });
+
+                          var pieChart = new Chart(document.querySelector('#pieChart'), {
+                            type: 'pie',
+                            data: {
+                              labels: decision,
+                              datasets: [{
+                                label: 'Pie chart',
+                                data: valeursParDefaut,
+                                backgroundColor: [
+                                  'rgb(255, 99, 132)',
+                                  'rgb(54, 162, 235)',
+                                  'rgb(255, 205, 86)',
+                                  'rgb(15,154,12)'
+                                ],
+                                hoverOffset: 4
+                              }]
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                    <!-- End Pie Chart -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!--End Graphs-->
 
-    <div class="col-lg-6">
-      <div class="card" style="margin-top: 180px">
-        <div class="card-body">
-          <h5 class="card-title">Decisions Ecoles</h5>
-
-          <!-- Pie Chart -->
-          <canvas id="pieChart" style="max-height: 400px;"></canvas>
-          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-          <script>
-            $(document).ready(function() {
-              // Effectuer une requête AJAX pour obtenir les données de l'API
-              $.get("/TP3/api/postule/decisions", function(decisionData) {
-
-                // Créez un tableau de tous les mois de l'année avec une valeur par défaut de 0
-                var decision = ['Accepté', 'En attente', 'Entretien', 'Refusé'];
-                var valeursParDefaut = Array(4).fill(0);
-
-                // Extraire les reponse et les valeurs de l'objet JavaScript
-                var reponseAPI = Object.keys(decisionData);
-                var valeursAPI = Object.values(decisionData);
-
-                // Mettre à jour les valeurs du tableau avec les valeurs de l'API
-                reponseAPI.forEach(function(reponseAPI, index) {
-                  var reponseIndex = decision.indexOf(reponseAPI);
-                  if (reponseIndex !== -1) {
-                    valeursParDefaut[reponseIndex] = valeursAPI[index];
-                  }
-                });
-
-                var pieChart = new Chart(document.querySelector('#pieChart'), {
-                  type: 'pie',
-                  data: {
-                    labels: decision,
-                    datasets: [{
-                      label: 'Pie chart',
-                      data: valeursParDefaut,
-                      backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)',
-                        'rgb(15,154,12)'
-                      ],
-                      hoverOffset: 4
-                    }]
-                  }
-                });
-              });
-            });
-          </script>
-          <!-- End Pie Chart -->
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="card" style="margin-top: -288px">
-      <div class="card-body">
-        <h5 class="card-title">Compétences</h5>
-        <div id="competenceDataDisplay1"></div>
-        <div id="competenceDataDisplay2"></div>
-        <div id="competenceDataDisplay3"></div>
-        <div id="competenceDataDisplay4"></div>
-        <!-- Radar Chart -->
-        <canvas id="radarChart" style="max-height: 400px;"></canvas>
+    <div class="delete-users-container">
+      <div class="user-list">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
           $(document).ready(function() {
+            $('.user-list').on('click', '.delete-user', function (e) {
+              e.preventDefault();
+              var userId = $(this).data('user-id');
 
-            // Effectuer une requête AJAX pour obtenir les données de l'API
-            $.get("/TP3/api/competences/enseignant-par-competence", function(competenceEnseignantData) {
-
-              // Créez un tableau de toutes les compétences avec une valeur par défaut de 0
-              var competences = ['mathematiques', 'svt', 'physique_chimie', 'histoire_géographie', 'francais', 'philosophie', 'sciences_sociales', 'psychologie', 'robotique', 'musique', 'education_physique', 'programmation'];
-              var valeursEnseignantParDefaut = Array(11).fill(0);
-
-              // Extraire les compétences et les valeurs de l'objet JavaScript
-              var competencesEnseignantAPI = Object.keys(competenceEnseignantData);
-              var valeursEnseignantAPI = Object.values(competenceEnseignantData);
-
-              // Mettre à jour les valeurs du tableau avec les valeurs de l'API
-              competencesEnseignantAPI.forEach(function (competencesEnseignantAPI, index) {
-                var CompetencesEnseignantIndex = competences.indexOf(competencesEnseignantAPI);
-                if (CompetencesEnseignantIndex !== -1) {
-                  valeursEnseignantParDefaut[CompetencesEnseignantIndex] = valeursEnseignantAPI[index];
+              // Make an AJAX request to delete the user with the userId.
+              $.ajax({
+                url: '/TP3/api/users/' + userId,
+                type: 'DELETE',
+                log: console.log('url = ' + '/TP3/api/users/' + userId),
+                success: function (data) {
+                  console.log('User deleted successfully. Response: ' + data.message);
+                  // Remove the row from the table upon successful deletion.
+                  $(e.target).closest('tr').remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.log('Failed to delete user. Error:', errorThrown);
+                  console.log('Status:', textStatus);
+                  console.log('Response:', jqXHR.responseText);
+                  alert('Failed to delete user.');
                 }
               });
-
-              $.get("/TP3/api/competences/ecole-par-competence", function (competenceEcoleData) {
-
-                var valeursEcoleParDefaut = Array(10).fill(0);
-
-                var competencesEcoleAPI = Object.keys(competenceEcoleData);
-                var valeursEcoleAPI = Object.values(competenceEcoleData);
-
-                competencesEcoleAPI.forEach(function (competencesEcoleAPI, index) {
-                  var CompetencesEcoleIndex = competences.indexOf(competencesEcoleAPI);
-                  if (CompetencesEcoleIndex !== -1) {
-                    valeursEcoleParDefaut[CompetencesEcoleIndex] = valeursEcoleAPI[index];
-                  }
-                });
-
-                // Mettre à jour les données du graphique
-                var radarChart = new Chart(document.querySelector('#radarChart'), {
-                  type: 'radar',
-                  data: {
-                    labels: competences, // Utilisez toutes les compétences
-                    datasets: [{
-                      label: 'Compétences Enseignants',
-                      data: valeursEnseignantParDefaut, // Utilisez les valeurs mises à jour
-                      fill: true,
-                      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                      borderColor: 'rgb(255, 99, 132)',
-                      pointBackgroundColor: 'rgb(255, 99, 132)',
-                      pointBorderColor: '#fff',
-                      pointHoverBackgroundColor: '#fff',
-                      pointHoverBorderColor: 'rgb(255, 99, 132)'
-                    },{
-                      label: 'Compétences Écoles',
-                      data: valeursEcoleParDefaut, // Utilisez les valeurs mises à jour
-                      fill: true,
-                      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                      borderColor: 'rgb(54, 162, 235)',
-                      pointBackgroundColor: 'rgb(54, 162, 235)',
-                      pointBorderColor: '#fff',
-                      pointHoverBackgroundColor: '#fff',
-                      pointHoverBorderColor: 'rgb(54, 162, 235)'
-                    }]
-                  },
-                  options: {
-                    elements: {
-                      line: {
-                        borderWidth: 3
-                      }
-                    }
-                  }
-                });
-              });
             });
+            fetch("/TP3/api/users/ecoles")
+                    .then((res) => {
+                      if (!res.ok) {
+                        throw new Error("Network response was not ok");
+                      }
+                      return res.json();
+                    })
+                    .then((ecolesData) => {
+                      console.log("Ecoles Data: ", ecolesData); // Log the data
+                      if (ecolesData && ecolesData.length > 0) {
+                        var temp = "";
+                        ecolesData.forEach((itemData) => {
+                          temp += "<tr>";
+                          temp += "<td>" + itemData.idUser + "</td>";
+                          temp += "<td>" + itemData.idEcole + "</td>";
+                          temp += "<td>" + itemData.raisonSociale + "</td>";
+                          temp += "<td>" + itemData.adresseElectronique + "</td>";
+                          temp += "<td>" + itemData.telephone + "</td>";
+                          temp += "<td>" + itemData.competenceText + "</td>";
+                          temp += "<td>" + itemData.contratText + "</td>";
+                          temp += "<td>" + itemData.dateDebutDispo + "</td>";
+                          temp +=
+                                  "<td><button type='button' class='btn delete-user btn-danger' data-user-id='" +
+                                  itemData.idUser +
+                                  "'><i class='bi bi-trash3-fill'></i></button></td>" + "</tr>";
+
+                        });
+                        document.getElementById("ecolesData").innerHTML = temp;
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error fetching Ecoles data: ", error);
+                    });
+            fetch("/TP3/api/users/enseignants")
+                    .then((res) => {
+                      if (!res.ok) {
+                        throw new Error("Network response was not ok");
+                      }
+                      return res.json();
+                    })
+                    .then((enseignantsData) => {
+                      console.log("Enseignants Data: ", enseignantsData); // Log the data
+                      if (enseignantsData && enseignantsData.length > 0) {
+                        var temp = "";
+                        enseignantsData.forEach((itemData) => {
+                          temp += "<tr>";
+                          temp += "<td>" + itemData.idUser + "</td>";
+                          temp += "<td>" + itemData.idEnseignant + "</td>";
+                          temp += "<td>" + itemData.nom + "</td>";
+                          temp += "<td>" + itemData.prenom + "</td>";
+                          temp += "<td>" + itemData.adresseElectronique + "</td>";
+                          temp += "<td>" + itemData.telephone + "</td>";
+                          temp += "<td>" + itemData.competenceText + "</td>";
+                          temp += "<td>" + itemData.dateDebutDispo + "</td>";
+                          temp +=
+                                  "<td><button type='button' class='btn delete-user btn-danger' data-user-id='" +
+                                  itemData.idUser +
+                                  "'><i class='bi bi-trash3-fill'></i></button></td>" + "</tr>";
+                        });
+                        //<button className="btn btn-danger" type="submit" name="action" > <i className="bi bi-trash3-fill"></i> </button>
+                        document.getElementById("enseignantsData").innerHTML = temp;
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error fetching Enseignants data: ", error);
+                    });
           });
         </script>
-        <!-- End Radar CHart -->
 
+        <div class="table-container">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Liste des écoles</h5>
+              <table class="table datatable">
+                <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Ecole ID</th>
+                  <th>Raison Sociale</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>Compétences Requise</th>
+                  <th>Type de Contrat</th>
+                  <th>Date de début de Contrat</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="ecolesData">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Liste des enseignants</h5>
+              <table class="table datatable">
+                <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Enseignant ID</th>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>Compétences</th>
+                  <th>Date de début de disponibilité</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="enseignantsData">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+<!-- End Section -->
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
