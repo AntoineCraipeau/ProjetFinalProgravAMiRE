@@ -55,11 +55,11 @@ public class EnseignantRepository implements IEnseignantRepository {
         postuleRepository.removeAllPostulesByEnseignantId(enseignant.getIdEnseignant());
         favorisEnseignantRepository.removeAllCandidatsFavorisByEnseignantId(enseignant.getIdEnseignant());
 
+        userRepository.deleteUser(userinfo);
+
         em.getTransaction().begin();
         em.remove(enseignant);
         em.getTransaction().commit();
-
-        userRepository.deleteUser(userinfo);
 
     }
 
