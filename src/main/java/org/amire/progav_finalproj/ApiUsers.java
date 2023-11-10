@@ -87,8 +87,11 @@ public class ApiUsers {
                         .entity("Failed to delete user: " + userId + "\nUser is not an enseignant or an ecole")
                         .build();
             }
-            // Return a successful response
-            return Response.status(Response.Status.OK).entity("User deleted successfully").build();
+            // Return a successful response with JSON
+            return Response.status(Response.Status.OK)
+                    .entity("{\"message\": \"User deleted successfully\"}")
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
         } catch (Exception e) {
             e.printStackTrace();
             // Return an error response
