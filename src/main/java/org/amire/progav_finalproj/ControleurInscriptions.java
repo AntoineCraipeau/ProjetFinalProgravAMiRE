@@ -21,11 +21,11 @@ import java.io.IOException;
 public class ControleurInscriptions extends HttpServlet implements Controleurs {
 
     @EJB
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    private EnseignantRepository enseignantRepository;
+    private IEnseignantRepository enseignantRepository;
     @EJB
-    private EcoleRepository ecoleRepository;
+    private IEcoleRepository ecoleRepository;
 
     UserBean unUtilisateur;
 

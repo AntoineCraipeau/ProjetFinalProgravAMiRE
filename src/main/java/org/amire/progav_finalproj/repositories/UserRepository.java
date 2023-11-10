@@ -11,7 +11,7 @@ import org.amire.progav_finalproj.utils.UserTypes;
 import java.util.List;
 
 @Stateless
-public class UserRepository {
+public class UserRepository implements IUserRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();

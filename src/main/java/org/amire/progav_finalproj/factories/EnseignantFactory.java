@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class EnseignantFactory {
