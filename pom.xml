@@ -68,7 +68,7 @@
     </dependencies>
 
     <build>
-        <finalName>TP3</finalName>
+        <finalName>AMIRE</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
