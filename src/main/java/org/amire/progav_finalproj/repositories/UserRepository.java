@@ -67,4 +67,16 @@ public class UserRepository {
             return UserTypes.NONE;
         }
     }
+
+    public long resolveUserIdFromEnseignantId(long enseignantId) {
+        Query q = em.createQuery("select e from UserinfoEntity e where e.idEnseignant = :id"); // Requête JPQL
+        q.setParameter("id", enseignantId);
+        return ((UserinfoEntity) q.getSingleResult()).getIdUserinfo();
+    }
+
+    public long resolveUserIdFromEcoleId(long ecoleId) {
+        Query q = em.createQuery("select e from UserinfoEntity e where e.idEcole = :id"); // Requête JPQL
+        q.setParameter("id", ecoleId);
+        return ((UserinfoEntity) q.getSingleResult()).getIdUserinfo();
+    }
 }
