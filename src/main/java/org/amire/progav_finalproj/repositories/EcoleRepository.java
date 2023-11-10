@@ -13,14 +13,14 @@ import org.amire.progav_finalproj.model.UserinfoEntity;
 import java.util.List;
 
 @Stateless
-public class EcoleRepository {
+public class EcoleRepository implements IEcoleRepository {
 
     @EJB
-    UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    PostuleRepository postuleRepository;
+    private IPostuleRepository postuleRepository;
     @EJB
-    FavorisEcoleRepository favorisEcoleRepository;
+    private IFavorisEcoleRepository favorisEcoleRepository;
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();

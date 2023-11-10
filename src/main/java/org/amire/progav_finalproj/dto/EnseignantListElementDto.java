@@ -1,10 +1,7 @@
 package org.amire.progav_finalproj.dto;
 
-import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.repositories.EcoleRepository;
 import org.amire.progav_finalproj.repositories.FavorisEcoleRepository;
-import org.amire.progav_finalproj.repositories.FavorisEnseignantRepository;
 
 import java.util.Date;
 

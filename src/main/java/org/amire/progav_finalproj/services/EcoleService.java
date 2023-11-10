@@ -23,17 +23,17 @@ import java.io.IOException;
 public class EcoleService {
 
     @EJB
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    private EnseignantRepository enseignantRepository;
+    private IEnseignantRepository enseignantRepository;
     @EJB
-    private FavorisEcoleRepository favorisEcoleRepository;
+    private IFavorisEcoleRepository favorisEcoleRepository;
     @EJB
-    private PostuleRepository postuleRepository;
+    private IPostuleRepository postuleRepository;
     @EJB
-    private EcoleRepository ecoleRepository;
+    private IEcoleRepository ecoleRepository;
     @EJB
-    private AuthService authService;
+    private IAuthService authService;
 
 
     public void handleEcoleRequest(HttpServletRequest request, UserBean unUtilisateur){

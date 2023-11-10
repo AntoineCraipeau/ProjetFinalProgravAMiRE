@@ -14,12 +14,12 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 import java.util.List;
 
 @Stateless
-public class FavorisEnseignantRepository {
+public class FavorisEnseignantRepository implements IFavorisEnseignantRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
     @EJB
-    EcoleRepository ecoleRepository;
+    private IEcoleRepository ecoleRepository;
 
     // Read
 
@@ -35,7 +35,7 @@ public class FavorisEnseignantRepository {
         return ecoles;
     }
 
-    private List<FavorisEnseignantEntity> getAllFavorisOfandidateByIdAsFavoris(long idEnseignant){
+    public List<FavorisEnseignantEntity> getAllFavorisOfCandidatByIdAsFavoris(long idEnseignant){
         Query q = em.createQuery("select e from FavorisEnseignantEntity e where e.idEnseignant = :idEnseignant"); // Requête JPQL
         q.setParameter("idEnseignant", idEnseignant);
         return q.getResultList();
@@ -91,7 +91,7 @@ public class FavorisEnseignantRepository {
     }
 
     public void removeAllCandidatsFavorisByEnseignantId(long idEnseignant){
-        List<FavorisEnseignantEntity> favoris = getAllFavorisOfandidateByIdAsFavoris(idEnseignant);
+        List<FavorisEnseignantEntity> favoris = getAllFavorisOfCandidatByIdAsFavoris(idEnseignant);
         for (FavorisEnseignantEntity favori : favoris) {
             removeCandidatsFavoris(favori);
         }

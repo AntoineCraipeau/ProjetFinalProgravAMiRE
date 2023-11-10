@@ -16,23 +16,23 @@ import org.amire.progav_finalproj.utils.*;
 public class Controleur extends HttpServlet implements Controleurs {
 
     @EJB
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    private EnseignantRepository enseignantRepository;
+    private IEnseignantRepository enseignantRepository;
     @EJB
-    private FavorisEnseignantRepository favorisEnseignantRepository;
+    private IFavorisEnseignantRepository favorisEnseignantRepository;
     @EJB
-    private EcoleRepository ecoleRepository;
+    private IEcoleRepository ecoleRepository;
     @EJB
-    private FavorisEcoleRepository favorisEcoleRepository;
+    private IFavorisEcoleRepository favorisEcoleRepository;
     @EJB
-    private PostuleRepository postuleRepository;
+    private IPostuleRepository postuleRepository;
     @EJB
-    private PreferenceMatcherService preferenceMatcherService;
+    private IPreferenceMatcherService preferenceMatcherService;
     @EJB
-    private SearchService searchService;
+    private ISearchService searchService;
     @EJB
-    private AuthService authService;
+    private IAuthService authService;
     @EJB
     private AdminService adminService;
     @EJB
@@ -94,7 +94,7 @@ public class Controleur extends HttpServlet implements Controleurs {
         ArrayList<ActionTypes> noContextActions = new ArrayList<>(Arrays.asList(ActionTypes.ToLogin, ActionTypes.ToRegister, ActionTypes.Login, ActionTypes.Logout));
 
         if(action == ActionTypes.Logout){
-            authService.deconnexion(request);
+            authService.deconnexion(request, unUtilisateur);
         }
 
         if(action == ActionTypes.Login){

@@ -14,12 +14,12 @@ import org.amire.progav_finalproj.model.EnseignantEntity;
 import java.util.List;
 
 @Stateless
-public class FavorisEcoleRepository {
+public class FavorisEcoleRepository implements IFavorisEcoleRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
     @EJB
-    EnseignantRepository enseignantRepository;
+    IEnseignantRepository enseignantRepository;
 
     // Read
 
@@ -35,7 +35,7 @@ public class FavorisEcoleRepository {
         return enseignants;
     }
 
-    private List<FavorisEcoleEntity> getAllFavorisOfEcoleByIdAsFavoris(long idEcole){
+    public List<FavorisEcoleEntity> getAllFavorisOfEcoleByIdAsFavoris(long idEcole){
         Query q = em.createQuery("select e from FavorisEcoleEntity e where e.idEcole = :idEcole"); // Requête JPQL
         q.setParameter("idEcole", idEcole);
         return q.getResultList();

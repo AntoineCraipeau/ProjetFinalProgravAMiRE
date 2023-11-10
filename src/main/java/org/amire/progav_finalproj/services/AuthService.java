@@ -6,13 +6,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.amire.progav_finalproj.Controleurs;
 import org.amire.progav_finalproj.UserBean;
 import org.amire.progav_finalproj.model.UserinfoEntity;
-import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.repositories.IUserRepository;
 
 @Stateless
-public class AuthService {
+public class AuthService implements IAuthService {
 
     @EJB
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     public boolean verifierInfosConnexion(HttpServletRequest request){
         try {
@@ -52,9 +52,10 @@ public class AuthService {
         }
     }
 
-    public void deconnexion(HttpServletRequest request){
+    public void deconnexion(HttpServletRequest request, UserBean unUtilisateur){
         request.getSession().removeAttribute("utilisateur");
         request.getSession().invalidate();
+        unUtilisateur.setIdUserinfo(0);
     }
 
     public void modifierMotDePasse (HttpServletRequest request, UserBean unUtilisateur){

@@ -10,14 +10,14 @@ import org.amire.progav_finalproj.model.UserinfoEntity;
 import java.util.List;
 
 @Stateless
-public class EnseignantRepository {
+public class EnseignantRepository implements IEnseignantRepository {
 
     @EJB
-    UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    PostuleRepository postuleRepository;
+    private IPostuleRepository postuleRepository;
     @EJB
-    FavorisEnseignantRepository favorisEnseignantRepository;
+    private IFavorisEnseignantRepository favorisEnseignantRepository;
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
