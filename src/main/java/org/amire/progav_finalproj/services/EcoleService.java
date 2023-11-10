@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.amire.progav_finalproj.Controleurs;
 import org.amire.progav_finalproj.UserBean;
+import org.amire.progav_finalproj.dto.EnseignantListElementDto;
 import org.amire.progav_finalproj.factories.EcoleFactory;
 import org.amire.progav_finalproj.factories.PostuleFactory;
 import org.amire.progav_finalproj.model.EcoleEntity;
@@ -78,6 +79,13 @@ public class EcoleService {
                 break;
             case RetraitPostulationEcole:
                 postuleRepository.removePostuleById(request.getParameter("idPostule") != null ? Long.parseLong(request.getParameter("idPostule")) : 0);
+                break;
+            case EcoleVersProfilEnseignant:
+                if(enseignant == null){
+                    request.setAttribute("messageErreur", "L'enseignant n'existe pas");
+                    break;
+                }
+                request.setAttribute("enseignant", new EnseignantListElementDto(enseignant, idEcole));
                 break;
             case ModifierProfil:
                 try {

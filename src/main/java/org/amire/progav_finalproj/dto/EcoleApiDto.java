@@ -1,15 +1,14 @@
 package org.amire.progav_finalproj.dto;
 
 import org.amire.progav_finalproj.model.EcoleEntity;
+import org.amire.progav_finalproj.repositories.UserRepository;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class EcoleApiDto {
 
     private final long idEcole;
+    private final long idUser;
     private String raisonSociale;
     private String adresseElectronique;
     private String telephone;
@@ -25,6 +24,7 @@ public class EcoleApiDto {
 
     public EcoleApiDto(EcoleEntity ecole) {
         this.idEcole = ecole.getIdEcole();
+        this.idUser = new UserRepository().resolveUserIdFromEcoleId(idEcole);
         this.raisonSociale = ecole.getRaisonSociale();
         this.adresseElectronique = ecole.getAdresseEletronique();
         this.telephone = ecole.getTelephone();
@@ -41,6 +41,9 @@ public class EcoleApiDto {
 
     public long getIdEcole() {
         return idEcole;
+    }
+    public long getIdUser() {
+        return idUser;
     }
     public String getRaisonSociale() {
         return raisonSociale;

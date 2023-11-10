@@ -83,6 +83,7 @@
                             var temp = "";
                             ecolesData.forEach((itemData) => {
                                 temp += "<tr>";
+                                temp += "<td>" + itemData.idUser + "</td>";
                                 temp += "<td>" + itemData.idEcole + "</td>";
                                 temp += "<td>" + itemData.raisonSociale + "</td>";
                                 temp += "<td>" + itemData.adresseElectronique + "</td>";
@@ -92,7 +93,7 @@
                                 temp += "<td>" + itemData.dateDebutDispo + "</td>";
                                 temp +=
                                     "<td><button class='delete-user' data-user-id='" +
-                                    itemData.idEcole +
+                                    itemData.idUser +
                                     "'>Delete</button></td>" + "</tr>";
                             });
                             document.getElementById("ecolesData").innerHTML = temp;
@@ -114,6 +115,7 @@
                             var temp = "";
                             enseignantsData.forEach((itemData) => {
                                 temp += "<tr>";
+                                temp += "<td>" + itemData.idUser + "</td>";
                                 temp += "<td>" + itemData.idEnseignant + "</td>";
                                 temp += "<td>" + itemData.nom + "</td>";
                                 temp += "<td>" + itemData.prenom + "</td>";
@@ -123,7 +125,7 @@
                                 temp += "<td>" + itemData.dateDebutDispo + "</td>";
                                 temp +=
                                     "<td><button class='delete-user' data-user-id='" +
-                                    itemData.nom +
+                                    itemData.idUser +
                                     "'>Delete</button></td>" + "</tr>";
                             });
                             document.getElementById("enseignantsData").innerHTML = temp;
@@ -140,7 +142,8 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Ecole ID</th>
                         <th>Raison Sociale</th>
                         <th>Email</th>
                         <th>Téléphone</th>
@@ -158,7 +161,8 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Enseignant ID</th>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Email</th>

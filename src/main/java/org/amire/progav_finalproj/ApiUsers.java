@@ -29,8 +29,6 @@ public class ApiUsers {
     EcoleRepository ecoleSessionBean = new EcoleRepository();
     UserTypes userType;
 
-    SimpleDateFormat dispoFormat = new SimpleDateFormat("dd/MM/yyyy");
-
     @GET
     @Path ("/all")
     @Produces(MediaType.APPLICATION_JSON)
