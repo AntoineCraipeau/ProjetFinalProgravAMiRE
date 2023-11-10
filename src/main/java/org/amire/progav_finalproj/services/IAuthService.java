@@ -9,4 +9,6 @@ public interface IAuthService {
     public void decoderSession(HttpServletRequest request, UserBean unUtilisateur);
     public void deconnexion(HttpServletRequest request, UserBean unUtilisateur);
     public void modifierMotDePasse (HttpServletRequest request, UserBean unUtilisateur);
+    public void createEcoleAccount(HttpServletRequest request, UserBean unUtilisateur);
+    public void createEnseignantAccount(HttpServletRequest request, UserBean unUtilisateur);
 }

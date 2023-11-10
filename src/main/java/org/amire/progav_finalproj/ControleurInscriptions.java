@@ -12,6 +12,7 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.model.UserinfoEntity;
 import org.amire.progav_finalproj.repositories.*;
+import org.amire.progav_finalproj.services.IAuthService;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 import org.amire.progav_finalproj.utils.UserTypes;
@@ -26,6 +27,8 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
     private IEnseignantRepository enseignantRepository;
     @EJB
     private IEcoleRepository ecoleRepository;
+    @EJB
+    private IAuthService authService;
 
     UserBean unUtilisateur;
 
@@ -69,56 +72,12 @@ public class ControleurInscriptions extends HttpServlet implements Controleurs {
         aiguillerVersLaProchainePage(request, response);
     }
 
-    @Transactional
     public void createEcoleAccount(HttpServletRequest request){
-
-        if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
-            request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_USED);
-            return;
-        }
-
-        //Creation d'une EcoleEntity et d'une UserInfoEntity
-        request.setAttribute("messageErreur", "");
-
-        EcoleEntity ecole = EcoleFactory.buildEmptyEcole();
-        ecoleRepository.addEcole(ecole);
-
-        UserinfoEntity user = new UserinfoEntity();
-        user.setLogin(request.getParameter("champLogin"));
-        user.setPassword(request.getParameter("champMotDePasse"));
-        user.setIdEcole(ecole.getIdEcole());
-        user.setEcole(ecole);
-        userRepository.addUser(user);
-
-        //Ajout de l'utilisateur dans la session
-        unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
-        request.getSession().setAttribute("utilisateur", unUtilisateur);
+        authService.createEcoleAccount(request, unUtilisateur);
     }
 
-    @Transactional
     public void createEnseignantAccount(HttpServletRequest request){
-
-        if(userRepository.getUserByLogin(request.getParameter("champLogin")) != null){
-            request.setAttribute("messageErreur", MESSAGE_ERREUR_CREDENTIALS_USED);
-            return;
-        }
-
-        //Creation d'une EnseignantEntity et d'une UserInfoEntity
-        request.setAttribute("messageErreur", "");
-
-        EnseignantEntity enseignant = EnseignantFactory.buildEmptyEnseignant();
-        enseignantRepository.addEnseignant(enseignant);
-
-        UserinfoEntity user = new UserinfoEntity();
-        user.setLogin(request.getParameter("champLogin"));
-        user.setPassword(request.getParameter("champMotDePasse"));
-        user.setIdEnseignant(enseignant.getIdEnseignant());
-        user.setEnseignant(enseignant);
-        userRepository.addUser(user);
-
-        //Ajout de l'utilisateur dans la session
-        unUtilisateur.setIdUserinfo(userRepository.getUserByLogin(user.getLogin()).getIdUserinfo());
-        request.getSession().setAttribute("utilisateur", unUtilisateur);
+        authService.createEnseignantAccount(request, unUtilisateur);
     }
 
     public void fillEcoleAccount(HttpServletRequest request){
