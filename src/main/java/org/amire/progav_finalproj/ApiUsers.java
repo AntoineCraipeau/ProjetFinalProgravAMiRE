@@ -18,7 +18,6 @@ import org.amire.progav_finalproj.repositories.IEcoleRepository;
 import org.amire.progav_finalproj.repositories.IUserRepository;
 import org.amire.progav_finalproj.utils.UserTypes;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -71,7 +70,7 @@ public class ApiUsers {
     @DELETE
     @Path("{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEnseignant(@PathParam("userId") long userId) {
+    public Response deleteUser(@PathParam("userId") long userId) {
         try {
             if(userRepository.getUserTypeFromUserId(userId) == userType.ENSEIGNANT){
                 // Attempt to delete the user by userId
