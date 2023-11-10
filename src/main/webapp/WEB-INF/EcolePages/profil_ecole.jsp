@@ -89,7 +89,7 @@
             <form action="Controlleur" method="post">
               <input type="hidden" name="action" value="EcoleVersProfil">
               <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                <i class="bi bi-box-arrow-right"></i>
+                <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
               </a>
             </form>
@@ -101,7 +101,7 @@
             <form action="Controlleur" method="post">
               <input type="hidden" name="action" value="Logout">
               <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-                <i class="bi bi-box-arrow-right"></i>
+                <i class="bi bi-unindent"></i>
                 <span>Sign Out</span>
               </a>
             </form>
@@ -126,8 +126,8 @@
         <form action="Controlleur" method="post">
           <input type="hidden" name="action" value="EcoleVersDashboard">
           <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Dashboard</span>
+            <i class="bi bi-clipboard-data me-2"></i>
+            <span> Dashboard</span>
           </a>
         </form>
       </li><!-- End Dashboard Nav -->
@@ -136,8 +136,8 @@
         <form action="Controlleur" method="post">
           <input type="hidden" name="action" value="EcoleVersProfil">
           <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Profil</span>
+            <i class="bi bi-person-circle me-2"></i>
+            <span> Profil</span>
           </a>
         </form>
       </li><!-- End Profile Page Nav -->
@@ -147,8 +147,8 @@
         <form action="Controlleur" method="post">
           <input type="hidden" name="action" value="EcoleVersMatch">
           <a class="dropdown-item d-flex align-items-center" href="#" onclick="this.parentNode.submit();">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Match Enseignant</span>
+            <i class="bi bi-clipboard-heart-fill me-2"></i>
+            <span> Match Enseignant</span>
           </a>
         </form>
       </li><!-- End Login Page Nav -->
