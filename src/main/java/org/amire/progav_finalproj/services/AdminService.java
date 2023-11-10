@@ -37,7 +37,7 @@ public class AdminService {
     }
 
     public void handleAdminRedirection(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/tableauBordAdmin.html").forward(request, response);
     }
 
 }

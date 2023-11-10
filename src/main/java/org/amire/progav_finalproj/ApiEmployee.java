@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.stream.*;
 
 
-@Path("/users")
+@Path("/employee")
 public class ApiEmployee {
 
     EnseignantRepository enseignantSessionBean = new EnseignantRepository();
