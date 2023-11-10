@@ -62,11 +62,11 @@ public class EcoleRepository implements IEcoleRepository {
         postuleRepository.removeAllPostulesByEcoleId(ecole.getIdEcole());
         favorisEcoleRepository.removeAllFavorisEcoleByEcoleId(ecole.getIdEcole());
 
+        userRepository.deleteUser(userRepository.getUserById(userId));
+
         em.getTransaction().begin();
         em.remove(ecole);
         em.getTransaction().commit();
-
-        userRepository.deleteUser(userRepository.getUserById(userId));
     }
 
 }
