@@ -1,5 +1,6 @@
 package org.amire.progav_finalproj;
 
+import jakarta.ejb.EJB;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
@@ -12,9 +13,9 @@ import org.amire.progav_finalproj.dto.EnseignantApiDto;
 import org.amire.progav_finalproj.model.EnseignantEntity;
 import org.amire.progav_finalproj.dto.EcoleApiDto;
 import org.amire.progav_finalproj.model.EcoleEntity;
-import org.amire.progav_finalproj.repositories.EnseignantRepository;
-import org.amire.progav_finalproj.repositories.EcoleRepository;
-import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.repositories.IEnseignantRepository;
+import org.amire.progav_finalproj.repositories.IEcoleRepository;
+import org.amire.progav_finalproj.repositories.IUserRepository;
 import org.amire.progav_finalproj.utils.UserTypes;
 
 import java.text.SimpleDateFormat;
@@ -24,23 +25,26 @@ import java.util.*;
 @Path("/users")
 public class ApiUsers {
 
-    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
-    UserRepository userSessionBean = new UserRepository();
-    EcoleRepository ecoleSessionBean = new EcoleRepository();
+    @EJB
+    private IUserRepository userRepository;
+    @EJB
+    private IEnseignantRepository enseignantRepository;
+    @EJB
+    private IEcoleRepository ecoleRepository;
     UserTypes userType;
 
     @GET
     @Path ("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllUsers() {
-        return userSessionBean.getAllUsers().toString();
+        return userRepository.getAllUsers().toString();
     }
 
     @GET
     @Path("/enseignants")
     @Produces(MediaType.APPLICATION_JSON)
     public List<EnseignantApiDto> getEnseignants() {
-        List<EnseignantEntity> enseignants = enseignantSessionBean.getAllEnseignants();
+        List<EnseignantEntity> enseignants = enseignantRepository.getAllEnseignants();
         List<EnseignantApiDto> enseignantDtos = new ArrayList<>();
         for (EnseignantEntity enseignant : enseignants) {
             EnseignantApiDto enseignantDto = new EnseignantApiDto(enseignant);
@@ -54,7 +58,7 @@ public class ApiUsers {
     @Path("/ecoles")
     @Produces(MediaType.APPLICATION_JSON)
     public List<EcoleApiDto> getEcoles() {
-        List<EcoleEntity> ecoles = ecoleSessionBean.getAllEcoles();
+        List<EcoleEntity> ecoles = ecoleRepository.getAllEcoles();
         List<EcoleApiDto> ecoleDtos = new ArrayList<>();
         for (EcoleEntity ecole : ecoles) {
             EcoleApiDto ecoleDto = new EcoleApiDto(ecole);
@@ -69,13 +73,13 @@ public class ApiUsers {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteEnseignant(@PathParam("userId") long userId) {
         try {
-            if(userSessionBean.getUserTypeFromUserId(userId) == userType.ENSEIGNANT){
+            if(userRepository.getUserTypeFromUserId(userId) == userType.ENSEIGNANT){
                 // Attempt to delete the user by userId
-                enseignantSessionBean.deleteEnseignantById(userId);
+                enseignantRepository.deleteEnseignantById(userId);
                 //userSessionBean.deleteUser(userSessionBean.getUserById(userId));
             }
-            else if(userSessionBean.getUserTypeFromUserId(userId) == userType.ECOLE){
-                ecoleSessionBean.deleteEcoleById(userId);
+            else if(userRepository.getUserTypeFromUserId(userId) == userType.ECOLE){
+                ecoleRepository.deleteEcoleById(userId);
                 //userSessionBean.deleteUser(userSessionBean.getUserById(userId));
             }
             else{
