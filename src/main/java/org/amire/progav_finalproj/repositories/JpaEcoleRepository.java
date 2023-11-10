@@ -13,7 +13,7 @@ import org.amire.progav_finalproj.model.UserinfoEntity;
 import java.util.List;
 
 @Stateless
-public class EcoleRepository implements IEcoleRepository {
+public class JpaEcoleRepository implements IEcoleRepository {
 
     @EJB
     private IUserRepository userRepository;

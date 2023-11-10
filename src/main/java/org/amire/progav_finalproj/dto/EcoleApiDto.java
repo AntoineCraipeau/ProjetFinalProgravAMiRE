@@ -1,7 +1,7 @@
 package org.amire.progav_finalproj.dto;
 
 import org.amire.progav_finalproj.model.EcoleEntity;
-import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.repositories.JpaUserRepository;
 
 import java.text.SimpleDateFormat;
 
@@ -24,7 +24,7 @@ public class EcoleApiDto {
 
     public EcoleApiDto(EcoleEntity ecole) {
         this.idEcole = ecole.getIdEcole();
-        this.idUser = new UserRepository().resolveUserIdFromEcoleId(idEcole);
+        this.idUser = new JpaUserRepository().resolveUserIdFromEcoleId(idEcole);
         this.raisonSociale = ecole.getRaisonSociale();
         this.adresseElectronique = ecole.getAdresseEletronique();
         this.telephone = ecole.getTelephone();

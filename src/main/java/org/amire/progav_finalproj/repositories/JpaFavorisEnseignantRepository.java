@@ -14,7 +14,7 @@ import org.amire.progav_finalproj.model.EcoleEntity;
 import java.util.List;
 
 @Stateless
-public class FavorisEnseignantRepository implements IFavorisEnseignantRepository {
+public class JpaFavorisEnseignantRepository implements IFavorisEnseignantRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();

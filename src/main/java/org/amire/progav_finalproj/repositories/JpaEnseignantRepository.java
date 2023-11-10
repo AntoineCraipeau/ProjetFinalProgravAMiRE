@@ -10,7 +10,7 @@ import org.amire.progav_finalproj.model.UserinfoEntity;
 import java.util.List;
 
 @Stateless
-public class EnseignantRepository implements IEnseignantRepository {
+public class JpaEnseignantRepository implements IEnseignantRepository {
 
     @EJB
     private IUserRepository userRepository;

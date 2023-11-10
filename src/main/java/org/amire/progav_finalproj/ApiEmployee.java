@@ -5,11 +5,10 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.repositories.EnseignantRepository;
-import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.repositories.JpaEnseignantRepository;
+import org.amire.progav_finalproj.repositories.JpaUserRepository;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.*;
@@ -18,8 +17,8 @@ import java.util.stream.*;
 @Path("/employee")
 public class ApiEmployee {
 
-    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
-    UserRepository userSessionBean = new UserRepository();
+    JpaEnseignantRepository enseignantSessionBean = new JpaEnseignantRepository();
+    JpaUserRepository userSessionBean = new JpaUserRepository();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

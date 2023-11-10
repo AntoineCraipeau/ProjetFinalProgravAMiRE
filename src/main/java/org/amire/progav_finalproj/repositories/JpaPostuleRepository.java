@@ -10,7 +10,7 @@ import org.amire.progav_finalproj.model.PostuleEntity;
 import java.util.List;
 
 @Stateless
-public class PostuleRepository implements IPostuleRepository {
+public class JpaPostuleRepository implements IPostuleRepository {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
 

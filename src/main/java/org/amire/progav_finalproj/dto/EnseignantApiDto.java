@@ -1,7 +1,7 @@
 package org.amire.progav_finalproj.dto;
 
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.repositories.UserRepository;
+import org.amire.progav_finalproj.repositories.JpaUserRepository;
 
 import java.text.SimpleDateFormat;
 
@@ -30,7 +30,7 @@ public class EnseignantApiDto {
 
     public EnseignantApiDto(EnseignantEntity enseignant) {
         this.idEnseignant = enseignant.getIdEnseignant();
-        this.idUser = new UserRepository().resolveUserIdFromEnseignantId(idEnseignant);
+        this.idUser = new JpaUserRepository().resolveUserIdFromEnseignantId(idEnseignant);
         this.nom = enseignant.getNom();
         this.prenom = enseignant.getPrenom();
         this.adresseElectronique = enseignant.getAdresseElectronique();

@@ -1,7 +1,7 @@
 package org.amire.progav_finalproj.dto;
 
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.repositories.FavorisEcoleRepository;
+import org.amire.progav_finalproj.repositories.JpaFavorisEcoleRepository;
 
 import java.util.Date;
 
@@ -52,7 +52,7 @@ public class EnseignantListElementDto {
         this.isFavoris = isEnseignantInEcoleFavoris(idEnseignant, idEcole);
     }
     private boolean isEnseignantInEcoleFavoris(long idEnseignant, long idEcole) {
-        return new FavorisEcoleRepository().getFavorisEcoleByOwnersId(idEcole, idEnseignant) != null;
+        return new JpaFavorisEcoleRepository().getFavorisEcoleByOwnersId(idEcole, idEnseignant) != null;
     }
 
     public long getIdEnseignant() {

@@ -6,8 +6,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.amire.progav_finalproj.model.EcoleEntity;
 import org.amire.progav_finalproj.model.EnseignantEntity;
-import org.amire.progav_finalproj.repositories.EnseignantRepository;
-import org.amire.progav_finalproj.repositories.EcoleRepository;
+import org.amire.progav_finalproj.repositories.JpaEnseignantRepository;
+import org.amire.progav_finalproj.repositories.JpaEcoleRepository;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
 
 @Path("/competences")
 public class ApiCompetences {
-    EnseignantRepository enseignantSessionBean = new EnseignantRepository();
-    EcoleRepository ecoleSessionBean = new EcoleRepository();
+    JpaEnseignantRepository enseignantSessionBean = new JpaEnseignantRepository();
+    JpaEcoleRepository ecoleSessionBean = new JpaEcoleRepository();
 
     @GET
     @Path("/competences-enseignants")
