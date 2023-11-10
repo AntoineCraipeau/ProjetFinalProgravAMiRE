@@ -10,14 +10,14 @@ import org.amire.progav_finalproj.model.UserinfoEntity;
 import java.util.List;
 
 @Stateless
-public class EnseignantRepository {
+public class EnseignantRepository implements IEnseignantRepository {
 
     @EJB
-    UserRepository userRepository;
+    private IUserRepository userRepository;
     @EJB
-    PostuleRepository postuleRepository;
+    private IPostuleRepository postuleRepository;
     @EJB
-    FavorisEnseignantRepository favorisEnseignantRepository;
+    private IFavorisEnseignantRepository favorisEnseignantRepository;
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
@@ -55,11 +55,11 @@ public class EnseignantRepository {
         postuleRepository.removeAllPostulesByEnseignantId(enseignant.getIdEnseignant());
         favorisEnseignantRepository.removeAllCandidatsFavorisByEnseignantId(enseignant.getIdEnseignant());
 
+        userRepository.deleteUser(userinfo);
+
         em.getTransaction().begin();
         em.remove(enseignant);
         em.getTransaction().commit();
-
-        userRepository.deleteUser(userinfo);
 
     }
 

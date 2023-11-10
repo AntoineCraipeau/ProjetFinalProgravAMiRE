@@ -5,8 +5,8 @@ import jakarta.ejb.Stateless;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.amire.progav_finalproj.repositories.EcoleRepository;
-import org.amire.progav_finalproj.repositories.EnseignantRepository;
+import org.amire.progav_finalproj.repositories.IEcoleRepository;
+import org.amire.progav_finalproj.repositories.IEnseignantRepository;
 import org.amire.progav_finalproj.utils.ActionTypes;
 import org.amire.progav_finalproj.utils.ActionTypesUtils;
 
@@ -16,9 +16,9 @@ import java.io.IOException;
 public class AdminService {
 
     @EJB
-    private EcoleRepository ecoleRepository;
+    private IEcoleRepository ecoleRepository;
     @EJB
-    private EnseignantRepository enseignantRepository;
+    private IEnseignantRepository enseignantRepository;
 
     public void handleAdminRequest(HttpServletRequest request){
         ActionTypes action = ActionTypesUtils.getActionTypesFromRequest(request);

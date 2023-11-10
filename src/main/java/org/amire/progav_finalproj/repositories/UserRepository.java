@@ -11,7 +11,7 @@ import org.amire.progav_finalproj.utils.UserTypes;
 import java.util.List;
 
 @Stateless
-public class UserRepository {
+public class UserRepository implements IUserRepository {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
     EntityManager em = entityManagerFactory.createEntityManager();
@@ -66,5 +66,17 @@ public class UserRepository {
         } else {
             return UserTypes.NONE;
         }
+    }
+
+    public long resolveUserIdFromEnseignantId(long enseignantId) {
+        Query q = em.createQuery("select e from UserinfoEntity e where e.idEnseignant = :id"); // Requête JPQL
+        q.setParameter("id", enseignantId);
+        return ((UserinfoEntity) q.getSingleResult()).getIdUserinfo();
+    }
+
+    public long resolveUserIdFromEcoleId(long ecoleId) {
+        Query q = em.createQuery("select e from UserinfoEntity e where e.idEcole = :id"); // Requête JPQL
+        q.setParameter("id", ecoleId);
+        return ((UserinfoEntity) q.getSingleResult()).getIdUserinfo();
     }
 }
